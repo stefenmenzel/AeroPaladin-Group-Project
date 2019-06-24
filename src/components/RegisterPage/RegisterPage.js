@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {input, label} from 'semantic-ui-react';
+
 
 class RegisterPage extends Component {
   state = {
@@ -44,7 +46,24 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
+        <h1 className="ui header" id="bigHead">Welcome To aeroPaladin</h1>
+        <h3 className="ui header">Create An Account To Start Using aeroPaladin</h3>
+        <div className="ui form">
+         <div className="fields">
+          <div className="field">
+            <label>First Name</label>
+            <input
+             type="text"
+             placeholder="First Name"
+            ></input>
+          </div>
+         </div>
+        </div>
+        
+        
+        
+        
+        {/* <form onSubmit={this.registerUser}>
           <h1>Register User</h1>
           <div>
             <label htmlFor="username">
@@ -76,7 +95,7 @@ class RegisterPage extends Component {
               value="Register"
             />
           </div>
-        </form>
+        </form> */}
         <center>
           <button
             type="button"
