@@ -9,7 +9,8 @@ class Contact extends Component{
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">
-                    <Input 
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_email", e)}
                         placeholder="Email"
                     />
                     <span>
@@ -18,7 +19,8 @@ class Contact extends Component{
                 </Label>
 
                 <Label className="formInputLabel">
-                    <Input
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_phoneNumber", e)}
                         placeholder="Phone Number"
                     />
                     <span>

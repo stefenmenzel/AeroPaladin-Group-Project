@@ -11,11 +11,20 @@ class OperatorForm extends Component {
         return (
             <div>
                 <h2>Operator</h2>
-                <Name />
+                <Name 
+                    handleChange={this.props.handleChange}
+                    stateType='operator'
+                />
                 <Divider style={{width:'40%'}}/>
-                <Address />
+                <Address 
+                    handleChange={this.props.handleChange}
+                    stateType='operator'
+                />
                 <Divider style={{width: '40%'}}/>
-                <Contact />
+                <Contact 
+                    handleChange={this.props.handleChange}
+                    stateType='operator'
+                />
             </div>
         )
     }

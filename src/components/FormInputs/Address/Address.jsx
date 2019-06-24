@@ -8,7 +8,8 @@ class Address extends Component{
     conditionalCountryCode = () => {
         return(
             <Label className="formInputLabel">
-                <Input 
+                <Input className="formInput"
+                    onChange={(e) => this.props.handleChange(this.props.stateType + "_countryCode", e)}
                     placeholder="Country Code"
                 />
                 <span>
@@ -22,7 +23,8 @@ class Address extends Component{
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">
-                    <Input 
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_streetAddress", e)}
                         placeholder="Street Address"
                     />
                     <span>
@@ -31,7 +33,8 @@ class Address extends Component{
                 </Label>
 
                 <Label className="formInputLabel">
-                    <Input
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_city", e)}
                         placeholder="City"
                     />
                     <span>
@@ -40,7 +43,8 @@ class Address extends Component{
                 </Label>
 
                 <Label className="formInputLabel">
-                    <Input
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_state", e)}
                         placeholder="State"
                     />
                     <span>
@@ -49,7 +53,8 @@ class Address extends Component{
                 </Label>
 
                 <Label className="formInputLabel">
-                    <Input
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_postalCode", e)}
                         placeholder="Postal Code"
                     />
                     <span>

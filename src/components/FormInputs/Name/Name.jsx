@@ -9,7 +9,8 @@ class Name extends Component{
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">
-                    <Input 
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_firstName", e)}
                         placeholder="First Name"
                     />
                     <span>
@@ -18,7 +19,8 @@ class Name extends Component{
                 </Label>
 
                 <Label className="formInputLabel"> 
-                    <Input
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_middleName", e)}
                         placeholder="Middle Name"
                     />
                     <span>
@@ -27,7 +29,8 @@ class Name extends Component{
                 </Label>
 
                 <Label className="formInputLabel">
-                    <Input
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_lastName", e)}
                         placeholder="Last Name"
                     />
                     <span>
