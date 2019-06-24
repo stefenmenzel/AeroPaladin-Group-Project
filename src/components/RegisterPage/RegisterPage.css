@@ -1,0 +1,23 @@
+.bigDiv {
+    display: inline-block
+}
+
+.aircraftLabel {
+    display: block !important;
+    width: 40%;
+    margin-bottom: 10px !important;
+}
+
+Input {
+    display: inline-block;
+    margin-left: 10px !important;
+}
+
+.userNameIn {
+    width: 500px
+}
+
+#regSubmitBtn {
+    background-color: #30c4f0;
+    color: white;
+}
