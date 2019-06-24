@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, Button, Grid} from 'semantic-ui-react';
+import {connect} from 'react-redux';
 
 import Aircraft from '../../FormInputs/Aircraft/Aircraft.jsx';
 import OperatorForm from '../../FormInputs/OperatorForm/OperatorForm.jsx';
@@ -16,6 +17,7 @@ class AddAircraftForm extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('submitting....or trying');
+        this.props.dispatch({type: 'ADD_AIRCRAFT', payload: this.state});
     }
 
     handleCancel = () => {
@@ -72,4 +74,4 @@ class AddAircraftForm extends Component{
     }
 }
 
-export default AddAircraftForm;
+export default connect()(AddAircraftForm);
