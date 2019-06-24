@@ -24,7 +24,6 @@ import AirCraftInfo from '../AirCraftInfo/AirCraftInfo'
 import UserInfo from '../UserInfo/UserInfo'
 import PassengerInfo from '../PassengerInfo/PassengerInfo'
 
-
 import './App.css';
 
 class App extends Component {
@@ -120,7 +119,7 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
-        </div>
+        </div>        
       </Router>
     )
   }

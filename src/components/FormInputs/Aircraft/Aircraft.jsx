@@ -1,14 +1,15 @@
 import React,{Component} from 'react';
 import {Input, Label} from 'semantic-ui-react';
 
-import './Aircraft.css';
+// import './Aircraft.css';
+import '../FormInputs.css';
 
 class Aircraft extends Component{
 
     render(){
         return(
-            <div className="aircraftInputs">
-                <Label className="aircraftLabel">
+            <div className="formInputs">
+                <Label className="formInputLabel">
                     <Input                                                
                         placeholder="Tail Number"
                     />
@@ -17,7 +18,7 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
+                <Label className="formInputLabel">
                     <Input                        
                         placeholder="Aircraft Type"
                     />
@@ -26,7 +27,7 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
+                <Label className="formInputLabel">
                     <Input                        
                         placeholder="Color"
                     />
@@ -35,7 +36,7 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
+                <Label className="formInputLabel">
                     <Input                        
                         placeholder="Call Sign"
                     />
@@ -44,7 +45,7 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
+                <Label className="formInputLabel">
                     <Input                        
                         placeholder="CBP Decal Number"
                     />
