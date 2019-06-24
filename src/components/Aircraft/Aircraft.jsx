@@ -1,15 +1,18 @@
 import React,{Component} from 'react';
+import {Input} from 'semantic-ui-react';
 
 class Aircraft extends Component{
 
     render(){
         return(
             <>
-                <div className="ui right labeled left icon input">
-                    <i className="tags icon"></i>
-                    <input type="text" placeholder="Tail Number" />
-                    <a className="ui tag label">Tail Number</a>
-                </div>                
+                <Input
+                    icon="tags"
+                    iconPosition='left'
+                    label={{tag: true, content: 'tail number'}}
+                    labelPosition="right"
+                    placeholder="Tail Number"
+                />             
             </>
         )
     }
