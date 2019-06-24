@@ -63,7 +63,7 @@ class RegisterPage extends Component {
              <Label className="userNameIn">
               <Input 
                 type="text"
-                placeholder="Username"
+                placeholder="Username - Genenerally Your Email"
                 onChange={this.handleInputChangeFor('username')}
                 />
               <div className="ui corner label">
@@ -183,15 +183,20 @@ class RegisterPage extends Component {
             />
           </div>
         </form> */}
-        <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-          >
-            Back To Login
-          </button>
-        </center>
+       
+       <center>
+         <div className="ui basic buttons">
+          <button 
+          className="ui black basic button" 
+          onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
+            Back To Login</button>
+         </div>
+       </center>
+       
+       
+       
+       
+
       </div>
     );
   }
