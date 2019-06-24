@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 
 import './App.css';
+import Aircraft from '../Aircraft/Aircraft';
 
 class App extends Component {
   componentDidMount () {
@@ -60,6 +61,7 @@ class App extends Component {
           </Switch>
           <Footer />
         </div>
+        <Aircraft />
       </Router>
   )}
 }
