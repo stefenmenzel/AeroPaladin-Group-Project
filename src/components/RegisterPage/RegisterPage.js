@@ -68,7 +68,7 @@ class RegisterPage extends Component {
              <Label className="userNameIn">
               <Input 
                 type="text"
-                placeholder="Username - Genenerally Your Email"
+                placeholder="Username"
                 onChange={this.handleInputChangeFor('username')}
                 />
               <div className="ui corner label">
