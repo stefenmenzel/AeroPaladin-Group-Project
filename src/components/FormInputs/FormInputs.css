@@ -1,0 +1,13 @@
+.formInputs{
+    display: block;
+}
+
+.formInputLabel{
+    display: block !important;
+    width: 40%;
+    margin-bottom: 10px !important;
+}  
+
+span{
+    margin-left: 10px;
+}

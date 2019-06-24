@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import '../FormInputs.css';
+
 class Aircraft extends Component{
 
     render(){
