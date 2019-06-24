@@ -32,6 +32,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
+      <div>
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -40,6 +41,10 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
+        <div>
+            {/* <img src="/images/aeroPaladin_logo-02.jpg" alt="logo"/> */}
+ 
+        </div>
         <form onSubmit={this.login}>
           <h1>Login</h1>
           <div>
@@ -75,14 +80,16 @@ class LoginPage extends Component {
         </form>
         <center>
           <button
+          className="registerButton"
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
-            Register
+            New User? Register Here
           </button>
         </center>
       </div>
+      </div >
     );
   }
 }
