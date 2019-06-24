@@ -11,11 +11,20 @@ class OwnerForm extends Component {
         return (
             <div>
                 <h2>Owner</h2>
-                <Name />
+                <Name 
+                    handleChange={this.props.handleChange}
+                    stateType='owner'
+                />
                 <Divider style={{ width: '40%' }} />
-                <Address />
+                <Address 
+                    handleChange={this.props.handleChange} 
+                    stateType='owner'
+                />                    
                 <Divider style={{ width: '40%' }} />
-                <Contact />
+                <Contact 
+                    handleChange={this.props.handleChange}
+                    stateType='owner'
+                />
             </div>
         )
     }
