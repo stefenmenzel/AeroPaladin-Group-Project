@@ -1,0 +1,18 @@
+.aircraftInputs{
+    display: block;
+}
+
+.aircraftLabel{
+    display: block !important;
+    width: 40%;
+    margin-bottom: 10px !important;
+}  
+
+.labelText{
+    display:inline-block;
+    margin-left: 10px !important;
+}
+
+span{
+    margin-left: 10px;
+}
