@@ -24,8 +24,13 @@ class RegisterPage extends Component {
         payload: {
           username: this.state.username,
           password: this.state.password,
+          firstname: this.state.firstName,
+          lastname: this.state.lastName,
+          email: this.state.email,
+          phonenumber: this.state.phoneNumber
         },
       });
+      this.props.history.push('/home');
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
@@ -187,7 +192,7 @@ class RegisterPage extends Component {
        <center>
          <div className="ui basic buttons">
           <button 
-          className="ui black basic button" 
+          className="ui grey basic button" 
           onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
             Back To Login</button>
          </div>
