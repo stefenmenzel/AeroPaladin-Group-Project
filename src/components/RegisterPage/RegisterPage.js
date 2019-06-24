@@ -43,11 +43,11 @@ class RegisterPage extends Component {
   }
 
   render() {
-    console.log('state update: username: ', this.state.username);
-    console.log('state update: firstname: ', this.state.firstName);
-    console.log('state update: lastName: ', this.state.lastName);
-    console.log('state update: password: ', this.state.password);
-    console.log('state update: email: ', this.state.email);
+    // console.log('state update: username: ', this.state.username);
+    // console.log('state update: firstname: ', this.state.firstName);
+    // console.log('state update: lastName: ', this.state.lastName);
+    // console.log('state update: password: ', this.state.password);
+    // console.log('state update: email: ', this.state.email);
     return (
       <div>
         {this.props.errors.registrationMessage && (
@@ -58,11 +58,13 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <h1 className="ui header" id="bigHead">Welcome To aeroPaladin</h1>
-        <h3 className="ui header">Create An Account To Start Using aeroPaladin</h3>
+        <div className="registrationDiv">
+        <div className="column">
+        <h1 className="ui header middle aligned center aligned grid" id="bigHead">Welcome To aeroPaladin</h1>
+        <h3 className="ui header middle aligned center aligned grid">Create An Account To Start Using aeroPaladin</h3>
         <div className="bigDiv">
-        <div className="ui form">
-         <div className="fields">
+        <form className="ui large form">
+         <div className="ui stacked segment">
           <div className="field">
            <div className="ui corner labeled input">
              <Label className="userNameIn">
@@ -149,45 +151,9 @@ class RegisterPage extends Component {
           </div>
          </div>
          <div className="ui submit button" id="regSubmitBtn" onClick={this.registerUser}>Create New Account</div>
+        </form>
         </div>
         </div>
-        
-        
-        
-        
-        {/* <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="register"
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
-        </form> */}
        
        <center>
          <div className="ui basic buttons">
@@ -201,7 +167,7 @@ class RegisterPage extends Component {
        
        
        
-
+       </div>
       </div>
     );
   }
