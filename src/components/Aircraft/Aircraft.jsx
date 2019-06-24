@@ -1,64 +1,58 @@
 import React,{Component} from 'react';
 import {Input, Label} from 'semantic-ui-react';
 
-class Aircraft extends Component{
+import './Aircraft.css';
 
-    state = {
-        tailNumber: '',
-        aircraftType: '',
-        color: '',
-        callSign: '',
-        decalNumber: ''
-    }
+class Aircraft extends Component{
 
     render(){
         return(
-            <>
-                <Label>
+            <div className="aircraftInputs">
+                <Label className="aircraftLabel">
                     <Input                                                
                         placeholder="Tail Number"
                     />
-                    <span style={{marginLeft: "10px"}}>  
+                    <span>  
                         Tail Number
                     </span>
                 </Label>
 
-                <Label>
+                <Label className="aircraftLabel">
                     <Input                        
                         placeholder="Aircraft Type"
                     />
-                    <span style={{ marginLeft: "10px" }}>
+                    <span>
                         Aircraft Type
                     </span>
                 </Label>
 
-                <Label>
+                <Label className="aircraftLabel">
                     <Input                        
                         placeholder="Color"
                     />
-                    <span style={{ marginLeft: "10px" }}>
+                    <span>
                         Color
                     </span>
                 </Label>
 
-                <Label>
+                <Label className="aircraftLabel">
                     <Input                        
                         placeholder="Call Sign"
                     />
-                    <span style={{ marginLeft: "10px" }}>
+                    <span>
                         Call Sign
                     </span>
                 </Label>
 
-                <Label>
+                <Label className="aircraftLabel">
                     <Input                        
                         placeholder="CBP Decal Number"
                     />
-                    <span style={{ marginLeft: "10px" }}>
+                    <span>
                         CBP Decal Number
                     </span>
                 </Label>
-            </>
+            </div>
         )
     }
 }
