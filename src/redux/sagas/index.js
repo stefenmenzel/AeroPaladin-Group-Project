@@ -18,7 +18,7 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
-    dashboardSaga()
+    dashboardSaga(),
     aircraftSaga(),
 
   ]);
