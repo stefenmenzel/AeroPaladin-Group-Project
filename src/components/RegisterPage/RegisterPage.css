@@ -14,6 +14,7 @@
     padding: 1rem;
     border-radius: 0.5rem;
     border: 1px solid rgba(34, 36, 38, 0.15);
+    padding-top: 40px;
 }
 
 registrationDiv {
@@ -33,7 +34,11 @@ registrationDiv {
 }
 
 .userNameIn {
-    width: 500px
+    width: 500px;
+}
+
+.ui.corner.labeled.input.userNameIn {
+    margin-top: 30px;
 }
 
 .firstNameIn{
@@ -56,6 +61,10 @@ registrationDiv {
     width: 500px;
 }
 
+.streetAddrIn {
+    width: 500px;
+}
+
 #regSubmitBtn {
     background-color: #30c4f0;
     color: white;
@@ -63,4 +72,18 @@ registrationDiv {
 
 #bigHead {
     margin-top: 30px;
+}
+
+.ui.header.middle.aligned.center.aligned.grid.addHead {
+    margin-top: 25px;
+}
+.ui.corner.labeled.input.streetAddrIn {
+    margin-top: 25px;
+}
+
+.cityIn {
+    width: 500px;
+}
+.zipIn {
+    width: 500px;
 }
