@@ -33,13 +33,13 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     //query to stash owner info
     const ownerQuery = `
         INSERT INTO "people" (lastname, firstname, middlename, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id)
-        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, 4, ${req.user.id}, $6
+        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, $6, %7, $8
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
                 "emailaddr" = $4
                 AND
-                "peopletype" = 4
+                "peopletype" = %6
             )
         )
         RETURNING "id";
@@ -47,13 +47,13 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     //query to stash operator info
     const operatorQuery = `
         INSERT INTO "people" (lastname, firstname, middlename, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id)
-        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, 4, ${req.user.id}, $6
+        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, %6, %7, $8
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
                 "emailaddr" = $4
                 AND
-                "peopletype" = 3
+                "peopletype" = $6
             )
         )
         RETURNING "id";                
@@ -81,13 +81,13 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
         await connection.query(addressQuery, [owner.streetAddress, owner.city, owner.state, owner.postalCode])
             .then((result) => {owner_address_id = result.rows[0].id});
 
-        await connection.query(ownerQuery, [owner.lastName, owner.firstName, owner.middleName, owner.email, owner.phoneNumber, owner_address_id])
+        await connection.query(ownerQuery, [owner.lastName, owner.firstName, owner.middleName, owner.email, owner.phoneNumber, 4, req.user.id, owner_address_id])
             .then((result) => {owner_id = result.rows[0].id});
 
         await connection.query(addressQuery, [operator.streetAddress, operator.city, operator.state, operator.postalCode])
             .then((result) => {operator_address_id = result.rows[0].id});
 
-        await connection.query(operatorQuery, [operator.lastName, operator.firstName, operator.middleName, operator.email, operator.phoneNumber, operator_address_id])
+        await connection.query(operatorQuery, [operator.lastName, operator.firstName, operator.middleName, operator.email, operator.phoneNumber,3, req.user.id, operator_address_id])
             .then((result) => {operator_id = result.rows[0].id})
 
         await connection.query(aircraftQuery, [aircraft.tailNumber, aircraft.type, aircraft.color, aircraft.callSign, aircraft.CBP, owner_id, operator_id])
