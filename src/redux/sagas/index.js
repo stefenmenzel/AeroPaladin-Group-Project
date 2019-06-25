@@ -2,6 +2,8 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import aircraftSaga from './aircraftSaga.js'
+import passengerSaga from './passengerSaga'
 import dashboardSaga from './dashboardSaga';
 import aircraftSaga from './aircraftSaga.js';
 
@@ -20,6 +22,7 @@ export default function* rootSaga() {
     userSaga(),
     dashboardSaga(),
     aircraftSaga(),
+    passengerSaga(),
 
   ]);
 }
