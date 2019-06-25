@@ -22,13 +22,18 @@ router.post('/register', (req, res, next) => {
   const password = encryptLib.encryptPassword(req.body.password);
   const email = req.body.email;
   const phonenumber = req.body.phonenumber;
+  const lastname = req.body.lastname;
 
-  const queryTextTwo = `INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, 
+  const queryText = 'INSERT INTO "user" (username, firstname, lastname, password, email, phonenumber) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+  
+  const queryTextTwo = `INSERT INTO "address" (streetaddr, city, state, postalcode, countrycode)
+      VALUES ($1, $2, $3, $4, $5)`
+
+  const queryTextThree = `INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, 
     citizenshipcntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id) 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
 
-  const queryText = 'INSERT INTO "user" (username, firstname, password, email, phonenumber) VALUES ($1, $2, $3, $4, $5) RETURNING id';
-  pool.query(queryText, [username, firstname, password, email, phonenumber])
+  pool.query(queryText, [username, firstname, lastname, password, email, phonenumber])
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('error in post user route:', err);

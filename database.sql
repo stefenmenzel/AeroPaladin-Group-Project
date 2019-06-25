@@ -26,7 +26,8 @@ CREATE TABLE "address" (
      "streetaddr" VARCHAR(35),
      "city" VARCHAR (35),
      "state" VARCHAR (2),
-     "postalcode" VARCHAR(9) 
+     "postalcode" VARCHAR(9), 
+     "countrycode" VARCHAR(10)
 );
 
 --Airport Table
