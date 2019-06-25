@@ -9,7 +9,7 @@ class Address extends Component{
         return(
             <Label className="formInputLabel">
                 <Input className="formInput"
-                    onChange={(e) => this.props.handleChange(this.props.stateType + "_countryCode", e)}
+                    onChange={(e) => this.props.handleChange(this.props.stateType, "countryCode", e)}
                     placeholder="Country Code"
                 />
                 <span>
@@ -24,7 +24,7 @@ class Address extends Component{
             <div className="formInputs">
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_streetAddress", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "streetAddress", e)}
                         placeholder="Street Address"
                     />
                     <span>
@@ -34,7 +34,7 @@ class Address extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_city", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "city", e)}
                         placeholder="City"
                     />
                     <span>
@@ -44,7 +44,7 @@ class Address extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_state", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "state", e)}
                         placeholder="State"
                     />
                     <span>
@@ -54,7 +54,7 @@ class Address extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_postalCode", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "postalCode", e)}
                         placeholder="Postal Code"
                     />
                     <span>

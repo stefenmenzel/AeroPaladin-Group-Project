@@ -12,7 +12,7 @@ class Aircraft extends Component{
                 <h2>Aircraft Info</h2>
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange('aircraft_tailNumber', e)}
+                        onChange={(e) => this.props.handleChange('aircraft', 'tailNumber', e)}
                         placeholder="Tail Number"
                     />
                     <span>  
@@ -22,7 +22,7 @@ class Aircraft extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange('aircraft_type', e)}
+                        onChange={(e) => this.props.handleChange('aircraft', 'type', e)}
                         placeholder="Aircraft Type"
                     />
                     <span>
@@ -32,7 +32,7 @@ class Aircraft extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange('aircraft_color', e)}
+                        onChange={(e) => this.props.handleChange('aircraft', 'color', e)}
                         placeholder="Color"
                     />
                     <span>
@@ -42,7 +42,7 @@ class Aircraft extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange('aircraft_callSign', e)}
+                        onChange={(e) => this.props.handleChange('aircraft', 'callSign', e)}
                         placeholder="Call Sign"
                     />
                     <span>
@@ -52,7 +52,7 @@ class Aircraft extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange('aircraft_CBP', e)}
+                        onChange={(e) => this.props.handleChange('aircraft', 'CBP', e)}
                         placeholder="CBP Decal Number"
                     />
                     <span>

@@ -10,7 +10,7 @@ class Contact extends Component{
             <div className="formInputs">
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_email", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "email", e)}
                         placeholder="Email"
                     />
                     <span>
@@ -20,7 +20,7 @@ class Contact extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_phoneNumber", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "phoneNumber", e)}
                         placeholder="Phone Number"
                     />
                     <span>
