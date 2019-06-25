@@ -15,7 +15,8 @@ class RegisterPage extends Component {
     streetAddress: '', 
     city: '',
     state: '',
-    postalCode: ''
+    postalCode: '',
+    countryCode: ''
   };
 
   registerUser = (event) => {
@@ -31,7 +32,12 @@ class RegisterPage extends Component {
           firstname: this.state.firstName,
           lastname: this.state.lastName,
           email: this.state.email,
-          phonenumber: this.state.phoneNumber
+          phonenumber: this.state.phoneNumber,
+          streetaddr: this.state.streetAddress, 
+          city: this.state.city,
+          state: this.state.state,
+          postalcode: this.state.postalCode,
+          countrycode: this.state.countryCode
         },
       });
       this.props.history.push('/home');
@@ -187,7 +193,7 @@ class RegisterPage extends Component {
              </Label>
            </div>
           </div>
-        <div className="ui select input">
+        <div className="ui select">
           <select class="ui search dropdown" onChange={this.handleInputChangeFor('state')}>
           <option value="">State</option>
           <option value="AL">Alabama</option>
@@ -257,20 +263,33 @@ class RegisterPage extends Component {
              </Label>
            </div>
           </div>
+          <div className="field">
+           <div className="ui corner labeled input">
+             <Label className="zipIn">
+              <Input 
+                type="text"
+                placeholder="Country Code"
+                onChange={this.handleInputChangeFor('postalCode')}
+                />
+              <div className="ui corner label">
+                <i className="asterisk icon"></i>
+              </div>
+             </Label>
+           </div>
+          </div>
          </div>
          <div className="ui submit button" id="regSubmitBtn" onClick={this.registerUser}>Create New Account</div>
-        </form>
-        </div>
-        </div>
-       
-       <center>
-         <div className="ui basic buttons">
+        <div className="ui basic buttons">
           <button 
           className="ui grey basic button" 
           onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}>
             Back To Login</button>
          </div>
-       </center>
+        </form>
+        </div>
+        </div>
+       
+       
        
        
        
