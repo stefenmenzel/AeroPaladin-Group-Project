@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
+import {Input, Label} from 'semantic-ui-react';
 
 import '../FormInputs.css';
 
-class Aircraft extends Component{
+class Name extends Component{
 
     render(){
         return(
-            <div>
-                <Label>
-                    <Input 
+            <div className="formInputs">
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_firstName", e)}
                         placeholder="First Name"
                     />
                     <span>
@@ -16,8 +18,9 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label>
-                    <Input
+                <Label className="formInputLabel"> 
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_middleName", e)}
                         placeholder="Middle Name"
                     />
                     <span>
@@ -25,8 +28,9 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label>
-                    <Input
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType + "_lastName", e)}
                         placeholder="Last Name"
                     />
                     <span>

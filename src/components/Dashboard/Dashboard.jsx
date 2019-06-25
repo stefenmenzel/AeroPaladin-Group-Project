@@ -57,8 +57,10 @@ class Dashboard extends Component {
 }
 
 
+
 const mapStateToProps = state => ({
     apisTrips : state.dashboardReducer
 })
 
 export default connect(mapStateToProps)(Dashboard);
+

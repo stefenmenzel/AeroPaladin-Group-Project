@@ -15,15 +15,14 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import Dashboard from '../Dashboard/Dashboard'
 import CreateNewApis from '../CreateNewApis/CreateNewApis'
-import AddAircraftForm from '../AddAircraftForm/AddAircraftForm'
-import AddPassengerForm from '../AddPassengerForm/AddPassengerForm'
-import AddCrewForm from '../AddCrewForm/AddCrewForm'
+import AddAircraftForm from '../Forms/AddAircraftForm/AddAircraftForm'
+import AddPassengerForm from '../Forms/AddPassengerForm/AddPassengerForm'
+import AddCrewForm from '../Forms/AddCrewForm/AddCrewForm'
 import ReviewPage from '../ReviewPage/ReviewPage/ReviewPage'
 import CrewInfo from '../CrewInfo/CrewInfo'
 import AirCraftInfo from '../AirCraftInfo/AirCraftInfo'
 import UserInfo from '../UserInfo/UserInfo'
 import PassengerInfo from '../PassengerInfo/PassengerInfo'
-
 
 import './App.css';
 
@@ -120,7 +119,7 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
-        </div>
+        </div>        
       </Router>
     )
   }

@@ -2,9 +2,13 @@
     display: block;
 }
 
+.formInput{
+    width: 80%;
+}
+
 .formInputLabel{
     display: block !important;
-    width: 40%;
+    /* width: 40%; */
     margin-bottom: 10px !important;
 }  
 

@@ -1,15 +1,18 @@
 import React,{Component} from 'react';
 import {Input, Label} from 'semantic-ui-react';
 
-import './Aircraft.css';
+// import './Aircraft.css';
+import '../FormInputs.css';
 
 class Aircraft extends Component{
 
     render(){
         return(
-            <div className="aircraftInputs">
-                <Label className="aircraftLabel">
-                    <Input                                                
+            <div className="formInputs">
+                <h2>Aircraft Info</h2>
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange('aircraft_tailNumber', e)}
                         placeholder="Tail Number"
                     />
                     <span>  
@@ -17,8 +20,9 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
-                    <Input                        
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange('aircraft_type', e)}
                         placeholder="Aircraft Type"
                     />
                     <span>
@@ -26,8 +30,9 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
-                    <Input                        
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange('aircraft_color', e)}
                         placeholder="Color"
                     />
                     <span>
@@ -35,8 +40,9 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
-                    <Input                        
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange('aircraft_callSign', e)}
                         placeholder="Call Sign"
                     />
                     <span>
@@ -44,8 +50,9 @@ class Aircraft extends Component{
                     </span>
                 </Label>
 
-                <Label className="aircraftLabel">
-                    <Input                        
+                <Label className="formInputLabel">
+                    <Input className="formInput"
+                        onChange={(e) => this.props.handleChange('aircraft_CBP', e)}
                         placeholder="CBP Decal Number"
                     />
                     <span>
