@@ -3,43 +3,54 @@ import { connect } from 'react-redux';
 import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 import "./Dashboard.css";
 
+const moment = require('moment');
+
 class Dashboard extends Component {
    componentDidMount() {
        this.props.dispatch({ type:'FETCH_APIS_TRIPS' })
    }
     render() {
+     
         return (
             <div>
                 <pre>{JSON.stringify(this.props.apisTrips)}</pre>
+                   <h2>Welcome Back User</h2>
                 <div>
-                   <h2>Welcome Back Tom</h2>
-                </div>
-                <p> APIS Trips</p>
+                {(this.props.apisTrips.length) ?
+                <div>
+                <h3 class="ptag">APIS Trips</h3>
+                <div class="table">
                 <table class="ui celled table">
-                    <thead class="">
-                        <tr class="">
-                            <th class="">From</th>
-                            <th class="">To</th>
-                            <th class="">Date</th>
-                            <th class="">Edit/Delete</th>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Date</th>
+                            <th>Edit/Delete</th>
                         </tr>
                     </thead>
-                    <tbody class="">
-                        <tr class="">
-                            <td >Cell</td>
-                            <td >Cell</td>
-                            <td >Cell</td>
+                    <tbody>
+                        <tr>
+                            <td>{this.props.apisTrips[0].departure_state}</td>
+                            <td>{this.props.apisTrips[0].arrival_state}</td>
+                            {/* <td >{new Date(Date.parse(this.props.apisTrips[0].localarrivaltimestamp))}</td>  */}
+                            <td>{moment(this.props.apisTrips[0].localarrivaltimestamp).format("MM/DD/YYYY")}</td>
                             <td ><button>Edit</button> <button>Delete</button></td>
                         </tr>
-                        <tr class="">
-                            <td >Cell</td>
-                            <td >Cell</td>
-                            <td >Cell</td>
-                            <td ><button>Edit</button> <button>Delete</button></td>
+                        <tr>
+                            <td>{this.props.apisTrips[1].departure_state}</td>
+                            <td>{this.props.apisTrips[1].arrival_state}</td>
+                            <td>{moment(this.props.apisTrips[1].localarrivaltimestamp).format("MM/DD/YYYY")}</td>
+                            <td><button>Edit</button> <button>Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
-                
+                </div>
+                </div>
+                :
+                <div>empty</div>
+                }
+                </div>
             </div>
         )
     }
