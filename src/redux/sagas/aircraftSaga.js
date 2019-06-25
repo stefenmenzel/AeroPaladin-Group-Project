@@ -7,8 +7,8 @@ function* addAircraft(action){
             headers: {'Content-Type': 'application/json'},
             withCredentials: true,
         };
-        console.log("action.payload", action.payload);
-        // yield axios.post('/api/aircraft/add', config);
+        // console.log("action.payload", action.payload);
+        yield axios.post('/api/aircraft/add', action.payload, config);
         // yield put({type:'FETCH_AIRCRAFT'});
     }catch(error) {
         console.log('add aircraft request failed:', error);

@@ -24,10 +24,13 @@ class AddAircraftForm extends Component{
         console.log('canceling');
     }
 
-    handleChange = (propertyToChange, event) => {
+    handleChange = (propertyToChange, newProperty, event) => {
         this.setState({
             ...this.state,
-            [propertyToChange]: event.target.value
+            [propertyToChange]: {
+                ...this.state[propertyToChange],
+                [newProperty] : event.target.value
+            }
         })
     }
 
@@ -35,7 +38,7 @@ class AddAircraftForm extends Component{
         console.log('this.state:', this.state);
         return(
             <div>
-                <h1>Add Aircraft</h1>
+                <h1>Add Aircraft</h1>                
                 <form className="addForm" onSubmit={this.handleSubmit}>                    
                     <Aircraft handleChange={this.handleChange} />
                     <Divider />

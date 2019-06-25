@@ -23,6 +23,10 @@ router.post('/register', (req, res, next) => {
   const email = req.body.email;
   const phonenumber = req.body.phonenumber;
 
+  const queryTextTwo = `INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, 
+    citizenshipcntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
+
   const queryText = 'INSERT INTO "user" (username, firstname, password, email, phonenumber) VALUES ($1, $2, $3, $4, $5) RETURNING id';
   pool.query(queryText, [username, firstname, password, email, phonenumber])
     .then(() => res.sendStatus(201))
@@ -31,6 +35,8 @@ router.post('/register', (req, res, next) => {
       res.sendStatus(500);
     });
 });
+
+
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
