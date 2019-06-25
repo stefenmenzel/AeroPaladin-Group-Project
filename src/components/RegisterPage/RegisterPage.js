@@ -265,11 +265,11 @@ class RegisterPage extends Component {
           </div>
           <div className="field">
            <div className="ui corner labeled input">
-             <Label className="zipIn">
+             <Label className="countryIn">
               <Input 
                 type="text"
                 placeholder="Country Code"
-                onChange={this.handleInputChangeFor('postalCode')}
+                onChange={this.handleInputChangeFor('countryCode')}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
