@@ -3,13 +3,30 @@ import {Input, Label} from 'semantic-ui-react';
 
 import '../FormInputs.css';
 
+/**
+ * This component will throw a few input fields on the DOM.
+ *
+ * This component is useless without a form.
+ *
+ * You must send props into this component in order for it to
+ * work properly.
+ * 
+ * If you'd like for this component to ask for a country code
+ * you must pass in a prop called "countryCode" and set it to true
+ *
+ * You must send in a "handleChange" function,
+ * and a "stateType" prop. The handleChange function
+ * will send the value of the input field back to the parent component form
+ * and the state type will correspond to an object to create/add values to
+ * in the parent components state (aircraft owner operator)
+ */
 class Address extends Component{
 
     conditionalCountryCode = () => {
         return(
             <Label className="formInputLabel">
                 <Input className="formInput"
-                    onChange={(e) => this.props.handleChange(this.props.stateType + "_countryCode", e)}
+                    onChange={(e) => this.props.handleChange(this.props.stateType, "countryCode", e)}
                     placeholder="Country Code"
                 />
                 <span>
@@ -24,7 +41,7 @@ class Address extends Component{
             <div className="formInputs">
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_streetAddress", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "streetAddress", e)}
                         placeholder="Street Address"
                     />
                     <span>
@@ -34,7 +51,7 @@ class Address extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_city", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "city", e)}
                         placeholder="City"
                     />
                     <span>
@@ -44,7 +61,7 @@ class Address extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_state", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "state", e)}
                         placeholder="State"
                     />
                     <span>
@@ -54,7 +71,7 @@ class Address extends Component{
 
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType + "_postalCode", e)}
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "postalCode", e)}
                         placeholder="Postal Code"
                     />
                     <span>
