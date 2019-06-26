@@ -8,6 +8,7 @@ class RegisterPage extends Component {
   state = {
     username: '',
     firstName: '',
+    middleName: '',
     lastName: '',
     password: '',
     email: '',
@@ -16,7 +17,10 @@ class RegisterPage extends Component {
     city: '',
     state: '',
     postalCode: '',
-    countryCode: ''
+    countryCode: '',
+    birthdate: '',
+    gender: '',
+    resCountryCode: ''
   };
 
   registerUser = (event) => {
@@ -31,13 +35,17 @@ class RegisterPage extends Component {
           password: this.state.password,
           firstname: this.state.firstName,
           lastname: this.state.lastName,
+          middlename: this.state.middleName,
           email: this.state.email,
           phonenumber: this.state.phoneNumber,
           streetaddr: this.state.streetAddress, 
           city: this.state.city,
           state: this.state.state,
           postalcode: this.state.postalCode,
-          countrycode: this.state.countryCode
+          countrycode: this.state.countryCode,
+          birthdate: this.state.birthdate,
+          sex: this.state.gender,
+          residencecntry: this.state.resCountryCode
         },
       });
       this.props.history.push('/home');
@@ -106,6 +114,20 @@ class RegisterPage extends Component {
             </div>
           </div>
           <div className="field">
+           <div className="ui corner labeled input streetAddrIn">
+             <Label className="middleNameIn">
+              <Input 
+                type="text"
+                placeholder="Middle Name"
+                onChange={this.handleInputChangeFor('middleName')}
+                />
+              <div className="ui corner label">
+                <i className="asterisk icon"></i>
+              </div>
+             </Label>
+           </div>
+          </div>
+          <div className="field">
            <div className="ui corner labeled input">
              <Label className="lastNameIn">
               <Input 
@@ -154,6 +176,34 @@ class RegisterPage extends Component {
                 type="number"
                 placeholder="Phone Number"
                 onChange={this.handleInputChangeFor('phoneNumber')}
+                />
+              <div className="ui corner label">
+                <i className="asterisk icon"></i>
+              </div>
+             </Label>
+           </div>
+          </div>
+          <div className="field">
+           <div className="ui corner labeled input">
+             <Label className="genderIn">
+              <Input 
+                type="text"
+                placeholder="Gender"
+                onChange={this.handleInputChangeFor('gender')}
+                />
+              <div className="ui corner label">
+                <i className="asterisk icon"></i>
+              </div>
+             </Label>
+           </div>
+          </div>
+          <div className="field">
+           <div className="ui corner labeled input">
+             <Label className="birthdayIn">
+              <Input 
+                type="text"
+                placeholder="Birth Date"
+                onChange={this.handleInputChangeFor('birthdate')}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -277,6 +327,23 @@ class RegisterPage extends Component {
              </Label>
            </div>
           </div>
+    
+          <h5 className="ui header middle aligned center aligned grid addHead">Additional Address Information</h5>
+          <div className="field">
+           <div className="ui corner labeled input">
+             <Label className="resCountryIn">
+              <Input 
+                type="text"
+                placeholder="Residence Country Code"
+                onChange={this.handleInputChangeFor('resCountryCode')}
+                />
+              <div className="ui corner label">
+                <i className="asterisk icon"></i>
+              </div>
+             </Label>
+           </div>
+          </div>
+
          </div>
          <div className="ui submit button" id="regSubmitBtn" onClick={this.registerUser}>Create New Account</div>
         <div className="ui basic buttons">
@@ -288,10 +355,6 @@ class RegisterPage extends Component {
         </form>
         </div>
         </div>
-       
-       
-       
-       
        
        
        </div>
