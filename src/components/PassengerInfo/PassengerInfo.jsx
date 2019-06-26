@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Icon } from 'semantic-ui-react'
 
-import { Header, Table, Rating, Button} from 'semantic-ui-react'
+import { Header, Table, Button} from 'semantic-ui-react'
 
 import './PassengerInfo.css'
 
+const moment = require('moment');
 
 
 
@@ -16,14 +18,19 @@ class PassengerInfo extends Component {
     }
 
     addPassenger = ()=>{
-        console.log('YOOOO');
         this.props.history.push("/addpassenger")
     }
+
+    handleDelete = (event) =>{
+        console.log('delete', event);
+        
+    }
+
     render() {
         return (
             <div>
-            <div>
-                    <Button onClick ={this.addPassenger}>Add New Passenger</Button>
+                <div className="addPassengerBtn">
+                    <Button  onClick ={this.addPassenger}>Add New Passenger</Button>
             </div>
             <div>
             <Table className ="table" celled padded>
@@ -35,6 +42,7 @@ class PassengerInfo extends Component {
                         <Table.HeaderCell>Residence Country Code</Table.HeaderCell>
                         <Table.HeaderCell>Citizenship Country Code</Table.HeaderCell>
                         <Table.HeaderCell>Address</Table.HeaderCell>
+                        <Table.HeaderCell>Document</Table.HeaderCell>
                         <Table.HeaderCell>Edit</Table.HeaderCell>
                         <Table.HeaderCell>Delete</Table.HeaderCell>
                     </Table.Row>
@@ -44,13 +52,13 @@ class PassengerInfo extends Component {
                         return(
                             <Table.Body key={person.id}>
                             <Table.Row>
-                                <Table.Cell>
+                                    <Table.Cell singleLine>
                                     <Header  textAlign='center'>
                                         {person.firstname} {person.lastname} 
                                     </Header>
                                 </Table.Cell>
                                 <Table.Cell singleLine>
-                                    {person.birthdate}
+                                        {moment(person.birthdate).format("MM/DD/YYYY")}
                                 </Table.Cell>
                                 <Table.Cell>
                                     {person.sex}
@@ -64,11 +72,14 @@ class PassengerInfo extends Component {
                                 <Table.Cell singleLine>
                                     {person.streetaddr}, {person.city}, {person.state} {person.postalcode}, {person.countrycode}
                         </Table.Cell>
+                                    <Table.Cell singleLine>
+                                        Document#: {person.documentnbr} Expiry Date: {moment(person.expirydate).format("MM/DD/YYYY")}
+                                    </Table.Cell>
                                 <Table.Cell>
-                                    <button>Edit</button>
+                                        <button><Icon name="edit" /></button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <button>Delete</button>
+                                    <button onClick={()=> this.handleDelete(person.id)}><Icon name="trash" /></button>
                                 </Table.Cell>
                             </Table.Row>
                                             </Table.Body>

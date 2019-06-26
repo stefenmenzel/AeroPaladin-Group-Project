@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 import "./Dashboard.css";
 
@@ -7,55 +8,65 @@ const moment = require('moment');
 
 class Dashboard extends Component {
 
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_APIS_TRIPS' })
+    }
 
-
-   componentDidMount() {
-       this.props.dispatch({ type:'FETCH_APIS_TRIPS' })
-   }
-
+    //    handleDelete = (idToDelete) => {
+    //        console.log('clicked on delete in dashboard', idToDelete)
+    //        this.props.dispatch({type:'DELETE_APIS_TRIPS', payload:{id:idToDelete} })
+    //    }
+    handleEdit = (trip) => {
+        console.log('clicked on edit in dashboard', trip.id)
+        this.props.history.push('/reviewpage')
+        //this.props.dispatch({type:'UPDATE_APIS_TRIPS', payload:{id:trip.id, data:trip} })
+    }
 
     render() {
-     
+
         return (
          <body>
            
                 <pre>{JSON.stringify(this.props.apisTrips)}</pre>
-                   <h2>Welcome Back {this.props.user.firstName}</h2>
+
+                <h2>Welcome Back User</h2>
+
                 <div>
-                {(this.props.apisTrips.length) ?
-                <div>
-                <h3 class="ptag">APIS Trips</h3>
-                <div class="table">
-                <table class="ui celled table">
-                    <thead>
-                        <tr>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Date</th>
-                            <th>Edit/Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{this.props.apisTrips[0].departure_state}</td>
-                            <td>{this.props.apisTrips[0].arrival_state}</td>
-                            {/* <td >{new Date(Date.parse(this.props.apisTrips[0].localarrivaltimestamp))}</td>  */}
-                            <td>{moment(this.props.apisTrips[0].localarrivaltimestamp).format("MM/DD/YYYY")}</td>
-                            <td ><button>Edit</button> <button>Delete</button></td>
-                        </tr>
-                        <tr>
-                            <td>{this.props.apisTrips[1].departure_state}</td>
-                            <td>{this.props.apisTrips[1].arrival_state}</td>
-                            <td>{moment(this.props.apisTrips[1].localarrivaltimestamp).format("MM/DD/YYYY")}</td>
-                            <td><button>Edit</button> <button>Delete</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-                </div>
-                :
-                <div>empty</div>
-                }
+                    <h3>APIS Trips</h3>
+                    <Table className="table" celled padded>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell singleLine>FROM</Table.HeaderCell>
+                                <Table.HeaderCell>TO</Table.HeaderCell>
+                                <Table.HeaderCell>DATE</Table.HeaderCell>
+                                <Table.HeaderCell>EDIT</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+
+                        {this.props.apisTrips.map(trip => {
+                            return (
+                                <Table.Body key={trip.id}>
+                                    <Table.Row>
+
+                                        <Table.Cell >
+                                            {trip.departure_state}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            {trip.arrival_state}
+                                        </Table.Cell>
+                                        <Table.Cell >
+                                            {moment(trip.localarrivaltimestamp).format("MM/DD/YYYY")}
+                                        </Table.Cell>
+                                        <Table.Cell>
+                                            <button onClick={() => this.handleEdit(trip)}>Edit</button>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+
+                            )
+                        })}
+
+                    </Table>
                 </div>
           </body>
         )
@@ -64,10 +75,11 @@ class Dashboard extends Component {
 
 
 
-const mapStateToProps = (reduxState) => ({
-    apisTrips : reduxState.dashboardReducer,
-    user: reduxState.user
+
+const mapStateToProps = state => ({
+    apisTrips: state.dashboardReducer
+
 })
 
-export default connect(mapStateToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps)(Dashboard));
 
