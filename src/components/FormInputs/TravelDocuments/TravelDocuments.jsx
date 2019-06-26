@@ -22,6 +22,10 @@ const docCodeSelectOptions = [
 
 class TravelDocuments extends Component{
     
+    state = {
+        date: ''
+    }
+
     onDateChange = (event, { name, value }) => {
         console.log('date change', value);
         console.log('date change:', name);
@@ -44,7 +48,7 @@ class TravelDocuments extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "documentNumber", e)}
-                        placeHolder="Document Number"
+                        placeholder="Document Number"
                     />
                     <span>
                         Document Number
@@ -58,7 +62,7 @@ class TravelDocuments extends Component{
                         onChange={this.onSelectChange}
                     />
                     <span>
-                        Sex
+                        Document Type
                     </span>
                 </Label>
                 <Label className="formInputLabel">
