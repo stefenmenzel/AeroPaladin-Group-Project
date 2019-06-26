@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class ReviewItems extends Component {
     render() {
        return (
-           <p>Review Item goes here</p>
+           <h2>Review APIS</h2>
        )
     }
 }

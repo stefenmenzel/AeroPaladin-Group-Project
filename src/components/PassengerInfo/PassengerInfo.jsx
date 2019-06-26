@@ -12,7 +12,6 @@ const moment = require('moment');
 
 class PassengerInfo extends Component {
 
-
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_PASSENGER' })
     }
@@ -23,7 +22,6 @@ class PassengerInfo extends Component {
 
     handleDelete = (event) =>{
         console.log('delete', event);
-        
     }
 
     render() {

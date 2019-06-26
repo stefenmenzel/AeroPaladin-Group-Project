@@ -5,6 +5,22 @@ const pool = require('../modules/pool');
 
 const router = express.Router();
 
+
+// router.get('/', rejectUnauthenticated, (req, res) => {
+//     const sqlQuery = `SELECT "aircraft".*, "people".id, "people".firstname, "people".middlename, "people".lastname, "people".telephonenbr, "people".emailaddr,  "address".*  FROM "people"
+//     JOIN "aircraft" ON "aircraft".owner_id= "people".id
+//     JOIN "address" ON "address".id = "people".addresswhileinus_id
+//     WHERE "people".peopletype = 3 AND "people".peopletype = 4 ;`
+//     pool.query(sqlQuery).then(result => {
+//         console.log(' Aircraft Result', result.rows);
+//         res.send(result.rows)
+//     }).catch(err => {
+//         console.log('Error in Aircraft GET', err);
+//         res.SendStatus(500)
+//     })
+// });  
+
+
 //we'll need to send this as a transaction...those look better as an async await
 //thus we declare our callback function async
 router.post('/add', rejectUnauthenticated, async (req, res) => {    

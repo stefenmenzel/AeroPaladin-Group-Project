@@ -43,7 +43,7 @@ class Dashboard extends Component {
                                 <Table.Body key={trip.id}>
                                     <Table.Row>
 
-                                        <Table.Cell >
+                                        <Table.Cell singleLine >
                                             {trip.departure_state}
                                         </Table.Cell>
                                         <Table.Cell>
