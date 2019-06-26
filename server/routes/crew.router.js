@@ -11,15 +11,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "document".*, "people".id, "people".firstname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
 JOIN "address" ON "address".id = "people".addresswhileinus_id
 JOIN "document" ON "document".people_id = "people".id
-WHERE "people".peopletype = 1;`
+WHERE "people".peopletype = 2;`
     pool.query(sqlQuery).then(result => {
-        console.log(' Passenger Result', result.rows);
+        console.log(' Crew Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
-        console.log('Error in Passenger GET', err);
+        console.log('Error in Crew GET', err);
         res.SendStatus(500)
     })
-});  
+});
 
 
 module.exports = router;
