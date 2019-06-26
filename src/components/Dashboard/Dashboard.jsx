@@ -7,6 +7,7 @@ import "./Dashboard.css";
 const moment = require('moment');
 
 class Dashboard extends Component {
+
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_APIS_TRIPS' })
     }
@@ -20,12 +21,16 @@ class Dashboard extends Component {
         this.props.history.push('/reviewpage')
         //this.props.dispatch({type:'UPDATE_APIS_TRIPS', payload:{id:trip.id, data:trip} })
     }
+
     render() {
 
         return (
-            <div>
+         <body>
+           
                 <pre>{JSON.stringify(this.props.apisTrips)}</pre>
+
                 <h2>Welcome Back User</h2>
+
                 <div>
                     <h3>APIS Trips</h3>
                     <Table className="table" celled padded>
@@ -63,15 +68,17 @@ class Dashboard extends Component {
 
                     </Table>
                 </div>
-            </div>
+          </body>
         )
     }
 }
 
 
 
+
 const mapStateToProps = state => ({
     apisTrips: state.dashboardReducer
+
 })
 
 export default withRouter(connect(mapStateToProps)(Dashboard));

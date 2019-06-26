@@ -1,37 +1,101 @@
-import React from 'react';
+import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+import {Button, Menu, Segment, Sidebar} from 'semantic-ui-react';
 
-const Nav = (props) => (
+
+
+class Nav extends Component {
+  //   state = {
+  //     visible: false
+  //   }
+
+  //   handleHideClick = () => this.setState({ visible: false })
+  //   handleShowClick = () => this.setState({ visible: true })
+  //   handleSidebarHide = () => this.setState({ visible: false })
+    
+  //   // showMenu = () => {
+  //   //  console.log('in SHOWMENU');
+  //   //  this.setState({
+  //   //      visible: !this.state.visible })
+  //   // }
+
+   render(){
+  //   console.log('state change for menu: ', this.state.visible);
+  //    const { visible } = this.state
+  return(
+    // <>
+    // <div>
+    // <Button.Group>
+    //       <Button disabled={visible} onClick={this.handleShowClick}>
+    //         Menu
+    //       </Button>
+    //       <Button disabled={!visible} onClick={this.handleHideClick}>
+    //         Hide Menu
+    //       </Button>
+    //     </Button.Group>
+
+    // <Sidebar.Pushable as={Segment}>
+    //       <Sidebar
+    //         as={Menu}
+    //         animation='overlay'
+    //         icon='labeled'
+    //         inverted
+    //         onHide={this.handleSidebarHide}
+    //         vertical
+    //         visible={visible}
+    //         width='normal'
+    //       >
+    //         <Menu.Item as='a'>
+    //           Home
+    //         </Menu.Item>
+    //         <Menu.Item as='a'>
+    //           Games
+    //         </Menu.Item>
+    //         <Menu.Item as='a'>
+    //           Channels
+    //         </Menu.Item>
+    //       </Sidebar>
+
+    //        <Sidebar.Pusher>
+    //       </Sidebar.Pusher>
+    //     </Sidebar.Pushable>
+    // </div>
+
+
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <h2 className="nav-title">aeroPaladin</h2>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
+        {this.props.user.id ? 'Home' : 'Login / Register'}
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
+      {this.props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
-            Info Page
+          <Link className="nav-link" to="/apis">
+            Create An APIS
+          </Link>
+          <Link className="nav-link" to="/reviewpage">
+            Review
           </Link>
           <LogOutButton className="nav-link"/>
         </>
       )}
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
-        About
-      </Link>
+
     </div>
   </div>
-);
+  
+    )};
+
+      }
 
 // Instead of taking everything from state, we just want the user
 // object to determine if they are logged in
