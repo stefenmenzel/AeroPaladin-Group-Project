@@ -6,15 +6,21 @@ import "./Dashboard.css";
 const moment = require('moment');
 
 class Dashboard extends Component {
+
+
+
    componentDidMount() {
        this.props.dispatch({ type:'FETCH_APIS_TRIPS' })
    }
+
+
     render() {
      
         return (
-            <div>
+         <body>
+           
                 <pre>{JSON.stringify(this.props.apisTrips)}</pre>
-                   <h2>Welcome Back User</h2>
+                   <h2>Welcome Back {this.props.user.firstName}</h2>
                 <div>
                 {(this.props.apisTrips.length) ?
                 <div>
@@ -51,15 +57,16 @@ class Dashboard extends Component {
                 <div>empty</div>
                 }
                 </div>
-            </div>
+          </body>
         )
     }
 }
 
 
 
-const mapStateToProps = state => ({
-    apisTrips : state.dashboardReducer
+const mapStateToProps = (reduxState) => ({
+    apisTrips : reduxState.dashboardReducer,
+    user: reduxState.user
 })
 
 export default connect(mapStateToProps)(Dashboard);
