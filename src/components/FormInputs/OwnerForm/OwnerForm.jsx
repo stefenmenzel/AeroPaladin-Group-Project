@@ -26,12 +26,12 @@ class OwnerForm extends Component {
                     handleChange={this.props.handleChange}
                     stateType='owner'                    
                 />
-                <Divider style={{ width: '40%' }} />
+                <Divider />
                 <Address 
                     handleChange={this.props.handleChange} 
                     stateType='owner'
                 />                    
-                <Divider style={{ width: '40%' }} />
+                <Divider />
                 <Contact 
                     handleChange={this.props.handleChange}
                     stateType='owner'

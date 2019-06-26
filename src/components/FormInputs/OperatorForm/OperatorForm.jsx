@@ -26,12 +26,12 @@ class OperatorForm extends Component {
                     handleChange={this.props.handleChange}
                     stateType='operator'
                 />
-                <Divider style={{width:'40%'}}/>
+                <Divider />
                 <Address 
                     handleChange={this.props.handleChange}
                     stateType='operator'
                 />
-                <Divider style={{width: '40%'}}/>
+                <Divider />
                 <Contact 
                     handleChange={this.props.handleChange}
                     stateType='operator'

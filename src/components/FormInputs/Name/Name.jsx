@@ -73,14 +73,9 @@ class Name extends Component{
                         options={[
                             {key: 'm', value:'m', text:'m'},
                             {key: 'f', value:'f', text:'f'}
-                        ]}
-                        // onChange={(e) => this.props.handleChange(this.props.stateType, "sex", e)}
+                        ]}                        
                         onChange={this.onSelectChange}
                     />
-                    {/* <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType, "sex", e)}
-                        placeholder="sex"
-                    /> */}
                     <span>
                         Sex
                     </span>
