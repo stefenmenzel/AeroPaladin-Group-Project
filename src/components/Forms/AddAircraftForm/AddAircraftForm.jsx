@@ -10,20 +10,32 @@ import '../Forms.css';
 
 class AddAircraftForm extends Component{
 
+    //as all the input are stored in separate components...we'll want
+    //to store all the data in the same state with the parent component.
     state = {
 
     }
 
+    //send the aircraft we just added to the database.
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('submitting....or trying');
         this.props.dispatch({type: 'ADD_AIRCRAFT', payload: this.state});
     }
 
+    //cancel this form filling outing (go back to aircraft summary page)
     handleCancel = () => {
         console.log('canceling');
+        this.props.history.push('/aircraftinfo');
     }
 
+    /**
+     * As our state is initially blank we need to fill it out
+     * from the inputs as we go. this function will setstate
+     * in a way that'll add new keys to the object that the
+     * inputs correspond with (aircraft, owner, operator) and
+     * set their values to whatever was set in the inputs.
+     */
     handleChange = (propertyToChange, newProperty, event) => {
         this.setState({
             ...this.state,
