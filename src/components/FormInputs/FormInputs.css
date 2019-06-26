@@ -6,6 +6,14 @@
     width: 80%;
 }
 
+.formAltInput{
+    display:inline-block;
+    width:80%;
+}
+/* .formDateInput input{
+    width:100%;
+} */
+
 .formInputLabel{
     display: block !important;
     /* width: 40%; */

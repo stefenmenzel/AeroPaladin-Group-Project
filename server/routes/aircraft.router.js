@@ -33,13 +33,13 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     //query to stash owner info
     const ownerQuery = `
         INSERT INTO "people" (lastname, firstname, middlename, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id)
-        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, $6, %7, $8
+        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, $6, $7, $8
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
                 "emailaddr" = $4
                 AND
-                "peopletype" = %6
+                "peopletype" = $6
             )
         )
         RETURNING "id";
@@ -47,7 +47,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     //query to stash operator info
     const operatorQuery = `
         INSERT INTO "people" (lastname, firstname, middlename, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id)
-        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, %6, %7, $8
+        SELECT $1, $2, $3, CAST($4 AS VARCHAR), $5, $6, $7, $8
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
@@ -75,20 +75,20 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
         declaring these queries as an "await" will allow us to wait for 
         responses from the database before we start the next query.
         all of these queries requre that we have an id from the last query.
-        **********/
+        **********/       
 
         await connection.query('BEGIN');
-        await connection.query(addressQuery, [owner.streetAddress, owner.city, owner.state, owner.postalCode])
-            .then((result) => {owner_address_id = result.rows[0].id});
+        let result = await connection.query(addressQuery, [owner.streetAddress, owner.city, owner.state, owner.postalCode])
+        owner_address_id = result.rows[0].id;
 
-        await connection.query(ownerQuery, [owner.lastName, owner.firstName, owner.middleName, owner.email, owner.phoneNumber, 4, req.user.id, owner_address_id])
-            .then((result) => {owner_id = result.rows[0].id});
+        result = await connection.query(ownerQuery, [owner.lastName, owner.firstName, owner.middleName, owner.email, owner.phoneNumber, 4, req.user.id, owner_address_id])
+        owner_id = result.rows[0].id;
 
-        await connection.query(addressQuery, [operator.streetAddress, operator.city, operator.state, operator.postalCode])
-            .then((result) => {operator_address_id = result.rows[0].id});
+        result = await connection.query(addressQuery, [operator.streetAddress, operator.city, operator.state, operator.postalCode])
+        operator_address_id = result.rows[0].id;
 
-        await connection.query(operatorQuery, [operator.lastName, operator.firstName, operator.middleName, operator.email, operator.phoneNumber,3, req.user.id, operator_address_id])
-            .then((result) => {operator_id = result.rows[0].id})
+        result = await connection.query(operatorQuery, [operator.lastName, operator.firstName, operator.middleName, operator.email, operator.phoneNumber,3, req.user.id, operator_address_id])
+        operator_id = result.rows[0].id;        
 
         await connection.query(aircraftQuery, [aircraft.tailNumber, aircraft.type, aircraft.color, aircraft.callSign, aircraft.CBP, owner_id, operator_id])
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Input, Label} from 'semantic-ui-react';
+import {Input, Label, Select, Checkbox} from 'semantic-ui-react';
+import {DateInput} from 'semantic-ui-calendar-react';
 
 import '../FormInputs.css';
 
@@ -18,6 +19,112 @@ import '../FormInputs.css';
  * in the parent components state (aircraft owner operator)
  */
 class Name extends Component{
+
+    state = {
+        date: '',
+        citizenshipToggle: false
+    }
+
+    onDateChange = (event, {name, value}) => {
+        console.log('date change', value);
+        console.log('date change:', name);
+        //nothing to see here. move along
+        this.setState({
+            ...this.state,
+            date:value
+        })
+        this.props.handleChange(this.props.stateType, name, {target: {value: value}})
+    }
+
+    onSelectChange = (event, {name, value}) => {
+        console.log("sex change:", value);
+        this.props.handleChange(this.props.stateType, name, {target: {value: value}})
+    }
+
+    citizenshipCheckbox = () => {
+        console.log('toggle');
+        this.setState({
+            ...this.state,
+            citizenshipToggle: !this.state.citizenshipToggle
+        })
+    }
+
+    conditionalInputs = () => {
+        return(
+            <>
+                <Label className="formInputLabel">
+                    <DateInput className="formAltInput"
+                        name="birthDate"
+                        placeholder = "Birth Date (YYYY-MM-DD)"
+                        value={this.state.date}
+                        iconPosition="left"                        
+                        onChange={this.onDateChange}
+                        style={{width:'100%'}}
+                        dateFormat="YYYY-MM-DD"
+                    />
+                    <span>
+                        Birth Date
+                    </span>
+                </Label>
+                <Label className="formInputLabel">
+                    <Select className="formAltInput"
+                        placeholder="select your sex"
+                        name="sex"
+                        options={[
+                            {key: 'm', value:'m', text:'m'},
+                            {key: 'f', value:'f', text:'f'}
+                        ]}
+                        // onChange={(e) => this.props.handleChange(this.props.stateType, "sex", e)}
+                        onChange={this.onSelectChange}
+                    />
+                    {/* <Input className="formInput"
+                        onChange={(e) => this.props.handleChange(this.props.stateType, "sex", e)}
+                        placeholder="sex"
+                    /> */}
+                    <span>
+                        Sex
+                    </span>
+                </Label>
+                <Label className="formInputLabel">
+                    <Select className="formAltInput"
+                        placeholder="select your residence country"
+                        name="residenceCountry"
+                        options={[
+                            { key: 'MEX', value: 'MEX', text: 'MEX' },
+                            { key: 'USA', value: 'USA', text: 'USA' }
+                        ]}                        
+                        onChange={this.onSelectChange}
+                    />                    
+                    <span>
+                        Residence Country
+                    </span>
+                </Label>
+                <Label className="formInputLabel">
+                    <Select className="formAltInput"
+                        placeholder="select your citizenship country"
+                        name="citizenShipCountry"
+                        options={[
+                            { key: 'MEX', value: 'MEX', text: 'MEX' },
+                            { key: 'USA', value: 'USA', text: 'USA' }
+                        ]}                        
+                        onChange={this.onSelectChange}    
+                        disabled={this.state.citizenshipToggle}                    
+                    />
+                    <span>
+                        Citizenship Country
+                    </span>
+                </Label>
+                <Label className="formInputLabel">
+                    <Checkbox                         
+                        onChange={this.citizenshipCheckbox}
+                    />
+                    <span>
+                        citizenship country is the same as residence country
+                    </span>
+                </Label>
+            </>
+        )
+    }
 
     render(){
         return(
@@ -51,6 +158,8 @@ class Name extends Component{
                         Last Name
                     </span>
                 </Label>
+
+                {(this.props.extended) && this.conditionalInputs()}
             </div>            
         )
     }

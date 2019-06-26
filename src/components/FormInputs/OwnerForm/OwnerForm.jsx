@@ -24,7 +24,7 @@ class OwnerForm extends Component {
                 <h2>Owner</h2>
                 <Name 
                     handleChange={this.props.handleChange}
-                    stateType='owner'
+                    stateType='owner'                    
                 />
                 <Divider style={{ width: '40%' }} />
                 <Address 
