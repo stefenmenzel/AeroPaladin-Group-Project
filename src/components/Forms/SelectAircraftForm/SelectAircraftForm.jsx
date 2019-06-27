@@ -7,15 +7,19 @@ import '../../FormInputs/FormInputs.css'
 class SelectAircraftForm extends Component{
 
     state = {
-        aircraftValue: ''
+        aircraftId: ''
+    }
+
+    componentDidMount(){
+        this.props.dispatch({ type: 'FETCH_AIRCRAFT'});
+        console.log("this.props.aircrafts:", this.props.aircrafts);
     }
 
     onSelectChange = (event, { name, value}) => {
         console.log("sex change:", value);
         this.setState({
-            ...this.state,
-            aircraftValue: value,
-            aircraft: value
+            ...this.state,            
+            aircraftId: value
         })
         // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
     }
@@ -26,13 +30,20 @@ class SelectAircraftForm extends Component{
     }
 
     getAircrafts = () => {
-        return [
-            {key: 'blah', value:'blah', text:'blah'}
-        ]
+        let options = []
+        for (let i of this.props.aircrafts) {
+            options.push(
+                { key: i.id, value: i.id, text: `${i.typeaircraft} ${i.callsign}`}
+            );
+        }        
+        console.log('options after population:', options);        
+        return options;
+            // {key: 'blah', value:'blah', text:'blah'}
     }
 
     render(){
         console.log('this.state:', this.state);
+        console.log('current aircrafts:', this.props.aircrafts);
         return(
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
@@ -70,4 +81,10 @@ class SelectAircraftForm extends Component{
     }
 }
 
-export default SelectAircraftForm;
+const mapStateToProps = (reduxState) => {
+    return{
+        aircrafts: reduxState.aircraftReducer
+    }
+}
+
+export default connect(mapStateToProps)(SelectAircraftForm);
