@@ -8,21 +8,71 @@ const router = express.Router();
 
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    let reviewPageId = req.params.id
+    let reviewPageId = req.params.id;
+    console.log('req.params. id: ', reviewPageId);
+    
+    const sqlQuery = `
+    SELECT plane.tailnumber AS planetailnum, 
+		p.firstname AS operatorfirstname, 
+		p.lastname AS operatorlastname ,
+		p1.firstname AS ownerfirstname,
+		p1.lastname AS ownerlastname,
+		
+  		json_agg(json_build_object(
+					'crew_paxFirstName', p2.firstname,
+					'crew_paxMiddleName', p2.middlename,
+					'crew_paxLastName', p2.lastname,
+					'crew_paxPeopleType', p2.peopletype
+					)) AS crewPaxPeople,
+					
+		flightbuilding.city, 
+		flightbuilding.cntrycode, 
+		flightbuilding2.city, 
+		flightbuilding2.cntrycode,
+		it.departure_airport_id, 
+ 		it."inboundarrivalLocation_airport_id", 
+		it2.localarrivaltimestamp, 
+		it2."localdeparturetimeStamp" 
 
-    const sqlQuery = `SELECT "document".*, "people".id, "people".firstname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
-JOIN "address" ON "address".id = "people".addresswhileinus_id
-JOIN "document" ON "document".people_id = "people".id
-WHERE "people".peopletype = 2;`
+    FROM "flight" 
+    LEFT JOIN "itinerary" AS it ON "flight".itinerary_id = it.id
+    LEFT JOIN "itinerary" AS it2 ON "flight".itinerary_id = it2.id 
+    LEFT JOIN "aircraft" AS plane ON "flight".aircraft_id = plane.id
+    LEFT JOIN "people" AS p ON "flight".operator_id = p.id
+    LEFT JOIN "people" AS p1 ON "flight".owner_id = p1.id
+    LEFT JOIN "flight_people" ON "flight".id = "flight_people".flight_id
+    LEFT JOIN "people" as p2 ON "flight_people".people_id = p2.id		
+    LEFT JOIN "airport" as flightbuilding ON it.departure_airport_id = flightbuilding.id
+    LEFT JOIN "airport" as flightbuilding2 ON it."inboundarrivalLocation_airport_id" = flightbuilding2.id
 
-    pool.query(sqlQuery).then(result => {
+    WHERE "flight".id = $1
+
+    GROUP BY planetailnum, 
+            operatorfirstname, 
+            operatorlastname, 
+            ownerfirstname, 
+            ownerlastname, 
+            flightbuilding.city, 
+            flightbuilding.cntrycode, 
+            flightbuilding2.city, 
+            flightbuilding2.cntrycode, 
+            it.departure_airport_id, 
+ 		    it."inboundarrivalLocation_airport_id", 
+		    it2.localarrivaltimestamp, 
+		    it2."localdeparturetimeStamp";`
+    
+
+    pool.query(sqlQuery, [reviewPageId]).then(result => {
         console.log(' Review Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
         console.log('Error in Review GET', err);
         res.SendStatus(500)
     })
+
 });
+
+
 
 
 
