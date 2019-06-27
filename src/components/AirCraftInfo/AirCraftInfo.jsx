@@ -21,8 +21,9 @@ class AircraftInfo extends Component {
         this.props.history.push("/addaircraft")
     }
 
-    handleDelete = (event) => {
-        console.log('delete', event);
+    handleDelete = (id) => {
+        console.log('delete', id);
+        this.props.dispatch({type: 'DELETE_AIRCRAFT', payload: id })
 
     }
 
@@ -75,7 +76,7 @@ class AircraftInfo extends Component {
                                             <button><Icon name="edit" /></button>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button onClick={() => this.handleDelete()}><Icon name="trash" /></button>
+                                            <button onClick={() => this.handleDelete(plane.id)}><Icon name="trash" /></button>
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
