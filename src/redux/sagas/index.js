@@ -6,6 +6,7 @@ import aircraftSaga from './aircraftSaga.js';
 import passengerSaga from './passengerSaga';
 import dashboardSaga from './dashboardSaga';
 import crewSaga from './crewSaga';
+import reviewSaga from './reviewSaga'
 
 
 // rootSaga is the primary saga.
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     aircraftSaga(),
     passengerSaga(),
     crewSaga(),
+    reviewSaga()
 
   ]);
 }

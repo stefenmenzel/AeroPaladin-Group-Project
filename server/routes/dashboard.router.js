@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 //get all the  APIS Trips 
 router.get('/apis', rejectUnauthenticated, (req, res) => {
     console.log('GET Route');
-    let queryText = `SELECT "itinerary".id, "airport".state as departure_state, "itinerary".localarrivaltimestamp, "itinerary"."localdeparturetimeStamp" ,"b".state as arrival_state FROM 
+    let queryText = `SELECT "flight".id as flight_id, "itinerary".id as itinerary_id, "airport".airportcode as departure_state, "itinerary".localarrivaltimestamp, "itinerary"."localdeparturetimeStamp" ,"b".airportcode as arrival_state FROM 
     "itinerary"
     JOIN "airport" ON "itinerary"."departure_airport_id"  = "airport".id
     JOIN "airport" as b on  "itinerary"."inboundarrivalLocation_airport_id"  = "b".id
