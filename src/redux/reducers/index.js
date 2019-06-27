@@ -2,11 +2,12 @@ import { combineReducers } from 'redux';
 import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import user from './userReducer';
-import passengerReducer from '../reducers/passengerReducer'
+import passengerReducer from '../reducers/passengerReducer';
 import dashboardReducer from './dashboardReducer';
-import crewReducer from './crewReducer'
-import reviewReducer from './reviewReducer'
-import aircraftReducer from './aircraftReducer'
+import crewReducer from './crewReducer';
+import reviewReducer from './reviewReducer';
+import aircraftReducer from './aircraftReducer';
+import apisReducer from './apisReducer.js';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   dashboardReducer,
   crewReducer,
   reviewReducer,
-  aircraftReducer
+  aircraftReducer,
+  apisReducer,
 });
 
 export default rootReducer;
