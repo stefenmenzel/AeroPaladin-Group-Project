@@ -1,9 +1,15 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+const config={
+    headers: {'Content-type': 'application/json'},
+    withCredentials: true
+};
+
+
 function* fetchCrew(action) {
     try {
-        const response = yield axios.get('/api/crew/');
+        const response = yield axios.get('/api/crew/', config);
         yield put({ type: 'SET_CREW', payload: response.data });
 
     } catch (error) {
@@ -11,8 +17,19 @@ function* fetchCrew(action) {
     }
 }
 
+function* addCrew(action){
+    try{
+        console.log('addcrew saga post', action.payload)
+        yield axios.post('/api/crew/add', action.payload, config);
+        yield put({type:'FETCH_CREW'});
+    }catch(error){
+        console.log('add crew request failed:', error);
+    }
+}
+
 function* crewSaga() {
     yield takeLatest('FETCH_CREW', fetchCrew);
+    yield takeLatest('ADD_CREW', addCrew);
 }
 
 export default crewSaga;
