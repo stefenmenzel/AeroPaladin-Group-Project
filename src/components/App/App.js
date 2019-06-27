@@ -57,7 +57,7 @@ class App extends Component {
             {/* Protected route for Review APIS View */}
             <ProtectedRoute
               exact
-              path="/reviewpage"
+              path="/reviewpage/:id"
               component={ReviewPage}
             />
 

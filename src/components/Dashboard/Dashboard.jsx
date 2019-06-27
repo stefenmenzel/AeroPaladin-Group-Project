@@ -16,10 +16,9 @@ class Dashboard extends Component {
     //        console.log('clicked on delete in dashboard', idToDelete)
     //        this.props.dispatch({type:'DELETE_APIS_TRIPS', payload:{id:idToDelete} })
     //    }
-    handleEdit = (trip) => {
-        console.log('clicked on edit in dashboard', trip.id)
-        this.props.history.push('/reviewpage')
-        //this.props.dispatch({type:'UPDATE_APIS_TRIPS', payload:{id:trip.id, data:trip} })
+    handleEdit = (id) => {
+        console.log('clicked on edit in dashboard', id)
+        this.props.history.push(`/reviewpage/${id}`)
     }
 
     render() {
@@ -45,7 +44,7 @@ class Dashboard extends Component {
 
                         {this.props.apisTrips.map(trip => {
                             return (
-                                <Table.Body key={trip.id}>
+                                <Table.Body key={trip.flight_id}>
                                     <Table.Row>
 
                                         <Table.Cell >
@@ -58,7 +57,7 @@ class Dashboard extends Component {
                                             {moment(trip.localarrivaltimestamp).format("MM/DD/YYYY")}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button onClick={() => this.handleEdit(trip)}>Edit</button>
+                                            <button onClick={() => this.handleEdit(trip.flight_id)}>Edit</button>
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>

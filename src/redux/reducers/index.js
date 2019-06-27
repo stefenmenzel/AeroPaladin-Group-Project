@@ -5,6 +5,7 @@ import user from './userReducer';
 import passengerReducer from '../reducers/passengerReducer'
 import dashboardReducer from './dashboardReducer';
 import crewReducer from './crewReducer'
+import reviewReducer from './reviewReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   passengerReducer,
   dashboardReducer,
-  crewReducer
+  crewReducer,
+  reviewReducer
 });
 
 export default rootReducer;
