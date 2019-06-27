@@ -6,13 +6,14 @@ import '../../FormInputs/FormInputs.css'
 
 class SelectAircraftForm extends Component{
 
-    state = {
-        aircraftId: ''
+    state = {        
+        id: ''        
     }
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_AIRCRAFT'});
         console.log("this.props.aircrafts:", this.props.aircrafts);
+
     }
 
     onSelectChange = (event, { name, value}) => {
@@ -26,7 +27,10 @@ class SelectAircraftForm extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("doing a submit");
+        // let test = this.props.apisReducer;
+        // test['aircraft'] = this.state.aircraftId;
+        // console.log("doing a submit", test);
+        this.props.dispatch({type: 'SET_APIS_AIRCRAFT', payload:this.state})
     }
 
     getAircrafts = () => {
@@ -44,6 +48,8 @@ class SelectAircraftForm extends Component{
     render(){
         console.log('this.state:', this.state);
         console.log('current aircrafts:', this.props.aircrafts);
+        console.log('current apis:', this.props.apis);
+        console.log('current apis aircraft:', this.props.apisAircraft);
         return(
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
@@ -83,7 +89,9 @@ class SelectAircraftForm extends Component{
 
 const mapStateToProps = (reduxState) => {
     return{
-        aircrafts: reduxState.aircraftReducer
+        aircrafts: reduxState.aircraftReducer,
+        apis: reduxState.apisReducer,
+        apisAircraft: reduxState.apisReducer.apisAircraft,
     }
 }
 
