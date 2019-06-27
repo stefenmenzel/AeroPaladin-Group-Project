@@ -6,6 +6,7 @@ import passengerReducer from '../reducers/passengerReducer'
 import dashboardReducer from './dashboardReducer';
 import crewReducer from './crewReducer'
 import reviewReducer from './reviewReducer'
+import aircraftReducer from './aircraftReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   passengerReducer,
   dashboardReducer,
   crewReducer,
-  reviewReducer
+  reviewReducer,
+  aircraftReducer
 });
 
 export default rootReducer;

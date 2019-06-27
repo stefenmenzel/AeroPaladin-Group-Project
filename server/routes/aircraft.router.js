@@ -110,4 +110,19 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     } 
 });
 
+router.get('/', rejectUnauthenticated, (req, res) => {
+    const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firstname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
+JOIN "people" ON  "people".id = "aircraft".operator_id
+JOIN "people" as owner ON  "owner".id = "aircraft".owner_id 
+JOIN "user" On "user".id = "people".user_id
+WHERE "user".id = $1;`
+    pool.query(sqlQuery, [req.user.id]).then(result => {
+        console.log(' Aircraft Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Aircraft GET', err);
+        res.SendStatus(500)
+    })
+});
+
 module.exports = router;

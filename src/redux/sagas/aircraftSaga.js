@@ -15,8 +15,20 @@ function* addAircraft(action){
     }
 }
 
+function* fetchAircraft(action) {
+    try {
+        const response = yield axios.get('/api/aircraft/');
+        yield put({ type: 'SET_AIRCRAFT', payload: response.data });
+
+    } catch (error) {
+        console.log('Passenger GET request failed', error);
+    }
+}
+
 function* aircraftSaga(){
     yield takeLatest('ADD_AIRCRAFT', addAircraft);
+    yield takeLatest('FETCH_AIRCRAFT', fetchAircraft);
+
 }
 
 export default aircraftSaga;
