@@ -9,7 +9,7 @@ function* addAircraft(action){
         };
         // console.log("action.payload", action.payload);
         yield axios.post('/api/aircraft/add', action.payload, config);
-        // yield put({type:'FETCH_AIRCRAFT'});
+        yield put({type:'FETCH_AIRCRAFT'});
     }catch(error) {
         console.log('add aircraft request failed:', error);
     }
