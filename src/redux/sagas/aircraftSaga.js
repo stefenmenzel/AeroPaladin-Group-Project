@@ -25,9 +25,21 @@ function* fetchAircraft(action) {
     }
 }
 
+function* deleteAircraft(action) {
+    try {
+        yield axios.delete(`/api/aircraft/${action.payload}`);
+        yield put({ type: 'FETCH_AIRCRAFT' })
+    } catch (error) {
+        console.log('AircraftSaga DELETE request failed', error);
+    }
+}
+
+
 function* aircraftSaga(){
     yield takeLatest('ADD_AIRCRAFT', addAircraft);
     yield takeLatest('FETCH_AIRCRAFT', fetchAircraft);
+    yield takeLatest('DELETE_AIRCRAFT', deleteAircraft);
+
 
 }
 

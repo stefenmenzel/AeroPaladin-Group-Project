@@ -125,4 +125,22 @@ WHERE "user".id = $1;`
     })
 });
 
+
+router.delete('/:id', (req, res) => {
+
+    let deleteId = req.params.id
+    const sqlQuery = `
+         DELETE FROM "aircraft"
+WHERE "aircraft".id = $1;
+    `;
+    pool.query(sqlQuery, [deleteId]).then(result => {
+        console.log('Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in DELETE', err);
+        res.SendStatus(500)
+    })
+});
+
+
 module.exports = router;
