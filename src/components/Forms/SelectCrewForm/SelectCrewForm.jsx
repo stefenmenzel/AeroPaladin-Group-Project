@@ -34,7 +34,7 @@ class SelectCrewForm extends Component{
         let options = []
         for (let i of this.props.crews) {
             options.push(
-                { key: i.id, value: i.id, text: `${i.firstname}`}
+                { key: i.id, value: i.id, text: `${i.firstname} ${i.lastname}`}
             );
         }        
         console.log('options after population:', options);        
