@@ -52,8 +52,7 @@ class CreateNewApis extends Component{
     conditionalComponent = () => {
         const componentArray = [
             <SelectAircraftForm nextStep={this.nextStep} />,
-            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />
-            <Name />
+            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />,            
         ]
         return(
             componentArray[this.state.step - 1]
