@@ -25,10 +25,10 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 					'crew_paxPeopleType', p2.peopletype
 					)) AS crewPaxPeople,
 					
-		flightbuilding.city, 
-		flightbuilding.cntrycode, 
-		flightbuilding2.city, 
-		flightbuilding2.cntrycode,
+		flightbuilding.city AS departureAirportCity,
+		flightbuilding.cntrycode AS departureAirportCntry,
+		flightbuilding2.city AS arrivalAirportCity, 
+		flightbuilding2.cntrycode AS arrivalAirportCntry,
 		it.departure_airport_id, 
  		it."inboundarrivalLocation_airport_id", 
 		it2.localarrivaltimestamp, 
