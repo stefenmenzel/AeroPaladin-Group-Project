@@ -44,7 +44,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     `
     const crewQuery = `
         INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, citizenshipcntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id)
-        SELECT $1, $2, $3, $4, $5, $6, CAST($7 AS VARCHAR), $8, $9, $10, $11
+        SELECT $1, $2, $3, $4, $5, $6, $7, CAST($8 AS VARCHAR), $9, $10, $11, $12, $13
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
