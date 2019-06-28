@@ -20,7 +20,7 @@ class ReviewPage extends Component {
             <div>
                 {/* Review Page */}
                 <ReviewItems />
-                <button onClick={()=>this.handler(this.props.match.params.id)}>Hit me</button>
+                
 
             </div>
         )
