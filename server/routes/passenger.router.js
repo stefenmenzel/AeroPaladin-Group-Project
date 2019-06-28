@@ -8,10 +8,12 @@ const router = express.Router();
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const sqlQuery = `SELECT "document".*, "people".id, "people".firstname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
+    const sqlQuery = `SELECT "document".*, "people".active, "people".id as people_id, "people".firstname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
 JOIN "address" ON "address".id = "people".addresswhileinus_id
 JOIN "document" ON "document".people_id = "people".id
-WHERE "people".peopletype = 1;`
+WHERE "people".peopletype = 1
+AND "people".active = TRUE
+;`
     pool.query(sqlQuery).then(result => {
         console.log(' Passenger Result', result.rows);
         res.send(result.rows)
@@ -20,6 +22,24 @@ WHERE "people".peopletype = 1;`
         res.SendStatus(500)
     })
 });  
+
+router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
+    let deleteID = req.params.id
+    console.log('DELETE', deleteID);
+    
+    const sqlQuery = `UPDATE "people"
+SET "active" = false
+WHERE "id" = $1;`
+    pool.query(sqlQuery, [deleteID]).then(result => {
+        console.log('DELETEEEEEE', result);
+        res.sendStatus(200)
+    }).catch(err => {
+        console.log('Error in DELETE', err);
+        res.SendStatus(500)
+    })
+});
+
+
 
 router.post('/add', rejectUnauthenticated, async (req, res) => {
     console.log('req.body:', req.body);
