@@ -7,4 +7,9 @@
     background-color: lightgray;
     margin-top: 40px;
     margin-left: 150px;
+    display: grid;
+}
+
+.tailNum{
+    -ms-flex-align: left;
 }
