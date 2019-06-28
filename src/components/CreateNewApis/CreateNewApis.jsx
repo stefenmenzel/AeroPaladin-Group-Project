@@ -6,43 +6,18 @@ import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 
-<<<<<<< HEAD
-const componentArray=[
-    <SelectAircraftForm/>,
-    <SelectCrewForm />,
-    <SelectPassengerForm />
-
-]
-
-// const stepItems=[
-//     {active: true, completed: false, title: 'Aircraft', description: 'Choose your aircraft'},
-//     {completed: false, title: 'Crew', description: 'Choose your crew'},
-//     { completed: false, title: 'Passengers', description: 'Choose your Passengers' },
-//     { completed: false, title: 'Flight segment one', description: 'Flight Segment One' },
-//     { completed: false, title: 'Flight segment Two', description: 'Flight Segment Two' },
-
-// ]
-=======
 /**
  * This component will walk a user through creating a new APIS.
  * It has a stepper that displays the current progress in creating
  * the APIS along with displaying the current form the user is currently filling out.
  */
->>>>>>> c6bf7d9079b2f042321e3a9f20b40f5ba9b3faa5
-
 class CreateNewApis extends Component{
 
     //this state will help us keep track of where we are in the form.
     state = {
-<<<<<<< HEAD
-        step: 3,
-        maxSteps: 5
-    }
-=======
         step: 1,
         maxSteps: 5,        
     }    
->>>>>>> c6bf7d9079b2f042321e3a9f20b40f5ba9b3faa5
 
     //flip to the next step
     nextStep = () => {
