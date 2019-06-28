@@ -47,6 +47,7 @@ class SelectAircraftForm extends Component{
         event.preventDefault();        
         this.props.dispatch({type: 'SET_APIS_AIRCRAFT', payload:this.state})        
         this.props.nextStep();
+
     }
 
     //This will get all aircrafts assigned to the logged in user
