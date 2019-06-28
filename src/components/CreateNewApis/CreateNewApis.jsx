@@ -10,14 +10,14 @@ const componentArray=[
     <Name />
 ]
 
-const stepItems=[
-    {active: true, completed: false, title: 'Aircraft', description: 'Choose your aircraft'},
-    {completed: false, title: 'Crew', description: 'Choose your crew'},
-    { completed: false, title: 'Passengers', description: 'Choose your Passengers' },
-    { completed: false, title: 'Flight segment one', description: 'Flight Segment One' },
-    { completed: false, title: 'Flight segment Two', description: 'Flight Segment Two' },
+// const stepItems=[
+//     {active: true, completed: false, title: 'Aircraft', description: 'Choose your aircraft'},
+//     {completed: false, title: 'Crew', description: 'Choose your crew'},
+//     { completed: false, title: 'Passengers', description: 'Choose your Passengers' },
+//     { completed: false, title: 'Flight segment one', description: 'Flight Segment One' },
+//     { completed: false, title: 'Flight segment Two', description: 'Flight Segment Two' },
 
-]
+// ]
 
 class CreateNewApis extends Component{
 
@@ -42,9 +42,12 @@ class CreateNewApis extends Component{
         }
     }
 
-    stepComponent = () => {
+    activeOrCompleted = (stepPosition) => {
         return(
-            componentArray[this.state.step]
+            (stepPosition < this.state.step) ?
+            true
+            : 
+            false
         )
     }
 
@@ -52,15 +55,47 @@ class CreateNewApis extends Component{
         return(
             <>
                 <div className="apisForm">
-                    <Grid columns='equal'>
-                        <Grid.Column width={2}></Grid.Column>
-                        <Grid.Column width={8}>
+                    {/* <Grid columns='equal'> */}
+                        {/* <Grid.Column width={2}></Grid.Column> */}
+                        {/* <Grid.Column width={8}> */}
                             <h1>New APIS Entry</h1>
-                            <Step.Group ordered steps={stepItems}>
-                            </Step.Group>
-                        </Grid.Column>
-                        <Grid.Column width={2}></Grid.Column>
-                    </Grid>
+                            <div style={{width:'80%'}}>
+                                <Step.Group ordered>
+                                    <Step completed={this.activeOrCompleted(1)}>
+                                        <Step.Content>
+                                            <Step.Title>Aircraft</Step.Title>
+                                            <Step.Description>Choose your aircraft</Step.Description>
+                                        </Step.Content>
+                                    </Step>
+                                    <Step completed={this.activeOrCompleted(2)}>
+                                        <Step.Content>
+                                            <Step.Title>Crew</Step.Title>
+                                            <Step.Description>Choose your crew</Step.Description>
+                                        </Step.Content>
+                                    </Step>
+                            <Step completed={this.activeOrCompleted(3)}>
+                                        <Step.Content>
+                                            <Step.Title>Passengers</Step.Title>
+                                            <Step.Description>Choose your Passengers</Step.Description>
+                                        </Step.Content>
+                                    </Step>
+                                    <Step completed={this.activeOrCompleted(4)}>
+                                        <Step.Content>
+                                            <Step.Title>Flight Segment One</Step.Title>
+                                            <Step.Description>Choose your first Flight Segment</Step.Description>
+                                        </Step.Content>
+                                    </Step>
+                                <Step completed={this.activeOrCompleted(5)}>
+                                        <Step.Content>
+                                            <Step.Title>Flight Segment Two</Step.Title>
+                                            <Step.Description>Choose your Second Flight Segment</Step.Description>
+                                        </Step.Content>
+                                    </Step>
+                                </Step.Group>
+                            </div>
+                        {/* </Grid.Column> */}
+                        {/* <Grid.Column width={2}></Grid.Column> */}
+                    {/* </Grid> */}
                 </div>
                 <div>
                     {componentArray[this.state.step - 1]}                  
