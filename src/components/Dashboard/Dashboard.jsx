@@ -54,7 +54,7 @@ class Dashboard extends Component {
                                             {trip.arrival_state}
                                         </Table.Cell>
                                         <Table.Cell >
-                                            {moment(trip.localarrivaltimestamp).format("MM/DD/YYYY")}
+                                            {moment(trip.localarrivaltimestamp).format("MM/DD/YY")}
                                         </Table.Cell>
                                         <Table.Cell>
                                             <button onClick={() => this.handleEdit(trip.flight_id)}>Edit</button>

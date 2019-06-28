@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import './ReviewItems.css'
 import {Button} from 'semantic-ui-react';
 
+const moment = require('moment');
+
 class ReviewItems extends Component {
   
     edit = () => {
@@ -14,9 +16,11 @@ class ReviewItems extends Component {
  render() {
     
     let crewToShow;
+    let paxToShow;
     console.log('HERES THAT THING', this.props.review.crewpaxpeople);
     console.log('STUFF', Object.keys(this.props.review));
-    
+       
+    //Conditional rendering to show only people with the type of crew (2)
      if (Object.keys(this.props.review).length) {
     
        console.log('new thing here: ', this.props.review);
@@ -32,23 +36,22 @@ class ReviewItems extends Component {
         </ul>
         </>    
     )}
-
-
-        //     crewToShow = (
-    //         <div>
-        
-    //          return(
-    //              <> 
-    //              {crewInfo.crewpaxpeople.map(person => {
-    //                  return (<p>Crew Member: {person.crew_paxFirstName} {person.crew_paxLastName}</p>)
-                 
-    //                 })}  
-    //              </>
-    //          )
-    //  })}
-    //         </div>
-    //         )}
-
+    //Conditional rendering to show only people with the type of pax (1)
+    if (Object.keys(this.props.review).length) {
+    
+       console.log('new thing here: ', this.props.review);
+       
+        paxToShow = (
+      <>
+        <ul>
+            {this.props.review.crewpaxpeople.map(person => {  
+              if(person.crew_paxPeopleType == 1) 
+               // console.log('PERSON HEIRE: ', person);
+                return <li>{person.crew_paxFirstName}</li> 
+            })}
+        </ul>
+        </>    
+    )}
 
 
     return (
@@ -63,7 +66,7 @@ class ReviewItems extends Component {
          <Button className="ui tiny button" onClick={this.edit}>Edit Section</Button>
          
              <>
-             <p>Tail Number: {this.props.review.planetailnum}</p>
+             <p className="tailNum">Tail Number: {this.props.review.planetailnum}</p>
              <p>Owner: {this.props.review.ownerfirstname} {this.props.review.ownerlastname}</p>
              </>
          
@@ -85,6 +88,7 @@ class ReviewItems extends Component {
             {crewToShow}
          
          <h5>Passengers</h5>
+            {paxToShow}
         </div>
         {/* flight segment one */}
         <div>
@@ -93,19 +97,19 @@ class ReviewItems extends Component {
          <button onClick={this.edit}>Edit Section</button>
              <>
              <p>Departure Airport: {this.props.review.departureairportcity}, {this.props.review.departureairportcntry}</p>
-             <p>Departure Date: {this.props.review.localdeparturetimeStamp} </p>
-             <p>Departure Time: {this.props.review.localdeparturetimeStamp}</p>
+             <p>Departure Date: {moment(this.props.review.localdeparturetimeStamp).format("MM/DD/YYYY")} </p>
+             <p>Departure Time: {moment(this.props.review.localdeparturetimeStamp).format("LT")} </p>
              </>
         </div>
         {/* flight segment two */}
         <div>
          <h3>Flight Segment Two</h3>
          <h5> Arrival </h5>
-         <button onClick={this.edit}>Edit Section</button>
+         <Button className="ui tiny button" onClick={this.edit}>Edit Section</Button>
              <>
              <p>Arrival Airport: {this.props.review.arrivalairportcity}, {this.props.review.arrivalairportcntry}</p>
-             <p>Arrival Date: {this.props.review.localdeparturetimeStamp} </p>
-             <p>Arrival Time: {this.props.review.localdeparturetimeStamp}</p>
+             <p>Arrival Date: {moment(this.props.review.localdeparturetimeStamp).format("MM/DD/YYYY")}  </p>
+             <p>Arrival Time: {moment(this.props.review.localdeparturetimeStamp).format("LT")}</p>
              </>
         </div>
      </div>
