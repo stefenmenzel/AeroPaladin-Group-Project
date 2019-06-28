@@ -6,6 +6,7 @@ import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 
+<<<<<<< HEAD
 const componentArray=[
     <SelectAircraftForm/>,
     <SelectCrewForm />,
@@ -21,15 +22,31 @@ const componentArray=[
 //     { completed: false, title: 'Flight segment Two', description: 'Flight Segment Two' },
 
 // ]
+=======
+/**
+ * This component will walk a user through creating a new APIS.
+ * It has a stepper that displays the current progress in creating
+ * the APIS along with displaying the current form the user is currently filling out.
+ */
+>>>>>>> c6bf7d9079b2f042321e3a9f20b40f5ba9b3faa5
 
 class CreateNewApis extends Component{
 
+    //this state will help us keep track of where we are in the form.
     state = {
+<<<<<<< HEAD
         step: 3,
         maxSteps: 5
     }
+=======
+        step: 1,
+        maxSteps: 5,        
+    }    
+>>>>>>> c6bf7d9079b2f042321e3a9f20b40f5ba9b3faa5
 
+    //flip to the next step
     nextStep = () => {
+        console.log("inside next step");
         if(this.state.step + 1 <= this.state.maxSteps){
             this.setState({
                 step: this.state.step + 1
@@ -37,6 +54,7 @@ class CreateNewApis extends Component{
         }        
     }
 
+    //flip to the previous step.
     previousStep = () => {
         if(this.state.step -1 >= 1){
             this.setState({
@@ -45,6 +63,7 @@ class CreateNewApis extends Component{
         }
     }
 
+    //this function will set the stepper components as acive/completed
     activeOrCompleted = (stepPosition) => {
         return(
             (stepPosition < this.state.step) ?
@@ -54,54 +73,62 @@ class CreateNewApis extends Component{
         )
     }
 
+    //this function returns the component that the form is currently on.
+    conditionalComponent = () => {
+        const componentArray = [
+            <SelectAircraftForm nextStep={this.nextStep} />,
+            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />
+            <Name />
+        ]
+        return(
+            componentArray[this.state.step - 1]
+        )
+    }
+
     render(){
         return(
             <>
+            {/* First a stepper...this displays current progress */}
                 <div className="apisForm">
-                    {/* <Grid columns='equal'> */}
-                        {/* <Grid.Column width={2}></Grid.Column> */}
-                        {/* <Grid.Column width={8}> */}
-                            <h1>New APIS Entry</h1>
-                            <div style={{width:'80%'}}>
-                                <Step.Group ordered>
-                                    <Step completed={this.activeOrCompleted(1)}>
-                                        <Step.Content>
-                                            <Step.Title>Aircraft</Step.Title>
-                                            <Step.Description>Choose your aircraft</Step.Description>
-                                        </Step.Content>
-                                    </Step>
-                                    <Step completed={this.activeOrCompleted(2)}>
-                                        <Step.Content>
-                                            <Step.Title>Crew</Step.Title>
-                                            <Step.Description>Choose your crew</Step.Description>
-                                        </Step.Content>
-                                    </Step>
+                    <h1>New APIS Entry</h1>
+                    <div style={{width:'80%'}}>
+                        <Step.Group ordered>
+                            <Step completed={this.activeOrCompleted(1)}>
+                                <Step.Content>
+                                    <Step.Title>Aircraft</Step.Title>
+                                    <Step.Description>Choose your aircraft</Step.Description>
+                                </Step.Content>
+                            </Step>
+                            <Step completed={this.activeOrCompleted(2)}>
+                                <Step.Content>
+                                    <Step.Title>Crew</Step.Title>
+                                    <Step.Description>Choose your crew</Step.Description>
+                                </Step.Content>
+                            </Step>
                             <Step completed={this.activeOrCompleted(3)}>
-                                        <Step.Content>
-                                            <Step.Title>Passengers</Step.Title>
-                                            <Step.Description>Choose your Passengers</Step.Description>
-                                        </Step.Content>
-                                    </Step>
-                                    <Step completed={this.activeOrCompleted(4)}>
-                                        <Step.Content>
-                                            <Step.Title>Flight Segment One</Step.Title>
-                                            <Step.Description>Choose your first Flight Segment</Step.Description>
-                                        </Step.Content>
-                                    </Step>
-                                <Step completed={this.activeOrCompleted(5)}>
-                                        <Step.Content>
-                                            <Step.Title>Flight Segment Two</Step.Title>
-                                            <Step.Description>Choose your Second Flight Segment</Step.Description>
-                                        </Step.Content>
-                                    </Step>
-                                </Step.Group>
-                            </div>
-                        {/* </Grid.Column> */}
-                        {/* <Grid.Column width={2}></Grid.Column> */}
-                    {/* </Grid> */}
+                                <Step.Content>
+                                    <Step.Title>Passengers</Step.Title>
+                                    <Step.Description>Choose your Passengers</Step.Description>
+                                </Step.Content>
+                            </Step>
+                            <Step completed={this.activeOrCompleted(4)}>
+                                <Step.Content>
+                                    <Step.Title>Flight Segment One</Step.Title>
+                                    <Step.Description>Choose your first Flight Segment</Step.Description>
+                                </Step.Content>
+                            </Step>
+                        <Step completed={this.activeOrCompleted(5)}>
+                                <Step.Content>
+                                    <Step.Title>Flight Segment Two</Step.Title>
+                                    <Step.Description>Choose your Second Flight Segment</Step.Description>
+                                </Step.Content>
+                            </Step>
+                        </Step.Group>
+                    </div>                    
                 </div>
+                {/* Now our currently displayed component. */}
                 <div>
-                    {componentArray[this.state.step - 1]}                  
+                    {this.conditionalComponent()}
                 </div>
             </>            
         )

@@ -7,7 +7,8 @@ import '../../FormInputs/FormInputs.css'
 class SelectPassengerForm extends Component {
 
     state = {
-        passengerId: ''
+        passengerId: '',
+        passengerName: ''
     }
 
     componentDidMount() {
@@ -42,8 +43,12 @@ class SelectPassengerForm extends Component {
         // {key: 'blah', value:'blah', text:'blah'}
     }
 
-    handleAddPassenger = (event) => {
+    handlePassengerSubmit = (event) => {
         event.preventDefault();
+        this.setState({
+            passengerName: event.target.value
+        })
+        this.props.dispatch({ type: 'STORE_PASSENGER', payload: this.state })
 
     }
 
@@ -54,6 +59,7 @@ class SelectPassengerForm extends Component {
 
             <div className="formInputs">
                 <form className="addForm" onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handlePassengerSubmit}>
                     <h2>Passenger</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
@@ -80,6 +86,12 @@ class SelectPassengerForm extends Component {
                                     ADD
                                 </Button>
                             </Grid.Column>
+                            </Grid>
+                            </div>
+                            </form>
+                           
+                            <div className="formButtons">
+                        <Grid columns='equal'>
                             <Grid.Column width={12}></Grid.Column>
                             <Grid.Column width={3}>
                                 <Button
@@ -95,7 +107,7 @@ class SelectPassengerForm extends Component {
                 </form>
                 <div>
                     <ul>
-                        {this.props.passengers.map(passenger => {
+                        {this.props.listPassenger.map(passenger => {
                             return <li key={passenger.id}>{passenger.firstname}{passenger.firstname}</li>
                         })}
                     </ul>
@@ -107,7 +119,8 @@ class SelectPassengerForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        passengers: reduxState.passengerReducer
+        passengers: reduxState.passengerReducer,
+        listPassenger: reduxState.storePassengerReducer
     }
 }
 
