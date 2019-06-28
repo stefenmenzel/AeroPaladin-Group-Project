@@ -14,14 +14,14 @@ class ReviewItems extends Component {
  render() {
     
     let crewToShow;
-     if (this.props.review.peopletype = 2) {
+     if (this.props.review) {
         crewToShow = (
             <div>
             {this.props.review.map(crewInfo => {
              return(
                  <> 
                  {crewInfo.crewpaxpeople.map(person => {
-                     return ((person.peopletype === '2') && (<p>Crew Member: {person.crew_paxFirstName} {person.crew_paxLastName}</p>))
+                     return (<p>Crew Member: {person.crew_paxFirstName} {person.crew_paxLastName}</p>)
                  
                     })}  
                  </>
