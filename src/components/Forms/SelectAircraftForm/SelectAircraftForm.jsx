@@ -27,6 +27,7 @@ class SelectAircraftForm extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log("doing a submit");
         // let test = this.props.apisReducer;
         // test['aircraft'] = this.state.aircraftId;
         // console.log("doing a submit", test);
