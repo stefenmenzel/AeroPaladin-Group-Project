@@ -22,16 +22,19 @@ class Dashboard extends Component {
     }
 
     render() {
-
+        console.log('apisreducer info: ', this.props.apisTrips);
+        console.log('user reducer info: ', this.props.user);
+        console.log('login reducer info: ', this.props.login);
+        
         return (
          <body>
            
-                <pre>{JSON.stringify(this.props.apisTrips)}</pre>
+                {/* <pre>{JSON.stringify(this.props.apisTrips)}</pre> */}
 
-                <h2>Welcome Back User</h2>
+                <h2>Welcome Back, {this.props.user.username}!</h2>
 
                 <div>
-                    <h3>APIS Trips</h3>
+                    <h2 className="ui header center aligned middle aligned grid">APIS Trips</h2>
                     <Table className="table" celled padded>
                         <Table.Header>
                             <Table.Row>
@@ -75,9 +78,10 @@ class Dashboard extends Component {
 
 
 
-const mapStateToProps = state => ({
-    apisTrips: state.dashboardReducer
-
+const mapStateToProps = (state) => ({
+    apisTrips: state.dashboardReducer,
+    user: state.user,
+    login: state.loginModeReducer
 })
 
 export default withRouter(connect(mapStateToProps)(Dashboard));
