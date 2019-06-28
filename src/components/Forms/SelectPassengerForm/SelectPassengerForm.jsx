@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 
 import '../../FormInputs/FormInputs.css'
 
+let options = []
+
 class SelectPassengerForm extends Component {
 
     state = {
-        passengerId: '',
-        passengerName: ''
+        currentPassenger: {},
+        passengers:[
+            
+         ],
+        
     }
 
     componentDidMount() {
@@ -16,55 +21,80 @@ class SelectPassengerForm extends Component {
         console.log("this.props.passenger:", this.props.passengers);
     }
 
-    onSelectChange = (event, { name, value }) => {
-        console.log("sex change:", value);
+    // onSelectChange = (event, { name, value }) => {
+    //     console.log("sex change:", value);
+    //     this.setState({
+    //         ...this.state,
+    //         passenger: {
+    //             ...this.state.passenger
+    //         }
+    //         passengerId: value,
+            
+    //     })
+    //     // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+    // }
+
+    onSelectChange = (event, { name, value}) => {
+        let passengerObj = options[value];
+        console.log('passenger obj:', passengerObj);
+        let passengerId = passengerObj.id;
+        this.setState({
+          ...this.state,
+          currentPassenger: passengerObj
+        //   passenger:{
+        //       ...this.state.passenger,
+        //       [passengerId]: passengerObj
+        //   }  
+        });
+    }
+
+    addPassenger = () => {
+        console.log('clicked on add button', this.state);
         this.setState({
             ...this.state,
-            passengerId: value
+            passengers: [
+                ...this.state.passengers,
+                // {[this.state.currentPassenger.id]:this.state.currentPassenger}
+                this.state.currentPassenger
+            ]
         })
-        // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("doing a submit", this.state);
-        this.props.dispatch({ type: 'SET_APIS_PASSENGER', payload: this.state })
+        this.props.dispatch({ type: 'SET_APIS_PASSENGER', payload: this.state.passengers })
+        this.props.nextStep();
     }
 
     getPassenger = () => {
-        let options = []
-        for (let i of this.props.passengers) {
-            options.push(
-                { key: i.id, value: i.id, text: `${i.firstname} ${i.lastname}` }
-            );
+        options = []
+        let selectOptions = []
+        for(let i = 0; i < this.props.passengers.length; i++){
+            let passenger = this.props.passengers[i];
+            options.push(passenger);
+            selectOptions.push(
+                {key: i, value: i, text: `${passenger.firstname} ${passenger.lastname}`}
+            )
         }
-        console.log('options after population:', options);
-        return options;
-        // {key: 'blah', value:'blah', text:'blah'}
+        
+        return selectOptions;            
     }
 
-    handlePassengerSubmit = (event) => {
-        event.preventDefault();
-        this.setState({
-            passengerName: event.target.value
-        })
-        this.props.dispatch({ type: 'STORE_PASSENGER', payload: this.state })
-
-    }
-
-    render() {
+    render(){
         console.log('this.state:', this.state);
         console.log('current passengers:', this.props.passengers);
-        return (
+        console.log('current passenger state:', this.state.currentPassenger );
+        console.log('current passengers selected:', this.state.passengers);
+        return(
 
-            <div className="formInputs">
-                <form className="addForm" onSubmit={this.handleSubmit}>
-                    <form onSubmit={this.handlePassengerSubmit}>
-                    <h2>Passenger</h2>
+            <div className="formInputs"> 
+                <form className="addForm" onSubmit={this.handleSubmit}>                                   
+                    <h2>Passengers</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
                             value={this.state.passengerValue}
-                            placeholder="select your Passenger"
+                            placeholder="select your passenger"
                             name="passenger"
                             options={this.getPassenger()}
                             onChange={this.onSelectChange}
@@ -74,44 +104,36 @@ class SelectPassengerForm extends Component {
                     </span>
                     </Label>
                     <div className="formButtons">
-                        <Grid columns='equal'>
-                            <Grid.Column width={12}></Grid.Column>
-                            <Grid.Column width={3}>
-                                <Button
-                                    type="submit"
-                                    primary
-                                    className="formButton"
-                                    onClick={this.handleAddPassenger}
-                                >
-                                    ADD
+                        <Grid columns='equal'>                            
+                                <Grid.Column width={12}></Grid.Column>
+                                <Grid.Column width={3}>
+                                    <Button
+                                        type="button"
+                                        primary
+                                        className="formButton"
+                                        onClick={this.addPassenger}
+                                    >
+                                       ADD
                                 </Button>
-                            </Grid.Column>
-                            </Grid>
-                            </div>
-                            </form>
-                           
-                            <div className="formButtons">
-                        <Grid columns='equal'>
-                            <Grid.Column width={12}></Grid.Column>
-                            <Grid.Column width={3}>
-                                <Button
-                                    type="submit"
-                                    primary
-                                    className="formButton"
-                                >
-                                    Next
+                                </Grid.Column>                                                     
+                        </Grid>
+                    </div>
+                    <div className="formButtons">
+                        <Grid columns='equal'>                            
+                                <Grid.Column width={12}></Grid.Column>
+                                <Grid.Column width={3}>
+                                    <Button
+                                        type="submit"
+                                        primary
+                                        className="formButton"
+                                    >
+                                        Next
                                 </Button>
-                            </Grid.Column>
+                                </Grid.Column>                                                     
                         </Grid>
                     </div>
                 </form>
-                <div>
-                    <ul>
-                        {this.props.listPassenger.map(passenger => {
-                            return <li key={passenger.id}>{passenger.firstname}{passenger.firstname}</li>
-                        })}
-                    </ul>
-                </div>
+                
             </div>
         )
     }
@@ -119,8 +141,7 @@ class SelectPassengerForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        passengers: reduxState.passengerReducer,
-        listPassenger: reduxState.storePassengerReducer
+        passengers: reduxState.passengerReducer
     }
 }
 
