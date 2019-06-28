@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
 import Name from '../FormInputs/Name/Name.jsx';
-import SelectCrewForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
+import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 
 const componentArray=[
     <SelectAircraftForm/>,

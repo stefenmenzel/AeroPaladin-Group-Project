@@ -27,13 +27,14 @@ class SelectCrewForm extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("doing a submit");
+        
     }
 
     getCrews = () => {
         let options = []
         for (let i of this.props.crews) {
             options.push(
-                { key: i.id, value: i.id, text: `${i.typeaircraft} ${i.callsign}`}
+                { key: i.id, value: i.id, text: `${i.firstname}`}
             );
         }        
         console.log('options after population:', options);        
@@ -45,14 +46,15 @@ class SelectCrewForm extends Component{
         console.log('this.state:', this.state);
         console.log('current aircrafts:', this.props.crews);
         return(
+
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
-                    <h2>Manifest</h2>
+                    <h2>Crew</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
                             value={this.state.crewValue}
-                            placeholder="select your aircraft"
-                            name="aircraft"
+                            placeholder="select your crew"
+                            name="crew"
                             options={this.getCrews()}
                             onChange={this.onSelectChange}
                         />
