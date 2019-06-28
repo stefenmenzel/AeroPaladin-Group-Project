@@ -111,11 +111,12 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
 });
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firstname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
+    const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
 JOIN "people" ON  "people".id = "aircraft".operator_id
 JOIN "people" as owner ON  "owner".id = "aircraft".owner_id 
 JOIN "user" On "user".id = "people".user_id
-WHERE "user".id = $1;`
+WHERE "user".id = $1
+AND "aircraft".active= TRUE;`
     pool.query(sqlQuery, [req.user.id]).then(result => {
         console.log(' Aircraft Result', result.rows);
         res.send(result.rows)
@@ -126,16 +127,17 @@ WHERE "user".id = $1;`
 });
 
 
-router.delete('/:id', (req, res) => {
+router.put('/delete/:id', (req, res) => {
 
     let deleteId = req.params.id
     const sqlQuery = `
-         DELETE FROM "aircraft"
-WHERE "aircraft".id = $1;
+         UPDATE "aircraft"
+SET "active" = false
+WHERE "id" = $1;
     `;
     pool.query(sqlQuery, [deleteId]).then(result => {
         console.log('Result', result.rows);
-        res.send(result.rows)
+        res.send(200)
     }).catch(err => {
         console.log('Error in DELETE', err);
         res.SendStatus(500)
