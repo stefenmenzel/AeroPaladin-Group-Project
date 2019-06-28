@@ -8,7 +8,6 @@ import crewReducer from './crewReducer';
 import reviewReducer from './reviewReducer';
 import aircraftReducer from './aircraftReducer';
 import apisReducer from './apisReducer.js';
-import storePassengerReducer from './storePassengerReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -26,7 +25,6 @@ const rootReducer = combineReducers({
   reviewReducer,
   aircraftReducer,
   apisReducer,
-  storePassengerReducer
 });
 
 export default rootReducer;

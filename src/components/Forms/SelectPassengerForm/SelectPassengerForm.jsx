@@ -7,8 +7,11 @@ import '../../FormInputs/FormInputs.css'
 class SelectPassengerForm extends Component {
 
     state = {
-        passengerId: '',
-        passengerName: ''
+        currentPassenger: 0,
+        passengers:[
+            
+         ],
+        passengerId: ''
     }
 
     componentDidMount() {
@@ -20,7 +23,11 @@ class SelectPassengerForm extends Component {
         console.log("sex change:", value);
         this.setState({
             ...this.state,
-            passengerId: value
+            passenger: {
+                ...this.state.passenger
+            }
+            passengerId: value,
+            
         })
         // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
     }
@@ -43,28 +50,28 @@ class SelectPassengerForm extends Component {
         // {key: 'blah', value:'blah', text:'blah'}
     }
 
-    handlePassengerSubmit = (event) => {
-        event.preventDefault();
+    addPassenger = (passengerId, ) => {
         this.setState({
-            passengerName: event.target.value
+            ...this.state,
+            passenger: {
+                ...this.state.passenger,
+                [passengerId]: 
+            }
         })
-        this.props.dispatch({ type: 'STORE_PASSENGER', payload: this.state })
-
     }
 
-    render() {
+    render(){
         console.log('this.state:', this.state);
         console.log('current passengers:', this.props.passengers);
-        return (
+        return(
 
-            <div className="formInputs">
-                <form className="addForm" onSubmit={this.handleSubmit}>
-                    <form onSubmit={this.handlePassengerSubmit}>
-                    <h2>Passenger</h2>
+            <div className="formInputs"> 
+                <form className="addForm" onSubmit={this.handleSubmit}>                                   
+                    <h2>Passengers</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
                             value={this.state.passengerValue}
-                            placeholder="select your Passenger"
+                            placeholder="select your passenger"
                             name="passenger"
                             options={this.getPassenger()}
                             onChange={this.onSelectChange}
@@ -74,44 +81,35 @@ class SelectPassengerForm extends Component {
                     </span>
                     </Label>
                     <div className="formButtons">
-                        <Grid columns='equal'>
-                            <Grid.Column width={12}></Grid.Column>
-                            <Grid.Column width={3}>
-                                <Button
-                                    type="submit"
-                                    primary
-                                    className="formButton"
-                                    onClick={this.handleAddPassenger}
-                                >
-                                    ADD
+                        <Grid columns='equal'>                            
+                                <Grid.Column width={12}></Grid.Column>
+                                <Grid.Column width={3}>
+                                    <Button
+                                        type="button"
+                                        primary
+                                        className="formButton"
+                                    >
+                                       ADD
                                 </Button>
-                            </Grid.Column>
-                            </Grid>
-                            </div>
-                            </form>
-                           
-                            <div className="formButtons">
-                        <Grid columns='equal'>
-                            <Grid.Column width={12}></Grid.Column>
-                            <Grid.Column width={3}>
-                                <Button
-                                    type="submit"
-                                    primary
-                                    className="formButton"
-                                >
-                                    Next
+                                </Grid.Column>                                                     
+                        </Grid>
+                    </div>
+                    <div className="formButtons">
+                        <Grid columns='equal'>                            
+                                <Grid.Column width={12}></Grid.Column>
+                                <Grid.Column width={3}>
+                                    <Button
+                                        type="submit"
+                                        primary
+                                        className="formButton"
+                                    >
+                                        Next
                                 </Button>
-                            </Grid.Column>
+                                </Grid.Column>                                                     
                         </Grid>
                     </div>
                 </form>
-                <div>
-                    <ul>
-                        {this.props.listPassenger.map(passenger => {
-                            return <li key={passenger.id}>{passenger.firstname}{passenger.firstname}</li>
-                        })}
-                    </ul>
-                </div>
+                
             </div>
         )
     }
@@ -119,8 +117,7 @@ class SelectPassengerForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        passengers: reduxState.passengerReducer,
-        listPassenger: reduxState.storePassengerReducer
+        passengers: reduxState.passengerReducer
     }
 }
 

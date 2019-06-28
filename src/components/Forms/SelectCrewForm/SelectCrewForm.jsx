@@ -28,6 +28,7 @@ class SelectCrewForm extends Component{
         event.preventDefault();
         console.log("doing a submit", this.state);
         this.props.dispatch({type: 'SET_APIS_CREW', payload:this.state})
+        this.props.nextStep();
     }
 
     getCrews = () => {
