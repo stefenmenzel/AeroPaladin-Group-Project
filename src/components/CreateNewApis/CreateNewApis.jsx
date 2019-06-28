@@ -3,15 +3,14 @@ import {Step, Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
 import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
-import Name from '../FormInputs/Name/Name.jsx';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
+import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 
 /**
  * This component will walk a user through creating a new APIS.
  * It has a stepper that displays the current progress in creating
  * the APIS along with displaying the current form the user is currently filling out.
  */
-
 class CreateNewApis extends Component{
 
     //this state will help us keep track of where we are in the form.
@@ -53,7 +52,11 @@ class CreateNewApis extends Component{
     conditionalComponent = () => {
         const componentArray = [
             <SelectAircraftForm nextStep={this.nextStep} />,
+<<<<<<< HEAD
             <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />            
+=======
+            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />,            
+>>>>>>> master
         ]
         return(
             componentArray[this.state.step - 1]

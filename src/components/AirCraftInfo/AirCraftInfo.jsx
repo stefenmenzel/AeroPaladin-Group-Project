@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react'
-
+import Swal from 'sweetalert2';
 import { Header, Table, Button } from 'semantic-ui-react'
 
 import './AircraftInfo.css'
@@ -23,9 +23,43 @@ class AircraftInfo extends Component {
 
     handleDelete = (id) => {
         console.log('delete', id);
-        this.props.dispatch({type: 'DELETE_AIRCRAFT', payload: id })
 
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: true,
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Your Aircraft has been deleted.',
+                    'success'
+                )
+                this.props.dispatch({ type: 'DELETE_AIRCRAFT', payload: id })
+
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled!',
+
+                )
+            }
+        })
     }
+
 
     render() {
         return (

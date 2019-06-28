@@ -27,7 +27,7 @@ function* fetchAircraft(action) {
 
 function* deleteAircraft(action) {
     try {
-        yield axios.delete(`/api/aircraft/${action.payload}`);
+        yield axios.put(`/api/aircraft/delete/${action.payload}`);
         yield put({ type: 'FETCH_AIRCRAFT' })
     } catch (error) {
         console.log('AircraftSaga DELETE request failed', error);

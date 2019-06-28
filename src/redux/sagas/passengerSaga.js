@@ -9,6 +9,7 @@ const config={
 function* fetchPassenger(action) {
     try {
         const response = yield axios.get('/api/passenger/', config);
+        console.log('passenger GET saga', response.data)
         yield put({ type: 'SET_PASSENGER', payload: response.data });
 
     } catch (error) {

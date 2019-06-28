@@ -19,9 +19,19 @@ import {combineReducers} from 'redux'
      }
  }
 
+ const passenger = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_APIS_PASSENGER':
+            return action.payload;            
+        default:
+            return state;
+    }
+}
+
 const apisReducer = combineReducers({
     crew,
     aircraft,
+    passenger,
 
 })
 
