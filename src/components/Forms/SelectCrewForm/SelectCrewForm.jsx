@@ -26,8 +26,8 @@ class SelectCrewForm extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log("doing a submit");
-        
+        console.log("doing a submit", this.state);
+        this.props.dispatch({type: 'SET_APIS_CREW', payload:this.state})
     }
 
     getCrews = () => {
@@ -44,7 +44,7 @@ class SelectCrewForm extends Component{
 
     render(){
         console.log('this.state:', this.state);
-        console.log('current aircrafts:', this.props.crews);
+        console.log('current crews:', this.props.crews);
         return(
 
             <div className="formInputs"> 
