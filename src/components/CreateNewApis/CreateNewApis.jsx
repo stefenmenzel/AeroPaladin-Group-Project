@@ -3,14 +3,14 @@ import {Step, Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 
 import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
-import Name from '../FormInputs/Name/Name.jsx';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
+import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 
 const componentArray=[
     <SelectAircraftForm/>,
     <SelectCrewForm />,
-    <Name />
-    
+    <SelectPassengerForm />
+
 ]
 
 // const stepItems=[
@@ -25,7 +25,7 @@ const componentArray=[
 class CreateNewApis extends Component{
 
     state = {
-        step: 2,
+        step: 3,
         maxSteps: 5
     }
 
