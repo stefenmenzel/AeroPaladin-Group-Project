@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 
 import '../../FormInputs/FormInputs.css'
 
+let options = []
+
 class SelectPassengerForm extends Component {
 
     state = {
-        currentPassenger: 0,
+        currentPassenger: {},
         passengers:[
             
          ],
-        passengerId: ''
+        
     }
 
     componentDidMount() {
@@ -19,50 +21,71 @@ class SelectPassengerForm extends Component {
         console.log("this.props.passenger:", this.props.passengers);
     }
 
-    onSelectChange = (event, { name, value }) => {
-        console.log("sex change:", value);
+    // onSelectChange = (event, { name, value }) => {
+    //     console.log("sex change:", value);
+    //     this.setState({
+    //         ...this.state,
+    //         passenger: {
+    //             ...this.state.passenger
+    //         }
+    //         passengerId: value,
+            
+    //     })
+    //     // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+    // }
+
+    onSelectChange = (event, { name, value}) => {
+        let passengerObj = options[value];
+        console.log('passenger obj:', passengerObj);
+        let passengerId = passengerObj.id;
+        this.setState({
+          ...this.state,
+          currentPassenger: passengerObj
+        //   passenger:{
+        //       ...this.state.passenger,
+        //       [passengerId]: passengerObj
+        //   }  
+        });
+    }
+
+    addPassenger = () => {
+        console.log('clicked on add button', this.state);
         this.setState({
             ...this.state,
-            passenger: {
-                ...this.state.passenger
-            }
-            passengerId: value,
-            
+            passengers: [
+                ...this.state.passengers,
+                // {[this.state.currentPassenger.id]:this.state.currentPassenger}
+                this.state.currentPassenger
+            ]
         })
-        // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("doing a submit", this.state);
-        this.props.dispatch({ type: 'SET_APIS_PASSENGER', payload: this.state })
+        this.props.dispatch({ type: 'SET_APIS_PASSENGER', payload: this.state.passengers })
+        this.props.nextStep();
     }
 
     getPassenger = () => {
-        let options = []
-        for (let i of this.props.passengers) {
-            options.push(
-                { key: i.id, value: i.id, text: `${i.firstname} ${i.lastname}` }
-            );
+        options = []
+        let selectOptions = []
+        for(let i = 0; i < this.props.passengers.length; i++){
+            let passenger = this.props.passengers[i];
+            options.push(passenger);
+            selectOptions.push(
+                {key: i, value: i, text: `${passenger.firstname} ${passenger.lastname}`}
+            )
         }
-        console.log('options after population:', options);
-        return options;
-        // {key: 'blah', value:'blah', text:'blah'}
-    }
-
-    addPassenger = (passengerId, ) => {
-        this.setState({
-            ...this.state,
-            passenger: {
-                ...this.state.passenger,
-                [passengerId]: 
-            }
-        })
+        
+        return selectOptions;            
     }
 
     render(){
         console.log('this.state:', this.state);
         console.log('current passengers:', this.props.passengers);
+        console.log('current passenger state:', this.state.currentPassenger );
+        console.log('current passengers selected:', this.state.passengers);
         return(
 
             <div className="formInputs"> 
@@ -88,6 +111,7 @@ class SelectPassengerForm extends Component {
                                         type="button"
                                         primary
                                         className="formButton"
+                                        onClick={this.addPassenger}
                                     >
                                        ADD
                                 </Button>
