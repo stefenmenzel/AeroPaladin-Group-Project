@@ -25,9 +25,20 @@ function* addPassenger(action){
     }
 }
 
+function* deletePassenger(action) {
+    try {
+        yield axios.put(`/api/passenger/delete/${action.payload}`);
+        yield put({ type: 'FETCH_PASSENGER' });
+    } catch (error) {
+        console.log('Delete passenger request failed:', error);
+    }
+}
+
 function* passengerSaga() {
     yield takeLatest('FETCH_PASSENGER', fetchPassenger);
     yield takeLatest('ADD_PASSENGER', addPassenger);
+    yield takeLatest('DELETE_PASSENGER', deletePassenger);
+
 }
 
 export default passengerSaga;

@@ -21,9 +21,9 @@ class PassengerInfo extends Component {
         this.props.history.push("/addpassenger")
     }
 
-    handleDelete = (event) =>{
-        console.log('delete', event);
-        
+    handleDelete = (id) =>{
+        console.log('delete', id);
+        this.props.dispatch({ type: 'DELETE_PASSENGER', payload: id })
     }
 
     render() {
@@ -50,7 +50,7 @@ class PassengerInfo extends Component {
 
                     {this.props.passenger.map(person =>{
                         return(
-                            <Table.Body key={person.id}>
+                            <Table.Body key={person.people_id}>
                             <Table.Row>
                                     <Table.Cell singleLine>
                                     <Header  textAlign='center'>
@@ -79,7 +79,7 @@ class PassengerInfo extends Component {
                                         <button><Icon name="edit" /></button>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <button onClick={()=> this.handleDelete(person.id)}><Icon name="trash" /></button>
+                                        <button onClick={() => this.handleDelete(person.people_id)}><Icon name="trash" /></button>
                                 </Table.Cell>
                             </Table.Row>
                                             </Table.Body>
