@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import '../../FormInputs/FormInputs.css'
 
+let options = []
+
 class SelectCrewForm extends Component{
 
     state = {
@@ -17,11 +19,8 @@ class SelectCrewForm extends Component{
 
     onSelectChange = (event, { name, value}) => {
         console.log("sex change:", value);
-        this.setState({
-            ...this.state,            
-            crewId: value
-        })
-        // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+        let crewObj = options[value];
+        this.setState(crewObj);
     }
 
     handleSubmit = (event) => {
@@ -31,15 +30,17 @@ class SelectCrewForm extends Component{
     }
 
     getCrews = () => {
-        let options = []
-        for (let i of this.props.crews) {
-            options.push(
-                { key: i.id, value: i.id, text: `${i.firstname} ${i.lastname}`}
-            );
-        }        
-        console.log('options after population:', options);        
-        return options;
-            // {key: 'blah', value:'blah', text:'blah'}
+        options = []
+        let selectOptions = []
+        for(let i = 0; i < this.props.crews.length; i++){
+            let crew = this.props.crews[i];
+            options.push(crew);
+            selectOptions.push(
+                {key: i, value: i, text: `${crew.firstname} ${crew.lastname}`}
+            )
+        }
+        
+        return selectOptions;            
     }
 
     render(){
