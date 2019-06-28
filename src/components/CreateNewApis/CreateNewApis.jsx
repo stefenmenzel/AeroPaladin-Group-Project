@@ -54,6 +54,7 @@ class CreateNewApis extends Component{
             <SelectAircraftForm nextStep={this.nextStep} />,
             <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />, 
             <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />          
+
         ]
         return(
             componentArray[this.state.step - 1]

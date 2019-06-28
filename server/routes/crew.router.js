@@ -43,14 +43,14 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
         RETURNING "id";
     `
     const crewQuery = `
-        INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id)
-        SELECT $1, $2, $3, $4, $5, $6, CAST($7 AS VARCHAR), $8, $9, $10, $11
+        INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, citizenshipcntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id)
+        SELECT $1, $2, $3, $4, $5, $6, $7, CAST($8 AS VARCHAR), $9, $10, $11, $12, $13
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
-                "emailaddr" = $7
+                "emailaddr" = $8
                 AND
-                "peopletype" = $9
+                "peopletype" = $10
             )
         )
         RETURNING "id";
@@ -75,7 +75,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
         crew_address_id = result.rows[0].id;
         console.log('got all the way to address', result.rows[0].id);
 
-        result = await connection.query(crewQuery, [crew.lastName, crew.firstName, crew.middleName, crew.birthDate, crew.sex, crew.residenceCountry, crew.email, crew.phoneNumber, 2, req.user.id, crew_address_id])
+        result = await connection.query(crewQuery, [crew.lastName, crew.firstName, crew.middleName, crew.birthDate, crew.sex, crew.residenceCountry, crew.residenceCountry, crew.email, crew.phoneNumber, 2, req.user.id, crew_address_id, crew_address_id])
         crew_id = result.rows[0].id;
         console.log('got all the way to crew', result.rows[0].id);
 
