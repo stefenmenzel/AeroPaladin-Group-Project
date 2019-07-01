@@ -1,10 +1,21 @@
 .pendingTable {
     text-align: left;
-    padding:30px;
+    padding: 30px;
     min-width: 800px;
     margin-top: 300px;
 }
-
+.submittedTable {
+    text-align: left;
+    padding: 30px;
+    min-width: 800px;
+    margin-top: 300px;
+}
+.historicTable {
+    text-align: left;
+    padding: 30px;
+    min-width: 800px;
+    margin-top: 300px;
+}
 
 .ui.header.welcome {
    text-align: center;
@@ -16,5 +27,8 @@
 }
 
 .ui.header.pendingTable {
+    margin-left: 100px;
+}
+.ui.header.submittedTable {
     margin-left: 100px;
 }
