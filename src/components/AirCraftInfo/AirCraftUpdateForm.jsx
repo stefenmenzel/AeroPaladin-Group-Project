@@ -52,36 +52,6 @@ class AddAircraftForm extends Component {
         }
     }
 
-    // static getDerivedStateFromProps(props, state) {
-    //     console.log('inside get derived', props.aircraft);
-    //     console.log('current state inside get derived state:', state);
-    //     if(props.owner !== state.owner){
-    //         console.log('does not equal', state);
-    //         return{
-    //             ...state,
-    //             owner: props.owner
-    //         }
-    //     }
-    //     if (props.operator !== state.operator) {
-    //         if(Object.keys(state.operator).length <= 0){
-    //             console.log('does not equal', state);
-    //             return {
-    //                 ...state,
-    //                 operator: props.operator
-    //             }
-    //         }
-    //     }
-    //     if (props.aircraft !== state.aircraft) {
-    //         console.log('does not equal', state);
-    //         return {
-    //             ...state,
-    //             aircraft: props.aircraft
-    //         }
-    //     }
-    //     return null;
-    // }
-
-
     //send the aircraft we just added to the database.
     handleSubmit = (event) => {
         // event.preventDefault();
