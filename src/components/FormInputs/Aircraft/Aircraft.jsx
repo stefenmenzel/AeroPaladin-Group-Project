@@ -1,21 +1,32 @@
-import React,{Component} from 'react';
-import {Input, Label} from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { Input, Label } from 'semantic-ui-react';
 
 // import './Aircraft.css';
 import '../FormInputs.css';
 
-class Aircraft extends Component{
+class Aircraft extends Component {
 
-    render(){
-        return(
+    state = {
+        aircraft: this.props.aircraft
+    }
+
+    componentDidMount() {
+    }
+
+    render() {
+
+        return (
+
             <div className="formInputs">
+
                 <h2>Aircraft Info</h2>
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange('aircraft', 'tailNumber', e)}
                         placeholder="Tail Number"
+                        defaultValue={(this.props.aircraft) && this.props.aircraft.tailnumber}
                     />
-                    <span>  
+                    <span>
                         Tail Number
                     </span>
                 </Label>

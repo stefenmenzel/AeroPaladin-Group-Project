@@ -12,8 +12,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 JOIN "address" ON "address".id = "people".addresswhileinus_id
 JOIN "document" ON "document".people_id = "people".id
 WHERE "people".peopletype = 2
-AND "active" = TRUE;`
-    pool.query(sqlQuery).then(result => {
+AND "active" = TRUE
+AND "people".user_id = $1;`
+    pool.query(sqlQuery, [req.user.id]).then(result => {
         console.log(' Crew Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
