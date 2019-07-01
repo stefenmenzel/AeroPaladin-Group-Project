@@ -13,8 +13,9 @@ class AddAircraftForm extends Component {
     //as all the input are stored in separate components...we'll want
     //to store all the data in the same state with the parent component.
     state = {
-        aircraft: {
-        }
+        aircraft: this.props.aircraft,
+        owner: this.props.owner,
+        operator: this.props.operator,
     }
 
     componentDidMount(){
@@ -24,20 +25,60 @@ class AddAircraftForm extends Component {
    
     }
 
+    componentDidUpdate(){
+        if(!Object.keys(this.state.aircraft).length){
+            if (this.state.aircraft !== this.props.aircraft) {
+                this.setState({
+                    ...this.state,
+                    aircraft: this.props.aircraft
+                })
+            }
+        }
+        if (!Object.keys(this.state.owner).length) {
+            if (this.state.owner !== this.props.owner) {
+                this.setState({
+                    ...this.state,
+                    owner: this.props.owner
+                })
+            }
+        }
+        if (!Object.keys(this.state.operator).length) {
+            if (this.state.operator !== this.props.operator) {
+                this.setState({
+                    ...this.state,
+                    operator: this.props.operator
+                })
+            }
+        }
+    }
+
     // static getDerivedStateFromProps(props, state) {
     //     console.log('inside get derived', props.aircraft);
     //     console.log('current state inside get derived state:', state);
-    //     if(props.aircraft !== state.aircraft){
+    //     if(props.owner !== state.owner){
     //         console.log('does not equal', state);
-    //         state.aircraft = props.aircraft;
-    //         return state;
+    //         return{
+    //             ...state,
+    //             owner: props.owner
+    //         }
+    //     }
+    //     if (props.operator !== state.operator) {
+    //         if(Object.keys(state.operator).length <= 0){
+    //             console.log('does not equal', state);
+    //             return {
+    //                 ...state,
+    //                 operator: props.operator
+    //             }
+    //         }
+    //     }
+    //     if (props.aircraft !== state.aircraft) {
+    //         console.log('does not equal', state);
+    //         return {
+    //             ...state,
+    //             aircraft: props.aircraft
+    //         }
     //     }
     //     return null;
-    //     // state = {
-    //     //     ...state,
-    //     //     aircraft: props.aircraft
-    //     // }
-    //     // return state;
     // }
 
 
@@ -74,8 +115,10 @@ class AddAircraftForm extends Component {
     }
 
     render() {
-        console.log('this.state:', this.state);
-        // console.log('what', this.props.apis.aircraft);
+        console.log("this.props.owner", this.props.owner);
+        console.log("this.props.operator:", this.props.operator);
+        console.log("this.props.aircraft:", this.props.aircraft);
+        console.log("top level state is here!!!!!!!!!!", this.state);
         
         return (
             <div>
@@ -83,11 +126,9 @@ class AddAircraftForm extends Component {
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <Aircraft aircraft={this.props.aircraft} handleChange={this.handleChange} stateType='aircraft'/>
                     <Divider />
-                    <OperatorForm handleChange={this.handleChange} />
+                    <OperatorForm person={this.props.operator} handleChange={this.handleChange} />
                     <Divider />
-                    {/* {(this.props.apis.length) && JSON.stringify(this.props.apis[0].tailnumber)} */}
-                    {JSON.stringify(this.props.aircraft.tailnumber)}
-                    <OwnerForm handleChange={this.handleChange} />
+                    <OwnerForm person={this.props.owner} handleChange={this.handleChange} />
                     <div className="formButtons">
                         <Grid columns='equal'>
                             <Grid.Column width={10}></Grid.Column>
@@ -121,7 +162,9 @@ class AddAircraftForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        aircraft: reduxState.aircraftReducer,        
+        aircraft: reduxState.aircraftReducer,
+        owner: reduxState.ownerReducer,
+        operator: reduxState.operatorReducer,
     }
 }
 

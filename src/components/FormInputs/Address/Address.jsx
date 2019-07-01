@@ -46,7 +46,7 @@ class Address extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "streetAddress", e)}
-                        defaultValue={(this.props.person) && this.props.person.streetaddr}
+                        defaultValue={(this.props.person) && this.props.person.streetAddress}
                         placeholder="Street Address"
                     />
                     <span>
@@ -79,7 +79,7 @@ class Address extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "postalCode", e)}
-                        defaultValue={(this.props.person) && this.props.person.postalcode}
+                        defaultValue={(this.props.person) && this.props.person.postalCode}
                         placeholder="Postal Code"
                     />
                     <span>

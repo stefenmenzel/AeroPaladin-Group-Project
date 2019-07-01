@@ -18,23 +18,31 @@ import Contact from '../Contact/Contact.jsx';
  */
 class OperatorForm extends Component {
 
+    state = {
+        operator: this.props.operator
+    }
+
     render() {
+
         return (
             <div>
                 <h2>Operator</h2>
                 <Name 
                     handleChange={this.props.handleChange}
                     stateType='operator'
+                    person={this.props.person}
                 />
                 <Divider />
                 <Address 
                     handleChange={this.props.handleChange}
                     stateType='operator'
+                    person={this.props.person}
                 />
                 <Divider />
                 <Contact 
                     handleChange={this.props.handleChange}
                     stateType='operator'
+                    person={this.props.person}
                 />
             </div>
         )

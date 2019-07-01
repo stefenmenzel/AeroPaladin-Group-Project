@@ -43,17 +43,20 @@ class OwnerForm extends Component {
                 <h2>Owner</h2>
                 <Name 
                     handleChange={this.handleChange}
-                    stateType='owner'                    
+                    stateType='owner'
+                    person={this.props.person}
                 />
                 <Divider />
                 <Address 
                     handleChange={this.handleChange} 
                     stateType='owner'
+                    person={this.props.person}
                 />                    
                 <Divider />
                 <Contact 
                     handleChange={this.handleChange}
                     stateType='owner'
+                    person={this.props.person}
                 />
             </div>
         )

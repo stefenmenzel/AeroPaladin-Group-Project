@@ -7,7 +7,13 @@ import '../FormInputs.css';
 class Aircraft extends Component {
 
     state = {
-        aircraft: this.props.aircraft,        
+        aircraft: this.props.aircraft,
+    }
+
+    componentDidMount(){
+        this.setState({
+            aircraft: this.props.aircraft
+        })
     }
 
     //this function is to display values in the input fields
@@ -25,7 +31,7 @@ class Aircraft extends Component {
     }
 
     render() {
-
+        console.log("aircraft state:", this.state);
         return (
 
             <div className="formInputs">
@@ -35,7 +41,7 @@ class Aircraft extends Component {
                     <Input className="formInput"
                         onChange={(e) => this.handleChange('aircraft', 'tailNumber', e)}
                         placeholder="Tail Number"
-                        defaultValue={(this.props.aircraft) && this.props.aircraft.tailnumber}
+                        defaultValue={(this.props.aircraft) && this.props.aircraft.tailNumber}
                     />
                     <span>
                         Tail Number
@@ -46,7 +52,7 @@ class Aircraft extends Component {
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange('aircraft', 'type', e)}
                         placeholder="Aircraft Type"
-                        defaultValue={(this.props.aircraft) && this.props.aircraft.typeaircraft}
+                        defaultValue={(this.props.aircraft) && this.props.aircraft.type}
                     />
                     <span>
                         Aircraft Type
@@ -68,7 +74,7 @@ class Aircraft extends Component {
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange('aircraft', 'callSign', e)}
                         placeholder="Call Sign"
-                        defaultValue={(this.props.aircraft) && this.props.aircraft.callsign}
+                        defaultValue={(this.props.aircraft) && this.props.aircraft.callSign}
                     />
                     <span>
                         Call Sign
@@ -79,7 +85,7 @@ class Aircraft extends Component {
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange('aircraft', 'CBP', e)}
                         placeholder="CBP Decal Number"
-                        defaultValue={(this.props.aircraft) && this.props.aircraft.cbpdecalnbr}
+                        defaultValue={(this.props.aircraft) && this.props.aircraft.CBP}
                     />
                     <span>
                         CBP Decal Number

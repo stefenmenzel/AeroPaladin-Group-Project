@@ -131,7 +131,8 @@ AND "aircraft".active= TRUE;`
 // Send Aircraft information to Reducer to update on form
 router.get('/updateaircraft/:id', rejectUnauthenticated, (req, res) => {
 let updateAircraftId = req.params.id
-    const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
+    const sqlQuery = `SELECT "aircraft".tailnumber AS "tailNumber", "aircraft".typeaircraft AS "type", "aircraft".color, "aircraft".callsign AS "callSign", "aircraft".cbpdecalnbr AS "CBP",
+     "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
 JOIN "people" ON  "people".id = "aircraft".operator_id
 JOIN "people" as owner ON  "owner".id = "aircraft".owner_id 
 JOIN "user" On "user".id = "people".user_id
@@ -150,7 +151,9 @@ AND "aircraft".active= TRUE;`
 // Send Operator information to Reducer to update on form
 router.get('/updateoperator/:id', rejectUnauthenticated, (req, res) => {
     let updateOperatorId = req.params.id
-    const sqlQuery = `SELECT "people".firstname as operator_firstname, "people".middlename as operator_middlename, "people".lastname as operator_lastname, "address".*, "people".emailaddr, "people".telephonenbr FROM "aircraft"
+    const sqlQuery = `SELECT "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
+     "address".streetaddr AS "streetAddress", "address".city, "address".state, "address".postalcode AS "postalCode",
+    "people".emailaddr AS "email", "people".telephonenbr AS "phoneNumber" FROM "aircraft"
 JOIN "people" ON  "people".id = "aircraft".operator_id
 JOIN "address" ON "address".id = "people".permanentaddress_id
 JOIN "user" On "user".id = "people".user_id
@@ -170,8 +173,10 @@ AND "aircraft".active = TRUE;`
 // Send owner information to Reducer to update on form
 router.get('/updateowner/:id', rejectUnauthenticated, (req, res) => {
     let updateOwnerId = req.params.id
-    const sqlQuery = `SELECT "people".firstname as owner_firstname, "people".middlename as owner_middlename, "people".lastname as owner_lastname, "address".*, "people".emailaddr, "people".telephonenbr FROM "aircraft"
-JOIN "people" ON  "people".id = "aircraft".owner_id
+    const sqlQuery = `SELECT "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
+     "address".streetaddr AS "streetAddress", "address".city, "address".state, "address".postalcode AS "postalCode",
+    "people".emailaddr AS "email", "people".telephonenbr AS "phoneNumber" FROM "aircraft"
+    JOIN "people" ON  "people".id = "aircraft".owner_id
 JOIN "address" ON "address".id = "people".permanentaddress_id
 JOIN "user" On "user".id = "people".user_id
 WHERE "user".id = $1
