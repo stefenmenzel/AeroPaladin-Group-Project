@@ -43,16 +43,16 @@ router.get('/apis', rejectUnauthenticated, (req, res) => {
 })
 
 // //delete the APIS Trip from the database
-// router.delete('/delete/:id', (req,res) => {
-//     console.log('req.params.id: ' + req.params.id + ' req.user.id: ' + req.user.id);
-//     let queryText = ``
-//   pool.query(queryText, [req.params.id, req.user.id]).then((result) => {
-//       res.sendStatus(200);
-//   }).catch((error) => {
-//       console.log(error);
-//       res.sendStatus(500);
-//   });;
+router.put('/delete/:id', (req,res) => {
+    console.log('req.params.id: ' + req.params.id + ' req.user.id: ' + req.user.id);
+    let queryText = ``
+  pool.query(queryText, [req.params.id, req.user.id]).then((result) => {
+      res.sendStatus(200);
+  }).catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+  });;
 
-// });
+});
 
 module.exports = router;

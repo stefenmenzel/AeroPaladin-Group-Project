@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import { Button, Table } from 'semantic-ui-react';
 
 const moment = require('moment');
 
 class HistoricTable extends Component {
 
+    handleArchive = (event) => {
+        console.log('in handleArchive'); 
+    }
 
     render() {
         
@@ -43,7 +46,7 @@ class HistoricTable extends Component {
                                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <button onClick={() => this.handleEdit(trip.flight_id)}>Edit</button>
+                                        <button onClick={() => this.handleArchive(trip.id)}>Archive</button>
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body> : <p></p>)

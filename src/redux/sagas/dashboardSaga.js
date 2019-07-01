@@ -11,15 +11,15 @@ function* fetchApisTrips() {
     }
 }
 //delete Apis Trip 
-// function* deleteApisTrips(action) {
-//     try {
-//         console.log('delete from sagas', action.payload)
-//         yield axios.delete(`api/dashboard/delete/${action.payload.id}`)
-//         yield put({type:'FETCH_APIS_TRIPS'})
-//     } catch(error) {
-//         console.log('DELETE Apis Trip failed', error)
-//     }
-// }
+function* deleteApisTrips(action) {
+    try {
+        console.log('delete from sagas', action.payload)
+        yield axios.put(`api/dashboard/delete/${action.payload.id}`)
+        yield put({type:'FETCH_APIS_TRIPS'})
+    } catch(error) {
+        console.log('DELETE Apis Trip failed', error)
+    }
+}
 //update APIS trip
 // function* updateApisTrips(action) {
 //     try {
@@ -29,7 +29,7 @@ function* fetchApisTrips() {
 
 function* dashboardSaga(){
     yield takeLatest('FETCH_APIS_TRIPS', fetchApisTrips);
-    // yield takeLatest('DELETE_APIS_TRIPS', deleteApisTrips);
+    //yield takeLatest('DELETE_APIS_TRIPS', deleteApisTrips);
     //yield takeLatest('UPDATE_APIS_TRIPS', updateApisTrips)
     
 }
