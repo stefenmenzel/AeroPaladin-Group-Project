@@ -5,7 +5,7 @@ import { Button, Grid} from 'semantic-ui-react';
 import {DateInput} from 'semantic-ui-calendar-react';
 import '../FormInputs.css';
 
-class FlightSegmentOne extends Component {
+class FlightSegment extends Component {
 
     state = {
         date: '',
@@ -126,4 +126,4 @@ class FlightSegmentOne extends Component {
 }
 }
 
-export default connect ()(FlightSegmentOne);
+export default connect ()(FlightSegment);
