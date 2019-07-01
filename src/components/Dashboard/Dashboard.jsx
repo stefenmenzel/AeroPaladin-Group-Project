@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import PendingTable from '../Dashboard/PendingTable/PendingTable.jsx';
 import "./Dashboard.css";
 
 const moment = require('moment');
@@ -22,17 +23,26 @@ class Dashboard extends Component {
     }
 
     render() {
-        console.log('apisreducer info: ', this.props.apisTrips);
+       // console.log('apisreducer info: ', this.props.apisTrips);
         // console.log('user reducer info: ', this.props.user);
         // console.log('login reducer info: ', this.props.login);
-        
+        let submitedData;
+        let historicData;
+
+    
+    
+
+
+
     return (
     <body>
         <h2 className="ui header welcome">Welcome Back, {this.props.user.username}!</h2>
-
+        
         <div>
             <h2 className="ui header center aligned middle aligned grid">APIS Trips</h2>
             <h4 className="ui header pendingTable"> Pending APIS </h4>
+            <PendingTable/>
+            
             <Table className="pendingTable" celled padded>
                 <Table.Header>
                     <Table.Row>
