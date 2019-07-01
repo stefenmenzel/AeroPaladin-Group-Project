@@ -126,6 +126,26 @@ AND "aircraft".active= TRUE;`
     })
 });
 
+router.get('/updateform/:id', rejectUnauthenticated, (req, res) => {
+let updateAircraftId = req.params.id
+    const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
+JOIN "people" ON  "people".id = "aircraft".operator_id
+JOIN "people" as owner ON  "owner".id = "aircraft".owner_id 
+JOIN "user" On "user".id = "people".user_id
+WHERE "user".id = $1
+AND "aircraft".id = $2
+AND "aircraft".active= TRUE;`
+    pool.query(sqlQuery, [req.user.id, updateAircraftId]).then(result => {
+        console.log(' Aircraft Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Aircraft GET', err);
+        res.SendStatus(500)
+    })
+});
+
+
+
 
 router.put('/delete/:id', (req, res) => {
 

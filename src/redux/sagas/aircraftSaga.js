@@ -25,6 +25,17 @@ function* fetchAircraft(action) {
     }
 }
 
+function* fetchUpdateAircraft(action) {
+    try {
+        const response = yield axios.get(`/api/aircraft/updateform/${action.payload}`);
+        yield put({ type: 'SET_UPDATE_AIRCRAFT', payload: response.data });
+
+    } catch (error) {
+        console.log('Passenger Update Form GET request failed', error);
+    }
+}
+
+
 function* deleteAircraft(action) {
     try {
         yield axios.put(`/api/aircraft/delete/${action.payload}`);
@@ -39,6 +50,8 @@ function* aircraftSaga(){
     yield takeLatest('ADD_AIRCRAFT', addAircraft);
     yield takeLatest('FETCH_AIRCRAFT', fetchAircraft);
     yield takeLatest('DELETE_AIRCRAFT', deleteAircraft);
+    yield takeLatest('FETCH_UPDATE_AIRCRAFT', fetchUpdateAircraft);
+
 
 
 }
