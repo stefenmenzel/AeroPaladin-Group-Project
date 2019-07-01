@@ -19,12 +19,17 @@ import '../FormInputs.css';
  */
 class Contact extends Component{
 
+    state = {
+        person: this.props.person
+    }
+
     render(){
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "email", e)}
+                        defaultValue={(this.props.person) && this.props.person.email}
                         placeholder="Email"
                     />
                     <span>
@@ -35,6 +40,7 @@ class Contact extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "phoneNumber", e)}
+                        defaultValue={(this.props.person) && this.props.person.phoneNumber}
                         placeholder="Phone Number"
                     />
                     <span>

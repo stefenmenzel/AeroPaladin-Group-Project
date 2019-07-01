@@ -22,9 +22,10 @@ class Name extends Component{
 
     state = {
         date: '',
-        citizenshipToggle: false
+        citizenshipToggle: false,
+        person: this.props.person
     }
-
+    
     onDateChange = (event, {name, value}) => {
         console.log('date change', value);
         console.log('date change:', name);
@@ -61,6 +62,7 @@ class Name extends Component{
                         onChange={this.onDateChange}
                         style={{width:'100%'}}
                         dateFormat="YYYY-MM-DD"
+                        defaultValue={(this.props.person) && this.props.person.birthdate}
                     />
                     <span>
                         Birth Date
@@ -75,6 +77,7 @@ class Name extends Component{
                             {key: 'f', value:'f', text:'f'}
                         ]}                        
                         onChange={this.onSelectChange}
+                        defaultValue={(this.props.person) && this.props.person.sex}
                     />
                     <span>
                         Sex
@@ -89,6 +92,7 @@ class Name extends Component{
                             { key: 'USA', value: 'USA', text: 'USA' }
                         ]}                        
                         onChange={this.onSelectChange}
+                        defaultValue={(this.props.person) && this.props.person.residencecntry}
                     />                    
                     <span>
                         Residence Country
@@ -102,8 +106,9 @@ class Name extends Component{
                             { key: 'MEX', value: 'MEX', text: 'MEX' },
                             { key: 'USA', value: 'USA', text: 'USA' }
                         ]}                        
-                        onChange={this.onSelectChange}    
-                        disabled={this.state.citizenshipToggle}                    
+                        onChange={this.onSelectChange}
+                        defaultValue={(this.props.person) && this.props.person.citizenshipcntry}
+                        disabled={this.state.citizenshipToggle}
                     />
                     <span>
                         Citizenship Country
@@ -128,6 +133,7 @@ class Name extends Component{
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "firstName", e)}
                         placeholder="First Name"
+                        defaultValue={(this.props.person) && this.props.person.firstName}
                     />
                     <span>
                         First Name
@@ -137,6 +143,7 @@ class Name extends Component{
                 <Label className="formInputLabel"> 
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "middleName", e)}
+                        defaultValue={(this.props.person) && this.props.person.middleName}
                         placeholder="Middle Name"
                     />
                     <span>
@@ -147,6 +154,7 @@ class Name extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "lastName", e)}
+                        defaultValue={(this.props.person) && this.props.person.lastName}
                         placeholder="Last Name"
                     />
                     <span>

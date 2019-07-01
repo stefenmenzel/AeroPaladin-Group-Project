@@ -110,6 +110,8 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     } 
 });
 
+
+// Information to get information on Aircraft settings page
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
 JOIN "people" ON  "people".id = "aircraft".operator_id
@@ -125,6 +127,71 @@ AND "aircraft".active= TRUE;`
         res.SendStatus(500)
     })
 });
+
+// Send Aircraft information to Reducer to update on form
+router.get('/updateaircraft/:id', rejectUnauthenticated, (req, res) => {
+let updateAircraftId = req.params.id
+    const sqlQuery = `SELECT "aircraft".tailnumber AS "tailNumber", "aircraft".typeaircraft AS "type", "aircraft".color, "aircraft".callsign AS "callSign", "aircraft".cbpdecalnbr AS "CBP",
+     "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
+JOIN "people" ON  "people".id = "aircraft".operator_id
+JOIN "people" as owner ON  "owner".id = "aircraft".owner_id 
+JOIN "user" On "user".id = "people".user_id
+WHERE "user".id = $1
+AND "aircraft".id = $2
+AND "aircraft".active= TRUE;`
+    pool.query(sqlQuery, [req.user.id, updateAircraftId]).then(result => {
+        console.log(' Aircraft Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Aircraft GET', err);
+        res.SendStatus(500)
+    })
+});
+
+// Send Operator information to Reducer to update on form
+router.get('/updateoperator/:id', rejectUnauthenticated, (req, res) => {
+    let updateOperatorId = req.params.id
+    const sqlQuery = `SELECT "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
+     "address".streetaddr AS "streetAddress", "address".city, "address".state, "address".postalcode AS "postalCode",
+    "people".emailaddr AS "email", "people".telephonenbr AS "phoneNumber" FROM "aircraft"
+JOIN "people" ON  "people".id = "aircraft".operator_id
+JOIN "address" ON "address".id = "people".permanentaddress_id
+JOIN "user" On "user".id = "people".user_id
+WHERE "user".id = $1
+AND "aircraft".id = $2
+AND "aircraft".active = TRUE;`
+    pool.query(sqlQuery, [req.user.id, updateOperatorId]).then(result => {
+        console.log(' Operator Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Operator GET', err);
+        res.SendStatus(500)
+    })
+});
+
+
+// Send owner information to Reducer to update on form
+router.get('/updateowner/:id', rejectUnauthenticated, (req, res) => {
+    let updateOwnerId = req.params.id
+    const sqlQuery = `SELECT "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
+     "address".streetaddr AS "streetAddress", "address".city, "address".state, "address".postalcode AS "postalCode",
+    "people".emailaddr AS "email", "people".telephonenbr AS "phoneNumber" FROM "aircraft"
+    JOIN "people" ON  "people".id = "aircraft".owner_id
+JOIN "address" ON "address".id = "people".permanentaddress_id
+JOIN "user" On "user".id = "people".user_id
+WHERE "user".id = $1
+AND "aircraft".id = $2
+AND "aircraft".active = TRUE;`
+    pool.query(sqlQuery, [req.user.id, updateOwnerId]).then(result => {
+        console.log(' Owner Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Owner GET', err);
+        res.SendStatus(500)
+    })
+});
+
+
 
 
 router.put('/delete/:id', (req, res) => {

@@ -11,8 +11,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "document".*, "people".id, "people".firstname, "people".lastname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
 JOIN "address" ON "address".id = "people".addresswhileinus_id
 JOIN "document" ON "document".people_id = "people".id
-WHERE "people".peopletype = 2;`
-    pool.query(sqlQuery).then(result => {
+WHERE "people".peopletype = 2
+AND "active" = TRUE
+AND "people".user_id = $1;`
+    pool.query(sqlQuery, [req.user.id]).then(result => {
         console.log(' Crew Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
@@ -20,6 +22,25 @@ WHERE "people".peopletype = 2;`
         res.SendStatus(500)
     })
 });
+
+router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
+    let deleteID = req.params.id
+    console.log('DELETE CREW', deleteID);
+
+    const sqlQuery = `UPDATE "people"
+SET "active" = false
+WHERE "id" = $1;`
+
+    pool.query(sqlQuery, [deleteID]).then(result => {
+        console.log('DELETE', result);
+        res.sendStatus(200)
+    }).catch(err => {
+        console.log('Error in DELETE', err);
+        res.SendStatus(500)
+    })
+});
+
+
 
 router.post('/add', rejectUnauthenticated, async (req, res) => {
     console.log('req.body:', req.body);
@@ -44,7 +65,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     `
     const crewQuery = `
         INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, citizenshipcntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id)
-        SELECT $1, $2, $3, $4, $5, $6, CAST($7 AS VARCHAR), $8, $9, $10, $11
+        SELECT $1, $2, $3, $4, $5, $6, $7, CAST($8 AS VARCHAR), $9, $10, $11, $12, $13
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(

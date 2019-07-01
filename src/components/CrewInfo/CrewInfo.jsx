@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react'
+import Swal from 'sweetalert2';
 
 import { Header, Table, Button } from 'semantic-ui-react'
 
@@ -21,9 +22,43 @@ class PassengerInfo extends Component {
         this.props.history.push("/addcrew")
     }
 
-    handleDelete = (event) => {
-        console.log('delete', event);
+    handleDelete = (id) => {
+        console.log('delete', id);
 
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: true,
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Your Passenger has been deleted.',
+                    'success'
+                )
+                this.props.dispatch({ type: 'DELETE_CREW', payload: id })
+
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled!',
+
+                )
+            }
+        })
     }
 
     render() {
@@ -50,7 +85,7 @@ class PassengerInfo extends Component {
 
                         {this.props.crew.map(crew => {
                             return (
-                                <Table.Body key={crew.id}>
+                                <Table.Body key={crew.people_id}>
                                     <Table.Row>
                                         <Table.Cell singleLine>
                                             <Header textAlign='center'>
@@ -79,7 +114,7 @@ class PassengerInfo extends Component {
                                             <button><Icon name="edit" /></button>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button onClick={() => this.handleDelete(crew.id)}><Icon name="trash" /></button>
+                                            <button onClick={() => this.handleDelete(crew.people_id)}><Icon name="trash" /></button>
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>

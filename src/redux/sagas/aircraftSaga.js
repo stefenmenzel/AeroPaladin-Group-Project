@@ -21,9 +21,40 @@ function* fetchAircraft(action) {
         yield put({ type: 'SET_AIRCRAFT', payload: response.data });
 
     } catch (error) {
-        console.log('Passenger GET request failed', error);
+        console.log('Aircraft GET request failed', error);
     }
 }
+
+function* fetchUpdateAircraft(action) {
+    try {
+        const response = yield axios.get(`/api/aircraft/updateaircraft/${action.payload}`);
+        yield put({ type: 'SET_UPDATE_AIRCRAFT', payload: response.data });
+
+    } catch (error) {
+        console.log('Aircraft Update Form GET request failed', error);
+    }
+}
+
+function* fetchUpdateOperator(action) {
+    try {
+        const response = yield axios.get(`/api/aircraft/updateoperator/${action.payload}`);
+        yield put({ type: 'SET_UPDATE_OPERATOR', payload: response.data });
+
+    } catch (error) {
+        console.log('Operator Update Form GET request failed', error);
+    }
+}
+
+function* fetchUpdateOwner(action) {
+    try {
+        const response = yield axios.get(`/api/aircraft/updateowner/${action.payload}`);
+        yield put({ type: 'SET_UPDATE_OWNER', payload: response.data });
+
+    } catch (error) {
+        console.log('Owner Update Form GET request failed', error);
+    }
+}
+
 
 function* deleteAircraft(action) {
     try {
@@ -39,7 +70,9 @@ function* aircraftSaga(){
     yield takeLatest('ADD_AIRCRAFT', addAircraft);
     yield takeLatest('FETCH_AIRCRAFT', fetchAircraft);
     yield takeLatest('DELETE_AIRCRAFT', deleteAircraft);
-
+    yield takeLatest('FETCH_UPDATE_AIRCRAFT', fetchUpdateAircraft);
+    yield takeLatest('FETCH_UPDATE_OPERATOR', fetchUpdateOperator);
+    yield takeLatest('FETCH_UPDATE_OWNER', fetchUpdateOwner);
 
 }
 

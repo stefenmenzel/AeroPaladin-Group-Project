@@ -27,7 +27,8 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.2",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^8.13.0"
+    "sweetalert2": "^8.13.0",
+    "xmlbuilder": "^13.0.2"
   },
   "scripts": {
     "client": "react-scripts start",

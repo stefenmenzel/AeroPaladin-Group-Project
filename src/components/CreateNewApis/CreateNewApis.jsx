@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
+import FlightSegmentOne from '../FormInputs/FlightSegment/FlightSegment';
 
 /**
  * This component will walk a user through creating a new APIS.
@@ -52,7 +53,10 @@ class CreateNewApis extends Component{
     conditionalComponent = () => {
         const componentArray = [
             <SelectAircraftForm nextStep={this.nextStep} />,
-            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />
+            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />, 
+            <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />,
+            <FlightSegmentOne nextStep={this.nextStep} previousStep={this.previousStep} />         
+
         ]
         return(
             componentArray[this.state.step - 1]

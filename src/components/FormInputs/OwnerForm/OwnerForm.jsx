@@ -18,23 +18,45 @@ import Contact from '../Contact/Contact.jsx';
  */
 class OwnerForm extends Component {
 
+    state = {
+        owner: this.props.owner
+
+    }
+
+    //this function is to display values in the input fields
+    //in the event of an edit. The information to be sent out
+    //is stored in the parent objects state.
+    handleChange = (propertyToChange, newProperty, event) => {
+        this.setState({
+            ...this.state,
+            [propertyToChange]: {
+                ...this.state[propertyToChange],
+                [newProperty]: event.target.value
+            }
+        })
+        this.props.handleChange(propertyToChange, newProperty, event)
+    }
+
     render() {
         return (
             <div>
                 <h2>Owner</h2>
                 <Name 
-                    handleChange={this.props.handleChange}
-                    stateType='owner'                    
+                    handleChange={this.handleChange}
+                    stateType='owner'
+                    person={this.props.person}
                 />
                 <Divider />
                 <Address 
-                    handleChange={this.props.handleChange} 
+                    handleChange={this.handleChange} 
                     stateType='owner'
+                    person={this.props.person}
                 />                    
                 <Divider />
                 <Contact 
-                    handleChange={this.props.handleChange}
+                    handleChange={this.handleChange}
                     stateType='owner'
+                    person={this.props.person}
                 />
             </div>
         )

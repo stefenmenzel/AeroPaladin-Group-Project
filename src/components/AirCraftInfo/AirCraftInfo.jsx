@@ -18,7 +18,14 @@ class AircraftInfo extends Component {
     }
 
     addCreww = () => {
-        this.props.history.push("/addaircraft")
+        this.props.history.push("/aircraftupdate")
+    }
+
+    handleEdit = (id) =>{
+        console.log('edit', id)
+        this.props.history.push(`/aircraftupdate/${id}`)
+
+        
     }
 
     handleDelete = (id) => {
@@ -107,7 +114,7 @@ class AircraftInfo extends Component {
                                         </Table.Cell>
                                         
                                         <Table.Cell>
-                                            <button><Icon name="edit" /></button>
+                                            <button onClick={() => this.handleEdit(plane.id)}><Icon name="edit" /></button>
                                         </Table.Cell>
                                         <Table.Cell>
                                             <button onClick={() => this.handleDelete(plane.id)}><Icon name="trash" /></button>

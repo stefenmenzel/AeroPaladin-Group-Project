@@ -23,6 +23,7 @@ import CrewInfo from '../CrewInfo/CrewInfo'
 import AirCraftInfo from '../AirCraftInfo/AirCraftInfo'
 import UserInfo from '../UserInfo/UserInfo'
 import PassengerInfo from '../PassengerInfo/PassengerInfo'
+import AirCraftUpdateForm from '../AirCraftInfo/AirCraftUpdateForm'
 
 import './App.css';
 
@@ -111,6 +112,11 @@ class App extends Component {
               exact
               path="/aircraftinfo"
               component={AirCraftInfo}
+            />
+            <ProtectedRoute
+              exact
+              path="/aircraftupdate/:id"
+              component={AirCraftUpdateForm}
             />
             {/*  User, Crew & Passenger information from Nav Ends Here */}
 

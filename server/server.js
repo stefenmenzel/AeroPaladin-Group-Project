@@ -15,6 +15,7 @@ const aircraftRouter = require('./routes/aircraft.router');
 const dashboardRouter = require('./routes/dashboard.router');
 const crewRouter = require('./routes/crew.router')
 const reviewRouter = require('./routes/review.router')
+const xmlRouter = require('./routes/xml.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/user', userRouter);
 app.use('/api/passenger', passengerRouter);
 app.use('/api/crew', crewRouter);
 app.use('/api/review', reviewRouter);
+app.use('/api/xml', xmlRouter);
 
 
 
