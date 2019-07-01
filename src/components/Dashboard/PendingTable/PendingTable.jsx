@@ -7,30 +7,10 @@ const moment = require('moment');
 
 class PendingTable extends Component {
  
- conditionalTable = () => {
-     let pendingData;
-      this.props.apisTrips.map(trip => {
-        console.log('flight STUFF: ', trip);
-        
-        return((trip.flight_status == 2) ? <p>INFO HERE</p> : <p>FAILED</p>)
-        
-        
-        
-        // console.log('trip here:', trip) 
-        // if(trip.flight_status ){
-        //     console.log('inside conditional');
-            
-             
-        //     return   <p>PENDING DATA</p>
-             
-        //  }
-        //  else{
-        //     return <p> failed </p>
-        //  }
-         
-     })
- }
- 
+    handleEdit = (id) => {
+        console.log('clicked on edit in dashboard', id)
+        this.props.history.push(`/reviewpage/${id}`)
+    }
  
     render(){
      console.log('apisreducer info from pending: ', this.props.apisTrips);
@@ -38,22 +18,6 @@ class PendingTable extends Component {
 
      //conditional rending for table data
      console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
-
-    //  {this.props.apisTrips.map(trip => {
-    //     console.log('trip here:', trip) 
-    //     if(trip.flight_status == 2){
-    //         console.log('inside conditional');
-            
-    //         pendingData = (
-    //              <p>PENDING DATA</p>
-    //          )
-    //      }
-    //      else{
-    //          pendingData= (
-    //          <p> failed </p>)
-    //      }
-    //     return pendingData
-    //  })}
 
      return(
          
