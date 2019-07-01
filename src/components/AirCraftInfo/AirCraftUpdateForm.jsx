@@ -19,7 +19,9 @@ class AddAircraftForm extends Component {
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_UPDATE_AIRCRAFT', payload: this.props.match.params.id})
-        
+        this.props.dispatch({ type: 'FETCH_UPDATE_OPERATOR', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'FETCH_UPDATE_OWNER', payload: this.props.match.params.id })
+   
     }
 
     // static getDerivedStateFromProps(props, state) {
