@@ -19,6 +19,7 @@ import Contact from '../Contact/Contact.jsx';
 class OwnerForm extends Component {
 
     state = {
+        owner: this.props.owner
 
     }
 

@@ -22,6 +22,10 @@ import '../FormInputs.css';
  */
 class Address extends Component{
 
+    state = {
+        person: this.props.person,
+    }
+
     conditionalCountryCode = () => {
         return(
             <Label className="formInputLabel">
@@ -42,6 +46,7 @@ class Address extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "streetAddress", e)}
+                        defaultValue={(this.props.person) && this.props.person.streetaddr}
                         placeholder="Street Address"
                     />
                     <span>
@@ -52,6 +57,7 @@ class Address extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "city", e)}
+                        defaultValue={(this.props.person) && this.props.person.city}
                         placeholder="City"
                     />
                     <span>
@@ -62,6 +68,7 @@ class Address extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "state", e)}
+                        defaultValue={(this.props.person) && this.props.person.state}
                         placeholder="State"
                     />
                     <span>
@@ -72,6 +79,7 @@ class Address extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "postalCode", e)}
+                        defaultValue={(this.props.person) && this.props.person.postalcode}
                         placeholder="Postal Code"
                     />
                     <span>
