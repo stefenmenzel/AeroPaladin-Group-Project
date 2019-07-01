@@ -13,8 +13,8 @@ class AddAircraftForm extends Component {
     //as all the input are stored in separate components...we'll want
     //to store all the data in the same state with the parent component.
     state = {
-        // aircraft: {
-        // }
+        aircraft: {
+        }
     }
 
     componentDidMount(){
@@ -22,26 +22,21 @@ class AddAircraftForm extends Component {
         
     }
 
-    static getDerivedStateFromProps(props, state) {
-        console.log('inside get derived', props.apis);
-        console.log('inside ')
-        
-            state = {
-                ...state,
-                aircraft: props.apis
-            }
-        //     this.setState({
-        //         ...this.state,
-        //         aircraft: props.apis
-        //     })
-        if (Object.keys(state).length) {
-        return null
-        }
-        else{
-            return state;
-        }
-
-    }
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('inside get derived', props.aircraft);
+    //     console.log('current state inside get derived state:', state);
+    //     if(props.aircraft !== state.aircraft){
+    //         console.log('does not equal', state);
+    //         state.aircraft = props.aircraft;
+    //         return state;
+    //     }
+    //     return null;
+    //     // state = {
+    //     //     ...state,
+    //     //     aircraft: props.aircraft
+    //     // }
+    //     // return state;
+    // }
 
 
     //send the aircraft we just added to the database.
@@ -84,12 +79,12 @@ class AddAircraftForm extends Component {
             <div>
                 <h1>Add Aircraft</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <Aircraft aircraft={this.state.aircraft} handleChange={this.handleChange} stateType='aircraft'/>
+                    <Aircraft aircraft={this.props.aircraft} handleChange={this.handleChange} stateType='aircraft'/>
                     <Divider />
                     <OperatorForm handleChange={this.handleChange} />
                     <Divider />
                     {/* {(this.props.apis.length) && JSON.stringify(this.props.apis[0].tailnumber)} */}
-                    {JSON.stringify(this.props.apis.tailnumber)}
+                    {JSON.stringify(this.props.aircraft.tailnumber)}
                     <OwnerForm handleChange={this.handleChange} />
                     <div className="formButtons">
                         <Grid columns='equal'>
@@ -124,7 +119,7 @@ class AddAircraftForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        apis: reduxState.aircraftReducer
+        aircraft: reduxState.aircraftReducer,        
     }
 }
 

@@ -22,9 +22,9 @@ class Name extends Component{
 
     state = {
         date: '',
-        citizenshipToggle: false
+        citizenshipToggle: false,        
     }
-
+    
     onDateChange = (event, {name, value}) => {
         console.log('date change', value);
         console.log('date change:', name);
