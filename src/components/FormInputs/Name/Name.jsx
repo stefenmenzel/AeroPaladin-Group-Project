@@ -133,7 +133,7 @@ class Name extends Component{
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "firstName", e)}
                         placeholder="First Name"
-                        defaultValue={(this.props.person) && this.props.person.firstname}
+                        defaultValue={(this.props.person) && this.props.person.firstName}
                     />
                     <span>
                         First Name
@@ -143,7 +143,7 @@ class Name extends Component{
                 <Label className="formInputLabel"> 
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "middleName", e)}
-                        defaultValue={(this.props.person) && this.props.person.middlename}
+                        defaultValue={(this.props.person) && this.props.person.middleName}
                         placeholder="Middle Name"
                     />
                     <span>
@@ -154,7 +154,7 @@ class Name extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "lastName", e)}
-                        defaultValue={(this.props.person) && this.props.person.lastname}
+                        defaultValue={(this.props.person) && this.props.person.lastName}
                         placeholder="Last Name"
                     />
                     <span>

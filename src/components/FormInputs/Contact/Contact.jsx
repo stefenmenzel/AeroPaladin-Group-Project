@@ -40,7 +40,7 @@ class Contact extends Component{
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "phoneNumber", e)}
-                        defaultValue={(this.props.person) && this.props.person.telephonenbr}
+                        defaultValue={(this.props.person) && this.props.person.phoneNumber}
                         placeholder="Phone Number"
                     />
                     <span>
