@@ -1,10 +1,20 @@
-.table {
+.pendingTable {
     text-align: left;
     padding:30px;
-    width: 100%;
+    min-width: 800px;
+    margin-top: 300px;
 }
 
 
-h2 {
+.ui.header.welcome {
    text-align: center;
+   margin-top: 30px;
+}
+
+.ui.header.center.aligned.middle.aligned.grid {
+    margin-bottom: 30px;
+}
+
+.ui.header.pendingTable {
+    margin-left: 100px;
 }
