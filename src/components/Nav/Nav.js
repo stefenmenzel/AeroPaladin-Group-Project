@@ -8,10 +8,16 @@ import {Button, Menu, Segment, Sidebar} from 'semantic-ui-react';
 
 
 class Nav extends Component {
-  //   state = {
-  //     visible: false
-  //   }
-
+  state = {
+    visible: false
+  }
+  
+  toggleMenu = () => {
+    this.setState({
+      ...this.state,
+      visible: !this.state.visible
+    })
+  }
   //   handleHideClick = () => this.setState({ visible: false })
   //   handleShowClick = () => this.setState({ visible: true })
   //   handleSidebarHide = () => this.setState({ visible: false })
