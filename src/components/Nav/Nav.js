@@ -37,16 +37,18 @@ class Nav extends Component {
 
   return(
     // <>
+    <div className="nav">
+
     <div>
-       <Button.Group>
+       <Button.Group className="hamgurger">
          <Button disabled={visible} onClick={this.handleShowClick}>
-          <Icon name='align justify' />
+            <Icon inverted color='white' name='align justify' size='big' />
            </Button>
          {/* <Button disabled={!visible} onClick={this.handleHideClick}>
           </Button> */}
        </Button.Group>
 
-       <Sidebar.Pushable as={Segment}>
+       {/* <Sidebar.Pushable as={Segment}> */}
          <Sidebar
            as={Menu}
            animation='overlay'
@@ -57,56 +59,66 @@ class Nav extends Component {
            visible={visible}
            width='thin'
          >
+          <Link onClick={this.handleSidebarHide}  to="/home">
            <Menu.Item as='a'>
-             <Icon name='home' />
-             Home
+              <Icon name='home' />
+              {this.props.user.id ? 'Home' : 'Login / Register'}
             </Menu.Item>
+          </Link>
+
+          {this.props.user.id && (
+            <>
+              <Link onClick={this.handleSidebarHide} to="/apis">
+                <Menu.Item as='a'>
+                  <Icon name='plane' />
+                  Create New Apis
+            </Menu.Item>
+              </Link>
+              <Link onClick={this.handleSidebarHide} to="/userinfo">
+                <Menu.Item as='a'>
+                  <Icon name='setting' />
+                  Manage Settings
+            </Menu.Item>
+              </Link>
+              <Link onClick={this.handleSidebarHide}>
+                <Menu.Item as='a'>
+                  <Icon name='setting' />
+                  <LogOutButton  />
+            </Menu.Item>
+              </Link>
+            </>
+          )}
+
+         
+          {/* <Link onClick={this.handleSidebarHide} to="/userinfo">
            <Menu.Item as='a'>
-             <Icon name='gamepad' />
-             Games
+             <Icon name='setting' />
+             Manage Settings
             </Menu.Item>
-           <Menu.Item as='a'>
-             <Icon name='camera' />
-             Channels
-            </Menu.Item>
+            </Link> */}
+
          </Sidebar>
 
          <Sidebar.Pusher>
-           <Segment basic>
-             {/* <App/> */}
-           </Segment>
+          
          </Sidebar.Pusher>
-       </Sidebar.Pushable>
+       
       </div >
 
-
-  // <div className="nav">
-  //   <Link to="/home">
-  //     <h2 className="nav-title">aeroPaladin</h2>
-  //   </Link>
-  //   <div className="nav-right">
-  //     <Link className="nav-link" to="/home">
-  //       {/* Show this link if they are logged in or not,
-  //       but call this link 'Home' if they are logged in,
-  //       and call this link 'Login / Register' if they are not */}
-  //       {this.props.user.id ? 'Home' : 'Login / Register'}
-  //     </Link>
-  //     {/* Show the link to the info page and the logout button if the user is logged in */}
-  //     {this.props.user.id && (
-  //       <>
-  //         <Link className="nav-link" to="/apis">
-  //           Create An APIS
-  //         </Link>
-  //         <Link className="nav-link" to="/reviewpage">
-  //           Review
-  //         </Link>
-  //         <LogOutButton className="nav-link"/>
-  //       </>
-  //     )}
-  //     {/* Always show this link since the about page is not protected */}
-
-  //   </div>
-  // </div>
+    <Link to="/home">
+      <h2 className="nav-title">aeroPaladin</h2>
+    </Link>
+    <div className="nav-right">
+      <Link className="nav-link" to="/home">
+        {/* Show this link if they are logged in or not,
+        but call this link 'Home' if they are logged in,
+        and call this link 'Login / Register' if they are not */}
+      </Link>
+      {/* Show the link to the info page and the logout button if the user is logged in */}
+      
+      {/* Always show this link since the about page is not protected */}
+    </div>
+  </div>
   
     )};
 
