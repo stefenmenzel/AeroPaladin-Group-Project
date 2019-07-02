@@ -10,6 +10,8 @@ import aircraftReducer from './aircraftReducer';
 import apisReducer from './apisReducer.js';
 import operatorReducer from './operatorReducer'
 import ownerReducer from './ownerReducer'
+import documentOneReducer from './documentOneReducer'
+import documentTwoReducer from './documentTwoReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -28,7 +30,9 @@ const rootReducer = combineReducers({
   aircraftReducer,
   apisReducer,
   operatorReducer,
-  ownerReducer
+  ownerReducer,
+  documentOneReducer,
+  documentTwoReducer
 });
 
 export default rootReducer;

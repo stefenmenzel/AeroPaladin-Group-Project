@@ -15,6 +15,10 @@ class PassengerUpdateForm extends Component {
  
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_UPDATE_PASSENGER', payload: this.props.match.params.id })
+
+        this.props.dispatch({ type: 'FETCH_UPDATE_PASSENGER_DOCUMENT_ONE', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'FETCH_UPDATE_PASSENGER_DOCUMENT_TWO', payload: this.props.match.params.id })
+        }    
         // this.props.dispatch({ type: 'FETCH_UPDATE_OPERATOR', payload: this.props.match.params.id })
         // this.props.dispatch({ type: 'FETCH_UPDATE_OWNER', payload: this.props.match.params.id })
     }
