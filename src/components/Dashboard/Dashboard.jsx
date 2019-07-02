@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import PendingTable from '../Dashboard/PendingTable/PendingTable.jsx';
 import SubmittedTable from './SubmittedTable/SubmittedTable.jsx';
 import HistoricTable from './HistoricTable/HistoricTable.jsx';
@@ -25,16 +25,7 @@ class Dashboard extends Component {
     }
 
     render() {
-       // console.log('apisreducer info: ', this.props.apisTrips);
-        // console.log('user reducer info: ', this.props.user);
-        // console.log('login reducer info: ', this.props.login);
-        let submitedData;
-        let historicData;
-
-    
-    
-
-
+     
 
     return (
     <body>
@@ -51,6 +42,7 @@ class Dashboard extends Component {
             <h4 className="ui header submittedTable"> Historic APIS </h4>
             <HistoricTable/>
         </div>
+        <br/>
     </body>
     )
     }
