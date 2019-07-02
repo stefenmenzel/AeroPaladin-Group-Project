@@ -93,7 +93,7 @@ class AddAircraftForm extends Component {
         
         return (
             <div>
-                <h1>Add Aircraft</h1>
+                <h1>Edit Aircraft</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <Aircraft aircraft={this.props.aircraft} handleChange={this.handleChange} stateType='aircraft'/>
                     <Divider />
