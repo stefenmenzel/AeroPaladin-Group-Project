@@ -7,8 +7,9 @@ const moment = require('moment');
 
 class HistoricTable extends Component {
 
-    handleArchive = (event) => {
-        console.log('in handleArchive'); 
+    handleArchive = (idToUpdate) => {
+        console.log('in handleArchive', idToUpdate);
+        this.props.dispatch({ type: 'DELETE_APIS_TRIPS', payload: { id: idToUpdate } })
     }
 
     render() {
