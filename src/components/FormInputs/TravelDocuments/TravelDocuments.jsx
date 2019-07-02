@@ -23,7 +23,8 @@ const docCodeSelectOptions = [
 class TravelDocuments extends Component{
     
     state = {
-        date: ''
+        date: '',
+        person: this.props.person
     }
 
     onDateChange = (event, { name, value }) => {
@@ -34,12 +35,23 @@ class TravelDocuments extends Component{
             ...this.state,
             date: value
         })
-        this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+        this.handleChange(this.props.stateType, name, { target: { value: value } })
     }
 
     onSelectChange = (event, { name, value }) => {
         console.log("sex change:", value);
-        this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+        this.handleChange(this.props.stateType, name, { target: { value: value } })
+    }
+
+    handleChange = (propertyToChange, newProperty, event) => {
+        this.setState({
+            ...this.state,
+            person: {
+                ...this.state.person,
+                [newProperty]: event.target.value
+            }
+        })
+        this.props.handleChange(propertyToChange, newProperty, event)
     }
 
     render(){
@@ -47,8 +59,9 @@ class TravelDocuments extends Component{
             <>
                 <Label className="formInputLabel">
                     <Input className="formInput"
-                        onChange={(e) => this.props.handleChange(this.props.stateType, "documentNumber", e)}
+                        onChange={(e) => this.handleChange(this.props.stateType, "documentNumber", e)}
                         placeholder="Document Number"
+                        defaultValue={(this.props.person) && this.props.person.documentNumber}
                     />
                     <span>
                         Document Number
@@ -60,6 +73,7 @@ class TravelDocuments extends Component{
                         name="documentType"
                         options={docCodeSelectOptions}
                         onChange={this.onSelectChange}
+                        defaultValue={(this.props.person) && this.props.person.documentType}
                     />
                     <span>
                         Document Type
@@ -72,6 +86,7 @@ class TravelDocuments extends Component{
                         value={this.state.date}
                         iconPosition="left"
                         onChange={this.onDateChange}
+                        defaultValue={(this.props.person) && this.props.person.expiryDate}
                         style={{ width: '100%' }}
                         dateFormat="YYYY-MM-DD"
                     />
@@ -88,6 +103,7 @@ class TravelDocuments extends Component{
                             { key: 'USA', value: 'USA', text: 'USA' }
                         ]}
                         onChange={this.onSelectChange}
+                        defaultValue={(this.props.person) && this.props.person.residenceCountry}
                     />
                     <span>
                         Issuing Country

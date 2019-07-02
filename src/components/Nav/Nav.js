@@ -23,11 +23,7 @@ class Nav extends Component {
     handleShowClick = () => this.setState({ visible: true })
     handleSidebarHide = () => this.setState({ visible: false })
     
-  //   // showMenu = () => {
-  //   //  console.log('in SHOWMENU');
-  //   //  this.setState({
-  //   //      visible: !this.state.visible })
-  //   // }
+  
 
    render(){
   //   console.log('state change for menu: ', this.state.visible);
@@ -42,7 +38,7 @@ class Nav extends Component {
     <div>
        <Button.Group className="hamgurger">
          <Button disabled={visible} onClick={this.handleShowClick}>
-            <Icon inverted color='white' name='align justify' size='big' />
+            <Icon inverted color='white' className='align justify hamburger' size='big' />
            </Button>
          {/* <Button disabled={!visible} onClick={this.handleHideClick}>
           </Button> */}

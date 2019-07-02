@@ -1,6 +1,6 @@
 .nav-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 35px;
+    font-weight: 500;
     /* display: inline-block; */
     color: #f2f2f2;
     padding-left: 10px;
@@ -19,7 +19,9 @@
   overflow: hidden;
   background-color: #525460;
 }
-
+.align.justify.hamburger {
+  margin-top: 20px;
+}
 
 .nav-link {
   float: left;

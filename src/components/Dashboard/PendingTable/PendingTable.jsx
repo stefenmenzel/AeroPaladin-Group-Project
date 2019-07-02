@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 
 const moment = require('moment');
 
@@ -13,11 +13,11 @@ class PendingTable extends Component {
     }
  
     render(){
-     console.log('apisreducer info from pending: ', this.props.apisTrips);
+    // console.log('apisreducer info from pending: ', this.props.apisTrips);
      
 
      //conditional rending for table data
-     console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
+     //console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
 
      return(
          
@@ -34,7 +34,7 @@ class PendingTable extends Component {
                 
 
              {this.props.apisTrips.map(trip => {
-                 console.log('flight STUFF: ', trip);
+                // console.log('flight STUFF: ', trip);
 
              return((trip.flight_status == 2) ? 
              <Table.Body key={trip.flight_id}>
@@ -49,7 +49,13 @@ class PendingTable extends Component {
                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                     </Table.Cell>
                     <Table.Cell>
-                        <button onClick={() => this.handleEdit(trip.flight_id)}>Edit</button>
+                             <div className="ui animated small button green" tabIndex="0" onClick={() => this.handleEdit(trip.id)}>
+                                 <div class="visible content">Edit</div>
+                                 <div class="hidden content">
+                                     <i class="right edit icon"></i>
+                                </div>
+                            </div> 
+                             {/* <Button className="ui animated button green" tabIndex="0" onClick={() => this.handleEdit(trip.id)}>Edit</Button> */}
                     </Table.Cell>
                 </Table.Row>
              </Table.Body> : <p></p>)})}
