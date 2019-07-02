@@ -28,10 +28,19 @@ function* addPassenger(action){
 
 function* deletePassenger(action) {
     try {
-        yield axios.put(`/api/passenger/delete/${action.payload}`);
+        yield axios.put(`/api/passenger/delete/${action.payload}`, action.payload, config);
         yield put({ type: 'FETCH_PASSENGER' });
     } catch (error) {
         console.log('Delete passenger request failed:', error);
+    }
+}
+
+function* updatePassenger(action) {
+    try{
+        yield axios.put('/api/passenger/update', action.payload, config);
+        yield put({type: 'FETCH_PASSENGER'});
+    }catch(error) {
+        console.log('error in update passenger request:', error);
     }
 }
 
@@ -50,7 +59,7 @@ function* passengerSaga() {
     yield takeLatest('ADD_PASSENGER', addPassenger);
     yield takeLatest('DELETE_PASSENGER', deletePassenger);
     yield takeLatest('FETCH_UPDATE_PASSENGER', fetchUpdatePassenger);
-
+    yield takeLatest('UPDATE_PASSENGER', updatePassenger);
 }
 
 export default passengerSaga;
