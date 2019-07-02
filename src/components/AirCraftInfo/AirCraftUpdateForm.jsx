@@ -54,9 +54,10 @@ class AddAircraftForm extends Component {
 
     //send the aircraft we just added to the database.
     handleSubmit = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         // console.log('submitting....or trying');
         // this.props.dispatch({ type: 'ADD_AIRCRAFT', payload: this.state });
+        this.props.dispatch({type: 'UPDATE_AIRCRAFT', payload: this.state})
     }
 
     //cancel this form filling outing (go back to aircraft summary page)
