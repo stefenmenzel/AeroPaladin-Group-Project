@@ -50,7 +50,7 @@ class AddAircraftForm extends Component{
         console.log('this.state:', this.state);
         return(
             <div>
-                <h1>Add Aircraft</h1>                
+                <h1 className="ui header center aligned grid">Add Aircraft</h1>                
                 <form className="addForm" onSubmit={this.handleSubmit}>                    
                     <Aircraft handleChange={this.handleChange} />
                     <Divider />
@@ -66,7 +66,7 @@ class AddAircraftForm extends Component{
                                     type="button"
                                     onClick={this.handleCancel}
                                     secondary 
-                                    className="formButton"
+                                    className="ui medium button formButton"
                                 >
                                     Cancel
                                 </Button>
@@ -75,8 +75,7 @@ class AddAircraftForm extends Component{
                             <Grid.Column width={3}>
                                 <Button
                                     type="submit"
-                                    primary 
-                                    className="formButton"
+                                    className="ui medium button green formButton"
                                 >
                                     Add Aircraft
                                 </Button>

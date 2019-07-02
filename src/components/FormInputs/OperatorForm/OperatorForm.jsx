@@ -26,7 +26,7 @@ class OperatorForm extends Component {
 
         return (
             <div>
-                <h2>Operator</h2>
+                <h2 className="travelDocHead">Operator</h2>
                 <Name 
                     handleChange={this.props.handleChange}
                     stateType='operator'

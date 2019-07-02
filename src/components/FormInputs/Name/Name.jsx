@@ -70,11 +70,11 @@ class Name extends Component{
                 </Label>
                 <Label className="formInputLabel">
                     <Select className="formAltInput"
-                        placeholder="select your sex"
+                        placeholder="Select Your Sex"
                         name="sex"
                         options={[
-                            {key: 'm', value:'m', text:'m'},
-                            {key: 'f', value:'f', text:'f'}
+                            {key: 'm', value:'m', text:'Male'},
+                            {key: 'f', value:'f', text:'Female'}
                         ]}                        
                         onChange={this.onSelectChange}
                         defaultValue={(this.props.person) && this.props.person.sex}
@@ -85,7 +85,7 @@ class Name extends Component{
                 </Label>
                 <Label className="formInputLabel">
                     <Select className="formAltInput"
-                        placeholder="select your residence country"
+                        placeholder="Select Your Residence Country"
                         name="residenceCountry"
                         options={[
                             { key: 'MEX', value: 'MEX', text: 'MEX' },
@@ -99,8 +99,16 @@ class Name extends Component{
                     </span>
                 </Label>
                 <Label className="formInputLabel">
+                    <Checkbox                         
+                        onChange={this.citizenshipCheckbox}
+                    />
+                    <span>
+                        Citizenship Country Is The Same As Residence Country
+                    </span>
+                </Label>
+                <Label className="formInputLabel">
                     <Select className="formAltInput"
-                        placeholder="select your citizenship country"
+                        placeholder="Select Your Citizenship Country"
                         name="citizenShipCountry"
                         options={[
                             { key: 'MEX', value: 'MEX', text: 'MEX' },
@@ -112,14 +120,6 @@ class Name extends Component{
                     />
                     <span>
                         Citizenship Country
-                    </span>
-                </Label>
-                <Label className="formInputLabel">
-                    <Checkbox                         
-                        onChange={this.citizenshipCheckbox}
-                    />
-                    <span>
-                        citizenship country is the same as residence country
                     </span>
                 </Label>
             </>

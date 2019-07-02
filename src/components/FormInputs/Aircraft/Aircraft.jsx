@@ -36,7 +36,7 @@ class Aircraft extends Component {
 
             <div className="formInputs">
 
-                <h2>Aircraft Info</h2>
+                <h2 className="travelDocHead">Aircraft Info</h2>
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.handleChange('aircraft', 'tailNumber', e)}

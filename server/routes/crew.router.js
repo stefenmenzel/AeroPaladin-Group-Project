@@ -117,6 +117,11 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     }
 })
 
+router.put('/update', rejectUnauthenticated, async (req, res) => {
+    console.log('req.body for update crew:', req.body);
+    res.sendStatus(201);
+})
+
 
 
 module.exports = router;

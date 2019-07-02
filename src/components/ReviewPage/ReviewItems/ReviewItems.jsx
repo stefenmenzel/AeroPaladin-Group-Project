@@ -31,7 +31,7 @@ class ReviewItems extends Component {
             {this.props.review.crewpaxpeople.map(person => {  
               if(person.crew_paxPeopleType === 2) 
                // console.log('PERSON HEIRE: ', person);
-                return <li>{person.crew_paxFirstName}</li> 
+                return <><li>{person.crew_paxFirstName}</li> <br/> </>
             })}
         </ul>
         </>    
@@ -47,7 +47,8 @@ class ReviewItems extends Component {
             {this.props.review.crewpaxpeople.map(person => {  
               if(person.crew_paxPeopleType === 1) 
                // console.log('PERSON HEIRE: ', person);
-                return <li>{person.crew_paxFirstName}</li> 
+                return  <>
+                <li>{person.crew_paxFirstName}</li> <br/> </>
             })}
         </ul>
         </>    
@@ -62,32 +63,41 @@ class ReviewItems extends Component {
      <div className="ui segments grid review div big">
         <List>
         {/* Aircraft Information */}
-        
+            
          <List.Item className="listItem">
+            <div className="subHeadBtn">
             <List.Header>AirCraft</List.Header>
-            <Button className="ui mini button" onClick={this.edit}>Edit Section</Button>
+            <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+            </div>
+            <br/>
             <br/>
             Tail Number: {this.props.review.planetailnum}
             <br/>
+            <br/>
             Owner: {this.props.review.ownerfirstname} {this.props.review.ownerlastname}
+            <br/>
+            <br/>
+            Company/Person Operator: {this.props.review.operatorfirstname} {this.props.review.operatorlastname}
          </List.Item>
         
-        {/* Operator Information */}
+        {/* Operator Information
         <List.Item className="listItem">
          <List.Header>Operator</List.Header>
-         <Button className="ui mini button" onClick={this.edit}>Edit Section</Button>
+         <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button>
          <br/>    
          Company/Person Operator: {this.props.review.operatorfirstname} {this.props.review.operatorlastname}
-        </List.Item>
+        </List.Item> */}
         {/* Manifest Info - Crew & Pax */}
         <List.Item className="listItem">
          <List.Header>Manifest</List.Header>
-         <Button className="ui mini button" onClick={this.edit}>Edit Section</Button>
+         {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
          <br/>
          Crew
+         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
             {crewToShow}
          
          Passengers
+         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
             {paxToShow}
         </List.Item>
         {/* flight segment one */}
@@ -95,11 +105,14 @@ class ReviewItems extends Component {
          <List.Header>Flight Segment One</List.Header>
          Departure
          <br/>
-         <Button className="ui mini button" onClick={this.edit}>Edit Section</Button>
+         {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
+         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
             <br/>
              Departure Airport: {this.props.review.departureairportcity}, {this.props.review.departureairportcntry}
             <br/>
+            <br/>
              Departure Date: {moment(this.props.review.localdeparturetimeStamp).format("MM/DD/YYYY")} 
+            <br/>
             <br/>
              Departure Time: {moment(this.props.review.localdeparturetimeStamp).format("LT")} 
         </List.Item>
@@ -109,11 +122,14 @@ class ReviewItems extends Component {
          <List.Header>Flight Segment Two</List.Header>
           Arrival 
           <br/>
-         <Button className="ui tiny button" onClick={this.edit}>Edit Section</Button>
+         {/* <Button className="ui tiny green button" onClick={this.edit}>Edit Section</Button> */}
+         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
              <br/>
              Arrival Airport: {this.props.review.arrivalairportcity}, {this.props.review.arrivalairportcntry}
              <br/>
+             <br/>
              Arrival Date: {moment(this.props.review.localdeparturetimeStamp).format("MM/DD/YYYY")} 
+             <br/>
              <br/>
              Arrival Time: {moment(this.props.review.localdeparturetimeStamp).format("LT")}
              
