@@ -9,7 +9,7 @@ import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
 class PassengerUpdateForm extends Component {
     state = {
-
+        passenger: this.props.passenger
     }
 
  
@@ -20,11 +20,11 @@ class PassengerUpdateForm extends Component {
     }
     
     componentDidUpdate() {
-        if (!Object.keys(this.state.crew).length) {
-            if (this.state.crew !== this.props.crew) {
+        if (!Object.keys(this.state.passenger).length) {
+            if (this.state.passenger !== this.props.passenger) {
                 this.setState({
                     ...this.state,
-                    crew: this.props.crew
+                    passenger: this.props.passenger
                 })
             }
         }
@@ -32,8 +32,8 @@ class PassengerUpdateForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-
         console.log('doing a submitto');
+        this.props.dispatch({type: 'UPDATE_PASSENGER', payload:{testing: 'test'}});
     }
 
     handleCancel = () => {
@@ -88,7 +88,7 @@ class PassengerUpdateForm extends Component {
                                     primary
                                     className="formButton"
                                 >
-                                    Add Crew
+                                    Edit Crew
                                 </Button>
                             </Grid.Column>
                         </Grid>
@@ -101,7 +101,7 @@ class PassengerUpdateForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        reduxState
+        passenger: reduxState.passengerReducer
     }
 }
 
