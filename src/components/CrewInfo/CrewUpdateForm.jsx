@@ -51,7 +51,7 @@ class CrewUpdateForm extends Component{
     render() {
         return(
             <div>
-                <h1>Edit Passenger</h1>
+                <h1>Edit Crew</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2>Crew Info</h2>
                     <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
