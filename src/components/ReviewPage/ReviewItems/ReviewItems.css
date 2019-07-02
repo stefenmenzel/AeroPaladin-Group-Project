@@ -22,3 +22,9 @@
     margin-top: 30px;
     text-decoration: underline;
 }
+
+.subHeadBtn {
+    -moz-box-flexgroup: inherit;
+    display: inline;
+
+}

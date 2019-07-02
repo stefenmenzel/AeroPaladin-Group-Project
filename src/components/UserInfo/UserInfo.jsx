@@ -20,25 +20,33 @@ class UserInfo extends Component {
 
     render() {
         return (
-            <div>
+            <div className="ui centered card grid">
+                <div className="content">
+                <div className="header">
+                    User Information
+                </div>
+                </div>
+                <div className="content">
+                    <p className="ui bold sub header"> User Name:</p> <p className="ui normal feed">{this.props.user.username}</p>
+                    <br/>
+                    <p className="ui sub header"> First Name: </p> <p> {this.props.user.firstname}</p>
+                    <br/>
+                    <p className="ui sub header"> Last Name: </p> <p> {this.props.user.lastname}</p>
+                    <br/>
+                    <p className="ui sub header"> Email: </p> <p> {this.props.user.email}</p>
+                    <br/>
+                    <p className="ui sub header"> Phone Number:</p> <p>{this.props.user.phonenumber}</p>
+                </div>
+            
+            <div className= "content userButtons">
                 <div>
-                <h1>User Information</h1>
-                    <p> User Name: {this.props.user.username}</p>
-                    <p> First Name: {this.props.user.firstname}</p>
-                    <p> Last Name: {this.props.user.lastname}</p>
-                    <p> Email: {this.props.user.email}</p>
-                    <p> Phone Number: {this.props.user.phonenumber}</p>
-
-            </div>
-            <div className= "userButtons">
-                <div>
-                    <Button className="ui button" onClick={this.handleCrewPage}>Crew</Button>
+                    <Button className="ui green button" onClick={this.handleCrewPage}>Crew</Button>
                 </div>
                 <div>
-                    <Button className="ui button" onClick={this.handlePassengerPage}>Passenger</Button>
+                    <Button className="ui green button" onClick={this.handlePassengerPage}>Passenger</Button>
                 </div>
                 <div>
-                    <Button className="ui button" onClick={this.handleAircraftPage}>Aircraft</Button>
+                    <Button className="ui green button" onClick={this.handleAircraftPage}>Aircraft</Button>
                 </div>
                 </div>
             </div>
