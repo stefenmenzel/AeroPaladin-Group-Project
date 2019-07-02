@@ -93,7 +93,7 @@ class AddAircraftForm extends Component {
         
         return (
             <div>
-                <h1>Edit Aircraft</h1>
+                <h1 className="ui header center aligned grid">Edit Aircraft</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <Aircraft aircraft={this.props.aircraft} handleChange={this.handleChange} stateType='aircraft'/>
                     <Divider />
@@ -108,7 +108,7 @@ class AddAircraftForm extends Component {
                                     type="button"
                                     onClick={this.handleCancel}
                                     secondary
-                                    className="formButton"
+                                    className="ui medium button formButton"
                                 >
                                     Cancel
                                 </Button>
@@ -117,8 +117,7 @@ class AddAircraftForm extends Component {
                             <Grid.Column width={3}>
                                 <Button
                                     type="submit"
-                                    primary
-                                    className="formButton"
+                                    className="ui medium button green formButton"
                                 >
                                     Save
                                 </Button>
