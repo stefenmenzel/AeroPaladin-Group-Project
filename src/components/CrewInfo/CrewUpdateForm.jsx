@@ -28,7 +28,9 @@ class CrewUpdateForm extends Component{
 
     render() {
         return(
-            <div>Testing form</div>
+            <div>
+                <h1>Edit Passenger</h1>
+            </div>
         )
     }
 }
