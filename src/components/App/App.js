@@ -118,6 +118,19 @@ class App extends Component {
               path="/aircraftupdate/:id"
               component={AirCraftUpdateForm}
             />
+            
+            {/* <ProtectedRoute
+              exact
+              path="/crewupdate/:id"
+              component={CrewUpdateForm}
+            /> */}
+
+            {/* <ProtectedRoute
+              exact
+              path="/passengerupdate/:id"
+              component={PassengerUpdateForm}
+            /> */}
+
             {/*  User, Crew & Passenger information from Nav Ends Here */}
 
 

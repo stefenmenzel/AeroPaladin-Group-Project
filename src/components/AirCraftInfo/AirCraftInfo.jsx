@@ -23,9 +23,7 @@ class AircraftInfo extends Component {
 
     handleEdit = (id) =>{
         console.log('edit', id)
-        this.props.history.push(`/aircraftupdate/${id}`)
-
-        
+        this.props.history.push(`/aircraftupdate/${id}`)  
     }
 
     handleDelete = (id) => {

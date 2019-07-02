@@ -61,7 +61,10 @@ class PassengerInfo extends Component {
         })
     }
 
-
+    handleEdit = (id) => {
+        console.log('edit', id)
+        this.props.history.push(`/passengerupdate/${id}`)
+    }
 
     render() {
 
@@ -114,11 +117,10 @@ class PassengerInfo extends Component {
                                             Document#: {person.documentnbr} Expiry Date: {moment(person.expirydate).format("MM/DD/YYYY")}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button><Icon name="edit" /></button>
+                                            <button onClick={() => this.handleEdit(person.people_id)}><Icon name="edit" /></button>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button onClick={() => this.handleDelete(person.people_id)}><Icon name="trash" /></button>
-                                           
+                                            <button onClick={() => this.handleDelete(person.people_id)}><Icon name="trash" /></button>                             
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
