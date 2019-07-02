@@ -38,18 +38,18 @@ class AddPassengerForm extends Component{
         console.log('this.state:', this.state);
         return(
             <div>
-                <h1>Add Passenger</h1>
+                <h1 className="ui header center aligned grid">Add Passenger</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2>Passenger Info</h2>
+                    <h2 className="travelDocHead">Passenger Info</h2>
                     <Name extended={true} handleChange={this.handleChange} stateType="passenger" />
                     <Divider />
                     <Address handleChange={this.handleChange} stateType="passenger" />
                     <Divider />
                     <Contact handleChange={this.handleChange} stateType="passenger" />
                     <Divider />
-                    <h2>Travel Document 1</h2>
+                    <h2 className="travelDocHead">Travel Document 1</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne"/>
-                    <h2>Travel Document 2</h2>
+                    <h2 className="travelDocHead">Travel Document 2</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo"/>
 
                     <div className="formButtons">
@@ -60,7 +60,7 @@ class AddPassengerForm extends Component{
                                     type="button"
                                     onClick={this.handleCancel}
                                     secondary
-                                    className="formButton"
+                                    className="ui medium button formButton"
                                 >
                                     Cancel
                                 </Button>
@@ -69,8 +69,8 @@ class AddPassengerForm extends Component{
                             <Grid.Column width={3}>
                                 <Button
                                     type="submit"
-                                    primary
-                                    className="formButton"
+                            
+                                    className="ui medium button green formButton"
                                 >
                                     Add Passenger
                                 </Button>

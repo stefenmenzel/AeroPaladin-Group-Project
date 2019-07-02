@@ -71,7 +71,7 @@ class PassengerInfo extends Component {
         return (
             <div>
                 <div className="addPassengerBtn">
-                    <Button onClick={this.addPassenger}>Add New Passenger</Button>
+                    <Button className="ui medium button blue" onClick={this.addPassenger}>Add New Passenger</Button>
                 </div>
                 <div>
                     <Table className="table" celled padded>

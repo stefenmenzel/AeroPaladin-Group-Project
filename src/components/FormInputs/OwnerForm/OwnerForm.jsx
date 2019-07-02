@@ -40,7 +40,7 @@ class OwnerForm extends Component {
     render() {
         return (
             <div>
-                <h2>Owner</h2>
+                <h2 className="travelDocHead">Owner</h2>
                 <Name 
                     handleChange={this.handleChange}
                     stateType='owner'
