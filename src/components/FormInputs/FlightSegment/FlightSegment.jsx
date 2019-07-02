@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Input, Label, Select, Checkbox} from 'semantic-ui-react';
-import { Button, Grid} from 'semantic-ui-react';
+import {Divider, Button, Grid} from 'semantic-ui-react';
 import {DateInput} from 'semantic-ui-calendar-react';
 import '../FormInputs.css';
 
@@ -12,9 +12,7 @@ class FlightSegment extends Component {
         airport: '',
         estimatedTime: '',
         timeZone: ''
-
     }
-
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -44,13 +42,56 @@ class FlightSegment extends Component {
         })
     }
 
-
     render () {
         return (
             <div className="formInputs">
                  <form className="addForm" onSubmit={this.handleSubmit}>
                 <h2>Flight Segment One</h2>
                 <p>Departure</p>
+            <Label className="formInputLabel">            
+                <Input className="formInput"
+                    onChange={this.handleChange("airport")}
+                    placeholder="Airport"
+                />
+                <span>
+                   Airport
+                </span>
+            </Label>
+
+            <Label className="formInputLabel">
+                <Input className="formInput"
+                    onChange={this.handleChange("estimatedTime")}
+                    placeholder="Estimated Time of Departure"
+                />
+                <span>
+                    Estimated Time
+                </span>
+            </Label>
+            <Label className="formInputLabel">
+                <Input className="formInput"
+                    onChange={this.handleChange("timeZone")}
+                    placeholder="Time Zone"
+                />
+                <span>
+                    Time Zone
+                </span>
+            </Label>
+            <Label className="formInputLabel">
+                    <DateInput className="formAltInput"
+                        name="departureDate"
+                        value={this.state.date}
+                        placeholder = "Estimated Departure Date"
+                        iconPosition="left"                        
+                        onChange={this.onDateChange}
+                        style={{width:'100%'}}
+                        dateFormat="YYYY-MM-DD"
+                    />
+                    <span>
+                        Estimated Departure Date
+                    </span>
+                </Label>
+            <Divider />
+            <p>Arrival</p>
             <Label className="formInputLabel">            
                 <Input className="formInput"
                     onChange={this.handleChange("airport")}
@@ -94,6 +135,8 @@ class FlightSegment extends Component {
                         Estimated Departure Date
                     </span>
                 </Label>
+
+            
        
         <div className="formButtons">
         <Grid columns='equal'>
