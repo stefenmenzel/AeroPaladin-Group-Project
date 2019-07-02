@@ -14,7 +14,7 @@ class SubmittedTable extends Component {
     render() {
         
         //conditional rending for table data
-        console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
+       // console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
 
         return (
 

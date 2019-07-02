@@ -13,11 +13,11 @@ class PendingTable extends Component {
     }
  
     render(){
-     console.log('apisreducer info from pending: ', this.props.apisTrips);
+    // console.log('apisreducer info from pending: ', this.props.apisTrips);
      
 
      //conditional rending for table data
-     console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
+     //console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
 
      return(
          
@@ -34,7 +34,7 @@ class PendingTable extends Component {
                 
 
              {this.props.apisTrips.map(trip => {
-                 console.log('flight STUFF: ', trip);
+                // console.log('flight STUFF: ', trip);
 
              return((trip.flight_status == 2) ? 
              <Table.Body key={trip.flight_id}>
