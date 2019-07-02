@@ -30,8 +30,18 @@ import {combineReducers} from 'redux'
 
 const flightSegmentOne = (state = {}, action) => {
     switch (action.type) {
-        case 'SET_APIS_FLIGHTSEGMENTONE':
-            return action.payload;            
+        case 'SET_APIS_FLIGHT_SEGMENT_ONE':
+            return action.payload
+        default:
+            return state;
+    }
+}
+
+const flightSegmentTwo = (state = {}, action) => {
+    switch (action.type) {
+        case 'SET_APIS_FLIGHT_SEGMENT_TWO':
+            return action.payload;
+    
         default:
             return state;
     }
@@ -41,7 +51,8 @@ const apisReducer = combineReducers({
     crew,
     aircraft,
     passenger,
-    flightSegmentOne
+    flightSegmentOne,
+    flightSegmentTwo,
 
 })
 
