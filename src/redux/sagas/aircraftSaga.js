@@ -1,12 +1,14 @@
 import axios from 'axios';
 import {put, takeLatest} from 'redux-saga/effects';
 
+const config = {
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true,
+};
+
 function* addAircraft(action){
     try{
-        const config={
-            headers: {'Content-Type': 'application/json'},
-            withCredentials: true,
-        };
+        
         // console.log("action.payload", action.payload);
         yield axios.post('/api/aircraft/add', action.payload, config);
         yield put({type:'FETCH_AIRCRAFT'});
@@ -17,7 +19,7 @@ function* addAircraft(action){
 
 function* fetchAircraft(action) {
     try {
-        const response = yield axios.get('/api/aircraft/');
+        const response = yield axios.get('/api/aircraft/', config);
         yield put({ type: 'SET_AIRCRAFT', payload: response.data });
 
     } catch (error) {
@@ -27,7 +29,7 @@ function* fetchAircraft(action) {
 
 function* fetchUpdateAircraft(action) {
     try {
-        const response = yield axios.get(`/api/aircraft/updateaircraft/${action.payload}`);
+        const response = yield axios.get(`/api/aircraft/updateaircraft/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_AIRCRAFT', payload: response.data });
 
     } catch (error) {
@@ -37,7 +39,7 @@ function* fetchUpdateAircraft(action) {
 
 function* fetchUpdateOperator(action) {
     try {
-        const response = yield axios.get(`/api/aircraft/updateoperator/${action.payload}`);
+        const response = yield axios.get(`/api/aircraft/updateoperator/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_OPERATOR', payload: response.data });
 
     } catch (error) {
@@ -47,7 +49,7 @@ function* fetchUpdateOperator(action) {
 
 function* fetchUpdateOwner(action) {
     try {
-        const response = yield axios.get(`/api/aircraft/updateowner/${action.payload}`);
+        const response = yield axios.get(`/api/aircraft/updateowner/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_OWNER', payload: response.data });
 
     } catch (error) {
@@ -58,10 +60,19 @@ function* fetchUpdateOwner(action) {
 
 function* deleteAircraft(action) {
     try {
-        yield axios.put(`/api/aircraft/delete/${action.payload}`);
+        yield axios.put(`/api/aircraft/delete/${action.payload}`, null, config);
         yield put({ type: 'FETCH_AIRCRAFT' })
     } catch (error) {
         console.log('AircraftSaga DELETE request failed', error);
+    }
+}
+
+function* updateAircraft(action) {
+    try{
+        yield axios.put('/api/aircraft/update', action.payload, config);
+        yield put({type: 'FETCH_AIRCRAFT'});
+    }catch (error){
+        console.log("error in update Aircraft request:", error);
     }
 }
 
@@ -73,7 +84,7 @@ function* aircraftSaga(){
     yield takeLatest('FETCH_UPDATE_AIRCRAFT', fetchUpdateAircraft);
     yield takeLatest('FETCH_UPDATE_OPERATOR', fetchUpdateOperator);
     yield takeLatest('FETCH_UPDATE_OWNER', fetchUpdateOwner);
-
+    yield takeLatest('UPDATE_AIRCRAFT', updateAircraft);
 }
 
 export default aircraftSaga;
