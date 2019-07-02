@@ -42,14 +42,18 @@ router.get('/apis', rejectUnauthenticated, (req, res) => {
     })
 })
 
-// //delete the APIS Trip from the database
-router.put('/delete/:id', (req,res) => {
+//delete the APIS Trip from the database
+router.put('/delete/:id', rejectUnauthenticated,(req, res) => {
+    let archiveID = req.params.id
     console.log('req.params.id: ' + req.params.id + ' req.user.id: ' + req.user.id);
-    let queryText = ``
-  pool.query(queryText, [req.params.id, req.user.id]).then((result) => {
-      res.sendStatus(200);
+    let queryText = `UPDATE "flight"
+                     SET "flight_status" = 4
+                     WHERE "id" = $1;`
+  pool.query(queryText, [archiveID]).then((result) => {
+    console.log('in Archive!', result);
+    res.sendStatus(200);
   }).catch((error) => {
-      console.log(error);
+      console.log('error in archive', error);
       res.sendStatus(500);
   });;
 
