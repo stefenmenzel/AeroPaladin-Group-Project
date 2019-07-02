@@ -43,18 +43,57 @@ WHERE "id" = $1;`
 // Send PASSENGER information to Reducer to update on form
 router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
     let updatePassengerId = req.params.id
+    console.log('id', updatePassengerId, req.user.id);
+    
     const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName", "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry","people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".streetaddr AS "streetAddress" FROM "people"
 JOIN "address" ON "address".id = "people".addresswhileinus_id
 WHERE "people".peopletype = 1
 AND "people".id = $1
 AND "people".user_id = $2
-AND "people".active = TRUE
-;`
-    pool.query(sqlQuery, [req.user.id, updatePassengerId]).then(result => {
-        console.log(' Aircraft Result', result.rows);
+`
+    pool.query(sqlQuery, [updatePassengerId, req.user.id]).then(result => {
+        console.log(' Passenger Update Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
-        console.log('Error in Aircraft GET', err);
+        console.log('Error in Passenger Update GET', err);
+        res.SendStatus(500)
+    })
+});
+
+router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
+    let updateDocumentId = req.params.id
+    const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
+JOIN "document" ON "document".people_id = "people_table".id
+WHERE people_table.peopletype = 1
+AND people_table.id = $1
+AND people_table.user_id = $2
+ORDER BY "document".id DESC
+LIMIT 1
+OFFSET 1`
+    pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
+        console.log(' Passenger Document Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Passenger Document GET', err);
+        res.SendStatus(500)
+    })
+});
+
+router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
+    let updateDocumentId = req.params.id
+    const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
+JOIN "document" ON "document".people_id = "people_table".id
+WHERE people_table.peopletype = 1
+AND people_table.id = $1
+AND people_table.user_id = $2
+ORDER BY "document".id DESC
+LIMIT 1
+;`
+    pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
+        console.log(' Passenger Document Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Passenger Document GET', err);
         res.SendStatus(500)
     })
 });

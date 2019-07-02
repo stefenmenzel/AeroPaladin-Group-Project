@@ -41,7 +41,27 @@ function* fetchUpdatePassenger(action) {
         yield put({ type: 'SET_UPDATE_PASSENGER', payload: response.data });
 
     } catch (error) {
-        console.log('Aircraft Update Form GET request failed', error);
+        console.log('Passenger Update Form GET request failed', error);
+    }
+}
+
+function* fetchUpdatePassengerDocumentOne(action) {
+    try {
+        const response = yield axios.get(`/api/passenger/updatedocument1/${action.payload}`, config);
+        yield put({ type: 'SET_UPDATE_PASSENGER_DOCUMENT_ONE', payload: response.data });
+
+    } catch (error) {
+        console.log('Passenger Update Form GET request failed', error);
+    }
+}
+
+function* fetchUpdatePassengerDocumentTwo(action) {
+    try {
+        const response = yield axios.get(`/api/passenger/updatedocument2/${action.payload}`, config);
+        yield put({ type: 'SET_UPDATE_PASSENGER_DOCUMENT_TWO', payload: response.data });
+
+    } catch (error) {
+        console.log('Passenger Update Form GET request failed', error);
     }
 }
 
@@ -50,6 +70,10 @@ function* passengerSaga() {
     yield takeLatest('ADD_PASSENGER', addPassenger);
     yield takeLatest('DELETE_PASSENGER', deletePassenger);
     yield takeLatest('FETCH_UPDATE_PASSENGER', fetchUpdatePassenger);
+    yield takeLatest('FETCH_UPDATE_PASSENGER_DOCUMENT_ONE', fetchUpdatePassengerDocumentOne);
+    yield takeLatest('FETCH_UPDATE_PASSENGER_DOCUMENT_TWO', fetchUpdatePassengerDocumentTwo);
+
+
 
 }
 
