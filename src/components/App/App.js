@@ -24,6 +24,8 @@ import AirCraftInfo from '../AirCraftInfo/AirCraftInfo'
 import UserInfo from '../UserInfo/UserInfo'
 import PassengerInfo from '../PassengerInfo/PassengerInfo'
 import AirCraftUpdateForm from '../AirCraftInfo/AirCraftUpdateForm'
+import CrewUpdateForm from '../CrewInfo/CrewUpdateForm'
+import PassengerUpdateForm from '../PassengerInfo/PassengerUpdateForm'
 
 import './App.css';
 
@@ -119,17 +121,17 @@ class App extends Component {
               component={AirCraftUpdateForm}
             />
             
-            {/* <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/crewupdate/:id"
               component={CrewUpdateForm}
-            /> */}
+            /> 
 
-            {/* <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/passengerupdate/:id"
               component={PassengerUpdateForm}
-            /> */}
+            />
 
             {/*  User, Crew & Passenger information from Nav Ends Here */}
 

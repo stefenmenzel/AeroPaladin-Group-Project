@@ -40,6 +40,25 @@ WHERE "id" = $1;`
     })
 });
 
+// Send PASSENGER information to Reducer to update on form
+router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
+    let updatePassengerId = req.params.id
+    const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName", "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry","people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".streetaddr AS "streetAddress" FROM "people"
+JOIN "address" ON "address".id = "people".addresswhileinus_id
+WHERE "people".peopletype = 1
+AND "people".id = $1
+AND "people".user_id = $2
+AND "people".active = TRUE
+;`
+    pool.query(sqlQuery, [req.user.id, updatePassengerId]).then(result => {
+        console.log(' Aircraft Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Aircraft GET', err);
+        res.SendStatus(500)
+    })
+});
+
 
 
 router.post('/add', rejectUnauthenticated, async (req, res) => {
