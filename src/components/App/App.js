@@ -13,18 +13,20 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
-import Dashboard from '../Dashboard/Dashboard';
-import CreateNewApis from '../CreateNewApis/CreateNewApis';
-import AddAircraftForm from '../Forms/AddAircraftForm/AddAircraftForm';
-import AddPassengerForm from '../Forms/AddPassengerForm/AddPassengerForm';
-import AddCrewForm from '../Forms/AddCrewForm/AddCrewForm';
-import ReviewPage from '../ReviewPage/ReviewPage/ReviewPage';
-import CrewInfo from '../CrewInfo/CrewInfo';
-import AirCraftInfo from '../AirCraftInfo/AirCraftInfo';
-import UserInfo from '../UserInfo/UserInfo';
-import PassengerInfo from '../PassengerInfo/PassengerInfo';
-import AirCraftUpdateForm from '../AirCraftInfo/AirCraftUpdateForm';
-import CrewUpdateForm from '../CrewInfo/CrewUpdateForm';
+import Dashboard from '../Dashboard/Dashboard'
+import CreateNewApis from '../CreateNewApis/CreateNewApis'
+import AddAircraftForm from '../Forms/AddAircraftForm/AddAircraftForm'
+import AddPassengerForm from '../Forms/AddPassengerForm/AddPassengerForm'
+import AddCrewForm from '../Forms/AddCrewForm/AddCrewForm'
+import ReviewPage from '../ReviewPage/ReviewPage/ReviewPage'
+import CrewInfo from '../CrewInfo/CrewInfo'
+import AirCraftInfo from '../AirCraftInfo/AirCraftInfo'
+import UserInfo from '../UserInfo/UserInfo'
+import PassengerInfo from '../PassengerInfo/PassengerInfo'
+import AirCraftUpdateForm from '../AirCraftInfo/AirCraftUpdateForm'
+import CrewUpdateForm from '../CrewInfo/CrewUpdateForm'
+import PassengerUpdateForm from '../PassengerInfo/PassengerUpdateForm'
+
 
 import './App.css';
 
@@ -124,13 +126,13 @@ class App extends Component {
               exact
               path="/crewupdate/:id"
               component={CrewUpdateForm}
-            />
+            /> 
 
-            {/* <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/passengerupdate/:id"
               component={PassengerUpdateForm}
-            /> */}
+            />
 
             {/*  User, Crew & Passenger information from Nav Ends Here */}
 
