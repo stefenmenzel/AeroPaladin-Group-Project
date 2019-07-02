@@ -131,7 +131,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Send Aircraft information to Reducer to update on form
 router.get('/updateaircraft/:id', rejectUnauthenticated, (req, res) => {
 let updateAircraftId = req.params.id
-    const sqlQuery = `SELECT "aircraft".tailnumber AS "tailNumber", "aircraft".typeaircraft AS "type", "aircraft".color, "aircraft".callsign AS "callSign", "aircraft".cbpdecalnbr AS "CBP",
+    const sqlQuery = `SELECT "aircraft".id, "aircraft".tailnumber AS "tailNumber", "aircraft".typeaircraft AS "type", "aircraft".color, "aircraft".callsign AS "callSign", "aircraft".cbpdecalnbr AS "CBP",
         "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
         JOIN "people" ON  "people".id = "aircraft".operator_id
         JOIN "people" as owner ON  "owner".id = "aircraft".owner_id 
@@ -151,7 +151,7 @@ let updateAircraftId = req.params.id
 // Send Operator information to Reducer to update on form
 router.get('/updateoperator/:id', rejectUnauthenticated, (req, res) => {
     let updateOperatorId = req.params.id
-    const sqlQuery = `SELECT "people".permanentaddress_id, "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
+    const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
             "address".streetaddr AS "streetAddress", "address".city, "address".state, "address".postalcode AS "postalCode",
             "people".emailaddr AS "email", "people".telephonenbr AS "phoneNumber" FROM "aircraft"
         JOIN "people" ON  "people".id = "aircraft".operator_id
@@ -173,7 +173,7 @@ router.get('/updateoperator/:id', rejectUnauthenticated, (req, res) => {
 // Send owner information to Reducer to update on form
 router.get('/updateowner/:id', rejectUnauthenticated, (req, res) => {
     let updateOwnerId = req.params.id
-    const sqlQuery = `SELECT "people".permanentaddress_id, "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
+    const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
      "address".streetaddr AS "streetAddress", "address".city, "address".state, "address".postalcode AS "postalCode",
     "people".emailaddr AS "email", "people".telephonenbr AS "phoneNumber" FROM "aircraft"
     JOIN "people" ON  "people".id = "aircraft".owner_id
@@ -211,19 +211,63 @@ router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.put('/update', rejectUnauthenticated, (req, res) => {
+router.put('/update', rejectUnauthenticated, async (req, res) => {
     console.log("req.body in update:", req.body);
 
     const aircraft = req.body.aircraft;
     const operator = req.body.operator;
     const owner = req.body.owner;
 
-    let owner_id = aircraft.owner_id;
+    let owner_id = owner.id;
     let owner_address_id = owner.permanentaddress_id;
-    let operator_id = aircraft.operator_id;
+    let operator_id = operator.id;
     let operator_address_id = operator.permanentaddress_id;
 
-    res.sendStatus(201);
+    const addressQuery = `
+        UPDATE "address"
+        SET "streetaddr" = $1, "city" = $2, "state" = $3, "postalcode" = $4
+        WHERE "id" = $5;
+    `;
+
+    const personQuery = `
+        UPDATE "people"
+        SET "lastname" = $1, "firstname" = $2, "middlename" = $3, "emailaddr" = $4, "telephonenbr" = $5
+        WHERE "id" = $6;
+    `;
+
+    const aircraftQuery = `
+        UPDATE "aircraft"
+        SET "tailnumber" = $1, "typeaircraft" = $2, "color" = $3, "callsign" = $4, "cbpdecalnbr" = $5
+        WHERE "id" = $6;
+    `;
+
+    const connection = await pool.connect();
+
+    try{
+        await connection.query('BEGIN');
+
+        await connection.query(addressQuery, [owner.streetAddress, owner.city, owner.state, owner.postalCode, owner_address_id]);
+        console.log('owner address');
+        await connection.query(personQuery, [owner.lastName, owner.firstName, owner.middleName, owner.email, owner.phoneNumber, owner_id]);
+        console.log('owner update');
+
+        await connection.query(addressQuery, [operator.streetAddress, operator.city, operator.state, operator.postalCode, operator_address_id]);
+        console.log('operator address');
+        await connection.query(personQuery, [operator.lastName, operator.firstName, operator.middleName, operator.email, operator.phoneNumber, operator_id]);
+        console.log("operator update");
+
+        await connection.query(aircraftQuery, [aircraft.tailNumber, aircraft.type, aircraft.color, aircraft.callSign, aircraft.CBP, aircraft.id])
+        console.log('aircraft update');
+
+        await connection.query('COMMIT');
+        res.sendStatus(201);
+    }catch (error){
+        await connection.query('ROLLBACK');
+        console.log("transaction error with update aircraft", error);
+        res.sendStatus(500);
+    }finally{
+        connection.release();
+    }
 })
 
 
