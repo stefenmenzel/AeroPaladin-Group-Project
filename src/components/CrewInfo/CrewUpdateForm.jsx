@@ -9,11 +9,22 @@ import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
 class CrewUpdateForm extends Component{
     state = {
-
+        crew: this.props.crew,
     }
 
     componentDidMount(){
         //fetch info here
+    }
+
+    componentDidUpdate(){
+        if(!Object.keys(this.state.crew).length){
+            if(this.state.crew !== this.props.crew){
+                this.setState({
+                    ...this.state,
+                    crew: this.props.crew
+                })
+            }
+        }
     }
 
     handleSubmit = (event) => {
@@ -43,16 +54,16 @@ class CrewUpdateForm extends Component{
                 <h1>Edit Passenger</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2>Crew Info</h2>
-                    <Name extended={true} handleChange={this.handleChange} stateType="crew" />
+                    <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
                     <Divider />
-                    <Address handleChange={this.handleChange} stateType="crew" />
+                    <Address handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
                     <Divider />
-                    <Contact handleChange={this.handleChange} stateType="crew" />
+                    <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
                     <Divider />
                     <h2>Travel Document 1</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" />
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" person={this.props.crew}/>
                     <h2>Travel Document 2</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" />
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" person={this.props.crew}/>
 
                     <div className="formButtons">
                         <Grid columns='equal'>
@@ -87,7 +98,7 @@ class CrewUpdateForm extends Component{
 
 const mapStateToProps = (reduxState) => {
     return {
-        reduxState
+        crew: reduxState.crewReducer
     }
 }
 
