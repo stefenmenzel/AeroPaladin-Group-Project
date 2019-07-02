@@ -47,7 +47,13 @@ class HistoricTable extends Component {
                                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <button onClick={() => this.handleArchive(trip.id)}>Archive</button>
+                                       <div className="ui animated small button green" tabIndex="0" onClick={() => this.handleArchive(trip.id)}>
+                                            <div class="visible content">Archive</div>
+                                            <div class="hidden content">
+                                                <i class="right archive icon"></i>
+                                            </div>
+                                        </div>
+                                        {/* <button onClick={() => this.handleArchive(trip.id)}>Archive</button> */}
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body> : <p></p>)
