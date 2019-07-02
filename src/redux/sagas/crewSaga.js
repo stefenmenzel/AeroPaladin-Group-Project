@@ -36,11 +36,20 @@ function* deleteCrew(action) {
     }
 }
 
+function* updateCrew(action){
+    try{
+        yield axios.put('/api/crew/update', action.payload, config);
+        yield put({type: 'FETCH_CREW'});
+    }catch(error){
+        console.log('error in update Crew request:');
+    }
+}
+
 function* crewSaga() {
     yield takeLatest('FETCH_CREW', fetchCrew);
     yield takeLatest('ADD_CREW', addCrew);
     yield takeLatest('DELETE_CREW', deleteCrew);
-
+    yield takeLatest('UPDATE_CREW', updateCrew);
 }
 
 export default crewSaga;

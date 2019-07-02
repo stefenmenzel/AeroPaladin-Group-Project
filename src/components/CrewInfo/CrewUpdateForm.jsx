@@ -29,8 +29,8 @@ class CrewUpdateForm extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-
         console.log('doing a submitto');
+        this.props.dispatch({type: 'UPDATE_CREW', payload: {testing: 'test'}});
     }
 
     handleCancel = () => {
@@ -85,7 +85,7 @@ class CrewUpdateForm extends Component{
                                     primary
                                     className="formButton"
                                 >
-                                    Add Crew
+                                    Edit Crew
                                 </Button>
                             </Grid.Column>
                         </Grid>
