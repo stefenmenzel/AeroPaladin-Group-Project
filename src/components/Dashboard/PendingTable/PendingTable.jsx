@@ -49,10 +49,10 @@ class PendingTable extends Component {
                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                     </Table.Cell>
                     <Table.Cell>
-                             <div className="ui animated button green" tabIndex="0" onClick={() => this.handleEdit(trip.id)}>
+                             <div className="ui animated small button green" tabIndex="0" onClick={() => this.handleEdit(trip.id)}>
                                  <div class="visible content">Edit</div>
                                  <div class="hidden content">
-                                     <i class="right arrow icon"></i>
+                                     <i class="right edit icon"></i>
                                 </div>
                             </div> 
                              {/* <Button className="ui animated button green" tabIndex="0" onClick={() => this.handleEdit(trip.id)}>Edit</Button> */}

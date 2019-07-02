@@ -45,7 +45,7 @@ class SubmittedTable extends Component {
                                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        <div className="ui animated button green" tabIndex="0" onClick={() => this.handleArchive(trip.id)}>
+                                        <div className="ui animated small button green" tabIndex="0" onClick={() => this.handleArchive(trip.id)}>
                                             <div class="visible content">Archive</div>
                                             <div class="hidden content">
                                                 <i class="right archive icon"></i>

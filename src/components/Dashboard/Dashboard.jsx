@@ -15,31 +15,23 @@ class Dashboard extends Component {
         this.props.dispatch({ type: 'FETCH_APIS_TRIPS' })
     }
 
-    //    handleDelete = (idToDelete) => {
-    //        console.log('clicked on delete in dashboard', idToDelete)
-    //        this.props.dispatch({type:'DELETE_APIS_TRIPS', payload:{id:idToDelete} })
-    //    }
-    handleEdit = (id) => {
-        console.log('clicked on edit in dashboard', id)
-        this.props.history.push(`/reviewpage/${id}`)
-    }
-
     render() {
      
-
     return (
     <body>
-        <h2 className="ui header welcome">Welcome Back, {this.props.user.username}!</h2>
+        <h1 className="ui header welcome">Welcome Back, {this.props.user.username}!</h1>
         
         <div>
-            <h2 className="ui header center aligned middle aligned grid">APIS Trips</h2>
-            <h4 className="ui header pendingTable"> Pending APIS </h4>
+            <h2 className="ui header center aligned middle aligned grid">Your APIS Trips</h2>
+          <div className="subHeadingDiv">
+            <h3 className="ui header pendingTable"> Pending APIS </h3>
+          </div>  
             <PendingTable/>
             <br/>
-            <h4 className="ui header submittedTable"> Submitted APIS </h4>
+            <h3 className="ui header submittedTable"> Submitted APIS </h3>
             <SubmittedTable/>
             <br/>
-            <h4 className="ui header submittedTable"> Historic APIS </h4>
+            <h3 className="ui header submittedTable"> Historic APIS </h3>
             <HistoricTable/>
         </div>
         <br/>
