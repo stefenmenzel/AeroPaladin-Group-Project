@@ -9,7 +9,6 @@ import './AircraftInfo.css'
 const moment = require('moment');
 
 
-
 class AircraftInfo extends Component {
 
 

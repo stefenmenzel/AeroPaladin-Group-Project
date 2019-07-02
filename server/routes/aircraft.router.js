@@ -194,8 +194,8 @@ router.put('/delete/:id', (req, res) => {
     let deleteId = req.params.id
     const sqlQuery = `
          UPDATE "aircraft"
-SET "active" = false
-WHERE "id" = $1;
+        SET "active" = false
+        WHERE "id" = $1;
     `;
     pool.query(sqlQuery, [deleteId]).then(result => {
         console.log('Result', result.rows);
