@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Select, Grid, Label, Button } from 'semantic-ui-react'
 import { connect } from 'react-redux';
+import PassengerList from './PassengerList';
 
 import '../../FormInputs/FormInputs.css'
 
@@ -58,6 +59,7 @@ class SelectPassengerForm extends Component {
                 this.state.currentPassenger
             ]
         })
+       
     }
 
     handleSubmit = (event) => {
@@ -80,6 +82,8 @@ class SelectPassengerForm extends Component {
         
         return selectOptions;            
     }
+    
+    
 
     render(){
         console.log('this.state:', this.state);
@@ -133,7 +137,9 @@ class SelectPassengerForm extends Component {
                         </Grid>
                     </div>
                 </form>
-                
+               <div>
+                   <PassengerList passengers={this.state.passengers} />
+               </div>
             </div>
         )
     }
