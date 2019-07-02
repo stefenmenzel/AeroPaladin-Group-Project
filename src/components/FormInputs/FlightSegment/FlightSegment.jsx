@@ -14,17 +14,37 @@ class FlightSegment extends Component {
         arrival : {
 
         },
-          date: '',
-          time: ''
-        // airport: '',
-        // estimatedTime: '',
-        // timeZone: ''
+        arrivalairport: '',
+        departureairport: '',
+        arrivaldate: '',
+        departuredate: '',
+        arrivaltime: '',
+        departuretime: '',        
+    }
+
+    segmentOneOrTwo = () => {
+        return ((this.props.stateType === 'flightSegmentOne') ? 'SET_APIS_FLIGHT_SEGMENT_ONE' : 'SET_APIS_FLIGHT_SEGMENT_TWO')
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("doing a submit", this.state);
-        this.props.dispatch({ type: 'SET_APIS_FLIGHTSEGMENTONE', payload: this.state })
+        let objToSend = {
+            departure: this.state.departure,
+            arrival: this.state.arrival,
+        }
+        this.props.dispatch({ type: this.segmentOneOrTwo(), payload: objToSend})
+
+        this.setState({
+            departure: {},
+            arrival: {},
+            arrivalairport: '',
+            departureairport: '',
+            arrivaldate: '',
+            departuredate: '',
+            arrivaltime: '',
+            departuretime: '',
+        })
         this.props.nextStep();
     }
 
@@ -33,64 +53,65 @@ class FlightSegment extends Component {
         this.props.previousStep();
     }
 
-    // handles on inputs on form and sets state
-    handleDepartureChange = property => event => {
-        this.setState({
-            departure:{
-            ...this.state.departure,
-            [property]: event.target.value
-            }
-        });
-    };
-
-    handleArrivalChange = property => event => {
-        this.setState({
-            arrival:{
-            ...this.state.departure,
-            [property]: event.target.value
-            }
-        });
-    };
-
-    onChange = (event, { name, value }) => {
+    onTimeChange = (event, { name, value }, segmentType) => {
+        console.log('date change', value);
+        console.log('date change:', name);
         //nothing to see here. move along
         this.setState({
             ...this.state,
-            [name]: value
+            [segmentType+name]: value,
+            [segmentType]: {
+                ...this.state[segmentType],
+                [name]: value
+            }            
+        })        
+    }
+
+    handleChange = (propertyToChange, newProperty, event) => {
+        console.log('now changing: ' + propertyToChange + ' ' + newProperty);
+
+        this.setState({
+            ...this.state,
+            [propertyToChange+newProperty]: event.target.value,
+            [propertyToChange]: {
+                ...this.state[propertyToChange],
+                [newProperty]: event.target.value
+            }
         })
     }
     
 
     render() {
+        console.log('flight segment state:', this.state);
         return (
             <div className="formInputs">
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2>Flight Segment One</h2>
-                    <p>Departure</p>
+                    <h2>Flight Segment</h2>
+                    <h3>Departure</h3>
                     <Label className="formInputLabel">
                         <Input className="formInput"
-                            onChange={this.handleDepartureChange("airportcode")}
+                            onChange={(e) => this.handleChange('departure', "airport", e)}
                             placeholder="Airport"
+                            value={this.state.departureairport}
                         />
                         <span>
                             Airport
                        </span>
                     </Label>
-
                     <Label className="formInputLabel">
                         <TimeInput className="formAltInput"
                             name="time"
-                            value={this.state.time}
+                            value={this.state.departuretime}
                             iconPosition="left"
-                            onChange={this.handleDepartureChange("airportcode")}
+                            onChange={(event, { name, value }) => this.onTimeChange(event, {name, value}, 'departure')}
                             placeholder="Estimated Time of Departure"
                             style={{ width: '100%' }}
                         />
                         <span>
                             Estimated Time
-                       </span>
+                        </span>
                     </Label>
-                    <Label className="formInputLabel">
+                    {/* <Label className="formInputLabel">
                     <Input className="formInput"
                             onChange={this.handleDepartureChange("time_zone")}
                             placeholder="Time Zone"
@@ -98,47 +119,49 @@ class FlightSegment extends Component {
                         <span>
                             Time Zone
                         </span>
-                    </Label>
+                    </Label> */}
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
                             name="date"
-                            value={this.state.date}
+                            value={this.state.departuredate}
                             placeholder="Estimated Departure Date"
                             iconPosition="left"
-                            onChange={this.handleDepartureChange("departure_date")}
+                            onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'departure')}
                             style={{ width: '100%' }}
                             dateFormat="YYYY-MM-DD"
                         />
                         <span>
                             Estimated Departure Date
-                    </span>
+                        </span>
                     </Label>
+
                     <Divider />
-                    <p>Arrival</p>
+
+                    <h3>Arrival</h3>
                     <Label className="formInputLabel">
                         <Input className="formInput"
-                            onChange={this.handleArrivalChange("airport")}
+                            onChange={(e) => this.handleChange('arrival', "airport", e)}
                             placeholder="Airport"
+                            value={this.state.arrivalairport}
                         />
                         <span>
                             Airport
-                </span>
+                        </span>
                     </Label>
-
                     <Label className="formInputLabel">
                     <TimeInput className="formAltInput"
                             name="time"
-                            value={this.state.time}
+                            value={this.state.arrivaltime}
                             iconPosition="left"
-                            onChange={this.onChange}
+                            onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
                             placeholder="Estimated Time of Departure"
                             style={{ width: '100%' }}
                         />
                         <span>
                             Estimated Time
-                </span>
+                        </span>
                     </Label>
-                    <Label className="formInputLabel">
+                    {/* <Label className="formInputLabel">
                         <Input className="formInput"
                             onChange={this.handleArrivalChange("time_zone")}
                             placeholder="Time Zone"
@@ -146,21 +169,20 @@ class FlightSegment extends Component {
                         <span>
                             Time Zone
                         </span>
-                    </Label>
-
+                    </Label> */}
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
-                            name="departureDate"
-                            value={this.state.date}
-                            placeholder="Estimated Departure Date"
+                            name="date"
+                            value={this.state.arrivaldate}
+                            placeholder="Estimated Arrival Date"
                             iconPosition="left"
-                            onChange={this.onChange}
+                            onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
                             style={{ width: '100%' }}
                             dateFormat="YYYY-MM-DD"
                         />
                         <span>
-                            Estimated Departure Date
-                    </span>
+                            Estimated Arrival Date
+                        </span>
                     </Label>
 
                     <div className="formButtons">
@@ -196,7 +218,7 @@ class FlightSegment extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-
+        reduxState
     }
 }
 
