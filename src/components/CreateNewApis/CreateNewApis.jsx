@@ -6,6 +6,7 @@ import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 import FlightSegment from '../FormInputs/FlightSegment/FlightSegment';
+import ReviewApis from '../Forms/ReviewApis/ReviewApis';
 
 /**
  * This component will walk a user through creating a new APIS.
@@ -17,7 +18,7 @@ class CreateNewApis extends Component{
     //this state will help us keep track of where we are in the form.
     state = {
         step: 1,
-        maxSteps: 5,        
+        maxSteps: 6,        
     }    
 
     //flip to the next step
@@ -57,6 +58,7 @@ class CreateNewApis extends Component{
             <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />,
             <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne"/>,
             <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo"/>,
+            <ReviewApis nextStep={this.nextStep} previousStep={this.previousStep} />
 
         ]
         return(
@@ -100,6 +102,12 @@ class CreateNewApis extends Component{
                                 <Step.Content>
                                     <Step.Title>Flight Segment Two</Step.Title>
                                     <Step.Description>Choose your Second Flight Segment</Step.Description>
+                                </Step.Content>
+                            </Step>
+                            <Step completed={this.activeOrCompleted(6)}>
+                                <Step.Content>
+                                    <Step.Title>Review APIS</Step.Title>
+                                    <Step.Description>Review APIS Form for submission</Step.Description>
                                 </Step.Content>
                             </Step>
                         </Step.Group>
