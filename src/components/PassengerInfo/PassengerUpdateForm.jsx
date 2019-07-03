@@ -9,7 +9,9 @@ import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
 class PassengerUpdateForm extends Component {
     state = {
-        passenger: this.props.passenger
+        passenger: this.props.passenger,
+        travelDocumentOne: this.props.travelDocumentOne,
+        travelDocumentTwo: this.props.travelDocumentTwo,
     }
 
  
@@ -20,11 +22,28 @@ class PassengerUpdateForm extends Component {
     }
     
     componentDidUpdate() {
-        if (!Object.keys(this.state.passenger).length) {
-            if (this.state.passenger !== this.props.passenger) {
+        if (!Object.keys(this.state.passenger).length || Array.isArray(this.state.passenger)) {
+            if (this.state.passenger !== this.props.passenger[0]) {
                 this.setState({
                     ...this.state,
-                    passenger: this.props.passenger
+                    passenger: this.props.passenger[0]
+                })
+            }
+        }
+
+        if (!Object.keys(this.state.travelDocumentOne).length) {
+            if (this.state.travelDocumentOne !== this.props.travelDocumentOne) {
+                this.setState({
+                    ...this.state,
+                    travelDocumentOne: this.props.travelDocumentOne
+                })
+            }
+        }
+        if (!Object.keys(this.state.travelDocumentTwo).length) {
+            if (this.state.travelDocumentTwo !== this.props.travelDocumentTwo) {
+                this.setState({
+                    ...this.state,
+                    travelDocumentTwo: this.props.travelDocumentTwo
                 })
             }
         }
@@ -33,7 +52,7 @@ class PassengerUpdateForm extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('doing a submitto');
-        this.props.dispatch({type: 'UPDATE_PASSENGER', payload:{testing: 'test'}});
+        this.props.dispatch({type: 'UPDATE_PASSENGER', payload:this.state});
     }
 
     handleCancel = () => {
@@ -52,21 +71,22 @@ class PassengerUpdateForm extends Component {
     }
 
     render() {
+        console.log('this.state passenger update', this.state);
         return (
             <div>
                 <h1>Edit Passenger</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2>Passenger Info</h2>
-                    <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.props.crew} />
+                    <Name extended={true} handleChange={this.handleChange} stateType="passenger" person={this.props.passenger[0]} />
                     <Divider />
-                    <Address handleChange={this.handleChange} stateType="crew" person={this.props.crew} />
+                    <Address handleChange={this.handleChange} stateType="passenger" person={this.props.passenger[0]} />
                     <Divider />
-                    <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew} />
+                    <Contact handleChange={this.handleChange} stateType="passenger" person={this.props.passenger[0]} />
                     <Divider />
                     <h2>Travel Document 1</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" person={this.props.crew} />
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.props.travelDocumentOne} />
                     <h2>Travel Document 2</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" person={this.props.crew} />
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" travelDocument={this.props.travelDocumentTwo} />
 
                     <div className="formButtons">
                         <Grid columns='equal'>
@@ -101,7 +121,9 @@ class PassengerUpdateForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        passenger: reduxState.passengerReducer
+        passenger: reduxState.passengerReducer,
+        travelDocumentOne: reduxState.documentOneReducer,
+        travelDocumentTwo: reduxState.documentTwoReducer,
     }
 }
 

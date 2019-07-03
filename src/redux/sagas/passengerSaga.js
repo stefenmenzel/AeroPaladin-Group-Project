@@ -38,7 +38,7 @@ function* deletePassenger(action) {
 function* updatePassenger(action) {
     try{
         yield axios.put('/api/passenger/update', action.payload, config);
-        yield put({type: 'FETCH_PASSENGER'});
+        // yield put({type: 'FETCH_PASSENGER'});
     }catch(error) {
         console.log('error in update passenger request:', error);
     }

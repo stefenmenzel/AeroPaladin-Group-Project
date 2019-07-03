@@ -10,6 +10,8 @@ import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 class CrewUpdateForm extends Component{
     state = {
         crew: this.props.crew,
+        travelDocumentOne: this.props.travelDocumentOne,
+        travelDocumentTwo: this.props.travelDocumentTwo,
     }
 
     componentDidMount(){
@@ -19,11 +21,28 @@ class CrewUpdateForm extends Component{
     }
 
     componentDidUpdate(){
-        if(!Object.keys(this.state.crew).length){
-            if(this.state.crew !== this.props.crew){
+        if(!Object.keys(this.state.crew).length || Array.isArray(this.state.crew)){
+            console.log('checking crew for length');
+            if(this.state.crew !== this.props.crew){                
                 this.setState({
                     ...this.state,
-                    crew: this.props.crew
+                    crew: this.props.crew[0]
+                })
+            }
+        }
+        if(!Object.keys(this.state.travelDocumentOne).length){
+            if(this.state.travelDocumentOne !== this.props.travelDocumentOne){
+                this.setState({
+                    ...this.state,
+                    travelDocumentOne: this.props.travelDocumentOne
+                })
+            }
+        }
+        if (!Object.keys(this.state.travelDocumentTwo).length) {
+            if (this.state.travelDocumentTwo !== this.props.travelDocumentTwo) {
+                this.setState({
+                    ...this.state,
+                    travelDocumentTwo: this.props.travelDocumentTwo
                 })
             }
         }
@@ -32,7 +51,7 @@ class CrewUpdateForm extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('doing a submitto');
-        this.props.dispatch({type: 'UPDATE_CREW', payload: {testing: 'test'}});
+        this.props.dispatch({type: 'UPDATE_CREW', payload: this.state});
     }
 
     handleCancel = () => {
@@ -51,21 +70,23 @@ class CrewUpdateForm extends Component{
     }
 
     render() {
+        console.log('this.state in crew update:', this.state);
+        console.log('this.props.crew:', this.props.crew);
         return(
             <div>
                 <h1>Edit Crew</h1>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2>Crew Info</h2>
-                    <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
+                    <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.props.crew[0]}/>
                     <Divider />
-                    <Address handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
+                    <Address handleChange={this.handleChange} stateType="crew" person={this.props.crew[0]}/>
                     <Divider />
-                    <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
+                    <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew[0]}/>
                     <Divider />
                     <h2>Travel Document 1</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" person={this.props.crew}/>
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.props.travelDocumentOne}/>
                     <h2>Travel Document 2</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" person={this.props.crew}/>
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" travelDocument={this.props.travelDocumentTwo}/>
 
                     <div className="formButtons">
                         <Grid columns='equal'>
@@ -100,7 +121,9 @@ class CrewUpdateForm extends Component{
 
 const mapStateToProps = (reduxState) => {
     return {
-        crew: reduxState.crewReducer
+        crew: reduxState.crewReducer,
+        travelDocumentOne: reduxState.documentOneReducer,
+        travelDocumentTwo: reduxState.documentTwoReducer,
     }
 }
 
