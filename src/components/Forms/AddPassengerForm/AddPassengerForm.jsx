@@ -15,6 +15,31 @@ class AddPassengerForm extends Component{
 
     }
 
+    fillDummyForm = () => {
+        this.setState({
+            passenger: {
+                birthDate: "1978-09-15",
+                citizenShipCountry: "USA",
+                city: "Cambridge",
+                email: "BerniceJProvencher@jourrapide.com",
+                firstName: "Bernice",
+                lastName: "Provencher",
+                phoneNumber: "6174300473",  
+                postalCode: "02138",
+                residenceCountry: "USA",
+                sex: "f",
+                state: "MA",
+                streetAddress: "1213 Aspen Court",
+            },
+            travelDocumentOne: {
+                documentNumber: "123476978",
+                documentType: "P",
+                expiryDate: "2020-05-21",
+                residenceCountry: "USA",
+            }
+        })
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'ADD_PASSENGER', payload: this.state});
@@ -39,18 +64,19 @@ class AddPassengerForm extends Component{
         return(
             <div>
                 <h1 className="ui header center aligned grid">Add Passenger</h1>
+                <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2 className="travelDocHead">Passenger Info</h2>
-                    <Name extended={true} handleChange={this.handleChange} stateType="passenger" />
+                    <Name extended={true} handleChange={this.handleChange} stateType="passenger" person={this.state.passenger}/>
                     <Divider />
-                    <Address handleChange={this.handleChange} stateType="passenger" />
+                    <Address handleChange={this.handleChange} stateType="passenger" person={this.state.passenger} />
                     <Divider />
-                    <Contact handleChange={this.handleChange} stateType="passenger" />
+                    <Contact handleChange={this.handleChange} stateType="passenger" person={this.state.passenger} />
                     <Divider />
                     <h2 className="travelDocHead">Travel Document 1</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne"/>
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.state.travelDocumentOne}/>
                     <h2 className="travelDocHead">Travel Document 2</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo"/>
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" travelDocument={this.state.travelDocumentTwo}/>
 
                     <div className="formButtons">
                         <Grid columns='equal'>

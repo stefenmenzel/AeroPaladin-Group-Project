@@ -24,7 +24,7 @@ class TravelDocuments extends Component{
     
     state = {
         date: '',
-        person: this.props.person
+        travelDocument: this.props.travelDocument
     }
 
     onDateChange = (event, { name, value }) => {
@@ -61,7 +61,7 @@ class TravelDocuments extends Component{
                     <Input className="formInput"
                         onChange={(e) => this.handleChange(this.props.stateType, "documentNumber", e)}
                         placeholder="Document Number"
-                        defaultValue={(this.props.person) && this.props.person.documentNumber}
+                        defaultValue={(this.props.travelDocument) && this.props.travelDocument.documentNumber}
                     />
                     <span>
                         Document Number
@@ -73,7 +73,7 @@ class TravelDocuments extends Component{
                         name="documentType"
                         options={docCodeSelectOptions}
                         onChange={this.onSelectChange}
-                        defaultValue={(this.props.person) && this.props.person.documentType}
+                        value={(this.props.travelDocument) && this.props.travelDocument.documentType}
                     />
                     <span>
                         Document Type
@@ -86,7 +86,7 @@ class TravelDocuments extends Component{
                         value={this.state.date}
                         iconPosition="left"
                         onChange={this.onDateChange}
-                        defaultValue={(this.props.person) && this.props.person.expiryDate}
+                        value={(this.props.travelDocument) && this.props.travelDocument.expiryDate}
                         style={{ width: '100%' }}
                         dateFormat="YYYY-MM-DD"
                     />
@@ -103,7 +103,7 @@ class TravelDocuments extends Component{
                             { key: 'USA', value: 'USA', text: 'USA' }
                         ]}
                         onChange={this.onSelectChange}
-                        defaultValue={(this.props.person) && this.props.person.residenceCountry}
+                        value={(this.props.travelDocument) && this.props.travelDocument.residenceCountry}
                     />
                     <span>
                         Issuing Country
