@@ -17,7 +17,7 @@ class AircraftInfo extends Component {
     }
 
     addCreww = () => {
-        this.props.history.push("/aircraftupdate")
+        this.props.history.push("/addaircraft")
     }
 
     handleEdit = (id) =>{
