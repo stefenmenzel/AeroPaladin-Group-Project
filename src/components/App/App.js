@@ -54,7 +54,7 @@ class App extends Component {
             {/* Protected route for creating new APIS View  */}
             <ProtectedRoute
               exact
-              path="/apis"
+              path="/apis/:id"
               component={CreateNewApis}
             />
             
