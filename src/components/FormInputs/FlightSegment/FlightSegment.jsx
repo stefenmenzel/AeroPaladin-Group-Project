@@ -22,6 +22,19 @@ class FlightSegment extends Component {
         departuretime: '',        
     }
 
+    fillDummyForm = () => {
+        this.setState({
+            arrival: this.props.flightSegment.arrival,
+            departure: this.props.flightSegment.departure,
+            arrivalairport: this.props.flightSegment.arrival.airport,
+            departureairport: this.props.flightSegment.departure.airport,
+            arrivaldate: this.props.flightSegment.arrival.date,
+            departuredate: this.props.flightSegment.departure.date,
+            arrivaltime: this.props.flightSegment.arrival.time,
+            departuretime: this.props.flightSegment.arrival.time,
+        })
+    }
+
     segmentOneOrTwo = () => {
         return ((this.props.stateType === 'flightSegmentOne') ? 'SET_APIS_FLIGHT_SEGMENT_ONE' : 'SET_APIS_FLIGHT_SEGMENT_TWO')
     }
@@ -85,6 +98,7 @@ class FlightSegment extends Component {
         console.log('flight segment state:', this.state);
         return (
             <div className="formInputs">
+                <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2>Flight Segment</h2>
                     <h3>Departure</h3>
