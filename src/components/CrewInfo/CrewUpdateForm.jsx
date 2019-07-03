@@ -10,6 +10,8 @@ import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 class CrewUpdateForm extends Component{
     state = {
         crew: this.props.crew,
+        travelDocumentOne: this.props.travelDocumentOne,
+        travelDocumentTwo: this.props.travelDocumentTwo,
     }
 
     componentDidMount(){
@@ -24,6 +26,22 @@ class CrewUpdateForm extends Component{
                 this.setState({
                     ...this.state,
                     crew: this.props.crew
+                })
+            }
+        }
+        if(!Object.keys(this.state.travelDocumentOne).length){
+            if(this.state.travelDocumentOne !== this.props.travelDocumentOne){
+                this.setState({
+                    ...this.state,
+                    travelDocumentOne: this.props.travelDocumentOne
+                })
+            }
+        }
+        if (!Object.keys(this.state.travelDocumentTwo).length) {
+            if (this.state.travelDocumentTwo !== this.props.travelDocumentTwo) {
+                this.setState({
+                    ...this.state,
+                    travelDocumentTwo: this.props.travelDocumentTwo
                 })
             }
         }
@@ -51,6 +69,7 @@ class CrewUpdateForm extends Component{
     }
 
     render() {
+        console.log('this.state in crew update:', this.state);
         return(
             <div>
                 <h1>Edit Crew</h1>
@@ -63,9 +82,9 @@ class CrewUpdateForm extends Component{
                     <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew}/>
                     <Divider />
                     <h2>Travel Document 1</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" person={this.props.crew}/>
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.props.travelDocumentOne}/>
                     <h2>Travel Document 2</h2>
-                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" person={this.props.crew}/>
+                    <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentTwo" travelDocument={this.props.travelDocumentTwo}/>
 
                     <div className="formButtons">
                         <Grid columns='equal'>
@@ -100,7 +119,9 @@ class CrewUpdateForm extends Component{
 
 const mapStateToProps = (reduxState) => {
     return {
-        crew: reduxState.crewReducer
+        crew: reduxState.crewReducer,
+        travelDocumentOne: reduxState.documentOneReducer,
+        travelDocumentTwo: reduxState.documentTwoReducer,
     }
 }
 
