@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './ReviewItems.css'
 import {Button, List} from 'semantic-ui-react';
 
@@ -7,10 +8,30 @@ const moment = require('moment');
 
 class ReviewItems extends Component {
   
-    edit = () => {
-        console.log('in edit');
-        
+    editAircraft = () => {
+        console.log('in edit Aircraft');
+        this.props.history.push(`/apis/${1}`)
     }
+
+    editCrew = () => {
+        console.log('in edit Crew');
+        this.props.history.push(`/apis/${2}`)
+    }
+
+    editPassenger = () => {
+        console.log('in edit Passenger');
+        this.props.history.push(`/apis/${3}`)
+    }
+
+    editFlightSegementOne = () => {
+        console.log('in edit Flight Segement One');
+        this.props.history.push(`/apis/${4}`)
+    }
+
+    editFlightSegementTwo = () => {
+    console.log('in edit Flight Segement Two');
+    this.props.history.push(`/apis/${5}`)
+}
 
 
  render() {
@@ -67,7 +88,7 @@ class ReviewItems extends Component {
          <List.Item className="listItem">
             <div className="subHeadBtn">
             <List.Header>AirCraft</List.Header>
-            <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+                            <Button className="ui mini icon button green" onClick={this.editAircraft}><i className="edit icon"></i></Button>
             </div>
             <br/>
             <br/>
@@ -93,11 +114,11 @@ class ReviewItems extends Component {
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
          <br/>
          Crew
-         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+         <Button className="ui mini icon button green" onClick={this.editCrew}><i className="edit icon"></i></Button>
             {crewToShow}
          
          Passengers
-         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+         <Button className="ui mini icon button green" onClick={this.editPassenger}><i className="edit icon"></i></Button>
             {paxToShow}
         </List.Item>
         {/* flight segment one */}
@@ -106,7 +127,7 @@ class ReviewItems extends Component {
          Departure
          <br/>
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+         <Button className="ui mini icon button green" onClick={this.editFlightSegementOne}><i className="edit icon"></i></Button>
             <br/>
              Departure Airport: {this.props.review.departureairportcity}, {this.props.review.departureairportcntry}
             <br/>
@@ -123,7 +144,7 @@ class ReviewItems extends Component {
           Arrival 
           <br/>
          {/* <Button className="ui tiny green button" onClick={this.edit}>Edit Section</Button> */}
-         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+                        <Button className="ui mini icon button green" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
              <br/>
              Arrival Airport: {this.props.review.arrivalairportcity}, {this.props.review.arrivalairportcntry}
              <br/>
@@ -149,4 +170,4 @@ const mapStateToProps = (reduxState) => ({
     review: reduxState.reviewReducer
 });
 
-export default connect(mapStateToProps)(ReviewItems);
+export default connect(mapStateToProps)( withRouter((ReviewItems)));

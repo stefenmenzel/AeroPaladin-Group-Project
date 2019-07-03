@@ -44,8 +44,23 @@ class CreateNewApis extends Component{
     //this state will help us keep track of where we are in the form.
     state = {
         step: 1,
-        maxSteps: 6,        
+        maxSteps: 6,
+        isStepSet: true,        
     }    
+
+
+// Set State to Match Router ID Params
+    componentDidUpdate() {
+        if (this.state.isStepSet) {
+            
+            this.setState({
+                ...this.state,
+                isStepSet: !this.state.isStepSet,
+                step: Number(this.props.match.params.id)
+            })
+        }     
+    }
+
 
     //flip to the next step
     nextStep = () => {
@@ -54,7 +69,10 @@ class CreateNewApis extends Component{
             this.setState({
                 step: this.state.step + 1
             })
-        }        
+            this.props.history.push(`/apis/${Number(this.props.match.params.id) + 1}`)
+        }
+        console.log('Next Step State', this.state);
+                
     }
 
     //flip to the previous step.
@@ -63,6 +81,7 @@ class CreateNewApis extends Component{
             this.setState({
                 step: this.state.step - 1
             })
+            this.props.history.push(`/apis/${Number(this.props.match.params.id) - 1}`)
         }
     }
 
@@ -94,6 +113,11 @@ class CreateNewApis extends Component{
     }
 
     render(){
+
+        console.log('Params ID', this.props.match.params.id);
+        console.log('State Value', this.state);
+        
+        
         return(
             <>
             {/* First a stepper...this displays current progress */}

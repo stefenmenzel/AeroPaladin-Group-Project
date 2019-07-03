@@ -64,7 +64,7 @@ class Nav extends Component {
 
           {this.props.user.id && (
             <>
-              <Link onClick={this.handleSidebarHide} to="/apis">
+              <Link onClick={this.handleSidebarHide} to="/apis/1">
                 <Menu.Item as='a'>
                   <Icon name='plane' />
                   Create New Apis
