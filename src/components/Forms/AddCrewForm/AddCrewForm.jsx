@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Name from '../../FormInputs/Name/Name';
 import Address from '../../FormInputs/Address/Address';
 import Contact from '../../FormInputs/Contact/Contact';
+import EmergencyContact from '../../FormInputs/EmergencyContact/EmergencyContact.jsx';
 import TravelDocuments from '../../FormInputs/TravelDocuments/TravelDocuments';
 
 
@@ -77,7 +78,10 @@ class AddCrewForm extends Component {
                     <Divider/>
                     <Address handleChange={this.handleChange} stateType="crew" person={this.state.crew}/>
                     <Divider />
+                    <h2 className="travelDocHead">Contact Information</h2>
                     <Contact handleChange={this.handleChange} stateType="crew" person={this.state.crew}/>
+                    <Divider />
+                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.EmergencyContact} />
                     <Divider />
                     <h2 className="travelDocHead">Travel Document 1</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.state.travelDocumentOne}/>
