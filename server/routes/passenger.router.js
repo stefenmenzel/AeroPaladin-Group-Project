@@ -9,7 +9,8 @@ const router = express.Router();
 
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `
-    SELECT "document".*, "people".id, "people".firstname, "people".lastname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
+    SELECT "document".*, "people".id, "people".firstname, "people".lastname, "people".birthdate,
+    "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
     JOIN "address" ON "address".id = "people".addresswhileinus_id
     JOIN "document" ON "document".people_id = "people".id
     WHERE "people".peopletype = 1
@@ -45,7 +46,10 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
     let updatePassengerId = req.params.id
     console.log('id', updatePassengerId, req.user.id);
     
-    const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName", "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry","people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".streetaddr AS "streetAddress" FROM "people"
+    const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName", "people".lastname AS "lastName",
+    "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate",
+    "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
+    "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
 JOIN "address" ON "address".id = "people".addresswhileinus_id
 WHERE "people".peopletype = 1
 AND "people".id = $1
@@ -71,10 +75,10 @@ ORDER BY "document".id DESC
 LIMIT 1
 OFFSET 1`
     pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
-        console.log(' Passenger Document Result', result.rows);
+        console.log(' Passenger Document One Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
-        console.log('Error in Passenger Document GET', err);
+        console.log('Error in Passenger Document One  GET', err);
         res.SendStatus(500)
     })
 });
@@ -90,10 +94,10 @@ ORDER BY "document".id DESC
 LIMIT 1
 ;`
     pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
-        console.log(' Passenger Document Result', result.rows);
+        console.log(' Passenger Document Two Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
-        console.log('Error in Passenger Document GET', err);
+        console.log('Error in Passenger Document Two GET', err);
         res.SendStatus(500)
     })
 });

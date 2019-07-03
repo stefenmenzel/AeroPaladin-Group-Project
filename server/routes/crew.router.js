@@ -40,6 +40,68 @@ WHERE "id" = $1;`
     })
 });
 
+// Send PASSENGER information to Reducer to update on form
+router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
+    let updateCrewId = req.params.id
+
+    const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName",
+    "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber",
+    "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry",
+    "people".citizenshipcntry AS "citizenShipCountry","people".emailaddr AS "email", "address".postalcode AS "postalCode",
+    "address".state,"address".city, "address".streetaddr AS "streetAddress" FROM "people"
+JOIN "address" ON "address".id = "people".addresswhileinus_id
+WHERE "people".peopletype = 2
+AND "people".id = $1
+AND "people".user_id = $2
+;
+`
+    pool.query(sqlQuery, [updateCrewId, req.user.id]).then(result => {
+        console.log(' Passenger Update Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Crew Update GET', err);
+        res.SendStatus(500)
+    })
+});
+
+router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
+    let updateDocumentId = req.params.id
+    const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
+JOIN "document" ON "document".people_id = "people_table".id
+WHERE people_table.peopletype = 2
+AND people_table.id = $1
+AND people_table.user_id = $2
+ORDER BY "document".id DESC
+LIMIT 1
+OFFSET 1`
+    pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
+        console.log(' Crew Document One Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Crew Document One GET', err);
+        res.SendStatus(500)
+    })
+});
+
+router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
+    let updateDocumentId = req.params.id
+    const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
+JOIN "document" ON "document".people_id = "people_table".id
+WHERE people_table.peopletype = 2
+AND people_table.id = $1
+AND people_table.user_id = $2
+ORDER BY "document".id DESC
+LIMIT 1
+;`
+    pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
+        console.log(' Crew Document Two Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Crew Document Two GET', err);
+        res.SendStatus(500)
+    })
+});
+
 
 
 router.post('/add', rejectUnauthenticated, async (req, res) => {

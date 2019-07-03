@@ -57,20 +57,20 @@ function* fetchUpdatePassenger(action) {
 function* fetchUpdatePassengerDocumentOne(action) {
     try {
         const response = yield axios.get(`/api/passenger/updatedocument1/${action.payload}`, config);
-        yield put({ type: 'SET_UPDATE_PASSENGER_DOCUMENT_ONE', payload: response.data });
+        yield put({ type: 'SET_UPDATE_DOCUMENT_ONE', payload: response.data });
 
     } catch (error) {
-        console.log('Passenger Update Form GET request failed', error);
+        console.log('Passenger Update Form GET Document One request failed', error);
     }
 }
 
 function* fetchUpdatePassengerDocumentTwo(action) {
     try {
         const response = yield axios.get(`/api/passenger/updatedocument2/${action.payload}`, config);
-        yield put({ type: 'SET_UPDATE_PASSENGER_DOCUMENT_TWO', payload: response.data });
+        yield put({ type: 'SET_UPDATE_DOCUMENT_TWO', payload: response.data });
 
     } catch (error) {
-        console.log('Passenger Update Form GET request failed', error);
+        console.log('Passenger Update Form GET Document Two request failed', error);
     }
 }
 

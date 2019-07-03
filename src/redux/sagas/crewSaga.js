@@ -45,11 +45,44 @@ function* updateCrew(action){
     }
 }
 
+function* fetchUpdateCrew(action) {
+    try {
+        const response = yield axios.get(`/api/crew/updatecrew/${action.payload}`, config);
+        yield put({ type: 'SET_UPDATE_CREW', payload: response.data });
+
+    } catch (error) {
+        console.log('Crew Update Form GET request failed', error);
+    }
+}
+
+function* fetchUpdateCrewDocumentOne(action) {
+    try {
+        const response = yield axios.get(`/api/crew/updatedocument1/${action.payload}`, config);
+        yield put({ type: 'SET_UPDATE_DOCUMENT_ONE', payload: response.data });
+
+    } catch (error) {
+        console.log('Crew Update Form GET Document One request failed', error);
+    }
+}
+
+function* fetchUpdateCrewDocumentTwo(action) {
+    try {
+        const response = yield axios.get(`/api/crew/updatedocument2/${action.payload}`, config);
+        yield put({ type: 'SET_UPDATE_DOCUMENT_TWO', payload: response.data });
+
+    } catch (error) {
+        console.log('Crew Update Form GET Document Two request failed', error);
+    }
+}
+
 function* crewSaga() {
     yield takeLatest('FETCH_CREW', fetchCrew);
     yield takeLatest('ADD_CREW', addCrew);
     yield takeLatest('DELETE_CREW', deleteCrew);
     yield takeLatest('UPDATE_CREW', updateCrew);
+    yield takeLatest('FETCH_UPDATE_CREW', fetchUpdateCrew);
+    yield takeLatest('FETCH_UPDATE_CREW_DOCUMENT_ONE', fetchUpdateCrewDocumentOne);
+    yield takeLatest('FETCH_UPDATE_CREW_DOCUMENT_TWO', fetchUpdateCrewDocumentTwo);
 }
 
 export default crewSaga;
