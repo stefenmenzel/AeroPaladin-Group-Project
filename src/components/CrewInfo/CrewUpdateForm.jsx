@@ -50,7 +50,7 @@ class CrewUpdateForm extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('doing a submitto');
-        this.props.dispatch({type: 'UPDATE_CREW', payload: {testing: 'test'}});
+        this.props.dispatch({type: 'UPDATE_CREW', payload: this.state});
     }
 
     handleCancel = () => {

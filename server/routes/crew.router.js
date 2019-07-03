@@ -44,7 +44,7 @@ WHERE "id" = $1;`
 router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
     let updateCrewId = req.params.id
 
-    const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName",
+    const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName",
     "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber",
     "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry",
     "people".citizenshipcntry AS "citizenShipCountry","people".emailaddr AS "email", "address".postalcode AS "postalCode",
@@ -181,7 +181,52 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
 
 router.put('/update', rejectUnauthenticated, async (req, res) => {
     console.log('req.body for update crew:', req.body);
-    res.sendStatus(201);
+
+    const crew = req.body.crew;
+    const doc1 = req.body.travelDocumentOne;
+    const doc2 = req.body.travelDocumentTwo;
+    
+    const addressQuery = `
+        UPDATE "address"
+        SET "streetaddr" = $1, "city" = $2, "state" = $3, "postalcode" = $4
+        WHERE "id" = $5;
+    `;
+
+    const crewQuery = `
+        UPDATE "people"
+        SET "lastname" = $1, "firstname" = $2, "middlename" = $3, "birthdate" = $4, "sex" = $5, "residencecntry" = $6, "citizenshipcntry" = $7, "emailaddr" = $8, "telephonenbr" = $9
+        WHERE "id" = $10;
+    `;
+
+    const documentQuery = `
+        UPDATE "document"
+        SET "doccode" = $1, "documentnbr" = $2, "expirydate" = $3, "cntrycode" = $4
+        WHERE "id" = $5;
+    `;
+
+    const connection = await pool.connect();
+
+    try{
+        await connection.query('BEGIN');
+
+        await connection.query(addressQuery, [crew.streetAddress, crew.city, crew.state, crew.postalCode, crew.permanentaddress_id]);
+        console.log('got through address');
+        await connection.query(crewQuery, [crew.lastName, crew.firstName, crew.middleName, crew.birthDate, crew.sex, crew.residenceCountry, (crew.citizenshipCountry || crew.residenceCountry), crew.email, crew.phoneNumber, crew.id]);
+        console.log("got through crew");
+        await connection.query(documentQuery, [doc1.documentType, doc1.documentNumber, doc1.expiryDate, doc1.residenceCountry, doc1.id]);
+        console.log('got through document one');
+        if(doc2){
+            await connection.query(documentQuery, [doc2.documentType, doc2.documentNumber, doc2.expiryDate, doc2.residenceCountry, doc2.id]);
+        }
+        await connection.query('COMMIT');
+        res.sendStatus(201);
+    }catch(error){
+        await connection.query('ROLLBACK');
+        console.log("transaction error with update crew", error);
+        res.sendStatus(500);
+    }finally{
+        connection.release();
+    }        
 })
 
 
