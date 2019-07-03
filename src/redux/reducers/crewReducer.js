@@ -3,7 +3,7 @@ const crewReducer = (state = [], action) => {
         case 'SET_CREW':
             return action.payload;
         case 'SET_UPDATE_CREW':
-            return action.payload[0];
+            return action.payload;
         default:
             return state;
     }
