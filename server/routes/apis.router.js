@@ -52,7 +52,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     // try {
     //     await connection.query('BEGIN');
-    //     let result = await 
+    //     for (let i=0, i)
     // }
 
 module.exports = router;
