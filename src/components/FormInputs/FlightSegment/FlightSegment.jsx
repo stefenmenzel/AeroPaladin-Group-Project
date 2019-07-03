@@ -50,13 +50,23 @@ class FlightSegment extends Component {
 
         this.setState({
             departure: {},
-            arrival: {},
-            arrivalairport: '',
+            arrival: {},                        
+
             departureairport: '',
-            arrivaldate: '',
+            departurecity: '',
+            departurestate:'',
+            departurecountry:'',
+            departuredescription: '',
             departuredate: '',
-            arrivaltime: '',
             departuretime: '',
+
+            arrivalairport: '',            
+            arrivalcity:'',
+            arrivalstate:'',
+            arrivalcountry:'',
+            arrivaldescription: '',
+            arrivaldate: '',
+            arrivaltime: '',
         })
         this.props.nextStep();
     }
@@ -109,7 +119,47 @@ class FlightSegment extends Component {
                             value={this.state.departureairport}
                         />
                         <span>
-                            Airport
+                            Airport Code
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('departure', "city", e)}
+                            placeholder="Airport city"
+                            value={this.state.departurecity}
+                        />
+                        <span>
+                            Airport City
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('departure', "state", e)}
+                            placeholder="Airport state"
+                            value={this.state.departurestate}
+                        />
+                        <span>
+                            Airport State
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('departure', "country", e)}
+                            placeholder="Airport country"
+                            value={this.state.departurecountry}
+                        />
+                        <span>
+                            Airport country code
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('departure', "description", e)}
+                            placeholder="Airport description"
+                            value={this.state.departuredescription}
+                        />
+                        <span>
+                            Airport description
                        </span>
                     </Label>
                     <Label className="formInputLabel">
@@ -163,12 +213,52 @@ class FlightSegment extends Component {
                         </span>
                     </Label>
                     <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('arrival', "city", e)}
+                            placeholder="Airport city"
+                            value={this.state.arrivalcity}
+                        />
+                        <span>
+                            Airport City
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('arrival', "state", e)}
+                            placeholder="Airport state"
+                            value={this.state.arrivalstate}
+                        />
+                        <span>
+                            Airport State
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('arrival', "country", e)}
+                            placeholder="Airport country"
+                            value={this.state.arrivalcountry}
+                        />
+                        <span>
+                            Airport country code
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
+                        <Input className="formInput"
+                            onChange={(e) => this.handleChange('arrival', "description", e)}
+                            placeholder="Airport description"
+                            value={this.state.arrivaldescription}
+                        />
+                        <span>
+                            Airport description
+                       </span>
+                    </Label>
+                    <Label className="formInputLabel">
                     <TimeInput className="formAltInput"
                             name="time"
                             value={this.state.arrivaltime}
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
-                            placeholder="Estimated Time of Departure"
+                            placeholder="Estimated Time of Arrival"
                             style={{ width: '100%' }}
                         />
                         <span>

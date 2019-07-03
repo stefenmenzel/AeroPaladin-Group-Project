@@ -25,7 +25,7 @@ class Contact extends Component{
 
     render(){
         return(
-            <div className="formInputs">
+            <div className="formInputs">                
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "email", e)}

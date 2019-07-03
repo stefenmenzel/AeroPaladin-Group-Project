@@ -43,6 +43,7 @@ class Address extends Component{
     render(){
         return(
             <div className="formInputs">
+                <h2 className="travelDocHead">Address</h2>
                 <Label className="formInputLabel">
                     <Input className="formInput"
                         onChange={(e) => this.props.handleChange(this.props.stateType, "streetAddress", e)}
