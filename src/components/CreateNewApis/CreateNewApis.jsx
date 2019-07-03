@@ -7,6 +7,32 @@ import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 import FlightSegment from '../FormInputs/FlightSegment/FlightSegment';
 
+
+const fs1Dummy = {
+    departure: {
+        airport: "MSP",
+        date: "2020-02-02",
+        time: "09:35",
+    },
+    arrival: {
+        airport: "TUY",
+        date: "2020-02-02",
+        time: "15:20",
+    }
+}
+
+const fs2Dummy = {
+    departure: {
+        airport: "TUY",
+        date: "2020-02-09",
+        time: "15:20",
+    },
+    arrival: {
+        airport: "MSP",
+        date: "2020-02-09",
+        time: "09:35",
+    }
+}
 /**
  * This component will walk a user through creating a new APIS.
  * It has a stepper that displays the current progress in creating
@@ -55,8 +81,8 @@ class CreateNewApis extends Component{
             <SelectAircraftForm nextStep={this.nextStep} />,
             <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />, 
             <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />,
-            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne"/>,
-            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo"/>,
+            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne" flightSegment={fs1Dummy}/>,
+            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo" flightSegment={fs2Dummy}/>,
 
         ]
         return(
