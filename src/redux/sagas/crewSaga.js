@@ -39,7 +39,7 @@ function* deleteCrew(action) {
 function* updateCrew(action){
     try{
         yield axios.put('/api/crew/update', action.payload, config);
-        // yield put({type: 'FETCH_CREW'});
+        yield put({type: 'FETCH_CREW'});
     }catch(error){
         console.log('error in update Crew request:');
     }

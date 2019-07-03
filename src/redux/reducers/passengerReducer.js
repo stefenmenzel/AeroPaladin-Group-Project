@@ -3,7 +3,7 @@ const passengerReducer = (state = [], action) => {
         case 'SET_PASSENGER':
             return action.payload;
         case 'SET_UPDATE_PASSENGER':
-            return action.payload[0];
+            return action.payload;
         default:
             return state;
     }
