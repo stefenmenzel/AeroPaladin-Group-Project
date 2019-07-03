@@ -107,6 +107,7 @@ class SelectPassengerForm extends Component {
                             Choose Passenger
                     </span>
                     </Label>
+                    
                     <div className="formButtons">
                         <Grid columns='equal'>                            
                                 <Grid.Column width={12}></Grid.Column>
@@ -122,6 +123,9 @@ class SelectPassengerForm extends Component {
                                 </Grid.Column>                                                     
                         </Grid>
                     </div>
+                    <div>
+                   <PassengerList passengers={this.state.passengers} />
+               </div>
                     <div className="formButtons">
                         <Grid columns='equal'>                            
                                 <Grid.Column width={12}></Grid.Column>
@@ -137,9 +141,7 @@ class SelectPassengerForm extends Component {
                         </Grid>
                     </div>
                 </form>
-               <div>
-                   <PassengerList passengers={this.state.passengers} />
-               </div>
+              
             </div>
         )
     }
