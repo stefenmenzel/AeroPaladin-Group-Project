@@ -10,7 +10,7 @@ class ReviewApis extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log("doing a submit", this.props.reviewApis);
-        this.props.dispatch({ type: 'SET_APIS', payload: this.props.reviewApis })
+        this.props.dispatch({ type: 'ADD_APIS', payload: this.props.reviewApis })
         
     }
     render() {
