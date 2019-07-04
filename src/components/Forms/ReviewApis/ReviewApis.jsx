@@ -56,7 +56,9 @@ class ReviewApis extends Component {
                                     {this.props.reviewApis.passenger.map(p => {
 
                                         return <>
-                                            <li key={p.id}>{p.firstname} {p.lastname}</li> <br /> </>
+                                            <li key={p.id}>{p.firstname} {p.lastname}</li>
+                                             <br />
+                                              </>
                                     })}
                                 </ul>
                             </div>
@@ -68,28 +70,40 @@ class ReviewApis extends Component {
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
          <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
          <br/>
-         Departure
+        <h3>Departure</h3> 
          <br/>
             <br/>
              Departure Airport: {this.props.reviewApis.flightSegmentOne.departure.airport}
             <br/>
+            Departure Airport City: {this.props.reviewApis.flightSegmentOne.departure.city}
             <br/>
-             Departure Date: {this.props.reviewApis.flightSegmentOne.departure.date} 
+            Departure Airport State: {this.props.reviewApis.flightSegmentOne.departure.state}
             <br/>
+            Departure Airport Country Code: {this.props.reviewApis.flightSegmentOne.departure.country}
+            <br/>
+            Departure Airport description: {this.props.reviewApis.flightSegmentOne.departure.description}
             <br/>
              Departure Time: {this.props.reviewApis.flightSegmentOne.departure.time} 
+            <br/>
+             Departure Date: {this.props.reviewApis.flightSegmentOne.departure.date} 
              <br/>
              <br/>
-             Arrival
+             <h3>Arrival</h3>
              <br/>
             <br/>
              Arrival Airport: {this.props.reviewApis.flightSegmentOne.arrival.airport}
+             <br/>
+            Arrival Airport City: {this.props.reviewApis.flightSegmentOne.arrival.city}
             <br/>
+            Arrival Airport State: {this.props.reviewApis.flightSegmentOne.arrival.state}
             <br/>
-             Arrival Date: {this.props.reviewApis.flightSegmentOne.arrival.date} 
+            Arrival Airport Country Code: {this.props.reviewApis.flightSegmentOne.arrival.country}
             <br/>
+            Arrival Airport Description: {this.props.reviewApis.flightSegmentOne.arrival.description}
             <br/>
-             Arrival Time: {this.props.reviewApis.flightSegmentOne.arrival.time}
+             Arrival Time: {this.props.reviewApis.flightSegmentOne.arrival.time} 
+            <br/>
+             Arrival Date: {this.props.reviewApis.flightSegmentOne.arrival.date}
         </List.Item>
              {/* flight segment Two */}
         <List.Item className="listItem">
@@ -98,28 +112,40 @@ class ReviewApis extends Component {
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
          <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
          <br/>
-         Departure
+         <h3>Departure</h3> 
          <br/>
             <br/>
              Departure Airport: {this.props.reviewApis.flightSegmentTwo.departure.airport}
             <br/>
+            Departure Airport City: {this.props.reviewApis.flightSegmentTwo.departure.city}
             <br/>
-             Departure Date: {this.props.reviewApis.flightSegmentTwo.departure.date} 
+            Departure Airport State: {this.props.reviewApis.flightSegmentTwo.departure.state}
             <br/>
+            Departure Airport Country Code: {this.props.reviewApis.flightSegmentTwo.departure.country}
+            <br/>
+            Departure Airport Description: {this.props.reviewApis.flightSegmentTwo.departure.description}
             <br/>
              Departure Time: {this.props.reviewApis.flightSegmentTwo.departure.time} 
+            <br/>
+             Departure Date: {this.props.reviewApis.flightSegmentTwo.departure.date} 
              <br/>
              <br/>
-             Arrival
+            <h3> Arrival</h3>
              <br/>
             <br/>
              Arrival Airport: {this.props.reviewApis.flightSegmentTwo.arrival.airport}
+             <br/>
+            Arrival Airport City: {this.props.reviewApis.flightSegmentTwo.arrival.city}
             <br/>
+            Arrival Airport State: {this.props.reviewApis.flightSegmentTwo.arrival.state}
             <br/>
-             Arrival Date: {this.props.reviewApis.flightSegmentTwo.arrival.date} 
+            Arrival Airport Country Code: {this.props.reviewApis.flightSegmentTwo.arrival.country}
             <br/>
+            Arrival Airport description: {this.props.reviewApis.flightSegmentTwo.arrival.description}
             <br/>
-             Arrival Time: {this.props.reviewApis.flightSegmentTwo.arrival.time}
+             Arrival Time: {this.props.reviewApis.flightSegmentTwo.arrival.time} 
+            <br/>
+             Arrival Date: {this.props.reviewApis.flightSegmentTwo.arrival.date}
         </List.Item>
                     </List>
                     <div className="formButtons">
