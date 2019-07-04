@@ -16,6 +16,7 @@ class CrewUpdateForm extends Component{
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'FETCH_UPDATE_CREW_EMERGENCY_CONTACT', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW_DOCUMENT_ONE', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW_DOCUMENT_TWO', payload: this.props.match.params.id })     
     }

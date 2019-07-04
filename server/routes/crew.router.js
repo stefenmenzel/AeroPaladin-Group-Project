@@ -102,6 +102,24 @@ LIMIT 1
     })
 });
 
+router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
+    let updateContactId = req.params.id
+    const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "emailAddress","emergencycontacts".telephonenbr AS "telephoneNumber" FROM "people"
+JOIN "people_emergencycontacts" ON "people_emergencycontacts".people_id = "people".id 
+JOIN "emergencycontacts" ON "emergencycontacts".id = "people_emergencycontacts".emergencycontact_id 
+WHERE "people".peopletype = 2
+AND "people".id = $1
+AND "people".user_id = $2
+;`
+    pool.query(sqlQuery, [updateContactId, req.user.id]).then(result => {
+        console.log(' Crew Emergency Contact Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Emergency Contact Two GET', err);
+        res.SendStatus(500)
+    })
+});
+
 
 
 router.post('/add', rejectUnauthenticated, async (req, res) => {
