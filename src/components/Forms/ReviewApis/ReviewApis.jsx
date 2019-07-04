@@ -82,71 +82,99 @@ class ReviewApis extends Component {
                                     {this.props.reviewApis.passenger.map(p => {
 
                                         return <>
-                                            <li key={p.id}>{p.firstname} {p.lastname}</li> <br /> </>
+                                            <li key={p.id}>{p.firstname} {p.lastname}</li>
+                                             <br />
+                                              </>
                                     })}
                                 </ul>
                             </div>
                         </List.Item>
                         {/* flight segment one */}
-                        <List.Item className="listItem">
-                            <List.Header>Flight Segment One</List.Header>
 
-                            {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-                            <Button className="ui mini icon button green" onClick={this.editFlightSegementOne}><i className="edit icon"></i></Button>
-                            <br />
-                            Departure
-         <br />
-                            <br />
-                            Departure Airport: {this.props.reviewApis.flightSegmentOne.departure.airport}
-                            <br />
-                            <br />
-                            Departure Date: {this.props.reviewApis.flightSegmentOne.departure.date}
-                            <br />
-                            <br />
-                            Departure Time: {this.props.reviewApis.flightSegmentOne.departure.time}
-                            <br />
-                            <br />
-                            Arrival
-             <br />
-                            <br />
-                            Arrival Airport: {this.props.reviewApis.flightSegmentOne.arrival.airport}
-                            <br />
-                            <br />
-                            Arrival Date: {this.props.reviewApis.flightSegmentOne.arrival.date}
-                            <br />
-                            <br />
-                            Arrival Time: {this.props.reviewApis.flightSegmentOne.arrival.time}
-                        </List.Item>
-                        {/* flight segment Two */}
-                        <List.Item className="listItem">
-                            <List.Header>Flight Segment Two</List.Header>
+        <List.Item className="listItem">
+         <List.Header>Flight Segment One</List.Header>
+         
+         {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
+         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+         <br/>
+        <h3>Departure</h3> 
+         <br/>
+            <br/>
+             Departure Airport: {this.props.reviewApis.flightSegmentOne.departure.airport}
+            <br/>
+            Departure Airport City: {this.props.reviewApis.flightSegmentOne.departure.city}
+            <br/>
+            Departure Airport State: {this.props.reviewApis.flightSegmentOne.departure.state}
+            <br/>
+            Departure Airport Country Code: {this.props.reviewApis.flightSegmentOne.departure.country}
+            <br/>
+            Departure Airport description: {this.props.reviewApis.flightSegmentOne.departure.description}
+            <br/>
+             Departure Time: {this.props.reviewApis.flightSegmentOne.departure.time} 
+            <br/>
+             Departure Date: {this.props.reviewApis.flightSegmentOne.departure.date} 
+             <br/>
+             <br/>
+             <h3>Arrival</h3>
+             <br/>
+            <br/>
+             Arrival Airport: {this.props.reviewApis.flightSegmentOne.arrival.airport}
+             <br/>
+            Arrival Airport City: {this.props.reviewApis.flightSegmentOne.arrival.city}
+            <br/>
+            Arrival Airport State: {this.props.reviewApis.flightSegmentOne.arrival.state}
+            <br/>
+            Arrival Airport Country Code: {this.props.reviewApis.flightSegmentOne.arrival.country}
+            <br/>
+            Arrival Airport Description: {this.props.reviewApis.flightSegmentOne.arrival.description}
+            <br/>
+             Arrival Time: {this.props.reviewApis.flightSegmentOne.arrival.time} 
+            <br/>
+             Arrival Date: {this.props.reviewApis.flightSegmentOne.arrival.date}
+        </List.Item>
+             {/* flight segment Two */}
+        <List.Item className="listItem">
+         <List.Header>Flight Segment Two</List.Header>
+         
+         {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
+         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+         <br/>
+         <h3>Departure</h3> 
+         <br/>
+            <br/>
+             Departure Airport: {this.props.reviewApis.flightSegmentTwo.departure.airport}
+            <br/>
+            Departure Airport City: {this.props.reviewApis.flightSegmentTwo.departure.city}
+            <br/>
+            Departure Airport State: {this.props.reviewApis.flightSegmentTwo.departure.state}
+            <br/>
+            Departure Airport Country Code: {this.props.reviewApis.flightSegmentTwo.departure.country}
+            <br/>
+            Departure Airport Description: {this.props.reviewApis.flightSegmentTwo.departure.description}
+            <br/>
+             Departure Time: {this.props.reviewApis.flightSegmentTwo.departure.time} 
+            <br/>
+             Departure Date: {this.props.reviewApis.flightSegmentTwo.departure.date} 
+             <br/>
+             <br/>
+            <h3> Arrival</h3>
+             <br/>
+            <br/>
+             Arrival Airport: {this.props.reviewApis.flightSegmentTwo.arrival.airport}
+             <br/>
+            Arrival Airport City: {this.props.reviewApis.flightSegmentTwo.arrival.city}
+            <br/>
+            Arrival Airport State: {this.props.reviewApis.flightSegmentTwo.arrival.state}
+            <br/>
+            Arrival Airport Country Code: {this.props.reviewApis.flightSegmentTwo.arrival.country}
+            <br/>
+            Arrival Airport description: {this.props.reviewApis.flightSegmentTwo.arrival.description}
+            <br/>
+             Arrival Time: {this.props.reviewApis.flightSegmentTwo.arrival.time} 
+            <br/>
+             Arrival Date: {this.props.reviewApis.flightSegmentTwo.arrival.date}
+        </List.Item>
 
-                            {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-                            <Button className="ui mini icon button green" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
-                            <br />
-                            Departure
-         <br />
-                            <br />
-                            Departure Airport: {this.props.reviewApis.flightSegmentTwo.departure.airport}
-                            <br />
-                            <br />
-                            Departure Date: {this.props.reviewApis.flightSegmentTwo.departure.date}
-                            <br />
-                            <br />
-                            Departure Time: {this.props.reviewApis.flightSegmentTwo.departure.time}
-                            <br />
-                            <br />
-                            Arrival
-             <br />
-                            <br />
-                            Arrival Airport: {this.props.reviewApis.flightSegmentTwo.arrival.airport}
-                            <br />
-                            <br />
-                            Arrival Date: {this.props.reviewApis.flightSegmentTwo.arrival.date}
-                            <br />
-                            <br />
-                            Arrival Time: {this.props.reviewApis.flightSegmentTwo.arrival.time}
-                        </List.Item>
                     </List>
                     <div className="formButtons">
                         <Grid columns='equal'>
