@@ -85,6 +85,17 @@ class CreateNewApis extends Component{
         }
     }
 
+    editStep = (event) =>{
+        if (this.state.isStepSet) {
+
+            this.setState({
+                ...this.state,
+                isStepSet: !this.state.isStepSet,
+                step: event
+            })
+        }   
+    }
+
     //this function will set the stepper components as acive/completed
     activeOrCompleted = (stepPosition) => {
         return(
@@ -103,7 +114,7 @@ class CreateNewApis extends Component{
             <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />,
             <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne" flightSegment={fs1Dummy}/>,
             <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo" flightSegment={fs2Dummy}/>,
-            <ReviewApis nextStep={this.nextStep} previousStep={this.previousStep} />
+            <ReviewApis editStep={this.editStep} nextStep={this.nextStep} previousStep={this.previousStep} />
 
 
         ]
