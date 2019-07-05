@@ -12,26 +12,38 @@ class ReviewApis extends Component {
     editAircraft = () => {
         console.log('in edit Aircraft');
         this.props.history.push(`/apis/${1}`)
+        this.props.editStep(1)
     }
 
     editCrew = () => {
         console.log('in edit Crew');
         this.props.history.push(`/apis/${2}`)
+        this.props.editStep(2)
+
     }
 
     editPassenger = () => {
         console.log('in edit Passenger');
         this.props.history.push(`/apis/${3}`)
+        this.props.editStep(3)
+
     }
 
     editFlightSegementOne = () => {
         console.log('in edit Flight Segement One');
         this.props.history.push(`/apis/${4}`)
+        this.props.editStep(4)
+        window.scrollTo(0, 0)
+
+
     }
 
     editFlightSegementTwo = () => {
         console.log('in edit Flight Segement Two');
+        this.props.history.push(`/apis/${5}`)
         this.props.editStep(5)
+        window.scrollTo(0, 0)
+
     }
 
     handleSubmit = (event) => {
@@ -95,7 +107,7 @@ class ReviewApis extends Component {
          <List.Header>Flight Segment One</List.Header>
          
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+                            <Button className="ui mini icon button green" onClick={this.editFlightSegementOne}><i className="edit icon"></i></Button>
          <br/>
         <h3>Departure</h3> 
          <br/>
@@ -137,7 +149,7 @@ class ReviewApis extends Component {
          <List.Header>Flight Segment Two</List.Header>
          
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-         <Button className="ui mini icon button green" onClick={this.edit}><i className="edit icon"></i></Button>
+                            <Button className="ui mini icon button green" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
          <br/>
          <h3>Departure</h3> 
          <br/>

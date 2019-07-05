@@ -52,7 +52,6 @@ class CreateNewApis extends Component{
 // Set State to Match Router ID Params
     componentDidUpdate() {
         if (this.state.isStepSet) {
-            
             this.setState({
                 ...this.state,
                 isStepSet: !this.state.isStepSet,
@@ -86,14 +85,13 @@ class CreateNewApis extends Component{
     }
 
     editStep = (event) =>{
-        if (this.state.isStepSet) {
+console.log('inside edite step', event);
 
             this.setState({
                 ...this.state,
                 isStepSet: !this.state.isStepSet,
                 step: event
             })
-        }   
     }
 
     //this function will set the stepper components as acive/completed
