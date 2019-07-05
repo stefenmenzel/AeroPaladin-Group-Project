@@ -25,6 +25,9 @@
 
 .subHeadBtn {
     -moz-box-flexgroup: inherit;
-    display: inline;
+    display: -webkit-inline-box;
+}
 
+.ui.mini.icon.button.green{
+    max-width: 10px;
 }

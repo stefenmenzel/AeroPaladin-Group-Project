@@ -131,7 +131,7 @@ class CreateNewApis extends Component {
             <>
                 {/* First a stepper...this displays current progress */}
                 <div className="apisForm">
-                    <h1>New APIS Entry</h1>
+                    <h1 className="ui header bigHead">New APIS Entry</h1>
                     <div style={{ width: '80%' }}>
                         <Step.Group ordered>
                             <Step completed={this.activeOrCompleted(1)}>

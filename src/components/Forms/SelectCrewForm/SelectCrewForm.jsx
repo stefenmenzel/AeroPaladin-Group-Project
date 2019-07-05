@@ -51,7 +51,7 @@ class SelectCrewForm extends Component{
 
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
-                    <h2>Crew</h2>
+                    <h2 className="travelDocHead">Crew</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
                             value={this.state.crewValue}
@@ -71,8 +71,7 @@ class SelectCrewForm extends Component{
                                 <Grid.Column width={3}>
                                     <Button
                                         type="submit"
-                                        primary
-                                        className="formButton"
+                                        className="ui medium button green formButton"
                                     >
                                         Next
                                 </Button>

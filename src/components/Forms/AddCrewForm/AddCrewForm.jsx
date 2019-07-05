@@ -27,7 +27,7 @@ class AddCrewForm extends Component {
                 phoneNumber: "1234567890",
                 postalCode: "55345",
                 residenceCountry: "USA",
-                sex: "m",
+                sex: "M",
                 state: "MN",
                 streetAddress: "123 Fake St.",
             },

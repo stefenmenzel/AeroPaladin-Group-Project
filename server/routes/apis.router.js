@@ -19,7 +19,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     let flight_id_One = 0;
     let flight_id_Two = 0;
 
-    //
+    //setting results 
     
     let result;
 

@@ -22,18 +22,7 @@ class SelectPassengerForm extends Component {
         console.log("this.props.passenger:", this.props.passengers);
     }
 
-    // onSelectChange = (event, { name, value }) => {
-    //     console.log("sex change:", value);
-    //     this.setState({
-    //         ...this.state,
-    //         passenger: {
-    //             ...this.state.passenger
-    //         }
-    //         passengerId: value,
-            
-    //     })
-    //     // this.props.handleChange(this.props.stateType, name, { target: { value: value } })
-    // }
+
 
     onSelectChange = (event, { name, value}) => {
         let passengerObj = options[value];
@@ -46,21 +35,38 @@ class SelectPassengerForm extends Component {
         //       ...this.state.passenger,
         //       [passengerId]: passengerObj
         //   }  
+        
         });
     }
-
-    addPassenger = () => {
+    
+    addPassenger = (event, { name, value }) => {
+        let passengerObj = options[value];
+        console.log('passenger obj:', passengerObj);
+        let passengerId = passengerObj.id;
         console.log('clicked on add button', this.state);
         this.setState({
             ...this.state,
             passengers: [
                 ...this.state.passengers,
                 // {[this.state.currentPassenger.id]:this.state.currentPassenger}
-                this.state.currentPassenger
+                passengerObj
             ]
         })
-       
+
     }
+
+    // addPassenger = () => {
+    //     console.log('clicked on add button', this.state);
+    //     this.setState({
+    //         ...this.state,
+    //         passengers: [
+    //             ...this.state.passengers,
+    //             // {[this.state.currentPassenger.id]:this.state.currentPassenger}
+    //             this.state.currentPassenger
+    //         ]
+    //     })
+       
+    // }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -94,21 +100,21 @@ class SelectPassengerForm extends Component {
 
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
-                    <h2>Passengers</h2>
+                    <h2 className="travelDocHead">Passengers</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
                             value={this.state.passengerValue}
                             placeholder="select your passenger"
                             name="passenger"
                             options={this.getPassenger()}
-                            onChange={this.onSelectChange}
+                            onChange={this.addPassenger}
                         />
                         <span>
                             Choose Passenger
                     </span>
                     </Label>
                     
-                    <div className="formButtons">
+                    {/* <div className="formButtons">
                         <Grid columns='equal'>                            
                                 <Grid.Column width={12}></Grid.Column>
                                 <Grid.Column width={3}>
@@ -122,7 +128,7 @@ class SelectPassengerForm extends Component {
                                 </Button>
                                 </Grid.Column>                                                     
                         </Grid>
-                    </div>
+                    </div> */}
                     <div>
                    <PassengerList passengers={this.state.passengers} />
                </div>
@@ -132,8 +138,7 @@ class SelectPassengerForm extends Component {
                                 <Grid.Column width={3}>
                                     <Button
                                         type="submit"
-                                        primary
-                                        className="formButton"
+                                        className="ui medium button green formButton"
                                     >
                                         Next
                                 </Button>
