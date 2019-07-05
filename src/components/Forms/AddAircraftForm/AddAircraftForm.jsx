@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, Button, Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import Swal from 'sweetalert2';
 
 import Aircraft from '../../FormInputs/Aircraft/Aircraft.jsx';
 import OperatorForm from '../../FormInputs/OperatorForm/OperatorForm.jsx';
@@ -55,6 +56,12 @@ class AddAircraftForm extends Component{
         event.preventDefault();
         console.log('submitting....or trying');
         this.props.dispatch({type: 'ADD_AIRCRAFT', payload: this.state});
+        this.props.history.push('/aircraftinfo/')
+        Swal.fire({
+            type: 'success',
+            title: 'Aircraft Added!',
+            timer: 1500
+        })
     }
 
     //cancel this form filling outing (go back to aircraft summary page)
@@ -62,6 +69,7 @@ class AddAircraftForm extends Component{
         console.log('canceling');
         this.props.history.push('/aircraftinfo');
     }
+
 
     /**
      * As our state is initially blank we need to fill it out

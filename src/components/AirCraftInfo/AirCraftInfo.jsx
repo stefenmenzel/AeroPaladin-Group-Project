@@ -24,6 +24,10 @@ class AircraftInfo extends Component {
         console.log('edit', id)
         this.props.history.push(`/aircraftupdate/${id}`)  
     }
+    
+    backButton = () => {
+        this.props.history.push(`/userinfo/`)
+    }
 
     handleDelete = (id) => {
         console.log('delete', id);
@@ -68,6 +72,10 @@ class AircraftInfo extends Component {
     render() {
         return (
             <div>
+                <button onClick={this.backButton} class="ui labeled icon button">
+                    <i class="left chevron icon"></i>
+                    Back
+                </button>
                 <div className="addPassengerBtn">
                     <Button className="ui medium button blue" onClick={this.addCreww}>Add New Aircraft</Button>
                 </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Divider, Button, Grid} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import Swal from 'sweetalert2';
 
 import Name from '../../FormInputs/Name/Name.jsx';
 import Address from '../../FormInputs/Address/Address.jsx';
@@ -43,6 +44,13 @@ class AddPassengerForm extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({type: 'ADD_PASSENGER', payload: this.state});
+        this.props.history.push('/passengerinfo');
+        Swal.fire({
+            type: 'success',
+            title: 'Passenger Added!',
+            timer: 1500
+        })
+
     }
 
     handleCancel = () => {

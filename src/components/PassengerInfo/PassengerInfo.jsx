@@ -21,7 +21,15 @@ class PassengerInfo extends Component {
     addPassenger = () => {
         this.props.history.push("/addpassenger")
     }
+    
+    handleEdit = (id) => {
+        console.log('edit', id)
+        this.props.history.push(`/passengerupdate/${id}`)
+    }
 
+    backButton = () => {
+        this.props.history.push(`/userinfo/`)
+    }
     handleDelete = (id) => {
         console.log('delete', id);
 
@@ -61,15 +69,15 @@ class PassengerInfo extends Component {
         })
     }
 
-    handleEdit = (id) => {
-        console.log('edit', id)
-        this.props.history.push(`/passengerupdate/${id}`)
-    }
 
     render() {
 
         return (
             <div>
+                <button onClick={this.backButton} class="ui labeled icon button">
+                    <i class="left chevron icon"></i>
+                    Back
+                </button>
                 <div className="addPassengerBtn">
                     <Button className="ui medium button blue" onClick={this.addPassenger}>Add New Passenger</Button>
                 </div>
