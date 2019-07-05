@@ -32,6 +32,14 @@ class FlightSegment extends Component {
             departuredate: this.props.flightSegment.departure.date,
             arrivaltime: this.props.flightSegment.arrival.time,
             departuretime: this.props.flightSegment.arrival.time,
+            arrivalcity: 'Minneapolis',
+            arrivalstate: 'MN',
+            arrivalcountry: 'USA',
+            arrivaldescription: 'text',
+            departurecity: 'Tulum',
+            departurestate: 'QR',
+            departurecountry: 'MEX',
+            departuredescription: 'tacos'
         })
     }
 
@@ -105,6 +113,8 @@ class FlightSegment extends Component {
     
 
     render() {
+        console.log('flight segment prop', this.props.flightSegment);
+        
         console.log('flight segment state:', this.state);
         return (
             <div className="formInputs">
