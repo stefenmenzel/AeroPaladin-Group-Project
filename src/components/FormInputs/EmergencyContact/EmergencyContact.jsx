@@ -8,7 +8,7 @@ class EmergencyContact extends Component {
 
     state = {
         emergencyContact : '',
-    }
+    }    
 
     render() {
         console.log('this.props.person in emergency contact:', this.props.person)
@@ -24,7 +24,7 @@ class EmergencyContact extends Component {
                 <Contact
                     handleChange={this.props.handleChange}
                     stateType='emergencyContact'
-                    person={{ email: this.props.person.emailAddress, phoneNumber: this.props.person.telephoneNumber }}
+                    person={this.props.person}
                 />
             </div>
         )

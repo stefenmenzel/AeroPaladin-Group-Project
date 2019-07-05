@@ -104,7 +104,7 @@ router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
 
 router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
     let updateContactId = req.params.id
-    const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "emailAddress","emergencycontacts".telephonenbr AS "telephoneNumber" FROM "people"
+    const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "email","emergencycontacts".telephonenbr AS "phoneNumber" FROM "people"
         JOIN "people_emergencycontacts" ON "people_emergencycontacts".people_id = "people".id 
         JOIN "emergencycontacts" ON "emergencycontacts".id = "people_emergencycontacts".emergencycontact_id 
         WHERE "people".peopletype = 2
