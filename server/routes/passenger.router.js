@@ -8,8 +8,8 @@ const router = express.Router();
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const sqlQuery = `SELECT "document".*, "people".id, "people".firstname, "people".lastname, "people".birthdate,
-        "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
+    const sqlQuery = `SELECT "document".*, "address".*, "people".id, "people".firstname, "people".lastname, "people".birthdate,
+        "people".sex, "people".residencecntry, "people".citizenshipcntry FROM "people"
         JOIN "address" ON "address".id = "people".addresswhileinus_id
         JOIN "document" ON "document".people_id = "people".id
         WHERE "people".peopletype = 1

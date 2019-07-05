@@ -25,7 +25,7 @@ class CrewUpdateForm extends Component{
     componentDidUpdate(){
         if(!Object.keys(this.state.crew).length || Array.isArray(this.state.crew)){
             console.log('checking crew for length');
-            if(this.state.crew !== this.props.crew){                
+            if(this.state.crew !== this.props.crew[0]){                
                 this.setState({
                     ...this.state,
                     crew: this.props.crew[0]

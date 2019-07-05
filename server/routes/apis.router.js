@@ -157,9 +157,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             [
                 itinerary_id_One,
                 crewData.emergency_id,
-                aircraft.id,
-                aircraft.operator_id,
-                aircraft.owner_id,
+                aircraftData.id,
+                aircraftData.operator_id,
+                aircraftData.owner_id,
                 flightStatusNum
             ]) 
             flight_id_One = result.rows[0].id;
@@ -169,9 +169,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             [
                 itinerary_id_Two,
                 crewData.emergency_id,
-                aircraft.id,
-                aircraft.operator_id,
-                aircraft.owner_id,
+                aircraftData.id,
+                aircraftData.operator_id,
+                aircraftData.owner_id,
                 2
             ])
         flight_id_Two = result.rows[0].id;
@@ -208,7 +208,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             ])
             console.log('in flight_people TWO');
         //passenger post
+        console.log('paxData:', paxData);
         for(let i=0; i < paxData.length; i++){
+            console.log(`paxperson: ${i}, ${paxData[i]}`)
             await connection.query(flightPeoplePost,
                 [
                     paxData[i].id,
@@ -228,6 +230,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(201);
     }
     catch(error){
+        console.log('error in post apis:', error);
         await connection.query('ROLLBACK');
         res.sendStatus(500);
     }
