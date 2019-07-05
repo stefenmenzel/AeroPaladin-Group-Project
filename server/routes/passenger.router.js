@@ -12,9 +12,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         "people".sex, "people".residencecntry, "people".citizenshipcntry FROM "people"
         JOIN "address" ON "address".id = "people".addresswhileinus_id
         JOIN "document" ON "document".people_id = "people".id
-        WHERE "people".peopletype = 1
+        WHERE "people".peopletype <= 4 
         AND "people".active = TRUE;
     `
+
     pool.query(sqlQuery).then(result => {
         console.log(' Passenger Result', result.rows);
         res.send(result.rows)
