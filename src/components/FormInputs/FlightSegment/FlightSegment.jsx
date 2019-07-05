@@ -69,6 +69,8 @@ class FlightSegment extends Component {
             arrivaltime: '',
         })
         this.props.nextStep();
+        window.scrollTo(0, 0)
+
     }
 
     handlePrevious = (event) => {
