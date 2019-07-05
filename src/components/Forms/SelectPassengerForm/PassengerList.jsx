@@ -8,7 +8,7 @@ class PassengerList extends Component {
           <ul>
               {this.props.passengers.map(passenger => {
                return (
-                <li key={passenger.id}>{passenger.firstname} {passenger.lastname}</li>
+                <li className="paxPersonLI" key={passenger.id}>{passenger.firstname} {passenger.lastname}</li>
                )
               })}
               
