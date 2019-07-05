@@ -9,16 +9,25 @@ import FlightSegment from '../FormInputs/FlightSegment/FlightSegment';
 import ReviewApis from '../Forms/ReviewApis/ReviewApis';
 import '../CreateNewApis/CreateNewApis.css';
 
+
 const fs1Dummy = {
     departure: {
         airport: "MSP",
         date: "2020-02-02",
         time: "09:35",
+        city: "Tulum",
+        state: "QR",
+        country: "MEX",
+        description: "tacos"
     },
     arrival: {
         airport: "TUY",
         date: "2020-02-02",
         time: "15:20",
+        city: "Minneapolis",
+        state: "MN",
+        country: "USA",
+        description: "text"
     }
 }
 
@@ -27,11 +36,19 @@ const fs2Dummy = {
         airport: "TUY",
         date: "2020-02-09",
         time: "15:20",
+        city: "Minneapolis",
+        state:"MN",
+        country: "USA",
+        description: "text"
     },
     arrival: {
         airport: "MSP",
         date: "2020-02-09",
         time: "09:35",
+        city: "Tulum",
+        state: "QR",
+        country: "MEX",
+        description: "tacos"
     }
 }
 /**
