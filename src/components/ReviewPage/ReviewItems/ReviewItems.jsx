@@ -98,20 +98,12 @@ class ReviewItems extends Component {
             Owner: {this.props.review.ownerfirstname} {this.props.review.ownerlastname}
             <br/>
             <br/>
-            Company/Person Operator: {this.props.review.operatorfirstname} {this.props.review.operatorlastname}
+            Operator: {this.props.review.operatorfirstname} {this.props.review.operatorlastname}
          </List.Item>
-        
-        {/* Operator Information
-        <List.Item className="listItem">
-         <List.Header>Operator</List.Header>
-         <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button>
-         <br/>    
-         Company/Person Operator: {this.props.review.operatorfirstname} {this.props.review.operatorlastname}
-        </List.Item> */}
-        {/* Manifest Info - Crew & Pax */}
+    
         <List.Item className="listItem">
          <List.Header>Manifest</List.Header>
-         {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
+         
          <br/>
          Crew
          <Button className="ui mini icon button green" onClick={this.editCrew}><i className="edit icon"></i></Button>
@@ -126,7 +118,6 @@ class ReviewItems extends Component {
          <List.Header>Flight Segment One</List.Header>
          Departure
          <br/>
-         {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
          <Button className="ui mini icon button green" onClick={this.editFlightSegementOne}><i className="edit icon"></i></Button>
             <br/>
              Departure Airport: {this.props.review.departureairportcity}, {this.props.review.departureairportcntry}
@@ -143,8 +134,7 @@ class ReviewItems extends Component {
          <List.Header>Flight Segment Two</List.Header>
           Arrival 
           <br/>
-         {/* <Button className="ui tiny green button" onClick={this.edit}>Edit Section</Button> */}
-                        <Button className="ui mini icon button green" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
+             <Button className="ui mini icon button green" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
              <br/>
              Arrival Airport: {this.props.review.arrivalairportcity}, {this.props.review.arrivalairportcntry}
              <br/>
