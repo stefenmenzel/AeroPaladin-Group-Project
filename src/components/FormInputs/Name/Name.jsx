@@ -73,8 +73,8 @@ class Name extends Component{
                         placeholder="Select Your Sex"
                         name="sex"
                         options={[
-                            {key: 'm', value:'m', text:'Male'},
-                            {key: 'f', value:'f', text:'Female'}
+                            {key: 'm', value:'M', text:'Male'},
+                            {key: 'f', value:'F', text:'Female'}
                         ]}                        
                         onChange={this.onSelectChange}
                         value={(this.props.person) && this.props.person.sex}
