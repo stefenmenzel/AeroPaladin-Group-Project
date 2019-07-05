@@ -56,6 +56,7 @@ function* fetchUpdatePassenger(action) {
 
 function* fetchUpdatePassengerDocumentOne(action) {
     try {
+        console.log("action.payload for document 1:", action.payload);
         const response = yield axios.get(`/api/passenger/updatedocument1/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_ONE', payload: response.data });
 
@@ -66,6 +67,7 @@ function* fetchUpdatePassengerDocumentOne(action) {
 
 function* fetchUpdatePassengerDocumentTwo(action) {
     try {
+        console.log("action.payload for document 2:", action.payload);
         const response = yield axios.get(`/api/passenger/updatedocument2/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_TWO', payload: response.data });
 

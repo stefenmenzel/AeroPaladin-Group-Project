@@ -8,14 +8,13 @@ const router = express.Router();
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const sqlQuery = `
-    SELECT "document".*, "people".id, "people".firstname, "people".lastname, "people".birthdate,
-    "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
-    JOIN "address" ON "address".id = "people".addresswhileinus_id
-    JOIN "document" ON "document".people_id = "people".id
-    WHERE "people".peopletype = 1
-    AND "people".active = TRUE;
-`
+    const sqlQuery = `SELECT "document".*, "people".id, "people".firstname, "people".lastname, "people".birthdate,
+        "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
+        JOIN "address" ON "address".id = "people".addresswhileinus_id
+        JOIN "document" ON "document".people_id = "people".id
+        WHERE "people".peopletype = 1
+        AND "people".active = TRUE;
+    `
     pool.query(sqlQuery).then(result => {
         console.log(' Passenger Result', result.rows);
         res.send(result.rows)
@@ -30,8 +29,9 @@ router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     console.log('DELETE', deleteID);
     
     const sqlQuery = `UPDATE "people"
-SET "active" = false
-WHERE "id" = $1;`
+        SET "active" = false
+        WHERE "id" = $1;
+    `
     pool.query(sqlQuery, [deleteID]).then(result => {
         console.log('DELETEEEEEE', result);
         res.sendStatus(200)
@@ -47,14 +47,14 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
     console.log('id', updatePassengerId, req.user.id);
     
     const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName", "people".lastname AS "lastName",
-    "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate",
-    "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
-    "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
-JOIN "address" ON "address".id = "people".addresswhileinus_id
-WHERE "people".peopletype = 1
-AND "people".id = $1
-AND "people".user_id = $2
-`
+        "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate",
+        "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
+        "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
+        JOIN "address" ON "address".id = "people".addresswhileinus_id
+        WHERE "people".peopletype = 1
+        AND "people".id = $1
+        AND "people".user_id = $2;
+    `
     pool.query(sqlQuery, [updatePassengerId, req.user.id]).then(result => {
         console.log(' Passenger Update Result', result.rows);
         res.send(result.rows)
@@ -67,13 +67,13 @@ AND "people".user_id = $2
 router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
-JOIN "document" ON "document".people_id = "people_table".id
-WHERE people_table.peopletype = 1
-AND people_table.id = $1
-AND people_table.user_id = $2
-ORDER BY "document".id DESC
-LIMIT 1
-OFFSET 1`
+        JOIN "document" ON "document".people_id = "people_table".id
+        WHERE people_table.peopletype = 1
+        AND people_table.id = $1
+        AND people_table.user_id = $2
+        ORDER BY "document".id DESC
+        LIMIT 1;
+    `
     pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
         console.log(' Passenger Document One Result', result.rows);
         res.send(result.rows)
@@ -86,13 +86,14 @@ OFFSET 1`
 router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
-JOIN "document" ON "document".people_id = "people_table".id
-WHERE people_table.peopletype = 1
-AND people_table.id = $1
-AND people_table.user_id = $2
-ORDER BY "document".id DESC
-LIMIT 1
-;`
+        JOIN "document" ON "document".people_id = "people_table".id
+        WHERE people_table.peopletype = 1
+        AND people_table.id = $1
+        AND people_table.user_id = $2
+        ORDER BY "document".id DESC
+        LIMIT 1
+        OFFSET 1;
+    `
     pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
         console.log(' Passenger Document Two Result', result.rows);
         res.send(result.rows)
