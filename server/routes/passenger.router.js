@@ -46,16 +46,15 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
     let updatePassengerId = req.params.id
     console.log('id', updatePassengerId, req.user.id);
     
-    const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName", "people".lastname AS "lastName",
-        "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate",
-        "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
-        "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
-        JOIN "address" ON "address".id = "people".addresswhileinus_id
-        WHERE "people".peopletype = 1
-        AND "people".id = $1
-        AND "people".user_id = $2;
-    `;
-
+    const sqlQuery = `SELECT "people".id, "people".firstname AS "firstName", "people".lastname AS "lastName",
+    "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber", "people".birthdate AS "birthDate",
+    "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
+    "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
+JOIN "address" ON "address".id = "people".addresswhileinus_id
+WHERE "people".peopletype = 1
+AND "people".id = $1
+AND "people".user_id = $2
+`
     pool.query(sqlQuery, [updatePassengerId, req.user.id]).then(result => {
         console.log(' Passenger Update Result', result.rows);
         res.send(result.rows)
@@ -68,14 +67,13 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
 router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
-        JOIN "document" ON "document".people_id = "people_table".id
-        WHERE people_table.peopletype = 1
-        AND people_table.id = $1
-        AND people_table.user_id = $2
-        ORDER BY "document".id DESC
-        LIMIT 1;
-    `;
-
+JOIN "document" ON "document".people_id = "people_table".id
+WHERE people_table.peopletype = 1
+AND people_table.id = $1
+AND people_table.user_id = $2
+ORDER BY "document".id DESC
+LIMIT 1
+OFFSET 1`
     pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
         console.log(' Passenger Document One Result', result.rows);
         res.send(result.rows)
@@ -88,15 +86,13 @@ router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
 router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
-        JOIN "document" ON "document".people_id = "people_table".id
-        WHERE people_table.peopletype = 1
-        AND people_table.id = $1
-        AND people_table.user_id = $2
-        ORDER BY "document".id DESC
-        LIMIT 1
-        OFFSET 1;
-    `;
-    
+JOIN "document" ON "document".people_id = "people_table".id
+WHERE people_table.peopletype = 1
+AND people_table.id = $1
+AND people_table.user_id = $2
+ORDER BY "document".id DESC
+LIMIT 1
+;`
     pool.query(sqlQuery, [updateDocumentId, req.user.id]).then(result => {
         console.log(' Passenger Document Two Result', result.rows);
         res.send(result.rows)
@@ -184,52 +180,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
 
 router.put('/update', rejectUnauthenticated, async (req, res) => {
     console.log('req.body for update passenger:', req.body);
-
-    const passenger = req.body.passenger;
-    const doc1 = req.body.travelDocumentOne;
-    const doc2 = req.body.travelDocumentTwo;
-
-    const addressQuery = `
-        UPDATE "address"
-        SET "streetaddr" = $1, "city" = $2, "state" = $3, "postalcode" = $4
-        WHERE "id" = $5;
-    `;
-
-    const passengerQuery = `
-        UPDATE "people"
-        SET "lastname" = $1, "firstname" = $2, "middlename" = $3, "birthdate" = $4, "sex" = $5, "residencecntry" = $6, "citizenshipcntry" = $7, "emailaddr" = $8, "telephonenbr" = $9
-        WHERE "id" = $10;
-    `;
-
-    const documentQuery = `
-        UPDATE "document"
-        SET "doccode" = $1, "documentnbr" = $2, "expirydate" = $3, "cntrycode" = $4
-        WHERE "id" = $5;
-    `;
-
-    const connection = await pool.connect();
-
-    try{
-        await connection.query('BEGIN');
-
-        await connection.query(addressQuery, [passenger.streetAddress, passenger.city, passenger.state, passenger.postalCode, passenger.permanentaddress_id])
-        console.log('got through address');
-        await connection.query(passengerQuery, [passenger.lastName, passenger.firstName, passenger.middleName, passenger.birthDate, passenger.sex, passenger.residenceCountry, (passenger.citizenshipCountry || passenger.residenceCountry), passenger.email, passenger.phoneNumber, passenger.id]);
-        console.log("got through crew");
-        await connection.query(documentQuery, [doc1.documentType, doc1.documentNumber, doc1.expiryDate, doc1.residenceCountry, doc1.id]);
-        console.log('got through document one');
-        if(doc2){
-            await connection.query(documentQuery, [doc2.documentType, doc2.documentNumber, doc2.expiryDate, doc2.residenceCountry, doc2.id])
-        }        
-        await connection.query('COMMIT');
-        res.sendStatus(201);
-    }catch(error){
-        await connection.query('ROLLBACK');
-        console.log('transaction error with update passenger', error);
-        res.sendStatus(500);
-    }finally{
-        connection.release();
-    }
+    res.sendStatus(201);
 })
 
 

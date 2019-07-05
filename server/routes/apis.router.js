@@ -12,9 +12,22 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     
     const connection = await pool.connect();
 
+    //returning data from DB querys
     let airport_id_One = 0;
     let itinerary_id_One = 0;
     let flight_id_One = 0;
+    let emergency_Contact_id = 0;
+    let crewID = 0;
+    
+    //objects
+    let crewData = req.body.crew;
+    let aircraftData = req.body.aircraft;
+    let flightSegmentOneData = req.body.flightSegmentOne;
+    let flightSegmentTwoData = req.body.flightSegmentTwo;
+
+    //array of objects
+    let paxData = req.body.passenger;
+
 
     const airportPost = `INSERT INTO "airport" ("airportcode", 
                          "city", 
@@ -22,7 +35,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                          "state", 
                          "description") 
                          SELECT $1, $2, $3, $4, $5 
-                         WHERE NOT EXISTS (SELECT * FROM "airport" WHERE ("airportcode" = $1))
                          RETURNING "airport".id ;`
 
     const itineraryPost = `INSERT INTO "itinerary" ("departure_airport_id", 
@@ -52,7 +64,26 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     // try {
     //     await connection.query('BEGIN');
-    //     for (let i=0, i)
+        
+        
+    //     //passenger post loop
+    //     for (let i=0; i <= paxData.length; i++){
+
+    //     }
+
+
+
+    //     //committing all posts
+    //     await connection.query('COMMIT');
+    //     console.log('made it through');
+    //     res.sendStatus(201);
+    // }
+    // catch(error){
+    //     await connection.query('ROLLBACK');
+    //     res.sendStatus(500);
+    // }
+    // finally{
+    //     connection.release();
     // }
 
 module.exports = router;
