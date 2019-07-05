@@ -102,6 +102,24 @@ LIMIT 1
     })
 });
 
+router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
+    let updateContactId = req.params.id
+    const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "emailAddress","emergencycontacts".telephonenbr AS "telephoneNumber" FROM "people"
+JOIN "people_emergencycontacts" ON "people_emergencycontacts".people_id = "people".id 
+JOIN "emergencycontacts" ON "emergencycontacts".id = "people_emergencycontacts".emergencycontact_id 
+WHERE "people".peopletype = 2
+AND "people".id = $1
+AND "people".user_id = $2
+;`
+    pool.query(sqlQuery, [updateContactId, req.user.id]).then(result => {
+        console.log(' Crew Emergency Contact Result', result.rows);
+        res.send(result.rows)
+    }).catch(err => {
+        console.log('Error in Emergency Contact Two GET', err);
+        res.SendStatus(500)
+    })
+});
+
 
 
 router.post('/add', rejectUnauthenticated, async (req, res) => {
@@ -116,9 +134,11 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     console.log('req.body.crew', req.body.crew)
     const travelDocumentOne = req.body.travelDocumentOne;
     const travelDocumentTwo = req.body.travelDocumentTwo;
+    const emergencyContact = req.body.emergencyContact;
 
     let crew_address_id = 0;
     let crew_id = 0;
+    let emergency_id = 0;
     
     const addressQuery = `
         INSERT INTO "address" (streetaddr, city, state, postalcode, countrycode)
@@ -137,7 +157,18 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
             )
         )
         RETURNING "id";
-    `
+    `;
+
+    const emergencyQuery = `
+        INSERT INTO "emergencycontacts" (lastname, firstname, middlename, telephonenbr, emailaddr)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING "id";
+    `;
+
+    const people_emergencyQuery = `
+        INSERT INTO "people_emergencycontacts" (people_id, emergencycontact_id)
+        VALUES ($1, $2);
+    `;
 
     const documentQuery = `
         INSERT INTO "document" (doccode, documentnbr, expirydate, cntrycode, people_id)
@@ -168,6 +199,10 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
             await connection.query(documentQuery, [travelDocumentTwo.documentType, travelDocumentTwo.documentNumber, travelDocumentTwo.expiryDate, travelDocumentTwo.residenceCountry, crew_id])
             console.log('got all the way to doc 2');
         }
+
+        result = await connection.query(emergencyQuery, [emergencyContact.lastName, emergencyContact.firstName, emergencyContact.middleName, emergencyContact.phoneNumber, emergencyContact.email]);
+        emergency_id = result.rows[0].id;
+        await connection.query(people_emergencyQuery, [crew_id, emergency_id]);
         await connection.query('COMMIT');
         console.log('made it through');
         res.sendStatus(201);

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Name from '../FormInputs/Name/Name.jsx';
 import Address from '../FormInputs/Address/Address.jsx';
 import Contact from '../FormInputs/Contact/Contact.jsx';
+import EmergencyContact from '../FormInputs/EmergencyContact/EmergencyContact.jsx';
 import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
 class CrewUpdateForm extends Component{
@@ -16,6 +17,7 @@ class CrewUpdateForm extends Component{
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'FETCH_UPDATE_CREW_EMERGENCY_CONTACT', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW_DOCUMENT_ONE', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW_DOCUMENT_TWO', payload: this.props.match.params.id })     
     }
@@ -82,6 +84,8 @@ class CrewUpdateForm extends Component{
                     <Address handleChange={this.handleChange} stateType="crew" person={this.props.crew[0]}/>
                     <Divider />
                     <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew[0]}/>
+                    <Divider />
+                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.EmergencyContact}/>
                     <Divider />
                     <h2>Travel Document 1</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.props.travelDocumentOne}/>

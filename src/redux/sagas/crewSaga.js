@@ -55,6 +55,16 @@ function* fetchUpdateCrew(action) {
     }
 }
 
+function* fetchUpdateCrewEmergencyContact(action) {
+    try {
+        const response = yield axios.get(`/api/crew/updateemergency/${action.payload}`, config);
+        yield put({ type: 'SET_UPDATE_CREW_EMERGENCY_CONTACT', payload: response.data });
+
+    } catch (error) {
+        console.log('Crew Update Form GET request failed', error);
+    }
+}
+
 function* fetchUpdateCrewDocumentOne(action) {
     try {
         const response = yield axios.get(`/api/crew/updatedocument1/${action.payload}`, config);
@@ -81,6 +91,7 @@ function* crewSaga() {
     yield takeLatest('DELETE_CREW', deleteCrew);
     yield takeLatest('UPDATE_CREW', updateCrew);
     yield takeLatest('FETCH_UPDATE_CREW', fetchUpdateCrew);
+    yield takeLatest('FETCH_UPDATE_CREW_EMERGENCY_CONTACT', fetchUpdateCrewEmergencyContact);
     yield takeLatest('FETCH_UPDATE_CREW_DOCUMENT_ONE', fetchUpdateCrewDocumentOne);
     yield takeLatest('FETCH_UPDATE_CREW_DOCUMENT_TWO', fetchUpdateCrewDocumentTwo);
 }

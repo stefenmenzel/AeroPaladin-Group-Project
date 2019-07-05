@@ -12,6 +12,7 @@ import operatorReducer from './operatorReducer'
 import ownerReducer from './ownerReducer'
 import documentOneReducer from './documentOneReducer'
 import documentTwoReducer from './documentTwoReducer'
+import emergencyContactReducer from './emergencyContactReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   operatorReducer,
   ownerReducer,
   documentOneReducer,
-  documentTwoReducer
+  documentTwoReducer,
+  emergencyContactReducer
 });
 
 export default rootReducer;
