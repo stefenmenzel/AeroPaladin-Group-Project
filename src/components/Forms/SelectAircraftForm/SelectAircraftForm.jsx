@@ -70,7 +70,7 @@ class SelectAircraftForm extends Component{
         return(
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
-                    <h2>Aircraft</h2>
+                    <h2 className="apisDocHead">Aircraft</h2>
                     <Label className="formInputLabel">                        
                         <Select className="formAltInput"
                             value={this.state.aircraftValue}
@@ -90,8 +90,8 @@ class SelectAircraftForm extends Component{
                                 <Grid.Column width={3}>
                                     <Button
                                         type="submit"
-                                        primary
-                                        className="formButton"
+                                        
+                                        className="ui green button formButton"
                                     >
                                         Next
                                 </Button>

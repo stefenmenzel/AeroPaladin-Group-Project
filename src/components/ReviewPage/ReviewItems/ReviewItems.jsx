@@ -60,7 +60,7 @@ class ReviewItems extends Component {
     //Conditional rendering to show only people with the type of pax (1)
     if (Object.keys(this.props.review).length) {
     
-       //console.log('new thing here: ', this.props.review);
+       console.log('new thing here: ', this.props.review);
        
         paxToShow = (
       <>

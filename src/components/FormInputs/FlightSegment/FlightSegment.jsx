@@ -19,7 +19,15 @@ class FlightSegment extends Component {
         arrivaldate: '',
         departuredate: '',
         arrivaltime: '',
-        departuretime: '',        
+        departuretime: '',  
+        arrivalcity: '',
+        arrivalstate: '',
+        arrivalcountry: '',
+        arrivaldescription: '',
+        departurecity: '',
+        departurestate: '',
+        departurecountry: '',
+        departuredescription: ''      
     }
 
     fillDummyForm = () => {
@@ -32,6 +40,14 @@ class FlightSegment extends Component {
             departuredate: this.props.flightSegment.departure.date,
             arrivaltime: this.props.flightSegment.arrival.time,
             departuretime: this.props.flightSegment.arrival.time,
+            arrivalcity: 'Minneapolis',
+            arrivalstate: 'MN',
+            arrivalcountry: 'USA',
+            arrivaldescription: 'text',
+            departurecity: 'Tulum',
+            departurestate: 'QR',
+            departurecountry: 'MEX',
+            departuredescription: 'tacos'
         })
     }
 
@@ -107,13 +123,15 @@ class FlightSegment extends Component {
     
 
     render() {
+        console.log('flight segment prop', this.props.flightSegment);
+        
         console.log('flight segment state:', this.state);
         return (
             <div className="formInputs">
                 <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2>Flight Segment</h2>
-                    <h3>Departure</h3>
+                    <h2 className="travelDocHead">Flight Segment</h2>
+                    <h3 className="travelDocHead">Departure</h3>
                     <Label className="formInputLabel">
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "airport", e)}
@@ -203,7 +221,7 @@ class FlightSegment extends Component {
 
                     <Divider />
 
-                    <h3>Arrival</h3>
+                    <h3 className="travelDocHead">Arrival</h3>
                     <Label className="formInputLabel">
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "airport", e)}
