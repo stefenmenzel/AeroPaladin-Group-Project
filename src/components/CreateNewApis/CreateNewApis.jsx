@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Step, Grid} from 'semantic-ui-react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Step, Grid } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 import SelectAircraftForm from '../Forms/SelectAircraftForm/SelectAircraftForm';
 import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
@@ -39,17 +39,17 @@ const fs2Dummy = {
  * It has a stepper that displays the current progress in creating
  * the APIS along with displaying the current form the user is currently filling out.
  */
-class CreateNewApis extends Component{
+class CreateNewApis extends Component {
 
     //this state will help us keep track of where we are in the form.
     state = {
         step: 1,
         maxSteps: 6,
-        isStepSet: true,        
-    }    
+        isStepSet: true,
+    }
 
 
-// Set State to Match Router ID Params
+    // Set State to Match Router ID Params
     componentDidUpdate() {
         if (this.state.isStepSet) {
             this.setState({
@@ -57,26 +57,26 @@ class CreateNewApis extends Component{
                 isStepSet: !this.state.isStepSet,
                 step: Number(this.props.match.params.id)
             })
-        }     
+        }
     }
 
 
     //flip to the next step
     nextStep = () => {
         console.log("inside next step");
-        if(this.state.step + 1 <= this.state.maxSteps){
+        if (this.state.step + 1 <= this.state.maxSteps) {
             this.setState({
                 step: this.state.step + 1
             })
             this.props.history.push(`/apis/${Number(this.props.match.params.id) + 1}`)
         }
         console.log('Next Step State', this.state);
-                
+
     }
 
     //flip to the previous step.
     previousStep = () => {
-        if(this.state.step -1 >= 1){
+        if (this.state.step - 1 >= 1) {
             this.setState({
                 step: this.state.step - 1
             })
@@ -84,23 +84,23 @@ class CreateNewApis extends Component{
         }
     }
 
-    editStep = (event) =>{
-console.log('inside edite step', event);
+    editStep = (event) => {
+        console.log('inside edite step', event);
 
-            this.setState({
-                ...this.state,
-                isStepSet: !this.state.isStepSet,
-                step: event
-            })
+        this.setState({
+            ...this.state,
+            isStepSet: !this.state.isStepSet,
+            step: event
+        })
     }
 
     //this function will set the stepper components as acive/completed
     activeOrCompleted = (stepPosition) => {
-        return(
+        return (
             (stepPosition < this.state.step) ?
-            true
-            : 
-            false
+                true
+                :
+                false
         )
     }
 
@@ -108,31 +108,31 @@ console.log('inside edite step', event);
     conditionalComponent = () => {
         const componentArray = [
             <SelectAircraftForm nextStep={this.nextStep} />,
-            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />, 
+            <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />,
             <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />,
-            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne" flightSegment={fs1Dummy}/>,
-            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo" flightSegment={fs2Dummy}/>,
+            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne" flightSegment={fs1Dummy} />,
+            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo" flightSegment={fs2Dummy} />,
             <ReviewApis editStep={this.editStep} nextStep={this.nextStep} previousStep={this.previousStep} />
 
 
         ]
-        return(
+        return (
             componentArray[this.state.step - 1]
         )
     }
 
-    render(){
+    render() {
 
         console.log('Params ID', this.props.match.params.id);
         console.log('State Value', this.state);
-        
-        
-        return(
+
+
+        return (
             <>
-            {/* First a stepper...this displays current progress */}
+                {/* First a stepper...this displays current progress */}
                 <div className="apisForm">
                     <h1>New APIS Entry</h1>
-                    <div style={{width:'80%'}}>
+                    <div style={{ width: '80%' }}>
                         <Step.Group ordered>
                             <Step completed={this.activeOrCompleted(1)}>
                                 <Step.Content>
@@ -158,7 +158,7 @@ console.log('inside edite step', event);
                                     <Step.Description>Choose your first Flight Segment</Step.Description>
                                 </Step.Content>
                             </Step>
-                        <Step completed={this.activeOrCompleted(5)}>
+                            <Step completed={this.activeOrCompleted(5)}>
                                 <Step.Content>
                                     <Step.Title>Flight Segment Two</Step.Title>
                                     <Step.Description>Choose your Second Flight Segment</Step.Description>
@@ -171,19 +171,19 @@ console.log('inside edite step', event);
                                 </Step.Content>
                             </Step>
                         </Step.Group>
-                    </div>                    
+                    </div>
                 </div>
                 {/* Now our currently displayed component. */}
                 <div>
                     {this.conditionalComponent()}
                 </div>
-            </>            
+            </>
         )
     }
 }
 
 const mapStateToProps = (reduxState) => {
-    return{
+    return {
         reduxState
     }
 }
