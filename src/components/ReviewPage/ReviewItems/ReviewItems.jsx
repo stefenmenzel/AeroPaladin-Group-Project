@@ -88,7 +88,7 @@ class ReviewItems extends Component {
          <List.Item className="listItem">
             <div className="subHeadBtn">
             <List.Header>AirCraft</List.Header>
-                            <Button className="ui mini icon button green" onClick={this.editAircraft}><i className="edit icon"></i></Button>
+            <Button className="ui mini icon button green" onClick={this.editAircraft}><i className="edit icon"></i></Button>
             </div>
             <br/>
             <br/>
