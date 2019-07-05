@@ -19,7 +19,15 @@ class FlightSegment extends Component {
         arrivaldate: '',
         departuredate: '',
         arrivaltime: '',
-        departuretime: '',        
+        departuretime: '',  
+        arrivalcity: '',
+        arrivalstate: '',
+        arrivalcountry: '',
+        arrivaldescription: '',
+        departurecity: '',
+        departurestate: '',
+        departurecountry: '',
+        departuredescription: ''      
     }
 
     fillDummyForm = () => {

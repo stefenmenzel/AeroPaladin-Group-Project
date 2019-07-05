@@ -8,7 +8,7 @@ const config={
 
 function* addApis(action){
     try{
-        console.log('in add APIS', action.payload);
+        console.log('in add APIS saga', action.payload);
         
         yield axios.post('/api/apis', action.payload, config);
         yield put({type:'FETCH_APIS_FORM'});

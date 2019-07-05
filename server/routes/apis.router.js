@@ -2,7 +2,6 @@ const express = require('express');
 const {rejectUnauthenticated} = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
-const moment = require('moment');
 const router = express.Router();
 
 
@@ -32,7 +31,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
     //array of objects
     let paxData = req.body.passenger;
-
+    let flightStatusNum = 2;
 
     const airportPost = `INSERT INTO "airport" ("airportcode", 
                          "city", 
@@ -51,12 +50,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     ;
     
     const flightPost = `INSERT INTO "flight" ("itinerary_id", 
-                        "emergencycontact_id",
+                        "emergencycontact_id", 
                         "aircraft_id", 
                         "operator_id", 
                         "owner_id", 
                         "flight_status")
-                        VALUES ($1, $2, $3, $4, $5)
+                        VALUES ($1, $2, $3, $4, $5, $6)
                         RETURNING "flight".id;`
     
     const userItineraryPost = `INSERT INTO "user_itinerary" ("user_id", 
@@ -146,14 +145,22 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                 console.log('in Itinerary TWO', itinerary_id_Two);
 
         // FLIGHT POST
+        console.log('right before FLIGHT with itinerary stuff: ', itinerary_id_One);
+        //console.log('itinerary ID 2 data here: ', itinerary_id_Two);
+        console.log('owner info :', aircraftData.owner_id);
+        console.log('operator info: ', aircraftData.operator_id);
+        console.log('aircraft info: ', aircraftData.id);
+        console.log('emergency id stuff: ', crewData.emergency_id);
+        console.log('flight status: ', flightStatusNum);
+    
         result = await connection.query(flightPost,
             [
                 itinerary_id_One,
-                crew.emergency_id,
+                crewData.emergency_id,
                 aircraft.id,
                 aircraft.operator_id,
                 aircraft.owner_id,
-                2
+                flightStatusNum
             ]) 
             flight_id_One = result.rows[0].id;
             console.log('in flight ONE', flight_id_One);
@@ -161,7 +168,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         result = await connection.query(flightPost,
             [
                 itinerary_id_Two,
-                crew.emergency_id,
+                crewData.emergency_id,
                 aircraft.id,
                 aircraft.operator_id,
                 aircraft.owner_id,
@@ -186,15 +193,17 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             console.log('in user_itinerary TWO');
     //FLIGHT_PEOPLE POST
         //crew post
+        console.log('crew INFO HERE1', crewData);
+        
         await connection.query(flightPeoplePost,
             [
-                crew.id,
+                crewData.id,
                 flight_id_One
             ])
             console.log('in flight_people ONE');
         await connection.query(flightPeoplePost,
             [
-                crew.id,
+                crewData.id,
                 flight_id_Two
             ])
             console.log('in flight_people TWO');
