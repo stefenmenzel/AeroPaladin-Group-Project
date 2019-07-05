@@ -110,8 +110,8 @@ class FlightSegment extends Component {
             <div className="formInputs">
                 <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2>Flight Segment</h2>
-                    <h3>Departure</h3>
+                    <h2 className="travelDocHead">Flight Segment</h2>
+                    <h3 className="travelDocHead">Departure</h3>
                     <Label className="formInputLabel">
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "airport", e)}
@@ -201,7 +201,7 @@ class FlightSegment extends Component {
 
                     <Divider />
 
-                    <h3>Arrival</h3>
+                    <h3 className="travelDocHead">Arrival</h3>
                     <Label className="formInputLabel">
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "airport", e)}

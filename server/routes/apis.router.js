@@ -12,11 +12,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     
     const connection = await pool.connect();
 
-    //returning data from DB querys
+    //returning data from DB queriess
     let airport_id_One = 0;
     let itinerary_id_One = 0;
     let flight_id_One = 0;
     let emergency_Contact_id = 0;
+    //
     let crewID = 0;
     
     //objects

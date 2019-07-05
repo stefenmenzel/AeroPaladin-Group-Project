@@ -7,7 +7,7 @@ import SelectCrewForm from '../Forms/SelectCrewForm/SelectCrewForm';
 import SelectPassengerForm from '../Forms/SelectPassengerForm/SelectPassengerForm';
 import FlightSegment from '../FormInputs/FlightSegment/FlightSegment';
 import ReviewApis from '../Forms/ReviewApis/ReviewApis';
-
+import '../CreateNewApis/CreateNewApis.css';
 
 const fs1Dummy = {
     departure: {
