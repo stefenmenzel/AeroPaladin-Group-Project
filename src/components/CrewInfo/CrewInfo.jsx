@@ -126,10 +126,10 @@ class PassengerInfo extends Component {
                                             Document#: {crew.documentnbr} Expiry Date: {moment(crew.expirydate).format("MM/DD/YYYY")}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button onClick={() => this.handleEdit(crew.people_id)}><Icon name="edit" /></button>
+                                            <button onClick={() => this.handleEdit(crew.id)}><Icon name="edit" /></button>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <button onClick={() => this.handleDelete(crew.people_id)}><Icon name="trash" /></button>
+                                            <button onClick={() => this.handleDelete(crew.id)}><Icon name="trash" /></button>
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>

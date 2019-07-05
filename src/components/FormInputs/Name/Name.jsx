@@ -126,7 +126,7 @@ class Name extends Component{
         )
     }
 
-    render(){
+    render(){        
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">            

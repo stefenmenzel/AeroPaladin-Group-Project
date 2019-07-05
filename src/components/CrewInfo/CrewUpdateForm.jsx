@@ -74,6 +74,7 @@ class CrewUpdateForm extends Component{
     render() {
         console.log('this.state in crew update:', this.state);
         console.log('this.props.crew:', this.props.crew);
+        console.log('this.props.emergencyContact:', this.props.emergencyContact);
         return(
             <div>
                 <h1>Edit Crew</h1>
@@ -85,7 +86,7 @@ class CrewUpdateForm extends Component{
                     <Divider />
                     <Contact handleChange={this.handleChange} stateType="crew" person={this.props.crew[0]}/>
                     <Divider />
-                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.EmergencyContact}/>
+                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.props.emergencyContact}/>
                     <Divider />
                     <h2>Travel Document 1</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.props.travelDocumentOne}/>
@@ -128,6 +129,7 @@ const mapStateToProps = (reduxState) => {
         crew: reduxState.crewReducer,
         travelDocumentOne: reduxState.documentOneReducer,
         travelDocumentTwo: reduxState.documentTwoReducer,
+        emergencyContact: reduxState.emergencyContactReducer,
     }
 }
 

@@ -24,6 +24,7 @@ class Contact extends Component{
     }
 
     render(){
+        console.log('this.props.person inside contact:', this.props.person);
         return(
             <div className="formInputs">                
                 <Label className="formInputLabel">
