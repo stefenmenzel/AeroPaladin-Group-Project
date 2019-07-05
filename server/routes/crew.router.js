@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    const sqlQuery = `SELECT "people_emergencycontacts".emergencycontact_id AS emergency_id, "people".id, "people".firstname, "people".lastname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry,  "address".* FROM "people"
+    const sqlQuery = `SELECT "people_emergencycontacts".emergencycontact_id AS emergency_id, "address".*, "people".id, "people".firstname, "people".lastname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry FROM "people"
         LEFT JOIN "address" ON "address".id = "people".addresswhileinus_id        
         LEFT JOIN "people_emergencycontacts" ON "people".id = "people_emergencycontacts".people_id
         WHERE "people".peopletype = 2
@@ -59,7 +59,7 @@ router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
         res.send(result.rows)
     }).catch(err => {
         console.log('Error in Crew Update GET', err);
-        res.SendStatus(500)
+        res.sendStatus(500)
     })
 });
 
@@ -79,7 +79,7 @@ router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
         res.send(result.rows)
     }).catch(err => {
         console.log('Error in Crew Document One GET', err);
-        res.SendStatus(500)
+        res.sendStatus(500)
     })
 });
 
@@ -98,25 +98,25 @@ router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
         res.send(result.rows)
     }).catch(err => {
         console.log('Error in Crew Document Two GET', err);
-        res.SendStatus(500)
+        res.sendStatus(500)
     })
 });
 
 router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
     let updateContactId = req.params.id
     const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "emailAddress","emergencycontacts".telephonenbr AS "telephoneNumber" FROM "people"
-JOIN "people_emergencycontacts" ON "people_emergencycontacts".people_id = "people".id 
-JOIN "emergencycontacts" ON "emergencycontacts".id = "people_emergencycontacts".emergencycontact_id 
-WHERE "people".peopletype = 2
-AND "people".id = $1
-AND "people".user_id = $2
-;`
+        JOIN "people_emergencycontacts" ON "people_emergencycontacts".people_id = "people".id 
+        JOIN "emergencycontacts" ON "emergencycontacts".id = "people_emergencycontacts".emergencycontact_id 
+        WHERE "people".peopletype = 2
+        AND "people".id = $1
+        AND "people".user_id = $2;
+    `
     pool.query(sqlQuery, [updateContactId, req.user.id]).then(result => {
         console.log(' Crew Emergency Contact Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
         console.log('Error in Emergency Contact Two GET', err);
-        res.SendStatus(500)
+        res.sendStatus(500)
     })
 });
 
