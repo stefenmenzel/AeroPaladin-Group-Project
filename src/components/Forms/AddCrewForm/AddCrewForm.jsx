@@ -6,6 +6,8 @@ import Address from '../../FormInputs/Address/Address';
 import Contact from '../../FormInputs/Contact/Contact';
 import EmergencyContact from '../../FormInputs/EmergencyContact/EmergencyContact.jsx';
 import TravelDocuments from '../../FormInputs/TravelDocuments/TravelDocuments';
+import Swal from 'sweetalert2';
+
 
 
 class AddCrewForm extends Component {
@@ -48,7 +50,12 @@ class AddCrewForm extends Component {
         event.preventDefault();
         console.log('handleSubmit dispatch add crew', this.state)
         this.props.dispatch({type: 'ADD_CREW', payload: this.state})
-        
+        this.props.history.push('/crewinfo/')
+        Swal.fire({
+            type: 'success',
+            title: 'Crew Added!',
+            timer: 1500
+        })
     }
 
     handleCancel = () => {
