@@ -77,7 +77,7 @@ class Name extends Component{
                             {key: 'f', value:'F', text:'Female'}
                         ]}                        
                         onChange={this.onSelectChange}
-                        value={(this.props.person) && this.props.person.sex}
+                        value={(this.props.person) && (this.props.person.sex == "m" ? 'M' : 'F')}                        
                     />
                     <span>
                         Sex
@@ -126,7 +126,9 @@ class Name extends Component{
         )
     }
 
-    render(){        
+    render(){
+        console.log('this.props.person in name: ', this.props.person);
+        (this.props.person) ? console.log('this.props.person.sex inside name:', this.props.person.sex) : console.log('not here');
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">            

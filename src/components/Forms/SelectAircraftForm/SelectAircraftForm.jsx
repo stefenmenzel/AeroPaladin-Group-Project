@@ -27,17 +27,22 @@ class SelectAircraftForm extends Component{
         owner_id: '',
         owner_firstname: '',
         owner_lastname: '',
+        selection: 0,
 
     }
 
     componentDidMount(){
-        this.props.dispatch({ type: 'FETCH_AIRCRAFT'});
+        this.props.dispatch({ type: 'FETCH_AIRCRAFT'});        
     }
 
     //this function takes the selected value from our
     //drop down and sets local state to the value of said selection
     onSelectChange = (event, { name, value}) => {        
         let aircraftObj = options[value]        
+        aircraftObj = {
+            ...aircraftObj,
+            selection: value
+        }        
         this.setState(aircraftObj);        
     }
 
@@ -62,8 +67,8 @@ class SelectAircraftForm extends Component{
             selectOptions.push(
                 {key:aircraft.id, value: i, text: `${aircraft.typeaircraft} ${aircraft.callsign}`}
             )
-        }                
-        return selectOptions;            
+        }        
+        return selectOptions;
     }
 
     render(){        
@@ -73,7 +78,7 @@ class SelectAircraftForm extends Component{
                     <h2 className="apisDocHead">Aircraft</h2>
                     <Label className="formInputLabel">                        
                         <Select className="formAltInput"
-                            value={this.state.aircraftValue}
+                            defaultValue={(Object.keys(this.props.apisAircraft).length) ? this.props.apisAircraft.selection : ''}
                             placeholder="select your aircraft"
                             name="aircraft"
                             options={this.getAircrafts()}
@@ -108,7 +113,7 @@ const mapStateToProps = (reduxState) => {
     return{
         aircrafts: reduxState.aircraftReducer,
         apis: reduxState.apisReducer,
-        apisAircraft: reduxState.apisReducer.apisAircraft,
+        apisAircraft: reduxState.apisReducer.aircraft,
     }
 }
 
