@@ -52,7 +52,7 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
         "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
         "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
         JOIN "address" ON "address".id = "people".addresswhileinus_id
-        WHERE "people".peopletype = 1
+        WHERE "people".peopletype < 4
         AND "people".id = $1
         AND "people".user_id = $2;
     `
