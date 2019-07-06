@@ -32,8 +32,7 @@ class SelectAircraftForm extends Component{
     }
 
     componentDidMount(){
-        this.props.dispatch({ type: 'FETCH_AIRCRAFT'});
-        console.log('inside select aircraft');
+        this.props.dispatch({ type: 'FETCH_AIRCRAFT'});        
     }
 
     //this function takes the selected value from our
@@ -43,8 +42,7 @@ class SelectAircraftForm extends Component{
         aircraftObj = {
             ...aircraftObj,
             selection: value
-        }
-        console.log('aircraft obj in select aircraft', aircraftObj);
+        }        
         this.setState(aircraftObj);        
     }
 
@@ -69,21 +67,18 @@ class SelectAircraftForm extends Component{
             selectOptions.push(
                 {key:aircraft.id, value: i, text: `${aircraft.typeaircraft} ${aircraft.callsign}`}
             )
-        }
-        console.log('selectOptions in select aircraft', selectOptions);
+        }        
         return selectOptions;
     }
 
-    render(){
-        console.log('apisAircraft is: ', this.props.apisAircraft);
-        console.log('apis is:', this.props.apis);        
+    render(){        
         return(
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
                     <h2 className="apisDocHead">Aircraft</h2>
                     <Label className="formInputLabel">                        
                         <Select className="formAltInput"
-                            value={(Object.keys(this.props.apisAircraft).length) ? this.props.apisAircraft.selection : ''}
+                            defaultValue={(Object.keys(this.props.apisAircraft).length) ? this.props.apisAircraft.selection : ''}
                             placeholder="select your aircraft"
                             name="aircraft"
                             options={this.getAircrafts()}

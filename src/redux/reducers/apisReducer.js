@@ -19,7 +19,7 @@ import {combineReducers} from 'redux'
      }
  }
 
- const passenger = (state = {}, action) => {
+ const passenger = (state = [], action) => {
     switch (action.type) {
         case 'SET_APIS_PASSENGER':
             return action.payload;            

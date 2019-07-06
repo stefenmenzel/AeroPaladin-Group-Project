@@ -20,6 +20,10 @@ class SelectCrewForm extends Component{
     onSelectChange = (event, { name, value}) => {
         console.log("sex change:", value);
         let crewObj = options[value];
+        crewObj = {
+            ...crewObj,
+            selection: value
+        }        
         this.setState(crewObj);
     }
 
@@ -54,7 +58,7 @@ class SelectCrewForm extends Component{
                     <h2 className="travelDocHead">Crew</h2>
                     <Label className="formInputLabel">
                         <Select className="formAltInput"
-                            value={this.state.crewValue}
+                            defaultValue={(this.props.apisCrew) ? this.props.apisCrew.selection : ''}
                             placeholder="select your crew"
                             name="crew"
                             options={this.getCrews()}
@@ -86,7 +90,8 @@ class SelectCrewForm extends Component{
 
 const mapStateToProps = (reduxState) => {
     return{
-        crews: reduxState.crewReducer
+        crews: reduxState.crewReducer,
+        apisCrew: reduxState.apisReducer.crew
     }
 }
 

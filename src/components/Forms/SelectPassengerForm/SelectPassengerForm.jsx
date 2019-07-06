@@ -130,7 +130,7 @@ class SelectPassengerForm extends Component {
                         </Grid>
                     </div> */}
                     <div>
-                   <PassengerList passengers={this.state.passengers} />
+                   <PassengerList passengers={(this.props.apisPassengers.length) ? this.props.apisPassengers : this.state.passengers}/>
                </div>
                     <div className="formButtons">
                         <Grid columns='equal'>                            
@@ -154,7 +154,8 @@ class SelectPassengerForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        passengers: reduxState.passengerReducer
+        passengers: reduxState.passengerReducer,
+        apisPassengers: reduxState.apisReducer.passenger
     }
 }
 
