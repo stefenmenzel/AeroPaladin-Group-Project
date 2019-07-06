@@ -41,6 +41,16 @@ class SelectPassengerForm extends Component {
     
     addPassenger = (event, { name, value }) => {
         let passengerObj = options[value];
+        passengerObj = {
+            ...passengerObj,
+            selection: this.state.passengers.length,
+        }
+
+        for(let i = 0; i < this.state.passengers.length; i++){
+            if(this.state.passengers[i].id === passengerObj.id){
+                return;
+            }
+        }
         console.log('passenger obj:', passengerObj);
         let passengerId = passengerObj.id;
         console.log('clicked on add button', this.state);
@@ -53,6 +63,17 @@ class SelectPassengerForm extends Component {
             ]
         })
 
+    }
+
+    removePassenger = (passengerIndex) => {
+        // event.preventDefault();
+        console.log('in remove passenger', passengerIndex);
+        let newPassengerList = this.state.passengers;
+        newPassengerList.splice(passengerIndex, 1);
+        this.setState({
+            ...this.state,
+            passengers: newPassengerList,
+        })
     }
 
     // addPassenger = () => {
@@ -130,7 +151,7 @@ class SelectPassengerForm extends Component {
                         </Grid>
                     </div> */}
                     <div>
-                   <PassengerList passengers={(this.props.apisPassengers.length) ? this.props.apisPassengers : this.state.passengers}/>
+                   <PassengerList removePassenger={this.removePassenger} passengers={(this.props.apisPassengers.length) ? this.props.apisPassengers : this.state.passengers}/>
                </div>
                     <div className="formButtons">
                         <Grid columns='equal'>                            

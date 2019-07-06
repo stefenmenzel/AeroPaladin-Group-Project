@@ -5,7 +5,12 @@ import { Divider, Button, Grid } from 'semantic-ui-react';
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import '../FormInputs.css';
 
-class FlightSegment extends Component {
+
+let apisSegment;
+
+class FlightSegment extends Component {    
+
+    apisSegment = (Object.keys(this.props.apisReducer[this.props.stateType]).length ? this.props.apisReducer[this.props.stateType] : {})
 
     state = {
         departure : {
@@ -124,7 +129,7 @@ class FlightSegment extends Component {
 
     render() {
         console.log('flight segment prop', this.props.flightSegment);
-        
+        console.log('apis segment is:', apisSegment)
         console.log('flight segment state:', this.state);
         return (
             <div className="formInputs">
@@ -136,7 +141,11 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "airport", e)}
                             placeholder="Airport"
-                            value={this.state.departureairport}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ? 
+                                this.props.apisReducer[this.props.stateType].departure.airport : 
+                                this.state.departureairport
+                            }
                         />
                         <span>
                             Airport Code
@@ -146,7 +155,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "city", e)}
                             placeholder="Airport city"
-                            value={this.state.departurecity}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].departure.city :
+                                this.state.departurecity}
                         />
                         <span>
                             Airport City
@@ -156,7 +168,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "state", e)}
                             placeholder="Airport state"
-                            value={this.state.departurestate}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].departure.state :
+                                this.state.departurestate}
                         />
                         <span>
                             Airport State
@@ -166,7 +181,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "country", e)}
                             placeholder="Airport country"
-                            value={this.state.departurecountry}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].departure.country :
+                                this.state.departurecountry}
                         />
                         <span>
                             Airport country code
@@ -176,7 +194,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "description", e)}
                             placeholder="Airport description"
-                            value={this.state.departuredescription}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].departure.description :
+                                this.state.departuredescription}
                         />
                         <span>
                             Airport description
@@ -185,7 +206,10 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                         <TimeInput className="formAltInput"
                             name="time"
-                            value={this.state.departuretime}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].departure.time :
+                                this.state.departuretime}
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, {name, value}, 'departure')}
                             placeholder="Estimated Time of Departure"
@@ -207,7 +231,10 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
                             name="date"
-                            value={this.state.departuredate}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].departure.date :
+                                this.state.departuredate}
                             placeholder="Estimated Departure Date"
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'departure')}
@@ -226,7 +253,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "airport", e)}
                             placeholder="Airport"
-                            value={this.state.arrivalairport}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                    this.props.apisReducer[this.props.stateType].arrival.airport :
+                                    this.state.arrivalairport}
                         />
                         <span>
                             Airport
@@ -236,7 +266,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "city", e)}
                             placeholder="Airport city"
-                            value={this.state.arrivalcity}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].arrival.city :
+                                this.state.arrivalcity}
                         />
                         <span>
                             Airport City
@@ -246,7 +279,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "state", e)}
                             placeholder="Airport state"
-                            value={this.state.arrivalstate}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].arrival.state :
+                                this.state.arrivalstate}
                         />
                         <span>
                             Airport State
@@ -256,7 +292,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "country", e)}
                             placeholder="Airport country"
-                            value={this.state.arrivalcountry}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].arrival.country :
+                                this.state.arrivalcountry}
                         />
                         <span>
                             Airport country code
@@ -266,7 +305,10 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "description", e)}
                             placeholder="Airport description"
-                            value={this.state.arrivaldescription}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].arrival.description :
+                                this.state.arrivaldescription}
                         />
                         <span>
                             Airport description
@@ -275,7 +317,10 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                     <TimeInput className="formAltInput"
                             name="time"
-                            value={this.state.arrivaltime}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].arrival.time :
+                                this.state.arrivaltime}
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
                             placeholder="Estimated Time of Arrival"
@@ -297,7 +342,10 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
                             name="date"
-                            value={this.state.arrivaldate}
+                            value={
+                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                                this.props.apisReducer[this.props.stateType].arrival.date :
+                                this.state.arrivaldate}
                             placeholder="Estimated Arrival Date"
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
@@ -342,7 +390,7 @@ class FlightSegment extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        reduxState
+        apisReducer: reduxState.apisReducer
     }
 }
 
