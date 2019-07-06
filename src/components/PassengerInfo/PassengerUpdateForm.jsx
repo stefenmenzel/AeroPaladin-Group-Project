@@ -9,7 +9,7 @@ import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
 class PassengerUpdateForm extends Component {
     state = {
-        passenger: this.props.passenger,
+        passenger: {},
         travelDocumentOne: this.props.travelDocumentOne,
         travelDocumentTwo: this.props.travelDocumentTwo,
     }
@@ -72,6 +72,8 @@ class PassengerUpdateForm extends Component {
 
     render() {
         console.log('this.state passenger update', this.state);
+        console.log('this.props.passenger in passenger update:', this.props.passenger);
+        console.log("redux state in passenger update:", this.props.reduxState);
         return (
             <div>
                 <h1>Edit Passenger</h1>
@@ -121,6 +123,7 @@ class PassengerUpdateForm extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
+        reduxState: reduxState,
         passenger: reduxState.passengerReducer,
         travelDocumentOne: reduxState.documentOneReducer,
         travelDocumentTwo: reduxState.documentTwoReducer,

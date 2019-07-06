@@ -32,6 +32,7 @@ class SelectAircraftForm extends Component{
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_AIRCRAFT'});
+        console.log('inside select aircraft');
     }
 
     //this function takes the selected value from our
@@ -66,14 +67,17 @@ class SelectAircraftForm extends Component{
         return selectOptions;            
     }
 
-    render(){        
+    render(){
+        console.log('apisAircraft is: ', this.props.apisAircraft);
+        console.log('apis is:', this.props.apis);
+        console.log('what should be filling the select:', (`${this.props.apisAircraft.typeaircraft} ${this.props.apisAircraft.callsign}`));
         return(
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
                     <h2 className="apisDocHead">Aircraft</h2>
                     <Label className="formInputLabel">                        
                         <Select className="formAltInput"
-                            value={this.state.aircraftValue}
+                            defaultValue={(Object.keys(this.props.apisAircraft).length) && (`${this.props.apisAircraft.typeaircraft} ${this.props.apisAircraft.callsign}`)}
                             placeholder="select your aircraft"
                             name="aircraft"
                             options={this.getAircrafts()}
@@ -108,7 +112,7 @@ const mapStateToProps = (reduxState) => {
     return{
         aircrafts: reduxState.aircraftReducer,
         apis: reduxState.apisReducer,
-        apisAircraft: reduxState.apisReducer.apisAircraft,
+        apisAircraft: reduxState.apisReducer.aircraft,
     }
 }
 
