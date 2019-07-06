@@ -39,15 +39,15 @@ class FlightSegment extends Component {
             arrivaldate: this.props.flightSegment.arrival.date,
             departuredate: this.props.flightSegment.departure.date,
             arrivaltime: this.props.flightSegment.arrival.time,
-            departuretime: this.props.flightSegment.arrival.time,
-            arrivalcity: 'Minneapolis',
-            arrivalstate: 'MN',
-            arrivalcountry: 'USA',
-            arrivaldescription: 'text',
-            departurecity: 'Tulum',
-            departurestate: 'QR',
-            departurecountry: 'MEX',
-            departuredescription: 'tacos'
+            departuretime: this.props.flightSegment.departure.time,
+            arrivalcity: this.props.flightSegment.arrival.city,
+            arrivalstate: this.props.flightSegment.arrival.state,
+            arrivalcountry: this.props.flightSegment.arrival.country,
+            arrivaldescription: this.props.flightSegment.arrival.description,
+            departurecity: this.props.flightSegment.departure.city,
+            departurestate: this.props.flightSegment.departure.state,
+            departurecountry: this.props.flightSegment.departure.country,
+            departuredescription: this.props.flightSegment.departure.description
         })
     }
 
