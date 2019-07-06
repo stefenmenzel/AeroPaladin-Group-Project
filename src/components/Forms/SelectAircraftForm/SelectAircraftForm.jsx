@@ -27,6 +27,7 @@ class SelectAircraftForm extends Component{
         owner_id: '',
         owner_firstname: '',
         owner_lastname: '',
+        selection: 0,
 
     }
 
@@ -39,6 +40,11 @@ class SelectAircraftForm extends Component{
     //drop down and sets local state to the value of said selection
     onSelectChange = (event, { name, value}) => {        
         let aircraftObj = options[value]        
+        aircraftObj = {
+            ...aircraftObj,
+            selection: value
+        }
+        console.log('aircraft obj in select aircraft', aircraftObj);
         this.setState(aircraftObj);        
     }
 
@@ -63,21 +69,21 @@ class SelectAircraftForm extends Component{
             selectOptions.push(
                 {key:aircraft.id, value: i, text: `${aircraft.typeaircraft} ${aircraft.callsign}`}
             )
-        }                
-        return selectOptions;            
+        }
+        console.log('selectOptions in select aircraft', selectOptions);
+        return selectOptions;
     }
 
     render(){
         console.log('apisAircraft is: ', this.props.apisAircraft);
-        console.log('apis is:', this.props.apis);
-        console.log('what should be filling the select:', (`${this.props.apisAircraft.typeaircraft} ${this.props.apisAircraft.callsign}`));
+        console.log('apis is:', this.props.apis);        
         return(
             <div className="formInputs"> 
                 <form className="addForm" onSubmit={this.handleSubmit}>                                   
                     <h2 className="apisDocHead">Aircraft</h2>
                     <Label className="formInputLabel">                        
                         <Select className="formAltInput"
-                            defaultValue={(Object.keys(this.props.apisAircraft).length) && (`${this.props.apisAircraft.typeaircraft} ${this.props.apisAircraft.callsign}`)}
+                            value={(Object.keys(this.props.apisAircraft).length) ? this.props.apisAircraft.selection : ''}
                             placeholder="select your aircraft"
                             name="aircraft"
                             options={this.getAircrafts()}
