@@ -6,11 +6,7 @@ import { DateInput, TimeInput } from 'semantic-ui-calendar-react';
 import '../FormInputs.css';
 
 
-let apisSegment;
-
-class FlightSegment extends Component {    
-
-    apisSegment = (Object.keys(this.props.apisReducer[this.props.stateType]).length ? this.props.apisReducer[this.props.stateType] : {})
+class FlightSegment extends Component {        
 
     state = {
         departure : {
@@ -128,9 +124,10 @@ class FlightSegment extends Component {
     
 
     render() {
-        console.log('flight segment prop', this.props.flightSegment);
-        console.log('apis segment is:', apisSegment)
+        console.log('flight segment prop', this.props.flightSegment);        
         console.log('flight segment state:', this.state);
+        console.log('this.props.apisReducer.flightSegment:', this.props.apisReducer[this.props.stateType])
+        console.log('this.props.apisReducer.flightSegment:', ((Object.keys(this.props.apisReducer[this.props.stateType]).length > 0) ? 'true' : false));
         return (
             <div className="formInputs">
                 <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
