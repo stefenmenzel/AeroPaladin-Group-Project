@@ -28,7 +28,7 @@ class AddPassengerForm extends Component{
                 phoneNumber: "6174300473",  
                 postalCode: "02138",
                 residenceCountry: "USA",
-                sex: "f",
+                sex: "F",
                 state: "MA",
                 streetAddress: "1213 Aspen Court",
             },
@@ -43,6 +43,7 @@ class AddPassengerForm extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log('sending out this passenger:', this.state);
         this.props.dispatch({type: 'ADD_PASSENGER', payload: this.state});
         this.props.history.push('/passengerinfo');
         Swal.fire({
