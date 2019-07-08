@@ -43,6 +43,13 @@ class AddCrewForm extends Component {
                 expiryDate: "2025-11-26",
                 residenceCountry: "USA",
             }
+            , emergencyContact: {
+                email: "GG@gmail.com",
+                firstName: "Gulash",
+                lastName: "Menzel",
+                name: "tony",
+                phoneNumber: "7634456677"
+            }
         })
     }
 
@@ -88,7 +95,7 @@ class AddCrewForm extends Component {
                     <h2 className="travelDocHead">Contact Information</h2>
                     <Contact handleChange={this.handleChange} stateType="crew" person={this.state.crew}/>
                     <Divider />
-                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.EmergencyContact} />
+                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.emergencyContact} />
                     <Divider />
                     <h2 className="travelDocHead">Travel Document 1</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.state.travelDocumentOne}/>
