@@ -92,9 +92,9 @@ class AddAircraftForm extends Component{
         console.log('this.state:', this.state);
         return(
             <div>
-                <h1 className="ui header center aligned grid">Add Aircraft</h1>
-                <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
+                <h1 className="ui header center aligned grid">Add Aircraft</h1>                
                 <form className="addForm" onSubmit={this.handleSubmit}>                    
+                    <h2 className="travelDocHead" onClick={this.fillDummyForm}>Aircraft Info</h2>
                     <Aircraft handleChange={this.handleChange} aircraft={this.state.aircraft}/>
                     <Divider />
                     <OperatorForm handleChange={this.handleChange} person={this.state.operator}/>

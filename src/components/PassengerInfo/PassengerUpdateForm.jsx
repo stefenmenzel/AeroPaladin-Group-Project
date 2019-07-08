@@ -53,10 +53,11 @@ class PassengerUpdateForm extends Component {
         event.preventDefault();
         console.log('doing a submitto');
         this.props.dispatch({type: 'UPDATE_PASSENGER', payload:this.state});
+        this.props.history.push('/passengerinfo');
     }
 
     handleCancel = () => {
-        this.props.history.push('/crewinfo');
+        this.props.history.push('/passengerinfo');
     }
 
     handleChange = (propertyToChange, newProperty, event) => {
@@ -110,7 +111,7 @@ class PassengerUpdateForm extends Component {
                                     primary
                                     className="formButton"
                                 >
-                                    Edit Crew
+                                    Edit Passenger
                                 </Button>
                             </Grid.Column>
                         </Grid>
