@@ -81,11 +81,6 @@ class RegisterPage extends Component {
   }
 
   render() {
-    // console.log('state update: username: ', this.state.username);
-    // console.log('state update: firstname: ', this.state.firstName);
-    // console.log('state update: lastName: ', this.state.lastName);
-    // console.log('state update: password: ', this.state.password);
-    // console.log('state update: email: ', this.state.email);
     return (
       <div>
         {this.props.errors.registrationMessage && (
@@ -99,13 +94,13 @@ class RegisterPage extends Component {
         <div className="registrationDiv">
         <div className="column">
         <h1 className="ui header middle aligned center aligned grid" id="bigHead">Welcome To aeroPaladin</h1>
-        <h3 className="ui header middle aligned center aligned grid">Create An Account To Start Using aeroPaladin</h3>
+        <h4 className="ui middle aligned center aligned grid" id="littlehead">Create And Account To Start Using aeroPaladin</h4>
         <div className="bigDiv">
-        <form className="ui large form">
+        <form className="ui middle aligned center aligned form reg">
           
          <div className="ui stacked segment">
-                  <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.registerDummy}></button>
-          <h5 className="ui header middle aligned center aligned grid">User Information</h5>
+          <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.registerDummy}></button>
+          <h5 className="ui middle aligned center aligned grid">User Information</h5>
           <div className="field">
            <div className="ui corner labeled input userNameIn">
              <Label className="userNameIn">
@@ -242,7 +237,7 @@ class RegisterPage extends Component {
            </div>
           </div>
 
-        <h5 className="ui header middle aligned center aligned grid addHead">Address Information</h5>
+        <h5 className="ui middle aligned center aligned grid addHead">Address Information</h5>
         {/* street address in input */}
         <div className="field">
            <div className="ui corner labeled input streetAddrIn">
@@ -275,8 +270,8 @@ class RegisterPage extends Component {
              </Label>
            </div>
           </div>
-        <div className="ui select">
-          <select class="ui search dropdown" onChange={this.handleInputChangeFor('state')} value={this.state.state}>
+        <div className="ui select state">
+          <select class="ui search dropdown state" onChange={this.handleInputChangeFor('state')} value={this.state.state}>
           <option value="">State</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
@@ -362,7 +357,7 @@ class RegisterPage extends Component {
            </div>
           </div>
     
-          <h5 className="ui header middle aligned center aligned grid addHead">Additional Address Information</h5>
+          
           <div className="field">
            <div className="ui corner labeled input">
              <Label className="resCountryIn">

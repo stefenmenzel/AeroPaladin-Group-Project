@@ -4,6 +4,7 @@ import { Grid, Button } from 'semantic-ui-react'
 import './ReviewApis.css';
 import { List } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 
@@ -50,6 +51,13 @@ class ReviewApis extends Component {
         event.preventDefault();
         console.log("doing a submit", this.props.reviewApis);
         this.props.dispatch({ type: 'ADD_APIS', payload: this.props.reviewApis })
+        this.props.history.push("/home")
+        Swal.fire({
+            type: 'success',
+            title: 'APIS Saved!',
+            timer: 1500
+        })
+        
     }
     render() {
         console.log('apis reducer:', this.props.reviewApis);

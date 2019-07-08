@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './LoginPage.css';
 
 class LoginPage extends Component {
   state = {
@@ -41,14 +42,14 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <div>
-            {/* <img src="/images/aeroPaladin_logo-02.jpg" alt="logo"/> */}
+        {/* <div>
+            <img src="../public/images/aeroPaladin_logo-02.jpg" alt="logo"/>
  
-        </div>
+        </div> */}
         <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
+          <h1 className="ui header login">Login</h1>
+          {/* <div>
+            <label className="labelLogin" htmlFor="username">
               Username:
               <input
                 type="text"
@@ -57,9 +58,29 @@ class LoginPage extends Component {
                 onChange={this.handleInputChangeFor('username')}
               />
             </label>
+          </div> */}
+          <h4 className="header">Username</h4>
+          <div className="ui input username">
+            <input 
+              type="text" 
+              placeholder="johnsmith@email.com"
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+             >
+            </input>
           </div>
-          <div>
-            <label htmlFor="password">
+          <br/>
+          <h4 className="headerTwo">Password</h4>
+          <div className="ui input password">
+            <input
+              type="password"
+              placeholder="1234AbCd"
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+            />
+          </div>
+          {/* <div className="ui input"></div>
+            <label className="labelLogin" htmlFor="password">
               Password:
               <input
                 type="password"
@@ -68,10 +89,10 @@ class LoginPage extends Component {
                 onChange={this.handleInputChangeFor('password')}
               />
             </label>
-          </div>
+          </div> */}
           <div>
             <input
-              className="log-in"
+              className="ui button log-in"
               type="submit"
               name="submit"
               value="Log In"

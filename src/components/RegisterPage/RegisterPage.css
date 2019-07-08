@@ -1,14 +1,14 @@
-.ui.form {
-    position: relative;
-    max-width: 100%;
+.ui.form.reg {
+    align-self: center;
     background-color: transparent;
-    padding-top: 50px;
+    margin-top: 30px;
+    width: 700px;
 }
 
 .ui.segment {
     /* position: relative; */
     background: #DADADA;
-    width: 37.5rem;
+    width: 50rem;
     box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
     margin: 1rem;
     padding: 1rem;
@@ -34,7 +34,7 @@ registrationDiv {
 }
 
 .userNameIn {
-    width: 500px;
+    width: 48rem;
 }
 
 .ui.corner.labeled.input.userNameIn {
@@ -42,48 +42,73 @@ registrationDiv {
 }
 
 .firstNameIn{
-    width: 500px;
+    width: 48rem;
+}
+
+.middleNameIn {
+    width: 48rem;
 }
 
 .lastNameIn {
-    width: 500px;
+    width: 48rem;
 }
 
 .passwordIn {
-    width: 500px;
+    width: 48rem;
 }
 
 .emailIn {
-    width: 500px;
+    width: 48rem;
 }
 
 .phoneNumberIn {
-    width: 500px;
+    width: 48rem;
 }
 
 .streetAddrIn {
-    width: 500px;
+    width: 48rem;
 }
 
 #regSubmitBtn {
-    background-color: #30c4f0;
+    background-color: #21ba45;
     color: white;
+    margin-bottom: 40px;
 }
+
 
 #bigHead {
     margin-top: 30px;
+    font-weight: 500;
+}
+#littlehead{
+    margin-top: -30px;
 }
 
-.ui.header.middle.aligned.center.aligned.grid.addHead {
-    margin-top: 25px;
+.ui.middle.aligned.center.aligned.grid.addHead {
+    padding-top: 25px;
 }
 .ui.corner.labeled.input.streetAddrIn {
     margin-top: 25px;
 }
+.ui.select.state{
+    margin-bottom: 15px;
+ }
 
 .cityIn {
-    width: 500px;
+    width: 48rem;
 }
 .zipIn {
-    width: 500px;
+    width: 48rem;
+}
+.genderIn{
+    width: 48rem;
+}
+.resCountryIn {
+    width: 48rem;
+}
+.birthdayIn {
+    width: 48rem;
+}
+.countryIn {
+    width: 48rem;
 }
