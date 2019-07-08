@@ -52,6 +52,18 @@ class FlightSegment extends Component {
         })
     }
 
+    componentDidMount(){        
+        if (Object.keys(this.props.apisReducer[this.props.stateType]).length){            
+            if (this.state.departure !== this.props.apisReducer[this.props.stateType].departure) {
+                this.setState({
+                    ...this.state,
+                    departure: this.props.apisReducer[this.props.stateType].departure,
+                    arrival: this.props.apisReducer[this.props.stateType].arrival
+                })
+            }
+        }            
+    }
+
     segmentOneOrTwo = () => {
         return ((this.props.stateType === 'flightSegmentOne') ? 'SET_APIS_FLIGHT_SEGMENT_ONE' : 'SET_APIS_FLIGHT_SEGMENT_TWO')
     }
@@ -127,7 +139,7 @@ class FlightSegment extends Component {
         console.log('flight segment prop', this.props.flightSegment);        
         console.log('flight segment state:', this.state);
         console.log('this.props.apisReducer.flightSegment:', this.props.apisReducer[this.props.stateType])
-        console.log('this.props.apisReducer.flightSegment:', ((Object.keys(this.props.apisReducer[this.props.stateType]).length > 0) ? 'true' : false));
+        console.log('this flightsegments departure object:', this.props.apisReducer[this.props.stateType].departure);
         return (
             <div className="formInputs">
                 <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
@@ -203,10 +215,11 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                         <TimeInput className="formAltInput"
                             name="time"
-                            value={
-                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
-                                this.props.apisReducer[this.props.stateType].departure.time :
-                                this.state.departuretime}
+                            // value={
+                            //     (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                            //     this.props.apisReducer[this.props.stateType].departure.time :
+                            //     this.state.departuretime}
+                            value={this.state.departure.time}
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, {name, value}, 'departure')}
                             placeholder="Estimated Time of Departure"
@@ -228,10 +241,11 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
                             name="date"
-                            value={
-                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
-                                this.props.apisReducer[this.props.stateType].departure.date :
-                                this.state.departuredate}
+                            // value={
+                            //     (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                            //     this.props.apisReducer[this.props.stateType].departure.date :
+                            //     this.state.departuredate}
+                            value={this.state.departure.date}
                             placeholder="Estimated Departure Date"
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'departure')}
@@ -314,10 +328,11 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                     <TimeInput className="formAltInput"
                             name="time"
-                            value={
-                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
-                                this.props.apisReducer[this.props.stateType].arrival.time :
-                                this.state.arrivaltime}
+                            // value={
+                            //     (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                            //     this.props.apisReducer[this.props.stateType].arrival.time :
+                            //     this.state.arrivaltime}
+                            value={this.state.arrival.time}
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
                             placeholder="Estimated Time of Arrival"
@@ -339,10 +354,11 @@ class FlightSegment extends Component {
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
                             name="date"
-                            value={
-                                (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
-                                this.props.apisReducer[this.props.stateType].arrival.date :
-                                this.state.arrivaldate}
+                            // value={
+                            //     (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
+                            //     this.props.apisReducer[this.props.stateType].arrival.date :
+                            //     this.state.arrivaldate}
+                            value={this.state.arrival.date}
                             placeholder="Estimated Arrival Date"
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
