@@ -138,7 +138,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "airport", e)}
                             placeholder="Airport"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ? 
                                 this.props.apisReducer[this.props.stateType].departure.airport : 
                                 this.state.departureairport
@@ -152,7 +152,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "city", e)}
                             placeholder="Airport city"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].departure.city :
                                 this.state.departurecity}
@@ -165,7 +165,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "state", e)}
                             placeholder="Airport state"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].departure.state :
                                 this.state.departurestate}
@@ -178,7 +178,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "country", e)}
                             placeholder="Airport country"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].departure.country :
                                 this.state.departurecountry}
@@ -191,7 +191,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('departure', "description", e)}
                             placeholder="Airport description"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].departure.description :
                                 this.state.departuredescription}
@@ -250,7 +250,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "airport", e)}
                             placeholder="Airport"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                     this.props.apisReducer[this.props.stateType].arrival.airport :
                                     this.state.arrivalairport}
@@ -263,7 +263,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "city", e)}
                             placeholder="Airport city"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].arrival.city :
                                 this.state.arrivalcity}
@@ -276,7 +276,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "state", e)}
                             placeholder="Airport state"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].arrival.state :
                                 this.state.arrivalstate}
@@ -289,7 +289,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "country", e)}
                             placeholder="Airport country"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].arrival.country :
                                 this.state.arrivalcountry}
@@ -302,7 +302,7 @@ class FlightSegment extends Component {
                         <Input className="formInput"
                             onChange={(e) => this.handleChange('arrival', "description", e)}
                             placeholder="Airport description"
-                            value={
+                            defaultValue={
                                 (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
                                 this.props.apisReducer[this.props.stateType].arrival.description :
                                 this.state.arrivaldescription}
