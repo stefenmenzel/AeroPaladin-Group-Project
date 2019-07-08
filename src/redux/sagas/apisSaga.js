@@ -12,7 +12,7 @@ function* addApis(action){
         
         yield axios.post('/api/apis', action.payload, config);
         yield put({type:'FETCH_APIS_FORM'});
-        
+        yield put({ type: 'FETCH_APIS_TRIPS' })
 
     }catch(error){
         console.log('add APIS request failed:', error);
