@@ -19,12 +19,12 @@ class AddPassengerForm extends Component{
     fillDummyForm1 = () => {
         this.setState({
             passenger: {
-                birthDate: "1978-09-15",
+                birthDate: "1968-03-21",
                 citizenShipCountry: "USA",
-                city: "Cambridge",
-                email: "BerniceJProvencher@jourrapide.com",
-                firstName: "Bernice",
-                lastName: "Provencher",
+                city: "Denver",
+                email: "numberOneMom@gmail.com",
+                firstName: "Kimberly",
+                lastName: "Aiken",
                 phoneNumber: "6174300473",  
                 postalCode: "02138",
                 residenceCountry: "USA",
@@ -46,10 +46,10 @@ class AddPassengerForm extends Component{
             passenger: {
                 birthDate: "1978-09-15",
                 citizenShipCountry: "USA",
-                city: "Boston",
-                email: "TerranceGAgustin@armyspy.com",
-                firstName: "Terrance",
-                lastName: "Agustin",
+                city: "Denver",
+                email: "arealbro@gmail.com",
+                firstName: "Griffon",
+                lastName: "Aiken",
                 phoneNumber: "5023798019",
                 postalCode: "40203",
                 residenceCountry: "USA",
@@ -98,10 +98,11 @@ class AddPassengerForm extends Component{
         return(
             <div>
                 <h1 className="ui header center aligned grid">Add Passenger</h1>
-                <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm1}></button>
-                <button type="button" style={{ float: 'right', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm2}></button>
+                {/* <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm1}></button>
+                <button type="button" style={{ float: 'right', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm2}></button> */}
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2 className="travelDocHead">Passenger Info</h2>
+                    <h2 className="travelDocHead" onClick={this.fillDummyForm1}>Passenger Info</h2>
+                    <button type="button" style={{opacity: '0', height: '50px', width: '150px', margin:'auto', display: 'block' }} onClick={this.fillDummyForm2}></button>
                     <Name extended={true} handleChange={this.handleChange} stateType="passenger" person={this.state.passenger}/>
                     <Divider />
                     <Address handleChange={this.handleChange} stateType="passenger" person={this.state.passenger} />
