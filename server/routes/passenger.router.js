@@ -127,8 +127,8 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
         RETURNING "id";
     `
     const passengerQuery = `
-        INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id)
-        SELECT $1, $2, $3, $4, $5, $6, CAST($7 AS VARCHAR), $8, $9, $10, $11, $12
+        INSERT INTO "people" (lastname, firstname, middlename, birthdate, sex, residencecntry, emailaddr, telephonenbr, peopletype, user_id, permanentaddress_id, addresswhileinus_id, citizenshipcntry)
+        SELECT $1, $2, $3, $4, $5, $6, CAST($7 AS VARCHAR), $8, $9, $10, $11, $12, $13
         WHERE NOT EXISTS(
             SELECT * FROM "people"
             WHERE(
@@ -159,7 +159,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
         passenger_address_id = result.rows[0].id;
         console.log('got all the way to address', result.rows[0].id);
 
-        result = await connection.query(passengerQuery, [passenger.lastName, passenger.firstName, passenger.middleName, passenger.birthDate, passenger.sex, passenger.residenceCountry, passenger.email, passenger.phoneNumber, 1, req.user.id, passenger_address_id, passenger_address_id])
+        result = await connection.query(passengerQuery, [passenger.lastName, passenger.firstName, passenger.middleName, passenger.birthDate, passenger.sex, passenger.residenceCountry, passenger.email, passenger.phoneNumber, 1, req.user.id, passenger_address_id, passenger_address_id, passenger.residenceCountry])
         passenger_id = result.rows[0].id;
         console.log('got all the way to passenger', result.rows[0].id);
 

@@ -39,7 +39,13 @@ class Name extends Component{
 
     onSelectChange = (event, {name, value}) => {
         console.log("sex change:", value);
-        this.props.handleChange(this.props.stateType, name, {target: {value: value}})
+        if (name === 'residenceCountry'){
+            this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+            // this.onSelectChange(event, {name: 'citizenShipCountry', value: value});
+        }
+        else{
+            this.props.handleChange(this.props.stateType, name, { target: { value: value } })
+        }        
     }
 
     citizenshipCheckbox = () => {
