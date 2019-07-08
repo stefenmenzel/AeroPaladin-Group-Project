@@ -54,7 +54,7 @@ router.post('/register', (req, res, next) => {
       pool.query(queryTextTwo, [streetaddr, city, state, postalcode, countrycode])
         .then((result) => {
           console.log('second post done: result POST', result.rows[0].id);
-           pool.query(queryTextThree, [lastname, firstname, middlename, birthdate, sex, countrycode, countrycode, email, phonenumber, '2', newUserId, result.rows[0].id, result.rows[0].id])
+          //  pool.query(queryTextThree, [lastname, firstname, middlename, birthdate, sex, countrycode, countrycode, email, phonenumber, '2', newUserId, result.rows[0].id, result.rows[0].id])
         })
     })
    .then(() => res.sendStatus(201))
