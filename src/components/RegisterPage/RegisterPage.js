@@ -23,6 +23,26 @@ class RegisterPage extends Component {
     resCountryCode: ''
   };
 
+  registerDummy = () => {
+    this.setState({
+      username: 'StefenMenzel',
+      firstName: 'Stefen',
+      middleName: 'Adam',
+      lastName: 'Menzel',
+      password: '1234',
+      email: 'stefentheemail@gmail.com',
+      phoneNumber: '1234567890',
+      streetAddress: '123 Real Ave.',
+      city: 'Minneapolis',
+      state: 'MN',
+      postalCode: '55454',
+      countryCode: 'USA',
+      birthdate: '1987-02-19',
+      gender: 'M',
+      resCountryCode: 'USA'
+    })
+  }
+
   registerUser = (event) => {
     event.preventDefault();
     console.log('in registerUser');
@@ -79,6 +99,7 @@ class RegisterPage extends Component {
         <form className="ui middle aligned center aligned form reg">
           
          <div className="ui stacked segment">
+          <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.registerDummy}></button>
           <h5 className="ui middle aligned center aligned grid">User Information</h5>
           <div className="field">
            <div className="ui corner labeled input userNameIn">
@@ -87,6 +108,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Username"
                 onChange={this.handleInputChangeFor('username')}
+                value={this.state.username}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -101,6 +123,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="First Name"
                 onChange={this.handleInputChangeFor('firstName')}
+                value={this.state.firstName}
                 />
                 <div className="ui corner label">
                   <i className="asterisk icon"></i>
@@ -115,6 +138,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Middle Name"
                 onChange={this.handleInputChangeFor('middleName')}
+                value={this.state.middleName}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -129,6 +153,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Last Name"
                 onChange={this.handleInputChangeFor('lastName')}
+                value={this.state.lastName}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -143,6 +168,7 @@ class RegisterPage extends Component {
                 type="password"
                 placeholder="Password"
                 onChange={this.handleInputChangeFor('password')}
+                value={this.state.password}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -157,6 +183,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Email"
                 onChange={this.handleInputChangeFor('email')}
+                value={this.state.email}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -171,6 +198,7 @@ class RegisterPage extends Component {
                 type="number"
                 placeholder="Phone Number"
                 onChange={this.handleInputChangeFor('phoneNumber')}
+                value={this.state.phoneNumber}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -185,6 +213,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Gender"
                 onChange={this.handleInputChangeFor('gender')}
+                value={this.state.gender}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -199,6 +228,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Birth Date"
                 onChange={this.handleInputChangeFor('birthdate')}
+                value={this.state.birthdate}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -216,6 +246,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Street Address"
                 onChange={this.handleInputChangeFor('streetAddress')}
+                value={this.state.streetAddress}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -231,6 +262,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="City"
                 onChange={this.handleInputChangeFor('city')}
+                value={this.state.city}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -239,7 +271,7 @@ class RegisterPage extends Component {
            </div>
           </div>
         <div className="ui select state">
-          <select class="ui search dropdown state" onChange={this.handleInputChangeFor('state')}>
+          <select class="ui search dropdown state" onChange={this.handleInputChangeFor('state')} value={this.state.state}>
           <option value="">State</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
@@ -301,6 +333,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Postal Code"
                 onChange={this.handleInputChangeFor('postalCode')}
+                value={this.state.postalCode}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -315,6 +348,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Country Code"
                 onChange={this.handleInputChangeFor('countryCode')}
+                value={this.state.countryCode}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
@@ -331,6 +365,7 @@ class RegisterPage extends Component {
                 type="text"
                 placeholder="Residence Country Code"
                 onChange={this.handleInputChangeFor('resCountryCode')}
+                value={this.state.resCountryCode}
                 />
               <div className="ui corner label">
                 <i className="asterisk icon"></i>
