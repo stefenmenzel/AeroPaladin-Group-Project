@@ -43,6 +43,13 @@ class AddCrewForm extends Component {
                 expiryDate: "2025-11-26",
                 residenceCountry: "USA",
             }
+            , emergencyContact: {
+                email: "GG@gmail.com",
+                firstName: "Gulash",
+                lastName: "Menzel",
+                name: "tony",
+                phoneNumber: "7634456677"
+            }
         })
     }
 
@@ -78,9 +85,9 @@ class AddCrewForm extends Component {
         return (
             <div>
                 <h1 className="ui header center aligned grid">Add Crew</h1>
-                <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
+                {/* <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button> */}
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2 className="travelDocHead">Crew Info</h2>
+                    <h2 className="travelDocHead" onClick={this.fillDummyForm}>Crew Info</h2>                    
                     <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.state.crew} />
                     <Divider/>
                     <Address handleChange={this.handleChange} stateType="crew" person={this.state.crew}/>
@@ -88,7 +95,7 @@ class AddCrewForm extends Component {
                     <h2 className="travelDocHead">Contact Information</h2>
                     <Contact handleChange={this.handleChange} stateType="crew" person={this.state.crew}/>
                     <Divider />
-                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.EmergencyContact} />
+                    <EmergencyContact handleChange={this.handleChange} stateType="emergencyContact" person={this.state.emergencyContact} />
                     <Divider />
                     <h2 className="travelDocHead">Travel Document 1</h2>
                     <TravelDocuments handleChange={this.handleChange} stateType="travelDocumentOne" travelDocument={this.state.travelDocumentOne}/>

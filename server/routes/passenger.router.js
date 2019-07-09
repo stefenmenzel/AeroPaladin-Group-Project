@@ -13,10 +13,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         JOIN "address" ON "address".id = "people".addresswhileinus_id
         JOIN "document" ON "document".people_id = "people".id
         WHERE "people".peopletype <= 4 
-        AND "people".active = TRUE;
+        AND "people".active = TRUE
+        AND "people".user_id = $1;
     `
 
-    pool.query(sqlQuery).then(result => {
+    pool.query(sqlQuery, [req.user.id]).then(result => {
         console.log(' Passenger Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
@@ -52,7 +53,7 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
         "people".sex, "people".residencecntry AS "residenceCountry", "people".citizenshipcntry AS "citizenShipCountry",
         "people".emailaddr AS "email", "address".postalcode AS "postalCode", "address".state, "address".city,"address".streetaddr AS "streetAddress" FROM "people"
         JOIN "address" ON "address".id = "people".addresswhileinus_id
-        WHERE "people".peopletype < 4
+        WHERE "people".peopletype <= 4
         AND "people".id = $1
         AND "people".user_id = $2;
     `

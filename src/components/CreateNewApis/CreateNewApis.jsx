@@ -37,7 +37,7 @@ const fs2Dummy = {
         date: "2020-02-09",
         time: "15:20",
         city: "Minneapolis",
-        state:"MN",
+        state:"MM",
         country: "USA",
         description: "text"
     },
