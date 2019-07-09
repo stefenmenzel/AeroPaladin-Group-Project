@@ -24,3 +24,8 @@
     font-size: 16px;
     padding: 10px;
 }
+.ui.icon.button.editBtn {
+    width: 75px;
+    background-color: #21ba45;
+    margin-left: 20px;
+}

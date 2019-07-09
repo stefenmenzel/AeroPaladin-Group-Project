@@ -66,14 +66,14 @@ class ReviewApis extends Component {
                 <div>
                     <h2 className="ui header middle aligned center aligned grid">Review APIS</h2>
                 </div>
-                <div className="ui segments grid review div big">
+                <div style={{display: "block", margin: "auto"}} className="ui segments middle aligned center aligned grid review div big">
                     <List>
                         {/* Aircraft Information */}
 
                         <List.Item className="listItem">
                             <div className="subHeadBtn">
                                 <List.Header>AirCraft</List.Header>
-                                <Button className="ui mini icon button green" onClick={this.editAircraft}><i className="edit icon"></i></Button>
+                                <Button className="ui icon button editBtn" onClick={this.editAircraft}><i className="edit icon"></i></Button>
                             </div>
                             <br />
                             <br />
@@ -87,23 +87,28 @@ class ReviewApis extends Component {
                         </List.Item>
 
                         <List.Item className="listItem">
-                            <div className="subHeadBtn">
+                            <div className="subHead">
                                 <List.Header>Manifest</List.Header>
                                 <br />
                                 Crew
-                                    <Button className="ui mini icon button green" onClick={this.editCrew}><i className="edit icon"></i></Button>
+                                    <Button className="ui icon button editBtn" onClick={this.editCrew}><i className="edit icon"></i></Button>
                                 <ul>
                                     <li> {this.props.reviewApis.crew.firstname} {this.props.reviewApis.crew.lastname} </li>
                                 </ul>
+                            </div>
+                        </List.Item>
 
+                        <List.Item className="listItem">
+                            <div className="subHead">
+                                
                                 Passengers
-                                     <Button className="ui mini icon button green" onClick={this.editPassenger}><i className="edit icon"></i></Button>
+                                     <Button className="ui icon button editBtn" onClick={this.editPassenger}><i className="edit icon"></i></Button>
                                 <ul>
                                     {this.props.reviewApis.passenger.map(p => {
 
                                         return <>
                                             <li key={p.id}>{p.firstname} {p.lastname}</li>
-                                             <br />
+                                             <br/>
                                               </>
                                     })}
                                 </ul>
@@ -112,12 +117,12 @@ class ReviewApis extends Component {
                         {/* flight segment one */}
 
         <List.Item className="listItem">
-         <List.Header>Flight Segment One</List.Header>
+         <h3>Flight Segment One</h3>
          
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-                            <Button className="ui mini icon button green" onClick={this.editFlightSegementOne}><i className="edit icon"></i></Button>
+            <Button className="ui icon button editBtn" onClick={this.editFlightSegementOne}><i className="edit icon"></i></Button>
          <br/>
-        <h3>Departure</h3> 
+        <h4 className="departuresubhead">Departure</h4> 
          <br/>
             <br/>
              Departure Airport: {this.props.reviewApis.flightSegmentOne.departure.airport}
@@ -135,7 +140,7 @@ class ReviewApis extends Component {
              Departure Date: {this.props.reviewApis.flightSegmentOne.departure.date} 
              <br/>
              <br/>
-             <h3>Arrival</h3>
+             <h4 className="arrivalsubhead">Arrival</h4>
              <br/>
             <br/>
              Arrival Airport: {this.props.reviewApis.flightSegmentOne.arrival.airport}
@@ -154,12 +159,12 @@ class ReviewApis extends Component {
         </List.Item>
              {/* flight segment Two */}
         <List.Item className="listItem">
-         <List.Header>Flight Segment Two</List.Header>
+            <h3>Flight Segment Two</h3>
          
          {/* <Button className="ui mini green button" onClick={this.edit}>Edit Section</Button> */}
-                            <Button className="ui mini icon button green" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
+            <Button className="ui icon button editBtn" onClick={this.editFlightSegementTwo}><i className="edit icon"></i></Button>
          <br/>
-         <h3>Departure</h3> 
+         <h4 className="departuresubhead">Departure</h4> 
          <br/>
             <br/>
              Departure Airport: {this.props.reviewApis.flightSegmentTwo.departure.airport}
@@ -177,7 +182,7 @@ class ReviewApis extends Component {
              Departure Date: {this.props.reviewApis.flightSegmentTwo.departure.date} 
              <br/>
              <br/>
-            <h3> Arrival</h3>
+                            <h4 className="arrivalsubhead"> Arrival</h4>
              <br/>
             <br/>
              Arrival Airport: {this.props.reviewApis.flightSegmentTwo.arrival.airport}
@@ -202,8 +207,8 @@ class ReviewApis extends Component {
                             <Grid.Column width={3}>
                                 <Button
                                     type="button"
-                                    primary
-                                    className="formButton"
+                                    
+                                    className="ui medium button green formButton"
                                     onClick={this.handleSubmit}
                                 >
                                     Submit APIS

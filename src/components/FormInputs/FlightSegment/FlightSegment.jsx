@@ -387,10 +387,9 @@ class FlightSegment extends Component {
                             <Grid.Column width={3}>
                                 <Button
                                     type="submit"
-                                    primary
-                                    className="formButton"
+                                    className="ui medium button green formButton"
                                 >
-                                    NEXT
+                                    Next
                             </Button>
                             </Grid.Column>
                         </Grid>

@@ -22,7 +22,7 @@ class UserInfo extends Component {
         return (
             <div className="ui centered card grid">
                 <div className="content">
-                <div className="header">
+                <div className="header One">
                     User Information
                 </div>
                 </div>
