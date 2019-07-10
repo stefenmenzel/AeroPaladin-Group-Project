@@ -9,6 +9,9 @@ import "./Dashboard.css";
 
 const moment = require('moment');
 
+/**
+ * This is our dashboard. It displays tables with various APIS information.
+ */
 class Dashboard extends Component {
 
     componentDidMount() {

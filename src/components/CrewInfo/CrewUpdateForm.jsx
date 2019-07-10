@@ -8,6 +8,12 @@ import Contact from '../FormInputs/Contact/Contact.jsx';
 import EmergencyContact from '../FormInputs/EmergencyContact/EmergencyContact.jsx';
 import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
+/**
+ * This form allows you to update an existing crew member.
+ * It is designed to take in a prop of the current crew member to edit.
+ * This could be merged with the add new crew form but in the scope of our 2 week
+ * project it was not feasible.
+ */
 class CrewUpdateForm extends Component{
     state = {
         crew: this.props.crew,
@@ -22,6 +28,11 @@ class CrewUpdateForm extends Component{
         this.props.dispatch({ type: 'FETCH_UPDATE_CREW_DOCUMENT_TWO', payload: this.props.match.params.id })     
     }
 
+    /**
+     * This will check to see if the props and state are the same...if not it will
+     * set the state to the prop passed in. This is used to update the state and set
+     * the default value of the form inputs (for edit mode).
+     */
     componentDidUpdate(){
         if(!Object.keys(this.state.crew).length || Array.isArray(this.state.crew)){
             console.log('checking crew for length');
@@ -71,10 +82,7 @@ class CrewUpdateForm extends Component{
 
     }
 
-    render() {
-        console.log('this.state in crew update:', this.state);
-        console.log('this.props.crew:', this.props.crew);
-        console.log('this.props.emergencyContact:', this.props.emergencyContact);
+    render() {        
         return(
             <div>
                 <h1>Edit Crew</h1>

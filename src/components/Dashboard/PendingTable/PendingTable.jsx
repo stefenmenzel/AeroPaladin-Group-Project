@@ -5,20 +5,17 @@ import { Table } from 'semantic-ui-react';
 
 const moment = require('moment');
 
+/**
+ * This is the pending table component. It takes in all the pending
+ * APIS' as a prop and displays them on a table from the dashboard.
+ */
 class PendingTable extends Component {
  
-    handleEdit = (id) => {
-        console.log('clicked on edit in dashboard', id)
+    handleEdit = (id) => {        
         this.props.history.push(`/reviewpage/${id}`)
     }
  
     render(){
-    // console.log('apisreducer info from pending: ', this.props.apisTrips);
-     
-
-     //conditional rending for table data
-     //console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
-
      return(
          
         <div>
@@ -34,8 +31,6 @@ class PendingTable extends Component {
                 
 
              {this.props.apisTrips.map(trip => {
-                // console.log('flight STUFF: ', trip);
-
              return((trip.flight_status == 2) ? 
              <Table.Body key={trip.flight_id}>
                 <Table.Row>

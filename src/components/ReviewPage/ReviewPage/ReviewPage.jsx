@@ -7,21 +7,15 @@ class ReviewPage extends Component {
          this.props.dispatch({ type: 'FETCH_REVIEW', payload: this.props.match.params.id })  
     }
 
-    handler =(id)=>{
-        console.log('this is id', id);
+    handler =(id)=>{        
         
     }
 
-    render() {
-        console.log('id thing', this.props.match.params.id );
-        console.log('review page state is HERE: ', this.props.review);
-        
+    render() {        
         return (
             <div>
                 {/* Review Page */}
-                <ReviewItems />
-                
-
+                <ReviewItems />            
             </div>
         )
     }

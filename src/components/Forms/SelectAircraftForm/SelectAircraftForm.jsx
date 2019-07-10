@@ -61,8 +61,7 @@ class SelectAircraftForm extends Component{
         options = []
         let selectOptions = []
         for(let i = 0; i < this.props.aircrafts.length; i++){
-            let aircraft = this.props.aircrafts[i]
-            console.log('aircraft is:', aircraft);
+            let aircraft = this.props.aircrafts[i]            
             options.push(aircraft);
             selectOptions.push(
                 {key:aircraft.id, value: i, text: `${aircraft.typeaircraft} ${aircraft.callsign}`}

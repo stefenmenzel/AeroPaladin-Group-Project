@@ -47,10 +47,9 @@ class AddCrewForm extends Component {
     render() {        
         return (
             <div>
-                <h1 className="ui header center aligned grid">Add Crew</h1>
-                {/* <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button> */}
+                <h1 className="ui header center aligned grid">Add Crew</h1>                
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2 className="travelDocHead">Crew Info</h2>                    
+                    <h2 className="travelDocHead">Crew Info</h2>
                     <Name extended={true} handleChange={this.handleChange} stateType="crew" person={this.state.crew} />
                     <Divider/>
                     <Address handleChange={this.handleChange} stateType="crew" person={this.state.crew}/>

@@ -18,8 +18,7 @@ function* fetchCrew(action) {
 }
 
 function* addCrew(action){
-    try{
-        console.log('addcrew saga post', action.payload)
+    try{        
         yield axios.post('/api/crew/add', action.payload, config);
         yield put({type:'FETCH_CREW'});
     }catch(error){
