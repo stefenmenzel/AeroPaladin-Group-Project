@@ -4,6 +4,7 @@ import {DateInput} from 'semantic-ui-calendar-react';
 
 import '../FormInputs.css';
 
+//these are the potential doccodes for the APIS
 const docCodeSelectOptions = [
     { key: 'P', value: 'P', text: 'Passport' },
     { key: 'L', value: 'L', text: "Pilot's License" },
@@ -20,6 +21,11 @@ const docCodeSelectOptions = [
     {key: 'TR', value: 'TR', text: 'U.S. Re-entry Permit Travel Document'},    
 ]
 
+/**
+ * This class contains a bunch of inputs for collecting travel document
+ * information for a crew or passenger in an APIS
+ * THIS COMPONENT MUST BE WRAPPED IN A FORM
+ */
 class TravelDocuments extends Component{
     
     state = {
@@ -27,9 +33,7 @@ class TravelDocuments extends Component{
         travelDocument: this.props.travelDocument
     }
 
-    onDateChange = (event, { name, value }) => {
-        console.log('date change', value);
-        console.log('date change:', name);
+    onDateChange = (event, { name, value }) => {        
         //nothing to see here. move along
         this.setState({
             ...this.state,
@@ -38,8 +42,7 @@ class TravelDocuments extends Component{
         this.handleChange(this.props.stateType, name, { target: { value: value } })
     }
 
-    onSelectChange = (event, { name, value }) => {
-        console.log("sex change:", value);
+    onSelectChange = (event, { name, value }) => {        
         this.handleChange(this.props.stateType, name, { target: { value: value } })
     }
 

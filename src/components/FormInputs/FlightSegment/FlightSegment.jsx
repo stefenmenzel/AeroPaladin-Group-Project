@@ -8,6 +8,11 @@ import '../FormInputs.css';
 
 class FlightSegment extends Component {        
 
+    /**
+     * Storing current values in local state...also setting
+     * values of the form inputs so that we can display current
+     * values in edits.
+     */
     state = {
         departure : {
          
@@ -30,28 +35,8 @@ class FlightSegment extends Component {
         departurecountry: '',
         departuredescription: ''      
     }
-
-    fillDummyForm = () => {
-        this.setState({
-            arrival: this.props.flightSegment.arrival,
-            departure: this.props.flightSegment.departure,
-            arrivalairport: this.props.flightSegment.arrival.airport,
-            departureairport: this.props.flightSegment.departure.airport,
-            arrivaldate: this.props.flightSegment.arrival.date,
-            departuredate: this.props.flightSegment.departure.date,
-            arrivaltime: this.props.flightSegment.arrival.time,
-            departuretime: this.props.flightSegment.departure.time,
-            arrivalcity: this.props.flightSegment.arrival.city,
-            arrivalstate: this.props.flightSegment.arrival.state,
-            arrivalcountry: this.props.flightSegment.arrival.country,
-            arrivaldescription: this.props.flightSegment.arrival.description,
-            departurecity: this.props.flightSegment.departure.city,
-            departurestate: this.props.flightSegment.departure.state,
-            departurecountry: this.props.flightSegment.departure.country,
-            departuredescription: this.props.flightSegment.departure.description
-        })
-    }
-
+    
+    //runs every time this component mounts -> state updates, props updates what have you.
     componentDidMount(){        
         if (Object.keys(this.props.apisReducer[this.props.stateType]).length){            
             if (this.state.departure !== this.props.apisReducer[this.props.stateType].departure) {
@@ -64,13 +49,17 @@ class FlightSegment extends Component {
         }            
     }
 
+    //This determines which SAGA dispatch to send the data to using state type.
     segmentOneOrTwo = () => {
         return ((this.props.stateType === 'flightSegmentOne') ? 'SET_APIS_FLIGHT_SEGMENT_ONE' : 'SET_APIS_FLIGHT_SEGMENT_TWO')
     }
 
+
+    //On submit, create an object from the departure and arrival to send out.
+    //Send data out to the SAGA.
+    //also reset state to empty values.
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("doing a submit", this.state);
+        event.preventDefault();        
         let objToSend = {
             departure: this.state.departure,
             arrival: this.state.arrival,
@@ -102,14 +91,16 @@ class FlightSegment extends Component {
 
     }
 
+    //go back to the previous page in the create new apis process.
     handlePrevious = (event) => {
         event.preventDefault();
         this.props.previousStep();
     }
 
-    onTimeChange = (event, { name, value }, segmentType) => {
-        console.log('date change', value);
-        console.log('date change:', name);
+    //this takes in a change event.
+    //this is specific to the way semantic UI does change events.
+    //We then set state with this new data.
+    onTimeChange = (event, { name, value }, segmentType) => {        
         //nothing to see here. move along
         this.setState({
             ...this.state,
@@ -121,8 +112,9 @@ class FlightSegment extends Component {
         })        
     }
 
-    handleChange = (propertyToChange, newProperty, event) => {
-        console.log('now changing: ' + propertyToChange + ' ' + newProperty);
+    //this is our normal handlechange function, it works similarly to the
+    //semantic UI way but with slightly different passed values.
+    handleChange = (propertyToChange, newProperty, event) => {        
 
         this.setState({
             ...this.state,
@@ -135,14 +127,9 @@ class FlightSegment extends Component {
     }
     
 
-    render() {
-        console.log('flight segment prop', this.props.flightSegment);        
-        console.log('flight segment state:', this.state);
-        console.log('this.props.apisReducer.flightSegment:', this.props.apisReducer[this.props.stateType])
-        console.log('this flightsegments departure object:', this.props.apisReducer[this.props.stateType].departure);
+    render() {        
         return (
-            <div className="formInputs">
-                <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm}></button>
+            <div className="formInputs">                
                 <form className="addForm" onSubmit={this.handleSubmit}>
                     <h2 className="travelDocHead">Flight Segment</h2>
                     <h3 className="travelDocHead">Departure</h3>
@@ -327,11 +314,7 @@ class FlightSegment extends Component {
                     </Label>
                     <Label className="formInputLabel">
                     <TimeInput className="formAltInput"
-                            name="time"
-                            // value={
-                            //     (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
-                            //     this.props.apisReducer[this.props.stateType].arrival.time :
-                            //     this.state.arrivaltime}
+                            name="time"                            
                             value={this.state.arrival.time}
                             iconPosition="left"
                             onChange={(event, { name, value }) => this.onTimeChange(event, { name, value }, 'arrival')}
@@ -341,23 +324,10 @@ class FlightSegment extends Component {
                         <span>
                             Estimated Time
                         </span>
-                    </Label>
-                    {/* <Label className="formInputLabel">
-                        <Input className="formInput"
-                            onChange={this.handleArrivalChange("time_zone")}
-                            placeholder="Time Zone"
-                        />
-                        <span>
-                            Time Zone
-                        </span>
-                    </Label> */}
+                    </Label>                    
                     <Label className="formInputLabel">
                         <DateInput className="formAltInput"
-                            name="date"
-                            // value={
-                            //     (Object.keys(this.props.apisReducer[this.props.stateType]).length) ?
-                            //     this.props.apisReducer[this.props.stateType].arrival.date :
-                            //     this.state.arrivaldate}
+                            name="date"                            
                             value={this.state.arrival.date}
                             placeholder="Estimated Arrival Date"
                             iconPosition="left"

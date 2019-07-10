@@ -5,15 +5,17 @@ import { Table } from 'semantic-ui-react';
 
 const moment = require('moment');
 
+/**
+ * This is the pending table component. It takes in all the pending
+ * APIS' as a prop and displays them on a table from the dashboard.
+ */
 class PendingTable extends Component {
  
-    handleEdit = (id) => {
-        console.log('clicked on edit in dashboard', id)
+    handleEdit = (id) => {        
         this.props.history.push(`/reviewpage/${id}`)
     }
  
     render(){
-   
      return(
          
         <div>
@@ -47,7 +49,7 @@ class PendingTable extends Component {
                                  <div class="hidden content">
                                      <i class="right edit icon"></i>
                                 </div>
-                            </div> 
+                            </div>                              
                     </Table.Cell>
                 </Table.Row>
              </Table.Body> : <p></p>)})}

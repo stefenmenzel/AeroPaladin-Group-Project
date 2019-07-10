@@ -10,65 +10,19 @@ import TravelDocuments from '../../FormInputs/TravelDocuments/TravelDocuments.js
 
 import '../Forms.css';
 
+/**
+ * This is the add passenger form.
+ * It wraps a bunch of components up in a form.
+ * This form makes a new passenger object and sends it to the database.
+ */
 class AddPassengerForm extends Component{
 
     state = {
 
     }
 
-    fillDummyForm1 = () => {
-        this.setState({
-            passenger: {
-                birthDate: "1968-03-21",
-                citizenShipCountry: "USA",
-                city: "Denver",
-                email: "numberOneMom@gmail.com",
-                firstName: "Kimberly",
-                lastName: "Aiken",
-                phoneNumber: "6174300473",  
-                postalCode: "02138",
-                residenceCountry: "USA",
-                sex: "F",
-                state: "MA",
-                streetAddress: "1213 Aspen Court",
-            },
-            travelDocumentOne: {
-                documentNumber: "123476978",
-                documentType: "P",
-                expiryDate: "2020-05-21",
-                residenceCountry: "USA",
-            }
-        })
-    }
-
-    fillDummyForm2 = () => {
-        this.setState({
-            passenger: {
-                birthDate: "1978-09-15",
-                citizenShipCountry: "USA",
-                city: "Denver",
-                email: "arealbro@gmail.com",
-                firstName: "Griffon",
-                lastName: "Aiken",
-                phoneNumber: "5023798019",
-                postalCode: "40203",
-                residenceCountry: "USA",
-                sex: "M",
-                state: "MA",
-                streetAddress: "1640 Cerullo Road",
-            },
-            travelDocumentOne: {
-                documentNumber: "3216549",
-                documentType: "P",
-                expiryDate: "2020-05-21",
-                residenceCountry: "USA",
-            }
-        })
-    }
-
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('sending out this passenger:', this.state);
+        event.preventDefault();        
         this.props.dispatch({type: 'ADD_PASSENGER', payload: this.state});
         this.props.history.push('/passengerinfo');
         Swal.fire({
@@ -93,16 +47,12 @@ class AddPassengerForm extends Component{
         })
     }
 
-    render(){
-        console.log('this.state:', this.state);
+    render(){        
         return(
             <div>
-                <h1 className="ui header center aligned grid">Add Passenger</h1>
-                {/* <button type="button" style={{ float: 'left', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm1}></button>
-                <button type="button" style={{ float: 'right', opacity: '0', height: '50px', width: '150px' }} onClick={this.fillDummyForm2}></button> */}
+                <h1 className="ui header center aligned grid">Add Passenger</h1>                
                 <form className="addForm" onSubmit={this.handleSubmit}>
-                    <h2 className="travelDocHead" onClick={this.fillDummyForm1}>Passenger Info</h2>
-                    <button type="button" style={{opacity: '0', height: '50px', width: '150px', margin:'auto', display: 'block' }} onClick={this.fillDummyForm2}></button>
+                    <h2 className="travelDocHead">Passenger Info</h2>                    
                     <Name extended={true} handleChange={this.handleChange} stateType="passenger" person={this.state.passenger}/>
                     <Divider />
                     <Address handleChange={this.handleChange} stateType="passenger" person={this.state.passenger} />

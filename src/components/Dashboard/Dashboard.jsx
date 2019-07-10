@@ -7,6 +7,11 @@ import SubmittedTable from './SubmittedTable/SubmittedTable.jsx';
 import HistoricTable from './HistoricTable/HistoricTable.jsx';
 import "./Dashboard.css";
 
+const moment = require('moment');
+
+/**
+ * This is our dashboard. It displays tables with various APIS information.
+ */
 class Dashboard extends Component {
     //dispatch goes to saga to fetch all the trips associated with the user who is logged in 
     componentDidMount() {

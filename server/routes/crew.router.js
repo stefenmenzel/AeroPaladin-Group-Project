@@ -6,7 +6,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-
+// Get crew information from database to crew settings view.
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "people_emergencycontacts".emergencycontact_id AS emergency_id, "address".*, "people".id, "people".firstname, "people".lastname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry FROM "people"
         LEFT JOIN "address" ON "address".id = "people".addresswhileinus_id        
@@ -23,14 +23,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+//  PUT to remove crew member info on crew member settings view. Change active status to false. Note this does not delete crew member but archives it from user.
 router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
-    let deleteID = req.params.id
-    console.log('DELETE CREW', deleteID);
-
+    let deleteID = req.params.id    
     const sqlQuery = `UPDATE "people"
         SET "active" = false
         WHERE "id" = $1;`
-
     pool.query(sqlQuery, [deleteID]).then(result => {
         console.log('DELETE', result);
         res.sendStatus(200)
@@ -40,10 +38,9 @@ router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// Send PASSENGER information to Reducer to update on form
+// Send CREW information to Reducer to the update form view
 router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
     let updateCrewId = req.params.id
-
     const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName",
         "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber",
         "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry",
@@ -63,6 +60,7 @@ router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send CREW document one to Reducer to the update form view
 router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
@@ -83,6 +81,7 @@ router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send CREW document Two to Reducer to the update form view
 router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
@@ -102,6 +101,7 @@ router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send CREW emergency contact to Reducer to the update form view
 router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
     let updateContactId = req.params.id
     const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "email","emergencycontacts".telephonenbr AS "phoneNumber" FROM "people"
@@ -122,16 +122,11 @@ router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
 
 
 
-router.post('/add', rejectUnauthenticated, async (req, res) => {
-    console.log('req.body:', req.body);
-    console.log('req.body.crew:', req.body.crew);
-    console.log('req.body.travelDocumentOne:', req.body.travelDocumentOne);
-    console.log('is there a travel document two:', (req.body.travelDocumentTwo) ? true : false)
+router.post('/add', rejectUnauthenticated, async (req, res) => {    
 
     const connection = await pool.connect();
 
-    const crew = req.body.crew;
-    console.log('req.body.crew', req.body.crew)
+    const crew = req.body.crew;    
     const travelDocumentOne = req.body.travelDocumentOne;
     const travelDocumentTwo = req.body.travelDocumentTwo;
     const emergencyContact = req.body.emergencyContact;
@@ -186,25 +181,20 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     try{
         await connection.query('BEGIN');
         let result = await connection.query(addressQuery, [crew.streetAddress, crew.city, crew.state, crew.postalCode, crew.residenceCountry])
-        crew_address_id = result.rows[0].id;
-        console.log('got all the way to address', result.rows[0].id);
+        crew_address_id = result.rows[0].id;        
 
         result = await connection.query(crewQuery, [crew.lastName, crew.firstName, crew.middleName, crew.birthDate, crew.sex, crew.residenceCountry, crew.residenceCountry, crew.email, crew.phoneNumber, 2, req.user.id, crew_address_id, crew_address_id])
-        crew_id = result.rows[0].id;
-        console.log('got all the way to crew', result.rows[0].id);
+        crew_id = result.rows[0].id;        
 
-        await connection.query(documentQuery, [travelDocumentOne.documentType, travelDocumentOne.documentNumber, travelDocumentOne.expiryDate, travelDocumentOne.residenceCountry, crew_id])
-        console.log('got all the way to doc 1');
+        await connection.query(documentQuery, [travelDocumentOne.documentType, travelDocumentOne.documentNumber, travelDocumentOne.expiryDate, travelDocumentOne.residenceCountry, crew_id])        
         if(travelDocumentTwo){
-            await connection.query(documentQuery, [travelDocumentTwo.documentType, travelDocumentTwo.documentNumber, travelDocumentTwo.expiryDate, travelDocumentTwo.residenceCountry, crew_id])
-            console.log('got all the way to doc 2');
+            await connection.query(documentQuery, [travelDocumentTwo.documentType, travelDocumentTwo.documentNumber, travelDocumentTwo.expiryDate, travelDocumentTwo.residenceCountry, crew_id])            
         }
 
         result = await connection.query(emergencyQuery, [emergencyContact.lastName, emergencyContact.firstName, emergencyContact.middleName, emergencyContact.phoneNumber, emergencyContact.email]);
         emergency_id = result.rows[0].id;
         await connection.query(people_emergencyQuery, [crew_id, emergency_id]);
-        await connection.query('COMMIT');
-        console.log('made it through');
+        await connection.query('COMMIT');        
         res.sendStatus(201);
     }catch(error){
         await connection.query('ROLLBACK');
@@ -214,9 +204,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
     }
 })
 
-router.put('/update', rejectUnauthenticated, async (req, res) => {
-    console.log('req.body for update crew:', req.body);
-
+router.put('/update', rejectUnauthenticated, async (req, res) => {    
     const crew = req.body.crew;
     const doc1 = req.body.travelDocumentOne;
     const doc2 = req.body.travelDocumentTwo;
@@ -244,12 +232,9 @@ router.put('/update', rejectUnauthenticated, async (req, res) => {
     try{
         await connection.query('BEGIN');
 
-        await connection.query(addressQuery, [crew.streetAddress, crew.city, crew.state, crew.postalCode, crew.permanentaddress_id]);
-        console.log('got through address');
-        await connection.query(crewQuery, [crew.lastName, crew.firstName, crew.middleName, crew.birthDate, crew.sex, crew.residenceCountry, (crew.citizenshipCountry || crew.residenceCountry), crew.email, crew.phoneNumber, crew.id]);
-        console.log("got through crew");
-        await connection.query(documentQuery, [doc1.documentType, doc1.documentNumber, doc1.expiryDate, doc1.residenceCountry, doc1.id]);
-        console.log('got through document one');
+        await connection.query(addressQuery, [crew.streetAddress, crew.city, crew.state, crew.postalCode, crew.permanentaddress_id]);        
+        await connection.query(crewQuery, [crew.lastName, crew.firstName, crew.middleName, crew.birthDate, crew.sex, crew.residenceCountry, (crew.citizenshipCountry || crew.residenceCountry), crew.email, crew.phoneNumber, crew.id]);        
+        await connection.query(documentQuery, [doc1.documentType, doc1.documentNumber, doc1.expiryDate, doc1.residenceCountry, doc1.id]);        
         if(doc2){
             await connection.query(documentQuery, [doc2.documentType, doc2.documentNumber, doc2.expiryDate, doc2.residenceCountry, doc2.id]);
         }

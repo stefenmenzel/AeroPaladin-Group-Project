@@ -7,6 +7,11 @@ import '../../FormInputs/FormInputs.css'
 
 let options = []
 
+
+/**
+ * This class goes on the create new APIS form and allows the 
+ * user to select 1-x passengers to go on their flight.
+ */
 class SelectPassengerForm extends Component {
 
     state = {
@@ -18,27 +23,21 @@ class SelectPassengerForm extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_PASSENGER' });
-        console.log("this.props.passenger:", this.props.passengers);
+        this.props.dispatch({ type: 'FETCH_PASSENGER' });        
     }
 
-
-
+    //this was the original way we were taking in a passenger selection
+    //we would take this in then there was an ADD button to add said passenger.
+    //we have since switched to just adding the passenger when selected.
     onSelectChange = (event, { name, value}) => {
-        let passengerObj = options[value];
-        console.log('passenger obj:', passengerObj);
-        let passengerId = passengerObj.id;
+        let passengerObj = options[value];                
         this.setState({
           ...this.state,
-          currentPassenger: passengerObj
-        //   passenger:{
-        //       ...this.state.passenger,
-        //       [passengerId]: passengerObj
-        //   }  
-        
+          currentPassenger: passengerObj        
         });
     }
     
+    //this will add a passenger only if the passenger hasn't already been added.
     addPassenger = (event, { name, value }) => {
         let passengerObj = options[value];
         passengerObj = {
@@ -50,24 +49,21 @@ class SelectPassengerForm extends Component {
             if(this.state.passengers[i].id === passengerObj.id){
                 return;
             }
-        }
-        console.log('passenger obj:', passengerObj);
-        let passengerId = passengerObj.id;
-        console.log('clicked on add button', this.state);
+        }                        
         this.setState({
             ...this.state,
             passengers: [
-                ...this.state.passengers,
-                // {[this.state.currentPassenger.id]:this.state.currentPassenger}
+                ...this.state.passengers,                
                 passengerObj
             ]
         })
 
     }
 
-    removePassenger = (passengerIndex) => {
-        // event.preventDefault();
-        console.log('in remove passenger', passengerIndex);
+    //this function allows you to remove a passenger from the tentative
+    //passenger list that will eventually be added to the reducer and eventually
+    //the database.
+    removePassenger = (passengerIndex) => {                
         let newPassengerList = this.state.passengers;
         newPassengerList.splice(passengerIndex, 1);
         this.setState({
@@ -76,26 +72,13 @@ class SelectPassengerForm extends Component {
         })
     }
 
-    // addPassenger = () => {
-    //     console.log('clicked on add button', this.state);
-    //     this.setState({
-    //         ...this.state,
-    //         passengers: [
-    //             ...this.state.passengers,
-    //             // {[this.state.currentPassenger.id]:this.state.currentPassenger}
-    //             this.state.currentPassenger
-    //         ]
-    //     })
-       
-    // }
-
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("doing a submit", this.state);
+        event.preventDefault();        
         this.props.dispatch({ type: 'SET_APIS_PASSENGER', payload: this.state.passengers })
         this.props.nextStep();
     }
 
+    //this takes all the passengers in from props and adds them to the drop down menu.
     getPassenger = () => {
         options = []
         let selectOptions = []
@@ -112,11 +95,7 @@ class SelectPassengerForm extends Component {
     
     
 
-    render(){
-        console.log('this.state:', this.state);
-        console.log('current passengers:', this.props.passengers);
-        console.log('current passenger state:', this.state.currentPassenger );
-        console.log('current passengers selected:', this.state.passengers);
+    render(){        
         return(
 
             <div className="formInputs"> 
@@ -133,23 +112,7 @@ class SelectPassengerForm extends Component {
                         <span>
                             Choose Passenger
                     </span>
-                    </Label>
-                    
-                    {/* <div className="formButtons">
-                        <Grid columns='equal'>                            
-                                <Grid.Column width={12}></Grid.Column>
-                                <Grid.Column width={3}>
-                                    <Button
-                                        type="button"
-                                        primary
-                                        className="formButton"
-                                        onClick={this.addPassenger}
-                                    >
-                                       ADD
-                                </Button>
-                                </Grid.Column>                                                     
-                        </Grid>
-                    </div> */}
+                    </Label>                    
                     <div>
                    <PassengerList removePassenger={this.removePassenger} passengers={(this.props.apisPassengers.length) ? this.props.apisPassengers : this.state.passengers}/>
                </div>

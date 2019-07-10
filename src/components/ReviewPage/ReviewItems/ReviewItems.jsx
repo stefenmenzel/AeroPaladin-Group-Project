@@ -6,30 +6,35 @@ import {Button, List} from 'semantic-ui-react';
 
 const moment = require('moment');
 
+/**
+ * This class displays all the review items for the review
+ * your created APIS page. All of the items that display on the page
+ * are here.
+ */
 class ReviewItems extends Component {
   
-    editAircraft = () => {
-        console.log('in edit Aircraft');
+    //this goes back to the Create new APIS page for add an aircraft.
+    editAircraft = () => {        
         this.props.history.push(`/apis/${1}`)
     }
 
-    editCrew = () => {
-        console.log('in edit Crew');
+    //this goes back to the Create new APIS page for add a crew member.
+    editCrew = () => {        
         this.props.history.push(`/apis/${2}`)
     }
 
-    editPassenger = () => {
-        console.log('in edit Passenger');
+    //this goes back to the Create new APIS page for adding passengers.
+    editPassenger = () => {        
         this.props.history.push(`/apis/${3}`)
     }
 
-    editFlightSegementOne = () => {
-        console.log('in edit Flight Segement One');
+    //this goes back to the Create new APIS page for flight segment one.
+    editFlightSegementOne = () => {        
         this.props.history.push(`/apis/${4}`)
     }
 
-    editFlightSegementTwo = () => {
-    console.log('in edit Flight Segement Two');
+    //this goes back to the Create new APIS page for flight segment two.
+    editFlightSegementTwo = () => {    
     this.props.history.push(`/apis/${5}`)
 }
 
@@ -41,35 +46,28 @@ class ReviewItems extends Component {
        
     //Conditional rendering to show only people with the type of crew (2)
      if (Object.keys(this.props.review).length) {
-    
-       
         crewToShow = (
-      <>
-        <ul>
-            {this.props.review.crewpaxpeople.map(person => {  
-              if(person.crew_paxPeopleType === 2) 
-               // console.log('PERSON HEIRE: ', person);
-                return <><li>{person.crew_paxFirstName}</li> <br/> </>
-            })}
-        </ul>
-        </>    
+            <>
+                <ul>
+                    {this.props.review.crewpaxpeople.map(person => {  
+                    if(person.crew_paxPeopleType === 2)                     
+                        return <><li>{person.crew_paxFirstName}</li> <br/> </>
+                    })}
+                </ul>
+            </>    
     )}
     //Conditional rendering to show only people with the type of pax (1)
-    if (Object.keys(this.props.review).length) {
-    
-       console.log('new thing here: ', this.props.review);
-       
+    if (Object.keys(this.props.review).length) {       
         paxToShow = (
-      <>
-        <ul>
-            {this.props.review.crewpaxpeople.map(person => {  
-              if(person.crew_paxPeopleType === 1) 
-               // console.log('PERSON HEIRE: ', person);
-                return  <>
-                <li>{person.crew_paxFirstName}</li> <br/> </>
-            })}
-        </ul>
-        </>    
+            <>
+                <ul>
+                    {this.props.review.crewpaxpeople.map(person => {  
+                    if(person.crew_paxPeopleType === 1)                     
+                        return  <>
+                        <li>{person.crew_paxFirstName}</li> <br/> </>
+                    })}
+                </ul>
+            </>    
     )}
 
 

@@ -6,8 +6,7 @@ const router = express.Router();
 
 
 /*** POST apis route ***/
-router.post('/', rejectUnauthenticated, async (req, res) => {
-    console.log('req.body here: ', req.body);
+router.post('/', rejectUnauthenticated, async (req, res) => {    
 
     //returning data from DB queriess
     let airport_id_One = 0;

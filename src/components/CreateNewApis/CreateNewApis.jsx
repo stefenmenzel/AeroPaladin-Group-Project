@@ -9,48 +9,6 @@ import FlightSegment from '../FormInputs/FlightSegment/FlightSegment';
 import ReviewApis from '../Forms/ReviewApis/ReviewApis';
 import '../CreateNewApis/CreateNewApis.css';
 
-
-const fs1Dummy = {
-    departure: {
-        airport: "MSP",
-        date: "2020-02-02",
-        time: "09:35",
-        city: "Tulum",
-        state: "QR",
-        country: "MEX",
-        description: "tacos"
-    },
-    arrival: {
-        airport: "TUY",
-        date: "2020-02-02",
-        time: "15:20",
-        city: "Minneapolis",
-        state: "MN",
-        country: "USA",
-        description: "text"
-    }
-}
-
-const fs2Dummy = {
-    departure: {
-        airport: "TUY",
-        date: "2020-02-09",
-        time: "15:20",
-        city: "Minneapolis",
-        state:"MM",
-        country: "USA",
-        description: "text"
-    },
-    arrival: {
-        airport: "MSP",
-        date: "2020-02-09",
-        time: "09:35",
-        city: "Tulum",
-        state: "QR",
-        country: "MEX",
-        description: "tacos"
-    }
-}
 /**
  * This component will walk a user through creating a new APIS.
  * It has a stepper that displays the current progress in creating
@@ -79,15 +37,13 @@ class CreateNewApis extends Component {
 
 
     //flip to the next step
-    nextStep = () => {
-        console.log("inside next step");
+    nextStep = () => {        
         if (this.state.step + 1 <= this.state.maxSteps) {
             this.setState({
                 step: this.state.step + 1
             })
             this.props.history.push(`/apis/${Number(this.props.match.params.id) + 1}`)
-        }
-        console.log('Next Step State', this.state);
+        }        
 
     }
 
@@ -102,8 +58,6 @@ class CreateNewApis extends Component {
     }
 
     editStep = (event) => {
-        console.log('inside edite step', event);
-
         this.setState({
             ...this.state,
             isStepSet: !this.state.isStepSet,
@@ -127,8 +81,8 @@ class CreateNewApis extends Component {
             <SelectAircraftForm nextStep={this.nextStep} />,
             <SelectCrewForm nextStep={this.nextStep} previousStep={this.previousStep} />,
             <SelectPassengerForm nextStep={this.nextStep} previousStep={this.previousStep} />,
-            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne" flightSegment={fs1Dummy} />,
-            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo" flightSegment={fs2Dummy} />,
+            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentOne" />,
+            <FlightSegment nextStep={this.nextStep} previousStep={this.previousStep} stateType="flightSegmentTwo" />,
             <ReviewApis editStep={this.editStep} nextStep={this.nextStep} previousStep={this.previousStep} />
 
 
@@ -138,12 +92,7 @@ class CreateNewApis extends Component {
         )
     }
 
-    render() {
-
-        console.log('Params ID', this.props.match.params.id);
-        console.log('State Value', this.state);
-
-
+    render() {        
         return (
             <>
                 {/* First a stepper...this displays current progress */}
