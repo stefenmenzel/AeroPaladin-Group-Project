@@ -20,8 +20,7 @@ class AircraftInfo extends Component {
         this.props.history.push("/addaircraft")
     }
 
-    handleEdit = (id) =>{
-        console.log('edit', id)
+    handleEdit = (id) =>{        
         this.props.history.push(`/aircraftupdate/${id}`)  
     }
     
@@ -29,9 +28,7 @@ class AircraftInfo extends Component {
         this.props.history.push(`/userinfo/`)
     }
 
-    handleDelete = (id) => {
-        console.log('delete', id);
-
+    handleDelete = (id) => {        
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -62,7 +59,6 @@ class AircraftInfo extends Component {
             ) {
                 swalWithBootstrapButtons.fire(
                     'Cancelled!',
-
                 )
             }
         })

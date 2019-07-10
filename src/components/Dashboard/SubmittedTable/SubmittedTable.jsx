@@ -5,16 +5,16 @@ import { Button, Table } from 'semantic-ui-react';
 
 const moment = require('moment');
 
+/**
+ * This contains all the submitted APIS' for current flights.
+ * This displays on the dashboard page.
+ */
 class SubmittedTable extends Component {
 
-    handleArchive = (idToUpdate) => {
-        console.log('in handleArchive', idToUpdate);
+    handleArchive = (idToUpdate) => {        
         this.props.dispatch({type: 'DELETE_APIS_TRIPS', payload:{id: idToUpdate}})
     }
     render() {
-        //conditional rending for table data
-       // console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
-
         return (
 
             <div>
@@ -30,17 +30,15 @@ class SubmittedTable extends Component {
 
 
                     {this.props.apisTrips.map(trip => {
-                       // console.log('flight STUFF: ', trip);
-
                         return ((trip.flight_status === 3) ?
                             <Table.Body key={trip.flight_id}>
                                 <Table.Row>
                                     <Table.Cell className={"departureInfoCell"}>
                                         {trip.departureairportcity}, {trip.departurecountrycode} Description: ({trip.departureairportdesc})
-                    </Table.Cell>
+                                    </Table.Cell>
                                     <Table.Cell className={"inboundInfoCell"}>
                                         {trip.inboundairportcity}, {trip.inboundcountrycode} Description: ({trip.inboundaiportdesc})
-                    </Table.Cell>
+                                    </Table.Cell>
                                     <Table.Cell className={"timeCell"}>
                                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                                     </Table.Cell>
@@ -50,12 +48,12 @@ class SubmittedTable extends Component {
                                             <div class="hidden content">
                                                 <i class="right archive icon"></i>
                                             </div>
-                                        </div>
-                                        {/* <button onClick={() => this.handleArchive(trip.id)}>Archive</button> */}
+                                        </div>                                        
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body> : <p></p>)
-                    })}
+                        })
+                    }
                 </Table>
             </div>
         )

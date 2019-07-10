@@ -49,8 +49,7 @@ class PendingTable extends Component {
                                  <div class="hidden content">
                                      <i class="right edit icon"></i>
                                 </div>
-                            </div> 
-                             {/* <Button className="ui animated button green" tabIndex="0" onClick={() => this.handleEdit(trip.id)}>Edit</Button> */}
+                            </div>                              
                     </Table.Cell>
                 </Table.Row>
              </Table.Body> : <p></p>)})}

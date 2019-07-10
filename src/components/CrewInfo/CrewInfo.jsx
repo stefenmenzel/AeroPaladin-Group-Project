@@ -22,8 +22,7 @@ class PassengerInfo extends Component {
         this.props.history.push("/addcrew")
     }
     
-    handleEdit = (id) => {
-        console.log('edit', id)
+    handleEdit = (id) => {        
         this.props.history.push(`/crewupdate/${id}`)
     }
 
@@ -31,9 +30,7 @@ class PassengerInfo extends Component {
         this.props.history.push(`/userinfo/`)
     }
 
-    handleDelete = (id) => {
-        console.log('delete', id);
-
+    handleDelete = (id) => {    
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',

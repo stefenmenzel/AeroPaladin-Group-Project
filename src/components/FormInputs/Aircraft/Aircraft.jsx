@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Label } from 'semantic-ui-react';
 
-// import './Aircraft.css';
 import '../FormInputs.css';
 
 class Aircraft extends Component {
