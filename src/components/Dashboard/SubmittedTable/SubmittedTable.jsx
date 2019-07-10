@@ -7,14 +7,12 @@ const moment = require('moment');
 
 class SubmittedTable extends Component {
 
+    //archives flight by calling the 'delete apis trips dispatch and including the id of the flight to update
     handleArchive = (idToUpdate) => {
         console.log('in handleArchive', idToUpdate);
         this.props.dispatch({type: 'DELETE_APIS_TRIPS', payload:{id: idToUpdate}})
     }
     render() {
-        //conditional rending for table data
-       // console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
-
         return (
 
             <div>

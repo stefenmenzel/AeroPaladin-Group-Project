@@ -6,9 +6,8 @@ import { Button, Table } from 'semantic-ui-react';
 const moment = require('moment');
 
 class HistoricTable extends Component {
-
+    //'deletes' the flight from the dashboard view by changing the flight status
     handleArchive = (idToUpdate) => {
-        console.log('in handleArchive', idToUpdate);
         this.props.dispatch({ type: 'DELETE_APIS_TRIPS', payload: { id: idToUpdate } })
     }
 
@@ -39,10 +38,10 @@ class HistoricTable extends Component {
                                 <Table.Row>
                                     <Table.Cell className={"departureInfoCell"}>
                                         {trip.departureairportcity}, {trip.departurecountrycode} Description: ({trip.departureairportdesc})
-                    </Table.Cell>
+                                    </Table.Cell>
                                     <Table.Cell className={"inboundInfoCell"}>
                                         {trip.inboundairportcity}, {trip.inboundcountrycode} Description: ({trip.inboundaiportdesc})
-                    </Table.Cell>
+                                    </Table.Cell>
                                     <Table.Cell className={"timeCell"}>
                                         {moment(trip.localarrivaltimestamp).format("MM/DD/YY")} at {moment(trip.arrivaltimestamp).format('LT')}
                                     </Table.Cell>
