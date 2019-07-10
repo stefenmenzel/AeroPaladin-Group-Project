@@ -39,7 +39,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     //crew member person ID
     let crewMemberID = req.body.crew.id;
     
-
+    // adds airport data returns airport id
     const airportPost = `INSERT INTO "airport" ("airportcode", 
                          "city", 
                          "cntrycode", 
@@ -48,6 +48,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                          SELECT $1, $2, $3, $4, $5 
                          RETURNING "airport".id ;`
 
+    //adds to the itinerary table. Includes all pertinent data returns itinerary id
     const itineraryPost = `INSERT INTO "itinerary" ("departure_airport_id", 
                             "localdeparturetimeStamp", 
                             "inboundarrivalLocation_airport_id", 
@@ -55,7 +56,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                            VALUES ($1, $2, $3, $4)
                            RETURNING "itinerary".id;`
     ;
-    
+    //adds to the flight table. Includes all pertinent data. returns the flight id
     const flightPost = `INSERT INTO "flight" ("itinerary_id", 
                         "emergencycontact_id", 
                         "aircraft_id", 
@@ -64,15 +65,16 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                         "flight_status")
                         VALUES ($1, $2, $3, $4, $5, $6)
                         RETURNING "flight".id;`
-    
+    //adds to the user_itinerary table. Includes all pertinent data
     const userItineraryPost = `INSERT INTO "user_itinerary" ("user_id", 
                               "itinerary_id")
                                VALUES ($1, $2);`
-
+    //adds to the flight_people table. Includes all pertinent data
     const flightPeoplePost = `INSERT INTO "flight_people" ("people_id", 
                               "flight_id")
                               VALUES ($1, $2); `
-
+    // first part of the GET(s) to collect all the data for the XML documents.
+    // gets airport data, itinerary data, aircraft data including owner and operator and address info based off the flight id that was posted
     const xmlGetOne = `SELECT 
 		--airport data
 		flightBuilding1.airportcode AS inboundAirportCode,
@@ -150,7 +152,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         left join "address" as operatoraddress on operatoraddress.id = p2.permanentaddress_id -- op address
 
         WHERE f1.id = $1;`
-    
+    //gets all the crew data for the XML doc
     const xmlGetCrew = `SELECT  --crew data
 		people.firstname AS crewInfoFirstName,
 		people.middlename AS crewInfoMiddleName,
@@ -190,7 +192,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     const connection = await pool.connect();
     console.log('in CONNECTION');
     console.log('CREW MEMBER ID HERE: ', crewMemberID);
-    
+    //async await post and GET
     try {
         await connection.query('BEGIN');
         

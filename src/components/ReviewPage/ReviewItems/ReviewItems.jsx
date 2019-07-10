@@ -42,9 +42,10 @@ class ReviewItems extends Component {
  render() {
     
     let crewToShow;
-    let paxToShow;    
+    let paxToShow;
+       
     //Conditional rendering to show only people with the type of crew (2)
-     if (Object.keys(this.props.review).length) {    
+     if (Object.keys(this.props.review).length) {
         crewToShow = (
             <>
                 <ul>

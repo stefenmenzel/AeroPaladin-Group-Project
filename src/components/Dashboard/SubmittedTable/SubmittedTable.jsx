@@ -10,7 +10,8 @@ const moment = require('moment');
  * This displays on the dashboard page.
  */
 class SubmittedTable extends Component {
-
+  
+    //archives flight by calling the 'delete apis trips dispatch and including the id of the flight to update
     handleArchive = (idToUpdate) => {        
         this.props.dispatch({type: 'DELETE_APIS_TRIPS', payload:{id: idToUpdate}})
     }

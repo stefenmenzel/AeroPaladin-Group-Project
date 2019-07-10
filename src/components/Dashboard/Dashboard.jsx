@@ -13,7 +13,7 @@ const moment = require('moment');
  * This is our dashboard. It displays tables with various APIS information.
  */
 class Dashboard extends Component {
-
+    //dispatch goes to saga to fetch all the trips associated with the user who is logged in 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_APIS_TRIPS' })
     }
