@@ -179,7 +179,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 		"emergencycontacts".middlename AS emergencycontactmiddlename,
 		"emergencycontacts".lastname AS emergencycontactlastname,
 		"emergencycontacts".telephonenbr AS emergencycontactphonenbr,
-		"emergencycontacts".emailaddr AS emergencycontactemail
+        "emergencycontacts".emailaddr AS emergencycontactemail,
 
         from "people" 
         left JOIN "address" on "people".permanentaddress_id = "address".id
