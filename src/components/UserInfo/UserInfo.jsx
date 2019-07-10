@@ -6,14 +6,16 @@ import './UserInfo.css'
 
 class UserInfo extends Component {
 
+    // Send user to crew information view. 
     handleCrewPage = () => {
         this.props.history.push("/crewinfo")
     }
-
+    // Send user to passenger information view. 
     handlePassengerPage = () => {
         this.props.history.push("/passengerinfo")
     }
 
+    // Send user to aircraft information view. 
     handleAircraftPage = () => {
         this.props.history.push("/aircraftinfo")
     }
@@ -37,7 +39,6 @@ class UserInfo extends Component {
                     <br/>
                     <p className="ui sub header"> Phone Number:</p> <p>{this.props.user.phonenumber}</p>
                 </div>
-            
             <div className= "content userButtons">
                 <div>
                     <Button className="ui green button" onClick={this.handleCrewPage}>Crew</Button>
@@ -54,6 +55,7 @@ class UserInfo extends Component {
     }
 }
 
+// Get access to user information from redux
 const mapStateToProps = (reduxState) => {
     return {
         user: reduxState.user

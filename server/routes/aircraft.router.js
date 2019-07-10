@@ -111,7 +111,7 @@ router.post('/add', rejectUnauthenticated, async (req, res) => {
 });
 
 
-// Information to get information on Aircraft settings page
+// Get aircraft information from database to crew settings view.
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "aircraft".*, "people".firstname as operator_firtname, "people".lastname as operator_lastname, "owner".firstname as owner_firstname, "owner".lastname as owner_lastname FROM "aircraft"
         JOIN "people" ON  "people".id = "aircraft".operator_id
@@ -128,7 +128,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// Send Aircraft information to Reducer to update on form
+// Send Aircraft information to Reducer to update form
 router.get('/updateaircraft/:id', rejectUnauthenticated, (req, res) => {
 let updateAircraftId = req.params.id
     const sqlQuery = `SELECT "aircraft".id, "aircraft".tailnumber AS "tailNumber", "aircraft".typeaircraft AS "type", "aircraft".color, "aircraft".callsign AS "callSign", "aircraft".cbpdecalnbr AS "CBP",
@@ -148,7 +148,7 @@ let updateAircraftId = req.params.id
     })
 });
 
-// Send Operator information to Reducer to update on form
+// Send Operator information to Reducer to update form
 router.get('/updateoperator/:id', rejectUnauthenticated, (req, res) => {
     let updateOperatorId = req.params.id
     const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
@@ -170,7 +170,7 @@ router.get('/updateoperator/:id', rejectUnauthenticated, (req, res) => {
 });
 
 
-// Send owner information to Reducer to update on form
+// Send owner information to Reducer to update form
 router.get('/updateowner/:id', rejectUnauthenticated, (req, res) => {
     let updateOwnerId = req.params.id
     const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName", "people".middlename AS "middleName", "people".lastname AS "lastName",
@@ -191,11 +191,8 @@ AND "aircraft".active = TRUE;`
     })
 });
 
-
-
-
+//  PUT to remove aircraft info on aircraft settings view. Change active status to false. Note this does not delete aircraft but archives it from user.
 router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
-
     let deleteId = req.params.id
     const sqlQuery = `
          UPDATE "aircraft"
