@@ -21,7 +21,7 @@ class PassengerInfo extends Component {
     // Send user to add crew form. 
     addCreww = () => {
         this.props.history.push("/addcrew")
-    }
+    }    
 
     // Send user to form view to update crew member form. 
     handleEdit = (id) => {

@@ -5,18 +5,18 @@ import { Button, Table } from 'semantic-ui-react';
 
 const moment = require('moment');
 
+/**
+ * This displays on the dashboard and 
+ * contains all the APIS' that have flights that have
+ * already happened.
+ */
 class HistoricTable extends Component {
 
-    handleArchive = (idToUpdate) => {
-        console.log('in handleArchive', idToUpdate);
+    handleArchive = (idToUpdate) => {        
         this.props.dispatch({ type: 'DELETE_APIS_TRIPS', payload: { id: idToUpdate } })
     }
 
     render() {
-        
-        //conditional rending for table data
-        // console.log('FLIGHT STATUS HERE', this.props.apisTrips[0]);
-
         return (
 
             <div>
@@ -32,8 +32,6 @@ class HistoricTable extends Component {
 
 
                     {this.props.apisTrips.map(trip => {
-                        console.log('flight STUFF: ', trip);
-
                         return ((trip.flight_status == 1) ?
                             <Table.Body key={trip.flight_id}>
                                 <Table.Row>
@@ -52,8 +50,7 @@ class HistoricTable extends Component {
                                             <div class="hidden content">
                                                 <i class="right archive icon"></i>
                                             </div>
-                                        </div>
-                                        {/* <button onClick={() => this.handleArchive(trip.id)}>Archive</button> */}
+                                        </div>                                        
                                     </Table.Cell>
                                 </Table.Row>
                             </Table.Body> : <p></p>)
