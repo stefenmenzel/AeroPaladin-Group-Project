@@ -4,6 +4,7 @@ const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios');
+const xmlGenerator = require('../modules/xml-generator');
 
 /*** POST apis route ***/
 router.post('/', rejectUnauthenticated, async (req, res) => {    
@@ -369,7 +370,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             crew: crewMemberData[0],
             pax: paxData
         }
-        axios.post('/api/xml/generate', xmlObj)
+        // axios.post('/api/xml/generate', xmlObj)
+        let xmlAPIS = xmlGenerator(xmlObj);
+        console.log('xmlApis:', xmlAPIS);
         res.sendStatus(201);
     }
     catch(error){

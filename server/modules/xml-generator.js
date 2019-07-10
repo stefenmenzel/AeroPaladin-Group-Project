@@ -1,54 +1,60 @@
 const xmlBuilder = require('xmlbuilder');
 
 function generateXML(currentAPIS){
-    
+    console.log('currentApis from xml generator:', currentAPIS);
+    let itinerary = currentAPIS.itinerary;
+    let crew = currentAPIS.crew;
+    let paxArray = currentAPIS.pax;
     /**
      * First we create a Transaction element...it's long
      ***************** TRANSACTION *******************
      */
 
     let emergencyContact = {
-        LastName: 'Dog',
-        FirstName: 'Gulash',
-        MiddleName: 'The',
-        TelephoneNbr: '867-5309',
-        EmailAddr: 'gubu@gmail.com',
+        LastName: crew.emergencycontactlastname,
+        FirstName: crew.emergencycontactfirstname,
+        MiddleName: (crew.emergencycontactmiddlename != null ? crew.emergencycontactmiddlename : ''),
+        TelephoneNbr: crew.emergencycontactphonenbr,
+        EmailAddr: crew.emergencycontactemail,
     }
 
     let itinerary = {
         InboundItinerary: {
             InboundDepartureLocation: {
-                AirportCode: 'inbound airport',
-                City: 'city',
-                CountryCode: 'USA',
+                AirportCode: itinerary.departureairportcode,
+                City: itinerary.departureairportcity,
+                State: '',//itinerary.departureairportstate
+                CountryCode: itinerary.departurecountrycode,
+                PlaceDescription: itinerary.departureairportdesc
             },
-            LocalDepartureDate: '2019-08-17',
-            LocalDepartureTime: '16:20',
+            LocalDepartureDate: Date.toLocaleDateString(itinerary.departuretimestamp),
+            LocalDepartureTime: Date.toLocaleTimeString(itinerary.departuretimestamp),
             InboundCompleteItinerary: {
-                ForeignAirport1: 'MSP',
-                ForeignAirport2: 'MSP',
-                ForeignAirport3: 'MSP',
-                ForeignAirport4: 'MSP',
-                ForeignAirport5: 'MSP',
+                // ForeignAirport1: 'MSP',
+                // ForeignAirport2: 'MSP',
+                // ForeignAirport3: 'MSP',
+                // ForeignAirport4: 'MSP',
+                // ForeignAirport5: 'MSP',
             },
             InboundArrivalLocation: {
-                AirportCode: 'MSP',
-                City: 'Minneapolis',
-                State: 'Minnesota',
-                PlaceDescription: 'Not too bad'
+                AirportCode: itinerary.inboundairportcode,
+                City: itinerary.inboundairportcity,
+                State: '',//itinerary.inboundairportstate,
+                CountryCode: itinerary.inboundcountrycode,
+                PlaceDescription: itinerary.inboundairportdesc
             },
-            LocalArrivalDate: '2019-08-17',
-            LocalArrivalTime: '17:20'
+            LocalArrivalDate: Date.toLocaleDateString(itinerary.arrivaltimestamp),
+            LocalArrivalTime: Date.toLocaleTimeString(itinerary.arrivaltimestamp),
         }
     }
 
     let aircraft = {
         AircraftDetail: {
-            TailNumber: 'nbp420',
-            TypeAircraft: 'Cessna',
-            Color: 'blue',
-            CallSign: 'SAW420',
-            CBPDecalNumber: '4598clo'
+            TailNumber: itinerary.tailnumber,
+            TypeAircraft: itinerary.typeaircraft,
+            Color: itinerary.color,
+            CallSign: itinerary.callsign,
+            CBPDecalNumber: itinerary.cbpdecalnbr
         },
         OperatorDetail: {
             PersonOperator: {
