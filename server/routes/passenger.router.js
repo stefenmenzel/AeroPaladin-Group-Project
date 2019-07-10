@@ -6,7 +6,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-
+// Get passenger information from database to crew settings view.
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "document".*, "address".*, "people".id, "people".firstname, "people".lastname, "people".birthdate,
         "people".sex, "people".residencecntry, "people".citizenshipcntry FROM "people"
@@ -16,7 +16,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         AND "people".active = TRUE
         AND "people".user_id = $1;
     `
-
     pool.query(sqlQuery, [req.user.id]).then(result => {
         console.log(' Passenger Result', result.rows);
         res.send(result.rows)
@@ -26,10 +25,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });  
 
+//  PUT to remove passenger info on passenger settings view. Change active status to false. Note this does not delete passenger but archives it from user.
 router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     let deleteID = req.params.id
     console.log('DELETE', deleteID);
-    
     const sqlQuery = `UPDATE "people"
         SET "active" = false
         WHERE "id" = $1;
@@ -43,7 +42,7 @@ router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// Send PASSENGER information to Reducer to update on form
+// Send PASSENGER information to Reducer to update on form view
 router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
     let updatePassengerId = req.params.id
     console.log('id', updatePassengerId, req.user.id);
@@ -66,6 +65,7 @@ router.get('/updatepassenger/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send passenger document one to Reducer to the update form view
 router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
@@ -85,6 +85,7 @@ router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send passenger document two to Reducer to the update form view
 router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table

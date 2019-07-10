@@ -6,7 +6,7 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-
+// Get crew information from database to crew settings view.
 router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlQuery = `SELECT "people_emergencycontacts".emergencycontact_id AS emergency_id, "address".*, "people".id, "people".firstname, "people".lastname, "people".birthdate, "people".sex, "people".residencecntry, "people".citizenshipcntry FROM "people"
         LEFT JOIN "address" ON "address".id = "people".addresswhileinus_id        
@@ -23,13 +23,12 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+//  PUT to remove crew member info on crew member settings view. Change active status to false. Note this does not delete crew member but archives it from user.
 router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     let deleteID = req.params.id    
-
     const sqlQuery = `UPDATE "people"
         SET "active" = false
         WHERE "id" = $1;`
-
     pool.query(sqlQuery, [deleteID]).then(result => {
         console.log('DELETE', result);
         res.sendStatus(200)
@@ -39,10 +38,9 @@ router.put('/delete/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
-// Send PASSENGER information to Reducer to update on form
+// Send CREW information to Reducer to the update form view
 router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
     let updateCrewId = req.params.id
-
     const sqlQuery = `SELECT "people".id, "people".permanentaddress_id, "people".firstname AS "firstName",
         "people".lastname AS "lastName", "people".middlename AS "middleName", "people".telephonenbr AS "phoneNumber",
         "people".birthdate AS "birthDate", "people".sex, "people".residencecntry AS "residenceCountry",
@@ -62,6 +60,7 @@ router.get('/updatecrew/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send CREW document one to Reducer to the update form view
 router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
@@ -82,6 +81,7 @@ router.get('/updatedocument1/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send CREW document Two to Reducer to the update form view
 router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     let updateDocumentId = req.params.id
     const sqlQuery = `SELECT "document".id, "document".documentnbr AS "documentNumber","document".doccode AS "documentType","document".expirydate AS "expiryDate", "document".cntrycode AS "residenceCountry"  FROM "people" as people_table
@@ -101,6 +101,7 @@ router.get('/updatedocument2/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Send CREW emergency contact to Reducer to the update form view
 router.get('/updateemergency/:id', rejectUnauthenticated, (req, res) => {
     let updateContactId = req.params.id
     const sqlQuery = `SELECT "emergencycontacts".id, "emergencycontacts".firstname AS "firstName", "emergencycontacts".lastname AS "lastName", "emergencycontacts".middlename AS "middleName",  "emergencycontacts".emailaddr AS "email","emergencycontacts".telephonenbr AS "phoneNumber" FROM "people"
