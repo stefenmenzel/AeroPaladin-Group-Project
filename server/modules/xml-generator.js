@@ -1,85 +1,91 @@
 const xmlBuilder = require('xmlbuilder');
 
 function generateXML(currentAPIS){
-    
+    console.log('currentApis from xml generator:', currentAPIS);
+    let apisItinerary = currentAPIS.itinerary;
+    let apisCrew = currentAPIS.crew;
+    let paxArray = currentAPIS.pax;
     /**
      * First we create a Transaction element...it's long
      ***************** TRANSACTION *******************
      */
 
     let emergencyContact = {
-        LastName: 'Dog',
-        FirstName: 'Gulash',
-        MiddleName: 'The',
-        TelephoneNbr: '867-5309',
-        EmailAddr: 'gubu@gmail.com',
+        LastName: apisCrew.emergencycontactlastname,
+        FirstName: apisCrew.emergencycontactfirstname,
+        MiddleName: (apisCrew.emergencycontactmiddlename != null ? apisCrew.emergencycontactmiddlename : ''),
+        TelephoneNbr: apisCrew.emergencycontactphonenbr,
+        EmailAddr: apisCrew.emergencycontactemail,
     }
 
     let itinerary = {
         InboundItinerary: {
             InboundDepartureLocation: {
-                AirportCode: 'inbound airport',
-                City: 'city',
-                CountryCode: 'USA',
+                AirportCode: apisItinerary.departureairportcode,
+                City: apisItinerary.departureairportcity,
+                State: apisItinerary.departureairportstate,
+                CountryCode: apisItinerary.departurecountrycode,
+                PlaceDescription: apisItinerary.departureairportdesc
             },
-            LocalDepartureDate: '2019-08-17',
-            LocalDepartureTime: '16:20',
-            InboundCompleteItinerary: {
-                ForeignAirport1: 'MSP',
-                ForeignAirport2: 'MSP',
-                ForeignAirport3: 'MSP',
-                ForeignAirport4: 'MSP',
-                ForeignAirport5: 'MSP',
+            LocalDepartureDate: new Date().toLocaleDateString(apisItinerary.departuretimestamp),
+            LocalDepartureTime: new Date().toLocaleTimeString(apisItinerary.departuretimestamp),
+            InboundCompleteapisItinerary: {
+                // ForeignAirport1: 'MSP',
+                // ForeignAirport2: 'MSP',
+                // ForeignAirport3: 'MSP',
+                // ForeignAirport4: 'MSP',
+                // ForeignAirport5: 'MSP',
             },
             InboundArrivalLocation: {
-                AirportCode: 'MSP',
-                City: 'Minneapolis',
-                State: 'Minnesota',
-                PlaceDescription: 'Not too bad'
+                AirportCode: apisItinerary.inboundairportcode,
+                City: apisItinerary.inboundairportcity,
+                State: apisItinerary.inboundairportstate,
+                CountryCode: apisItinerary.inboundcountrycode,
+                PlaceDescription: apisItinerary.inboundairportdesc
             },
-            LocalArrivalDate: '2019-08-17',
-            LocalArrivalTime: '17:20'
+            LocalArrivalDate: new Date().toLocaleDateString(apisItinerary.arrivaltimestamp),
+            LocalArrivalTime: new Date().toLocaleTimeString(apisItinerary.arrivaltimestamp),
         }
     }
 
     let aircraft = {
         AircraftDetail: {
-            TailNumber: 'nbp420',
-            TypeAircraft: 'Cessna',
-            Color: 'blue',
-            CallSign: 'SAW420',
-            CBPDecalNumber: '4598clo'
+            TailNumber: apisItinerary.tailnumber,
+            TypeAircraft: apisItinerary.typeaircraft,
+            Color: apisItinerary.color,
+            CallSign: apisItinerary.callsign,
+            CBPDecalNumber: apisItinerary.cbpdecalnbr
         },
         OperatorDetail: {
             PersonOperator: {
-                LastName: 'Menzel',
-                FirstName: 'Stefen',
-                MiddleName: 'Adam',
+                LastName: apisItinerary.operatorlastname,
+                FirstName: apisItinerary.operatorfirstname,
+                MiddleName: (apisItinerary.operatormiddlename != null ? apisItinerary.operatormiddlename : '') ,
             },
             OperatorContact: {
-                StreetAddr: '123 fake st.',
-                City: 'Minneapolis',
-                StateProvince: 'Minnesota',
-                ZipPostal: '55678',
-                Country: 'USA',
-                TelephoneNbr: '8675309',
-                EmailAddr: 'fakemail@aol.com'
+                StreetAddr: apisItinerary.operatorstreetaddr,
+                City: apisItinerary.operatorcity,
+                StateProvince: apisItinerary.operatorstate,
+                ZipPostal: apisItinerary.operatorpostalcode,
+                Country: apisItinerary.operatorcountrycode,
+                TelephoneNbr: apisItinerary.operatortelephonenbr,
+                EmailAddr: apisItinerary.operatoremail
             }
         },
         OwnerDetail: {
             PersonOwnerOrLessee: {
-                LastName: 'Dykoski',
-                FirstName: 'Rhea',
-                MiddleName: 'Marie',
+                LastName: apisItinerary.ownerlastname,
+                FirstName: apisItinerary.ownerfirstname,
+                MiddleName: (apisItinerary.ownermiddlename != null ? apisItinerary.ownermiddlename : ''),
             },
             OwnerOrLesseeContact: {
-                StreetAddr: '123 Fake St.',
-                City: 'Minneapolis',
-                StateProvice: 'Minnesota',
-                ZipPostal: '45678',
-                Country: 'USA',
-                TelephoneNbr: '8675309',
-                EmailAddr: 'anotherfakemail@gmail.com'
+                StreetAddr: apisItinerary.ownerstreetaddr,
+                City: apisItinerary.ownercity,
+                StateProvice: apisItinerary.ownerstate,
+                ZipPostal: apisItinerary.ownerpostalcode,
+                Country: apisItinerary.ownercountrycode,
+                TelephoneNbr: apisItinerary.ownertelephonenbr,
+                EmailAddr: apisItinerary.owneremail
             }
         }
     }
@@ -119,25 +125,25 @@ function generateXML(currentAPIS){
             ExpiryDate: '2024-03-30',
             CntryCode: 'USA'
         },
-        SurName: 'Menzel',
-        FirstName: 'Stefen',
-        SecondName: 'Adam',
-        Birthdate: '1987-02-19',
-        Sex: 'M',
-        ResidenceCntry: 'USA',
-        CitizenshipCntry: 'USA',
+        SurName: apisCrew.crewinfolastname,
+        FirstName: apisCrew.crewinfofirstname,
+        SecondName: (apisCrew.crewinfomiddlename != null ? apisCrew.crewinfomiddlename : '') ,
+        Birthdate: new Date().toLocaleDateString(apisCrew.crewinfobirthdate),
+        Sex: apisCrew.crewinfosex,
+        ResidenceCntry: apisCrew.crewinforesidencecountry,
+        CitizenshipCntry: apisCrew.crewinfocitizenshipcountry,
         PermanentAddress: {
-            StreetAddr: '1234 Faker St.',
-            City: 'Minneapolis',
-            StateProvince: 'Minnesota',
-            ZipPostal: '44567',
-            Country: 'USA'
+            StreetAddr: apisCrew.streetaddr,
+            City: apisCrew.city,
+            StateProvince: apisCrew.state,
+            ZipPostal: apisCrew.postalcode,
+            Country: apisCrew.countrycode
         },
         AddressWhileInUs: {
-            StreetAddr: '1234 Faker St.',
-            City: 'Minneapolis',
-            State: 'Minnesota',
-            ZipPostal: '55678'
+            StreetAddr: apisCrew.streetaddr,
+            City: apisCrew.city,
+            State: apisCrew.state,
+            ZipPostal: apisCrew.postalcode
         },
         TravelerType: 'CREW'
     }

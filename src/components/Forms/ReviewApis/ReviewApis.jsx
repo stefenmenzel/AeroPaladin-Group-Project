@@ -53,7 +53,7 @@ class ReviewApis extends Component {
     handleSubmit = (event) => {
         event.preventDefault();        
         this.props.dispatch({ type: 'ADD_APIS', payload: this.props.reviewApis })
-        this.props.history.push("/home")
+        // this.props.history.push("/home")
         Swal.fire({
             type: 'success',
             title: 'APIS Saved!',
