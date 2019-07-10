@@ -3,7 +3,7 @@ const {rejectUnauthenticated} = require('../modules/authentication-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
-
+const axios = require('axios');
 
 /*** POST apis route ***/
 router.post('/', rejectUnauthenticated, async (req, res) => {    
@@ -179,14 +179,21 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 		"emergencycontacts".middlename AS emergencycontactmiddlename,
 		"emergencycontacts".lastname AS emergencycontactlastname,
 		"emergencycontacts".telephonenbr AS emergencycontactphonenbr,
-        "emergencycontacts".emailaddr AS emergencycontactemail,
+		"emergencycontacts".emailaddr AS emergencycontactemail,
 
+		-- crew address info
+		"address".city,
+		"address".streetaddr,
+		"address".state,
+		"address".postalcode,
+		"address".countrycode
+		
         from "people" 
         left JOIN "address" on "people".permanentaddress_id = "address".id
         JOIN "document" on "people".id = "document".people_id
         JOIN "people_emergencycontacts" on "people".id = "people_emergencycontacts".people_id
         JOIN "emergencycontacts" on "people_emergencycontacts".emergencycontact_id = "emergencycontacts".id
-        where "people".id = $1;`
+        where "people".id = $1`
 
      
     const connection = await pool.connect();
@@ -357,6 +364,12 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             console.log('back from xmlGetCrew with results: ', crewMemberData);
 
         console.log('made it through');
+        let xmlObj = {
+            itinerary: flightAircraftXML[0],
+            crew: crewMemberData[0],
+            pax: paxData
+        }
+        axios.post('/api/xml/generate', xmlObj)
         res.sendStatus(201);
     }
     catch(error){

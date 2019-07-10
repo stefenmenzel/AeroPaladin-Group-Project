@@ -5,7 +5,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const xmlGenerator = require('../modules/xml-generator');
 
-router.post('/generate', rejectUnauthenticated, (req, res) => {
+router.post('/generate', (req, res) => {
+    console.log('req.body HERE  XML : ', req.body);
+    
     let xmlAPIS = xmlGenerator('foo');
     console.log("xmlApis is:", xmlAPIS);
     // res.sendStatus(201);
