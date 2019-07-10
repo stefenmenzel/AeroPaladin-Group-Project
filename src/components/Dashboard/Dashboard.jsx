@@ -7,8 +7,6 @@ import SubmittedTable from './SubmittedTable/SubmittedTable.jsx';
 import HistoricTable from './HistoricTable/HistoricTable.jsx';
 import "./Dashboard.css";
 
-const moment = require('moment');
-
 class Dashboard extends Component {
 
     componentDidMount() {
@@ -17,6 +15,7 @@ class Dashboard extends Component {
 
     render() {
      
+    //parent element containing the historic, pending, and submitted flight data tables
     return (
     <body>
         <h1 className="ui header welcome">Welcome Back, {this.props.user.username}!</h1>
