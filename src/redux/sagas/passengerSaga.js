@@ -8,8 +8,7 @@ const config={
 
 function* fetchPassenger(action) {
     try {
-        const response = yield axios.get('/api/passenger/', config);
-        console.log('passenger GET saga', response.data)
+        const response = yield axios.get('/api/passenger/', config);        
         yield put({ type: 'SET_PASSENGER', payload: response.data });
 
     } catch (error) {
@@ -38,7 +37,7 @@ function* deletePassenger(action) {
 function* updatePassenger(action) {
     try{
         yield axios.put('/api/passenger/update', action.payload, config);
-        // yield put({type: 'FETCH_PASSENGER'});
+        yield put({type: 'FETCH_PASSENGER'});
     }catch(error) {
         console.log('error in update passenger request:', error);
     }
@@ -55,8 +54,7 @@ function* fetchUpdatePassenger(action) {
 }
 
 function* fetchUpdatePassengerDocumentOne(action) {
-    try {
-        console.log("action.payload for document 1:", action.payload);
+    try {        
         const response = yield axios.get(`/api/passenger/updatedocument1/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_ONE', payload: response.data });
 
@@ -66,8 +64,7 @@ function* fetchUpdatePassengerDocumentOne(action) {
 }
 
 function* fetchUpdatePassengerDocumentTwo(action) {
-    try {
-        console.log("action.payload for document 2:", action.payload);
+    try {        
         const response = yield axios.get(`/api/passenger/updatedocument2/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_TWO', payload: response.data });
 

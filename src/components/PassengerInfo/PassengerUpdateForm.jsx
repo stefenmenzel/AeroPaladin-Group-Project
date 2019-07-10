@@ -7,7 +7,15 @@ import Address from '../FormInputs/Address/Address.jsx';
 import Contact from '../FormInputs/Contact/Contact.jsx';
 import TravelDocuments from '../FormInputs/TravelDocuments/TravelDocuments.jsx';
 
+/**
+ * This is our PassengerUpdateForm...It looks/works similarly to the add passenger form
+ * but is designed to auto-populate data. This could be condensed into one passenger form
+ * but we didn't have time in the two weeks we worked on this project.
+ */
 class PassengerUpdateForm extends Component {
+    
+    //stash changes in local state....also stash initial values
+    //for inputs.
     state = {
         passenger: {},
         travelDocumentOne: this.props.travelDocumentOne,
@@ -21,6 +29,15 @@ class PassengerUpdateForm extends Component {
         this.props.dispatch({ type: 'FETCH_UPDATE_PASSENGER_DOCUMENT_TWO', payload: this.props.match.params.id }) 
     }
     
+    /**
+        this runs every time the component updated E.G. props have changed.
+        this bit of code checks to make sure that the local state (where the inputs get their values)
+        is the same as the props passed in (what we want to set the values to)
+        we do this check because componentDidUpdate will run every time the state/props change
+        so if we update the local state every time it isn't the same as the props we'll have an
+        infinite loop.
+     *   
+     * */
     componentDidUpdate() {
         if (!Object.keys(this.state.passenger).length || Array.isArray(this.state.passenger)) {
             if (this.state.passenger !== this.props.passenger[0]) {
@@ -50,8 +67,7 @@ class PassengerUpdateForm extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('doing a submitto');
+        event.preventDefault();    
         this.props.dispatch({type: 'UPDATE_PASSENGER', payload:this.state});
         this.props.history.push('/passengerinfo');
     }
@@ -71,10 +87,7 @@ class PassengerUpdateForm extends Component {
 
     }
 
-    render() {
-        console.log('this.state passenger update', this.state);
-        console.log('this.props.passenger in passenger update:', this.props.passenger);
-        console.log("redux state in passenger update:", this.props.reduxState);
+    render() {        
         return (
             <div>
                 <h1>Edit Passenger</h1>

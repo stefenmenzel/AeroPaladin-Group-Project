@@ -6,19 +6,23 @@ import '../../FormInputs/FormInputs.css'
 
 let options = []
 
+/**
+ * This class goes into the create new apis form and allows the user to select a crew member
+ * for a given APIS
+ */
 class SelectCrewForm extends Component{
 
     state = {
         crewId: ''
     }
 
+    //grab all crew when component mounts.
     componentDidMount(){
-        this.props.dispatch({ type: 'FETCH_CREW'});
-        console.log("this.props.crews:", this.props.crews);
+        this.props.dispatch({ type: 'FETCH_CREW'});        
     }
 
-    onSelectChange = (event, { name, value}) => {
-        console.log("sex change:", value);
+    //semantic UI requires us to capture changes this way.
+    onSelectChange = (event, { name, value}) => {        
         let crewObj = options[value];
         crewObj = {
             ...crewObj,
@@ -48,9 +52,7 @@ class SelectCrewForm extends Component{
         return selectOptions;            
     }
 
-    render(){
-        console.log('this.state:', this.state);
-        console.log('current crews:', this.props.crews);
+    render(){        
         return(
 
             <div className="formInputs"> 

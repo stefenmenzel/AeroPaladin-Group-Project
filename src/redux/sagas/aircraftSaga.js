@@ -8,8 +8,7 @@ const config = {
 
 function* addAircraft(action){
     try{
-        
-        // console.log("action.payload", action.payload);
+                
         yield axios.post('/api/aircraft/add', action.payload, config);
         yield put({type:'FETCH_AIRCRAFT'});
     }catch(error) {

@@ -30,8 +30,7 @@ class Aircraft extends Component {
         this.props.handleChange(propertyToChange, newProperty, event)
     }
 
-    render() {
-        console.log("aircraft state:", this.state);
+    render() {        
         return (
 
             <div className="formInputs">
