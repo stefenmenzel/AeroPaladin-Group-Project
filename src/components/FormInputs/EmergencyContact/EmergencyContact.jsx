@@ -4,6 +4,11 @@ import {Divider} from 'semantic-ui-react';
 import Name from '../Name/Name.jsx';
 import Contact from '../Contact/Contact.jsx';
 
+
+/**
+ * This class will display an Emergency contacts section...
+ * MUST BE PLACED INSIDE A FORM
+ */
 class EmergencyContact extends Component {
 
     state = {
