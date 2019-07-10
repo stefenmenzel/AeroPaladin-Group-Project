@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     let reviewPageId = req.params.id;
-    console.log('req.params. id: ', reviewPageId);
+    
     
     const sqlQuery = `
     SELECT plane.tailnumber AS planetailnum, 
@@ -63,7 +63,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     
 
     pool.query(sqlQuery, [reviewPageId]).then(result => {
-        console.log(' Review Result', result.rows);
         res.send(result.rows)
     }).catch(err => {
         console.log('Error in Review GET', err);

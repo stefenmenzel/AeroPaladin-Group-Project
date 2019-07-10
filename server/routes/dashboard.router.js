@@ -4,10 +4,8 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
-//get all the  APIS Trips 
+//get all the logged in users's APIS Trips 
 router.get('/apis', rejectUnauthenticated, (req, res) => {
-    console.log('GET Route');
-    console.log('USER ID', req.user.id);
     
     let userId = req.user.id;
 
@@ -42,15 +40,14 @@ router.get('/apis', rejectUnauthenticated, (req, res) => {
     })
 })
 
-//delete the APIS Trip from the database
+//'delete' the APIS Trip from the database
 router.put('/delete/:id', rejectUnauthenticated,(req, res) => {
     let archiveID = req.params.id
-    console.log('req.params.id: ' + req.params.id + ' req.user.id: ' + req.user.id);
+    
     let queryText = `UPDATE "flight"
                      SET "flight_status" = 4
                      WHERE "id" = $1;`
   pool.query(queryText, [archiveID]).then((result) => {
-    console.log('in Archive!', result);
     res.sendStatus(200);
   }).catch((error) => {
       console.log('error in archive', error);
