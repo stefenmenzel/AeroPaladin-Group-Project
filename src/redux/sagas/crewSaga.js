@@ -12,6 +12,7 @@ function* fetchCrew(action) {
         const response = yield axios.get('/api/crew/', config);
         yield put({ type: 'SET_CREW', payload: response.data });
     } catch (error) {
+        console.log('error in GET crew on crew info', error);
     }
 }
 
@@ -30,6 +31,7 @@ function* deleteCrew(action) {
         yield axios.put(`/api/crew/delete/${action.payload}`);
         yield put({ type: 'FETCH_CREW' });
     } catch (error) {
+        console.log('error in DELETE crew on crew info', error);
     }
 }
 
@@ -48,6 +50,7 @@ function* fetchUpdateCrew(action) {
         const response = yield axios.get(`/api/crew/updatecrew/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_CREW', payload: response.data });
     } catch (error) {
+        console.log('error in GET crew on crew update form', error);
     }
 }
 
@@ -56,7 +59,6 @@ function* fetchUpdateCrewEmergencyContact(action) {
     try {
         const response = yield axios.get(`/api/crew/updateemergency/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_CREW_EMERGENCY_CONTACT', payload: response.data });
-
     } catch (error) {
         console.log('Crew Update Form GET request failed', error);
     }
@@ -68,6 +70,7 @@ function* fetchUpdateCrewDocumentOne(action) {
         const response = yield axios.get(`/api/crew/updatedocument1/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_ONE', payload: response.data });
     } catch (error) {
+        console.log('error in GET crew document one on crew update form', error);
     }
 }
 
@@ -77,6 +80,7 @@ function* fetchUpdateCrewDocumentTwo(action) {
         const response = yield axios.get(`/api/crew/updatedocument2/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_TWO', payload: response.data });
     } catch (error) {
+        console.log('error in GET crew document two on crew update form', error);
     }
 }
 

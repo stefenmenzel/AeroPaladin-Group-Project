@@ -22,6 +22,7 @@ function* fetchAircraft(action) {
         const response = yield axios.get('/api/aircraft/', config);
         yield put({ type: 'SET_AIRCRAFT', payload: response.data });
     } catch (error) {
+        console.log('GET aircraft request failed:', error);
     }
 }
 
@@ -31,6 +32,7 @@ function* fetchUpdateAircraft(action) {
         const response = yield axios.get(`/api/aircraft/updateaircraft/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_AIRCRAFT', payload: response.data });
     } catch (error) {
+        console.log('GET aircraft request failed in update aircraft form:', error);
     }
 }
 
@@ -40,6 +42,7 @@ function* fetchUpdateOperator(action) {
         const response = yield axios.get(`/api/aircraft/updateoperator/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_OPERATOR', payload: response.data });
     } catch (error) {
+        console.log('GET aircraft operator request failed in update aircraft form:', error);
     }
 }
 
@@ -49,6 +52,7 @@ function* fetchUpdateOwner(action) {
         const response = yield axios.get(`/api/aircraft/updateowner/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_OWNER', payload: response.data });
     } catch (error) {
+        console.log('GET aircraft owner request failed in update aircraft form:', error);
     }
 }
 
@@ -58,6 +62,7 @@ function* deleteAircraft(action) {
         yield axios.put(`/api/aircraft/delete/${action.payload}`, null, config);
         yield put({ type: 'FETCH_AIRCRAFT' })
     } catch (error) {
+        console.log('Delete aircraft request failed:', error);
     }
 }
 
