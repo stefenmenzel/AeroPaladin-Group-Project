@@ -78,14 +78,16 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     // gets airport data, itinerary data, aircraft data including owner and operator and address info based off the flight id that was posted
     const xmlGetOne = `SELECT 
 		--airport data
-		flightBuilding1.airportcode AS inboundAirportCode,
-		flightBuilding1.city AS inboundAirportCity,
-		flightBuilding1.description AS inboundAiportDesc,
-		flightBuilding1.cntrycode AS inboundCountryCode,
-		flightBuilding2.city AS departureAirportCity,
-		flightBuilding2.cntrycode AS departureCountryCode,
-		flightBuilding2.airportcode AS departureAirportCode,
-		flightBuilding2.description AS departureAirportDesc,
+        flightbuilding1.airportcode AS inboundAirportCode,
+        flightbuilding1.city AS inboundAirportCity,
+        flightbuilding1.description AS inboundAiportDesc,
+        flightbuilding1.cntrycode AS inboundCountryCode,
+        flightbuilding1.state AS inboundAirportState,
+        flightbuilding2.city AS departureAirportCity,
+        flightbuilding2.cntrycode AS departureCountryCode,
+        flightbuilding2.airportcode AS departureAirportCode,
+        flightbuilding2.state AS departureAirportState,
+        flightbuilding2.description AS departureAirportDesc,
 		
 		--itinerary data
 		it."localdeparturetimeStamp" AS departureTimeStamp, 
