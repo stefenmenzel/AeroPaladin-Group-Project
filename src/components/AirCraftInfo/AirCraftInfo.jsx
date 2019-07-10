@@ -6,29 +6,31 @@ import { Header, Table, Button } from 'semantic-ui-react'
 
 import './AircraftInfo.css'
 
-const moment = require('moment');
-
 
 class AircraftInfo extends Component {
 
-
+    // GET request to get the the information for all aircrafts when page loads. 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_AIRCRAFT' })
     }
 
+    // Send user to add aircraft form. 
     addCreww = () => {
         this.props.history.push("/addaircraft")
     }
 
-    handleEdit = (id) =>{        
-        this.props.history.push(`/aircraftupdate/${id}`)  
+    // Send user to form view to update aircradt form. 
+    handleEdit = (id) => {
+        this.props.history.push(`/aircraftupdate/${id}`)
     }
-    
+
+    // Send user back to the user info view
     backButton = () => {
         this.props.history.push(`/userinfo/`)
     }
 
-    handleDelete = (id) => {        
+    // Archive aircraft when button is clicked. Will change database active to false. 
+    handleDelete = (id) => {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -51,10 +53,9 @@ class AircraftInfo extends Component {
                     'Your Aircraft has been deleted.',
                     'success'
                 )
+                // Remove aircraft if you click yes if not it will be canncelled
                 this.props.dispatch({ type: 'DELETE_AIRCRAFT', payload: id })
-
             } else if (
-                // Read more about handling dismissals
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
@@ -88,7 +89,7 @@ class AircraftInfo extends Component {
                                 <Table.HeaderCell>Delete</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
-
+                        {/* Loop through reduxState from mapStateToProps to get infomation on the DOM */}
                         {this.props.aircraft.map(plane => {
                             return (
                                 <Table.Body key={plane.id}>
@@ -102,18 +103,14 @@ class AircraftInfo extends Component {
                                             {plane.typeaircraft}
                                         </Table.Cell>
                                         <Table.Cell singleLine>
-                                            {plane.operator_firstname} {plane.operator_lastname} 
-
+                                            {plane.operator_firstname} {plane.operator_lastname}
                                         </Table.Cell>
                                         <Table.Cell singleLine textAlign='right'>
-                                            {plane.owner_firstname} {plane.owner_lastname} 
-
+                                            {plane.owner_firstname} {plane.owner_lastname}
                                         </Table.Cell>
                                         <Table.Cell singleLine textAlign='right'>
-                                            {plane.cbpdecalnbr} 
-
+                                            {plane.cbpdecalnbr}
                                         </Table.Cell>
-                                        
                                         <Table.Cell>
                                             <button onClick={() => this.handleEdit(plane.id)}><Icon name="edit" /></button>
                                         </Table.Cell>
@@ -122,10 +119,8 @@ class AircraftInfo extends Component {
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
-
                             )
                         })}
-
                     </Table>
                 </div>
             </div>
@@ -133,8 +128,7 @@ class AircraftInfo extends Component {
     }
 }
 
-
-
+// Get access to aircraft information from redux
 const mapStateToProps = (reduxState) => {
     return {
         aircraft: reduxState.aircraftReducer

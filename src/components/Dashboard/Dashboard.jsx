@@ -20,6 +20,7 @@ class Dashboard extends Component {
 
     render() {
      
+    //parent element containing the historic, pending, and submitted flight data tables
     return (
     <body>
         <h1 className="ui header welcome">Welcome Back, {this.props.user.username}!</h1>

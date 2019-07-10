@@ -18,8 +18,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     let flight_id_One = 0;
     let flight_id_Two = 0;
 
-    //setting results 
-    
+    //setting results
     let result;
 
     //objects
@@ -31,6 +30,15 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     //array of objects
     let paxData = req.body.passenger;
     let flightStatusNum = 2;
+
+    //XML GET data
+    let flightAircraftXML;
+    let crewMemberData;
+    let paxMemberData = req.body.passenger;
+    
+    //crew member person ID
+    let crewMemberID = req.body.crew.id;
+    
 
     const airportPost = `INSERT INTO "airport" ("airportcode", 
                          "city", 
@@ -65,7 +73,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                               "flight_id")
                               VALUES ($1, $2); `
 
-    const xmlGetNoAddr = `SELECT 
+    const xmlGetOne = `SELECT 
 		--airport data
 		flightBuilding1.airportcode AS inboundAirportCode,
 		flightBuilding1.city AS inboundAirportCity,
@@ -75,6 +83,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 		flightBuilding2.cntrycode AS departureCountryCode,
 		flightBuilding2.airportcode AS departureAirportCode,
 		flightBuilding2.description AS departureAirportDesc,
+		
+		--itinerary data
 		it."localdeparturetimeStamp" AS departureTimeStamp, 
 		it.localarrivaltimestamp AS arrivalTimeStamp,
  	    flightBuilding2.airportcode AS departureAirportcode,
@@ -98,8 +108,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 	    "p1".telephonenbr AS ownertelephonenbr,
 	    p1.permanentaddress_id AS owneraddressid,
 	    
-	    
-	    -- operator info
+	    --owner address info
+	    owneraddress.streetaddr AS ownerstreetaddr,
+	    owneraddress.city AS ownercity,
+	    owneraddress.state AS ownerstate,
+	    owneraddress.postalcode AS ownerpostalcode,
+	    owneraddress.countrycode AS ownercountrycode,
+
+		-- operator info
 	    "p2".firstname AS operatorfirstname,
 	    "p2".middlename AS operatormiddlename,
 	    "p2".lastname AS operatorlastname,
@@ -109,100 +125,71 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 	    "p2".citizenshipcntry AS operatorcitizenshipcountry,
 	    "p2".emailaddr AS operatoremail,
 	    "p2".telephonenbr AS operatortelephonenbr,
-	    p2.permanentaddress_id AS operatoraddressid,
+	    p2.permanentaddress_id AS operatoraddressid, 
 	    
-	    --crew data
-	    json_agg(json_build_object(
-					'crewInfoFirstName', p3.firstname,
-					'crewInfoMiddleName', p3.middlename,
-					'crewInfoLastName', p3.lastname,
-					'crewInfobirthdate',p3.birthdate,
-					'crewInfoSex', p3.sex,
-					'crewInfoResidenceCountry', p3.residencecntry,
-					'crewInfoCitizenshipCountry', p3.citizenshipcntry,
-					'crewInfoEmail', p3.emailaddr,
-					'crewInfoPhoneNbr', p3.telephonenbr,
-					'crewInfoPeopleType', p3.peopletype,
-					'crewInfoPermAddrID', p3.permanentaddress_id,
-					'crewInfoAddrInUSID', p3.addresswhileinus_id
-					)) AS crewInfo,
+	     --operator address info
+	    operatoraddress.streetaddr AS operatorstreetaddr,
+	    operatoraddress.city AS operatorcity,
+	    operatoraddress.state AS operatorstate,
+	    operatoraddress.postalcode AS operatorpostalcode,
+	    operatoraddress.countrycode AS operatorcountrycode
+	    
+	    
+        from "itinerary" AS it
+        inner join "airport" as flightbuilding1 on it.departure_airport_id = flightbuilding1.id
+        inner join "airport" as flightbuilding2 on it."inboundarrivalLocation_airport_id" = flightbuilding2.id
+        LEFT JOIN "user_itinerary" ON it.id = "user_itinerary".itinerary_id
+
+        LEFT JOIN "flight" AS f1 ON it.id = "f1".itinerary_id
+        JOIN "aircraft" ON f1.aircraft_id = "aircraft".id
+
+        full JOIN "people" AS p1 ON f1.owner_id = p1.id --owner
+        left join "address" as owneraddress on owneraddress.id = p1.permanentaddress_id -- owner address
+
+        full JOIN "people" AS p2 ON f1.operator_id = p2.id --operator
+        left join "address" as operatoraddress on operatoraddress.id = p2.permanentaddress_id -- op address
+
+        WHERE f1.id = $1;`
+    
+    const xmlGetCrew = `SELECT  --crew data
+		people.firstname AS crewInfoFirstName,
+		people.middlename AS crewInfoMiddleName,
+		people.lastname AS crewInfoLastName, 
+		people.birthdate AS crewInfobirthdate,
+		people.sex AS crewInfoSex,
+		people.residencecntry AS crewInfoResidenceCountry,
+		people.citizenshipcntry AS crewInfoCitizenshipCountry,
+		people.emailaddr AS crewInfoEmail,
+		people.telephonenbr AS crewInfoPhoneNbr,
+		people.peopletype AS crewInfoPeopleType,
+		people.permanentaddress_id AS crewInfoPermAddrID,
+		people.addresswhileinus_id AS crewInfoAddrInUSID,
 		
 		--CREW DOCS DATA
-		"d1".doccode AS crewdoccode,
-		"d1".documentnbr AS crewdocnbr,
-		"d1".cntrycode AS crewdoccountrycode,
-		"d1".expirydate AS crewdocexpirationdate,
+		"document".doccode AS crewdoccode,
+		"document".documentnbr AS crewdocnbr,
+		"document".cntrycode AS crewdoccountrycode,
+		"document".expirydate AS crewdocexpirationdate,
+		"document".people_id AS crewdocpeopleid,
 		
 		-- CREW EMERGENCY CONTACT INFO
 		"emergencycontacts".firstname AS emergencycontactfirstname,
 		"emergencycontacts".middlename AS emergencycontactmiddlename,
 		"emergencycontacts".lastname AS emergencycontactlastname,
 		"emergencycontacts".telephonenbr AS emergencycontactphonenbr,
-		"emergencycontacts".emailaddr AS emergencycontactemail,
-	    
-	--passenger data
-	       json_agg(json_build_object(
-					'paxDataFirstName', p4.firstname,
-					'paxDataMiddleName', p4.middlename,
-					'paxDataLastName', p4.lastname,
-					'paxDatabirthdate', p4.birthdate,
-					'paxDataSex', p4.sex,
-					'paxDataResidenceCountry', p4.residencecntry,
-					'paxDataCitizenshipCountry', p4.citizenshipcntry,
-					'paxDataEmail', p4.emailaddr,
-					'paxDataPhoneNbr', p4.telephonenbr,
-					'paxDataPeopleType', p4.peopletype,
-					'paxDataPermAdressID', p4.permanentaddress_id,
-					'paxDataAddrInUSID', p4.addresswhileinus_id
-					)) AS paxData,
+		"emergencycontacts".emailaddr AS emergencycontactemail
 
-		-- PAX DOCS DATA
-		"d2".doccode AS paxdoccode,
-		"d2".documentnbr AS paxdocnbr,
-		"d2".cntrycode AS paxdoccntrycode,
-		"d2".expirydate AS paxdocexpirationdate
-		
+        from "people" 
+        left JOIN "address" on "people".permanentaddress_id = "address".id
+        JOIN "document" on "people".id = "document".people_id
+        JOIN "people_emergencycontacts" on "people".id = "people_emergencycontacts".people_id
+        JOIN "emergencycontacts" on "people_emergencycontacts".emergencycontact_id = "emergencycontacts".id
+        where "people".id = $1;`
 
-from "itinerary" AS it
-inner join "airport" as flightbuilding1 on it.departure_airport_id = flightbuilding1.id
-inner join "airport" as flightbuilding2 on it."inboundarrivalLocation_airport_id" = flightbuilding2.id
-LEFT JOIN "user_itinerary" ON it.id = "user_itinerary".itinerary_id
-LEFT JOIN "flight" AS f1 ON it.id = "f1".itinerary_id
-JOIN "aircraft" ON f1.aircraft_id = "aircraft".id
-JOIN "people" AS p1 ON f1.owner_id = p1.id
-JOIN "people" AS p2 ON f1.operator_id = p2.id
-LEFT JOIN "address" AS adr1 ON "aircraft".owner_id = adr1.id
-LEFT JOIN "address" AS adr2 ON "aircraft".operator_id = adr2.id
-JOIN "flight_people" ON f1.id = "flight_people".flight_id
-JOIN "people" AS p3 ON "flight_people".people_id = p3.id
-JOIN "people" AS p4 ON "flight_people".people_id = p4.id
-JOIN "people_document" AS peepdoc1 ON p3.id = peepdoc1.people_id
-JOIN "people_document" AS peepdoc2 ON p4.id = peepdoc2.people_id
-JOIN "document" AS d1 ON peepdoc1.people_id = d1.people_id
-JOIN "document" AS d2 ON peepdoc2.people_id = d2.people_id
-JOIN "people_emergencycontacts" ON p3.id = "people_emergencycontacts".people_id
-JOIN "emergencycontacts" ON "people_emergencycontacts".emergencycontact_id = "emergencycontacts".id
-
-WHERE f1.id = $1
-
-GROUP BY inboundAirportCode, inboundAirportCity, inboundAiportDesc, 
-         inboundCountryCode, departureAirportCity, departureCountryCode, 
-         departureAirportCode, departureAirportDesc, departureTimeStamp, 
-         arrivalTimeStamp, "aircraft".tailnumber, "aircraft".typeaircraft, 
-         "aircraft".color, "aircraft".callsign, "aircraft".cbpdecalnbr, 
-         ownerfirstname, ownermiddlename, ownerlastname, ownerbirthdate, 
-         ownersex, ownerresidencecountry, ownercitizenshipcountry, owneremail, 
-         ownertelephonenbr, operatorfirstname, operatormiddlename, operatorlastname, 
-         operatorbirthdate, operatorsex, operatorresidencecountry, 
-         operatorcitizenshipcountry, operatoremail, operatortelephonenbr, 
-         owneraddressid, operatoraddressid, crewdoccode, crewdocnbr, 
-         crewdoccountrycode, crewdocexpirationdate, paxdoccode, 
-         paxdocnbr, paxdoccntrycode, paxdocexpirationdate, 
-         emergencycontactfirstname, emergencycontactmiddlename, emergencycontactlastname, 
-         emergencycontactphonenbr, emergencycontactemail;`
-
+     
     const connection = await pool.connect();
     console.log('in CONNECTION');
+    console.log('CREW MEMBER ID HERE: ', crewMemberID);
     
     try {
         await connection.query('BEGIN');
@@ -255,9 +242,7 @@ GROUP BY inboundAirportCode, inboundAirportCity, inboundAiportDesc,
     // ITINERARY POST
         let testTime = flightSegmentOneData.departure.date + 'T' + flightSegmentOneData.departure.time + ':00CST';
         console.log('TEST TIME HERE', testTime);
-        
-       //console.log('time statmp', moment(flightSegmentOne.departure.date + ' ' + flightSegmentOne.departure.time));
-        
+
         result = await connection.query(itineraryPost, 
                 [
                     airport_id_One, 
@@ -361,7 +346,14 @@ GROUP BY inboundAirportCode, inboundAirportCity, inboundAiportDesc,
         } 
         //committing all posts
         await connection.query('COMMIT');
-        await connection.query(xmlGetNoAddr, [flight_id_One])
+    result = await connection.query(xmlGetOne, [flight_id_One])
+            flightAircraftXML = result.rows;
+            console.log('back from xmlGetOne with results: ', flightAircraftXML);
+            
+    result = await connection.query(xmlGetCrew, [crewMemberID])
+            crewMemberData = result.rows;
+            console.log('back from xmlGetCrew with results: ', crewMemberData);
+
         console.log('made it through');
         res.sendStatus(201);
     }
