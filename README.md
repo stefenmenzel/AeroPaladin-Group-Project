@@ -1,35 +1,48 @@
-# Prime Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+# AeroPaladin
+AeroPaladin is a full-stack application that helps general aviation pilots file the necessary flight permission documentation, an APIS (Advance Passenger Information System) when traveling internationally. This application gives the pilot the ability to collect and save all their flight data such as Crew Members, Aircraft Details, Passengers and Itinerary Information. The data can then be used to fill out future APIS documents.
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## Built With
+* HTML
+* CSS
+* JavaScript
+* Axios
+* Bcrypt
+* Cookie-session
+* Dotenv
+* Express
+* Nodemon
+* Passport
+* Passport-local
+* Pg
+* React/Redux/Saga
+* Material-UI
+* Moment.js
 
-## Download (Don't Clone) This Repository
+## Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
-
-## Prerequisites
+### Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
+- [Postico](https://eggerapps.at/postico/)
+- [Postman](https://www.getpostman.com/)
+- [IDE - Virtual Studio Code Recommended](https://code.visualstudio.com/)
+- [Heroku - Create Account](https://www.heroku.com/)
 
-## Create database and table
-
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+### Installing
+1. Download this project via zip
+2. Create a repository on github for this project
+3. Open downloaded zip of project in your IDE
+4. Follow the instructions outlined on Github for ... or create a new repository on the command line (these immediately follow    the creation of a new repository)
+5. Create database in Postico with database name of 'aeropaladin'
+6. Insert sql-text from database.sql file located in project root into database sql-query in Postico
+7. Execute sql queries to create tables
+8. In terminal, start postgres server (this will start 'aeropalaldin' database)
+9. Start postgres if not running already by using `brew services start postgresql`
 
 ## Development Setup Instructions
 
@@ -55,22 +68,6 @@ Then make sure `Launch Program` is selected from the dropdown, then click the gr
 ![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
 
 
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum. 
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Passport. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-    1. `POST /api/user/register` registers a new user, see body to change username/password
-    2. `POST /api/user/login` will login a user, see body to change username/password
-    3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-
 ## Production Build
 
 Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
@@ -79,37 +76,48 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 * Run `npm start`
 * Navigate to `localhost:5000`
 
-## Lay of the Land
+## Deploying
 
-* `src/` contains the React application
-* `public/` contains static assets for the client-side
-* `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-* `server/` contains the Express App
+1. Install Heroku CLI by typing `brew install heroku` in Terminal
+2. Authenticate by typing `heroku login` in Terminal
+3. In terminal, navigate to your project folder and type `heroku create`
+4. In terminal, type `git remote -v` to ensure it added successfully
+5. In terminal, type `git push heroku master`
+6. In terminal, type `heroku addons:create heroku-postgresql:hobby-dev` to set up Postgresql on your Heroku project
+7. In terminal, type `heroku pg:push aeropaladin DATABASE_URL` to copy your database contents up to Heroku.
+8. If changes are made within the IDE and you want them reflected on Heroku following the following prompts:
+  * `git add .`
+  * `git commit -m "MESSAGE"`
+  * `git push heroku master`
 
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
+## Screenshot
 
-* src/components
-  * App/App
-  * Footer/Footer
-  * Nav/Nav
-  * AboutPage/AboutPage
-  * InfoPage/InfoPage
-  * UserPage/UserPage
-  * LoginPage/LoginPage
-  * RegisterPage/RegisterPage
-  * LogOutButton/LogOutButton
-  * ProtectedRoute/ProtectedRoute
+### Completed Features
 
-## Deployment
+- [x] Authentication with multiple roles
+- [x] Routes based on authentication
+- [x] Register User
+- [x] view APIS Trips on Home page(Pending APIS, Submitted APIS, Historic APIS)
+- [x] view User Information, crew Information, Passenger Information, Aircraft Information
+- [x] Add new Crew member, add new passengers and add new Aircraft.
+- [x] Edit crew member, passengers and aircraft.
+- [x] Create new APIS 
+- [x] Select Aircraft, Select Passenger, Select crew to create an APIS.
+- [x] create Flight segment One, Flight Segment Two for the inbound and outbound Information for creating the APIS.
+- [x] Review Apis to review the APIS and edit the APIS before submitting.
+- [x] Generate XML Document
 
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+### Next Steps
 
-## Update Documentation
+- [ ] Edit Home page Review APIS
+- [ ] Edit Review Apis via dashboard edit aircraft, edit Manifest, edit flight segment one, edit flight segment two.
 
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+
+
+## Authors
+
+Stefen Menzel, Heena Kouser, Tony Xiong and Maddie Morton
+
+
+
+
