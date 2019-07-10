@@ -21,7 +21,7 @@ AeroPaladin is a full-stack application that helps general aviation pilots file 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
@@ -33,7 +33,8 @@ Before you get started, make sure you have the following software installed on y
 - [IDE - Virtual Studio Code Recommended](https://code.visualstudio.com/)
 - [Heroku - Create Account](https://www.heroku.com/)
 
-### Installing
+## Installing
+
 1. Download this project via zip
 2. Create a repository on github for this project
 3. Open downloaded zip of project in your IDE
@@ -56,16 +57,6 @@ Before you get started, make sure you have the following software installed on y
 * Run `npm run server`
 * Run `npm run client`
 * Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
 
 
 ## Production Build
@@ -92,7 +83,9 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 
 ## Screenshot
 
-### Completed Features
+![image](https://user-images.githubusercontent.com/47267211/61001536-6ed3c300-a325-11e9-9564-1e0497fc7631.png)
+
+## Completed Features
 
 - [x] Authentication with multiple roles
 - [x] Routes based on authentication

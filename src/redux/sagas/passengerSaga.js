@@ -12,6 +12,7 @@ function* fetchPassenger(action) {
         const response = yield axios.get('/api/passenger/', config);        
         yield put({ type: 'SET_PASSENGER', payload: response.data });
     } catch (error) {
+        console.log('error in passenger', error);
     }
 }
 
@@ -27,9 +28,10 @@ function* addPassenger(action){
 // Update passenger active status to false in database. This will remove the passenger on passenger info page. 
 function* deletePassenger(action) {
     try {
-        yield axios.put(`/api/passenger/delete/${action.payload}`, action.payload, config);
+        yield axios.put(`/api/passenger/delete/${action.payload}`, config);
         yield put({ type: 'FETCH_PASSENGER' });
     } catch (error) {
+        console.log('error in delete', error);
     }
 }
 
@@ -59,6 +61,7 @@ function* fetchUpdatePassengerDocumentOne(action) {
         const response = yield axios.get(`/api/passenger/updatedocument1/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_ONE', payload: response.data });
     } catch (error) {
+        console.log('Passenger Update Form GET document one request failed', error);
     }
 }
 
@@ -68,6 +71,7 @@ function* fetchUpdatePassengerDocumentTwo(action) {
         const response = yield axios.get(`/api/passenger/updatedocument2/${action.payload}`, config);
         yield put({ type: 'SET_UPDATE_DOCUMENT_TWO', payload: response.data });
     } catch (error) {
+        console.log('Passenger Update Form GET document two request failed', error);
     }
 }
 
