@@ -12,15 +12,6 @@ CREATE TABLE "user" (
 );
 
 
---Document Table
-CREATE TABLE "document" (
-    "id" SERIAL PRIMARY KEY,
-    "doccode" VARCHAR(3),
-    "documentnbr" VARCHAR(20),
-    "expirydate" DATE,
-    "cntrycode" VARCHAR(3)
-);
-
 --Address Table
 CREATE TABLE "address" (
      "id" SERIAL PRIMARY KEY,
@@ -57,7 +48,18 @@ CREATE TABLE "people" (
     "peopletype" INTEGER,
     "user_id" INT REFERENCES "user",
     "permanentaddress_id" INT REFERENCES "address",
-    "addresswhileinus_id" INT REFERENCES "address"
+    "addresswhileinus_id" INT REFERENCES "address",
+    "active" BOOLEAN DEFAULT TRUE
+);
+
+--Document Table
+CREATE TABLE "document" (
+    "id" SERIAL PRIMARY KEY,
+    "doccode" VARCHAR(3),
+    "documentnbr" VARCHAR(20),
+    "expirydate" DATE,
+    "cntrycode" VARCHAR(3),
+    "people_id" INT REFERENCES "people"
 );
 
 --EmergencyContacts Table
@@ -78,7 +80,9 @@ CREATE TABLE "aircraft" (
     "color" VARCHAR(30),
     "callsign" VARCHAR(30),
     "cbpdecalnbr" VARCHAR(8),
-    "owner_id" INT REFERENCES "people" 
+    "owner_id" INT REFERENCES "people",
+    "operator_id" INT REFERENCES "people",
+    "active" BOOLEAN DEFAULT TRUE
 );
 
 --Itinerary Table
@@ -98,7 +102,8 @@ CREATE TABLE "flight" (
     "itinerary_id" INT REFERENCES "itinerary",
     "aircraft_id" INT REFERENCES "aircraft",
     "operator_id" INT REFERENCES "people",
-    "owner_id" INT REFERENCES "people"
+    "owner_id" INT REFERENCES "people",
+    "flight_status" INT DEFAULT 2
 );
 
 --User_Itinerary Junction Table
@@ -124,10 +129,5 @@ CREATE TABLE "people_emergencycontacts" (
      "emergencycontact_id" INT REFERENCES "emergencycontacts"
 );
 
---People_Document JUNCTION Table
-CREATE TABLE "people_document" (
-    "id" SERIAL PRIMARY KEY,
-    "people_id" INT REFERENCES "people",
-    "document_id" INT REFERENCES "document"
-);
+
 
