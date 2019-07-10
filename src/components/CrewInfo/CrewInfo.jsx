@@ -2,38 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react'
 import Swal from 'sweetalert2';
-
 import { Header, Table, Button } from 'semantic-ui-react'
 
 import './CrewInfo.css'
 
+// moment will change the format of date
 const moment = require('moment');
 
 
 
 class PassengerInfo extends Component {
 
-
+    // GET request to get the the information for all crew members when page loads. 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_CREW' })
     }
 
+    // Send user to add crew form. 
     addCreww = () => {
         this.props.history.push("/addcrew")
     }
-    
+
+    // Send user to form view to update crew member form. 
     handleEdit = (id) => {
-        console.log('edit', id)
         this.props.history.push(`/crewupdate/${id}`)
     }
 
+    // Send user back to user info view. 
     backButton = () => {
         this.props.history.push(`/userinfo/`)
     }
 
+    // Archive Crew member when button is clicked. Will change database active to false. 
     handleDelete = (id) => {
-        console.log('delete', id);
-
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -56,15 +57,13 @@ class PassengerInfo extends Component {
                     'Your Passenger has been deleted.',
                     'success'
                 )
+            // Remove crew member if you click yes if not it will be canncelled.
                 this.props.dispatch({ type: 'DELETE_CREW', payload: id })
-
             } else if (
-                // Read more about handling dismissals
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
                     'Cancelled!',
-
                 )
             }
         })
@@ -97,7 +96,7 @@ class PassengerInfo extends Component {
                                 <Table.HeaderCell>Delete</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
-
+                        {/* Loop through reduxState from mapStateToProps to get infomation on the DOM */}
                         {this.props.crew.map(crew => {
                             return (
                                 <Table.Body key={crew.people_id}>
@@ -133,10 +132,8 @@ class PassengerInfo extends Component {
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
-
                             )
                         })}
-
                     </Table>
                 </div>
             </div>
@@ -145,7 +142,7 @@ class PassengerInfo extends Component {
 }
 
 
-
+// Get access to crew information from redux
 const mapStateToProps = (reduxState) => {
     return {
         crew: reduxState.crewReducer

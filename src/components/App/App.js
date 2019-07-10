@@ -31,6 +31,7 @@ import PassengerUpdateForm from '../PassengerInfo/PassengerUpdateForm'
 import './App.css';
 
 class App extends Component {
+
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' })
   }
@@ -51,7 +52,7 @@ class App extends Component {
               component={Dashboard}
             />
 
-            {/* Protected route for creating new APIS View  */}
+            {/* Protected route for creating new APIS View with match router */}
             <ProtectedRoute
               exact
               path="/apis/:id"
@@ -65,7 +66,6 @@ class App extends Component {
               component={ReviewPage}
             />
 
-            {/*  Adding new flight info starts here */}
             {/* Protected route for adding new aircraft */}
             <ProtectedRoute
               exact
@@ -86,9 +86,7 @@ class App extends Component {
               path="/addpassenger"
               component={AddPassengerForm}
             />
-            {/*  Adding new flight info ends here */}
 
-            {/*  User, Crew, Aircraft & Passenger information view from Nav Starts Here */}
             {/*  Protected route to see User Information View from Nav */}
             <ProtectedRoute
               exact
@@ -116,27 +114,29 @@ class App extends Component {
               path="/aircraftinfo"
               component={AirCraftInfo}
             />
+
+
+            {/*  Protected route to update Aircraft information in the update form component with match router */}
             <ProtectedRoute
               exact
               path="/aircraftupdate/:id"
               component={AirCraftUpdateForm}
             />
-            
+
+            {/*  Protected route to update crew information in the update form component with match router */}
             <ProtectedRoute
               exact
               path="/crewupdate/:id"
               component={CrewUpdateForm}
             /> 
 
+            {/*  Protected route to update passenger information in the update form component with match router */}
             <ProtectedRoute
               exact
               path="/passengerupdate/:id"
               component={PassengerUpdateForm}
             />
-
-            {/*  User, Crew & Passenger information from Nav Ends Here */}
-
-
+            
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

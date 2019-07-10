@@ -6,33 +6,34 @@ import { Header, Table, Button } from 'semantic-ui-react'
 
 import './PassengerInfo.css'
 
+// moment will change the format of date
 const moment = require('moment');
-
-
 
 
 class PassengerInfo extends Component {
 
-   
+    // GET request to get the the information for all crew members when page loads. 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_PASSENGER' })
     }
 
+    // Send user to add passenger form. 
     addPassenger = () => {
         this.props.history.push("/addpassenger")
     }
-    
+
+    // Send user to form view to update passenger form. 
     handleEdit = (id) => {
-        console.log('edit', id)
         this.props.history.push(`/passengerupdate/${id}`)
     }
 
+    // Send user back to user info view. 
     backButton = () => {
         this.props.history.push(`/userinfo/`)
     }
-    handleDelete = (id) => {
-        console.log('delete', id);
 
+     // Archive passenger when button is clicked. Will change database active to false. 
+    handleDelete = (id) => {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -55,15 +56,14 @@ class PassengerInfo extends Component {
                     'Your Passenger has been deleted.',
                     'success'
                 )
+         // Remove passenger if you click yes if not it will be canncelled.
                 this.props.dispatch({ type: 'DELETE_PASSENGER', payload: id })
-
             } else if (
                 // Read more about handling dismissals
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 swalWithBootstrapButtons.fire(
-                    'Cancelled!',
-                    
+                    'Cancelled!',  
                 )
             }
         })
@@ -96,7 +96,7 @@ class PassengerInfo extends Component {
                                 <Table.HeaderCell>Delete</Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
-
+                        {/* Loop through reduxState from mapStateToProps to get infomation on the DOM */}
                         {this.props.passenger.map(person => {
                             return (
                                 <Table.Body key={person.people_id}>
@@ -132,7 +132,6 @@ class PassengerInfo extends Component {
                                         </Table.Cell>
                                     </Table.Row>
                                 </Table.Body>
-
                             )
                         })}
 
@@ -144,7 +143,7 @@ class PassengerInfo extends Component {
 }
 
 
-
+// Get access to passenger information from redux
 const mapStateToProps = (reduxState) => {
     return {
         passenger: reduxState.passengerReducer
