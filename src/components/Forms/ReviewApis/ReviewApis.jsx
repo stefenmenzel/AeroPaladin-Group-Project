@@ -7,40 +7,43 @@ import { withRouter } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
-
+/**
+ * This class shows the review page for create new apis.
+ * This displays all the information you've alread selected
+ * and allows you to go back and edit all the information you 
+ * just added to the review page.
+ */
 class ReviewApis extends Component {
 
-    editAircraft = () => {
-        console.log('in edit Aircraft');
+    //goes back to the create new apis aircraft selection page
+    editAircraft = () => {        
         this.props.history.push(`/apis/${1}`)
         this.props.editStep(1)
     }
 
-    editCrew = () => {
-        console.log('in edit Crew');
+    //goes back to the create new apis crew selection page
+    editCrew = () => {        
         this.props.history.push(`/apis/${2}`)
         this.props.editStep(2)
 
     }
 
-    editPassenger = () => {
-        console.log('in edit Passenger');
+    //goes back to the create new apis passenger selection page
+    editPassenger = () => {        
         this.props.history.push(`/apis/${3}`)
         this.props.editStep(3)
 
     }
 
-    editFlightSegementOne = () => {
-        console.log('in edit Flight Segement One');
+    //goes back to the create new apis flight segment one page
+    editFlightSegementOne = () => {        
         this.props.history.push(`/apis/${4}`)
         this.props.editStep(4)
         window.scrollTo(0, 0)
-
-
     }
 
-    editFlightSegementTwo = () => {
-        console.log('in edit Flight Segement Two');
+    //goes back to the create new apis flight segment two page
+    editFlightSegementTwo = () => {        
         this.props.history.push(`/apis/${5}`)
         this.props.editStep(5)
         window.scrollTo(0, 0)
@@ -48,8 +51,7 @@ class ReviewApis extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("doing a submit", this.props.reviewApis);
+        event.preventDefault();        
         this.props.dispatch({ type: 'ADD_APIS', payload: this.props.reviewApis })
         this.props.history.push("/home")
         Swal.fire({
@@ -59,8 +61,7 @@ class ReviewApis extends Component {
         })
         
     }
-    render() {
-        console.log('apis reducer:', this.props.reviewApis);
+    render() {        
         return (
             <>
                 <div>

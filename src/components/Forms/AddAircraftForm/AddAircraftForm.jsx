@@ -17,44 +17,9 @@ class AddAircraftForm extends Component{
 
     }
 
-    fillDummyForm = () => {
-        this.setState({
-            aircraft: {
-                CBP: "NW9PX5",
-                callSign: "BCH666",
-                color: "Red/White",
-                tailNumber: "973DXP",
-                type: "Beechcraft Bonanza G36",
-            },
-            operator: {
-                city: "Minneapolis",
-                email: "steviebeechcraft@gmail.com",
-                firstName: "Stefen",
-                lastName: "Menzel",
-                middleName: "",
-                phoneNumber: "1234567890",
-                postalCode: "55409",
-                state: "MN",
-                streetAddress: "123 joke st.",
-            },
-            owner: {
-                city: "Minneapolis",
-                email: "steviebeechcraft@gmail.com",
-                firstName: "Stefen",
-                lastName: "Menzel",
-                middleName: "",
-                phoneNumber: "1234567890",
-                postalCode: "55409",
-                state: "MN",
-                streetAddress: "123 Joke St.",
-            }
-        })
-    }
-
     //send the aircraft we just added to the database.
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('submitting....or trying');
+        event.preventDefault();        
         this.props.dispatch({type: 'ADD_AIRCRAFT', payload: this.state});
         this.props.history.push('/aircraftinfo/')
         Swal.fire({
@@ -65,8 +30,7 @@ class AddAircraftForm extends Component{
     }
 
     //cancel this form filling outing (go back to aircraft summary page)
-    handleCancel = () => {
-        console.log('canceling');
+    handleCancel = () => {        
         this.props.history.push('/aircraftinfo');
     }
 
@@ -88,8 +52,7 @@ class AddAircraftForm extends Component{
         })
     }
 
-    render(){
-        console.log('this.state:', this.state);
+    render(){        
         return(
             <div>
                 <h1 className="ui header center aligned grid">Add Aircraft</h1>                

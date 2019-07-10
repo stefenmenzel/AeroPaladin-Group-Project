@@ -26,9 +26,7 @@ class Name extends Component{
         person: this.props.person
     }
     
-    onDateChange = (event, {name, value}) => {
-        console.log('date change', value);
-        console.log('date change:', name);
+    onDateChange = (event, {name, value}) => {        
         //nothing to see here. move along
         this.setState({
             ...this.state,
@@ -37,19 +35,16 @@ class Name extends Component{
         this.props.handleChange(this.props.stateType, name, {target: {value: value}})
     }
 
-    onSelectChange = (event, {name, value}) => {
-        console.log("sex change:", value);
+    onSelectChange = (event, {name, value}) => {        
         if (name === 'residenceCountry'){
-            this.props.handleChange(this.props.stateType, name, { target: { value: value } })
-            // this.onSelectChange(event, {name: 'citizenShipCountry', value: value});
+            this.props.handleChange(this.props.stateType, name, { target: { value: value } })            
         }
         else{
             this.props.handleChange(this.props.stateType, name, { target: { value: value } })
         }        
     }
 
-    citizenshipCheckbox = () => {
-        console.log('toggle');
+    citizenshipCheckbox = () => {        
         this.setState({
             ...this.state,
             citizenshipToggle: !this.state.citizenshipToggle
@@ -133,8 +128,6 @@ class Name extends Component{
     }
 
     render(){
-        console.log('this.props.person in name: ', this.props.person);
-        (this.props.person) ? console.log('this.props.person.sex inside name:', this.props.person.sex) : console.log('not here');
         return(
             <div className="formInputs">
                 <Label className="formInputLabel">            
