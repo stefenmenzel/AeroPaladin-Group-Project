@@ -58,16 +58,6 @@ Before you get started, make sure you have the following software installed on y
 * Run `npm run client`
 * Navigate to `localhost:3000`
 
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
 
 ## Production Build
 
