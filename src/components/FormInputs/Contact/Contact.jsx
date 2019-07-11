@@ -23,8 +23,7 @@ class Contact extends Component{
         person: this.props.person
     }
 
-    render(){
-        console.log('this.props.person inside contact:', this.props.person);
+    render(){        
         return(
             <div className="formInputs">                
                 <Label className="formInputLabel">
