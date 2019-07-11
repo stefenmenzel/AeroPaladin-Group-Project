@@ -15,7 +15,7 @@ AeroPaladin is a full-stack application that helps general aviation pilots file 
 * Passport-local
 * Pg
 * React/Redux/Saga
-* Material-UI
+* Semantic-UI
 * Moment.js
 
 ## Getting Started
