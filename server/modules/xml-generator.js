@@ -114,17 +114,21 @@ function generateXML(currentAPIS){
 
     let crew = {
         CrewDocument1: {
-            DocCode: 'P',
-            DocumentNbr: '9098676',
-            ExpiryDate: '2024-04-20',
-            CntryCode: 'USA'
+            DocCode: apisCrew.crewdoccode,
+            DocumentNbr: apisCrew.crewdocnbr,
+            ExpiryDate: apisCrew.crewdocexpirationdate,
+            CntryCode: apisCrew.crewdoccountrycode
         },
-        CrewDocument2: {
-            DocCode: 'L',
-            DocumentNbr: '0982097',
-            ExpiryDate: '2024-03-30',
-            CntryCode: 'USA'
-        },
+
+        //currently the crew doc 2 isn't coming in
+        //from the database...the query will have to be tweaked.
+
+        // CrewDocument2: {
+        //     DocCode: 'L',
+        //     DocumentNbr: '0982097',
+        //     ExpiryDate: '2024-03-30',
+        //     CntryCode: 'USA'
+        // },
         SurName: apisCrew.crewinfolastname,
         FirstName: apisCrew.crewinfofirstname,
         SecondName: (apisCrew.crewinfomiddlename != null ? apisCrew.crewinfomiddlename : '') ,
@@ -148,31 +152,39 @@ function generateXML(currentAPIS){
         TravelerType: 'CREW'
     }
 
+    //currently we only support a flight with one crew and one pilot.
+    //the database query needs to be tweaked to get the second document for
+    //both crew and passengers...
+    //******** I.E. this xml document isn't valid for submission *********
     let pax = {
         PaxDocument1: {
-            DocCode: 'P',
-            DocumentNbr: '9098676',
-            ExpiryDate: '2024-04-20',
-            CntryCode: 'USA'
+            DocCode: paxArray[0].doccode,
+            DocumentNbr: paxArray[0].documentnbr,
+            ExpiryDate: paxArray[0].expirydate,
+            CntryCode: paxArray[0].cntrycode
         },
-        PaxDocument2: {
-            DocCode: 'M',
-            DocumentNbr: '0982097',
-            ExpiryDate: '2024-03-30',
-            CntryCode: 'USA'
-        },
-        SurName: 'Menzel',
-        FirstName: 'Stefen',
-        SecondName: 'Adam',
-        Birthdate: '1987-02-19',
-        Sex: 'M',
-        ResidenceCntry: 'USA',
-        CitizenshipCntry: 'USA',
+
+        //currently paxdocument 2 isn't coming in for all passengers.
+        //The database query will have to be tweaked.
+
+        // PaxDocument2: {
+        //     DocCode: 'M',
+        //     DocumentNbr: '0982097',
+        //     ExpiryDate: '2024-03-30',
+        //     CntryCode: 'USA'
+        // },
+        SurName: paxArray[0].lastname,
+        FirstName: paxArray[0].firstname,
+        SecondName: (paxArray[0].middlename != null ? paxArray[0].middlename : ''),
+        Birthdate: paxArray[0].birthdate,
+        Sex: paxArray[0].sex,
+        ResidenceCntry: paxArray[0].countrycode,
+        CitizenshipCntry: paxArray[0].countrycode,
         AddressWhileInUs: {
-            StreetAddr: '1234 Faker St.',
-            City: 'Minneapolis',
-            State: 'Minnesota',
-            ZipPostal: '55678'
+            StreetAddr: paxArray[0].streetaddr,
+            City: paxArray[0].city,
+            State: paxArray[0].state,
+            ZipPostal: paxArray[0].postalcode
         },
     }
 
@@ -182,7 +194,13 @@ function generateXML(currentAPIS){
      }     
 
      function getCrew() {
-         //for each crew in currentApis, make a crew, add it to flightmanifest obj
+        //for each crew in currentApis, make a crew, add it to flightmanifest obj
+     }
+
+     function makePax(){
+        //this would have to make a <pax> tag for each passenger.
+        //js doesn't let you have multiple object keys with the same value
+        //we'll have to have it just make an xml doc for one crew and one pax for now.
      }
 
      /**
